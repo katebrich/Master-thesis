@@ -1,26 +1,17 @@
-import requests, sys
+import matplotlib.pyplot as plt
+from scipy import stats
 
-accessions = {"Q14676", "P69892"}
 
-#modified residues for protein Q14676
-requestURL = f"https://www.ebi.ac.uk/proteins/api/features?offset=0&size=100&accession={','.join(accessions)}&types=MOD_RES"
-r = requests.get(requestURL, headers={ "Accept" : "application/json"})
-if not r.ok:
-  r.raise_for_status()
-  sys.exit()
-responseBody = r.text
-print(responseBody)
+binding_data = stats.norm.rvs(loc=5, scale=2, size=2000, random_state=1234)
+nonBinding_data = stats.norm.rvs(loc=7, scale=2, size=2000, random_state=1234)
 
-import json
+#weights_binding = np.ones_like(binding_data)/len(binding_data)
+#weights_nonBinding = np.ones_like(nonBinding_data)/len(nonBinding_data)
+#plt.hist((binding_data, nonBinding_data), bins=20, weights=(weights_binding, weights_nonBinding), alpha=0.5, label=('Binding sites', 'Non-binding sites'))
 
-#returns dictionary
-parsedResponse = json.loads(responseBody)
+plt.hist((binding_data, nonBinding_data), bins=20, alpha=0.5, label=('Binding sites', 'Non-binding sites'))
 
-#iterate over all objects (=Uniprot accessions)
-for i in range(0, len(accessions)):
-    features = parsedResponse[i]["features"]
-    #get list of modified residues
-    mod_res = []
-    for feature in features:
-        mod_res.append(feature["begin"])
-    print(mod_res)
+plt.legend(loc='upper left')
+plt.xlabel('Value')
+plt.ylabel('Count')
+plt.savefig('histogram.svg')
