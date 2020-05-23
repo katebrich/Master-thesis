@@ -1,0 +1,11 @@
+\begin{thebibliography}{1}
+
+\bibitem{test}
+Adam Frankish, Barbara Uszczynska, Graham R.~S. Ritchie, Jose~M. Gonzalez,
+  Dmitri Pervouchine, Robert Petryszak, Jonathan~M. Mudge, Nuno Fonseca, Alvis
+  Brazma, Roderic Guigo, et~al.
+\newblock {Comparison of GENCODE and RefSeq gene annotation and the impact of
+  reference geneset on variant effect prediction}.
+\newblock {\em BMC genomics}, 16(8):S2, 2015.
+
+\end{thebibliography}

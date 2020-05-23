@@ -1,0 +1,9 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Consequence terms used by the Ensembl database and the Variant Effect Predictor. The diagram shows the locations of consequences in the transcript structure. Adapted from the \textit {Ensemble database}. Retrieved 20-07-2018 from \url {https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html}}}{4}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Relationship tree for the Sequence Ontology term \textit {UTR\_variant} (\textit {SO:0001622}). Adapted from the \textit {Sequence Ontology browser}. Retrieved 18-07-2018 from \url {http://www.sequenceontology.org/browser/current_svn/term/SO:0001622}}}{5}{figure.1.2}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Incorrect predictions when not considering the compound effect. (\textbf {A}) Two SNPs together result in a stop codon. (\textbf {B}) A frameshift restoring variant. The AAs change is much less severe when considering the compound effect. Adapted from \textit {BCFtools/csq: haplotype-aware variant consequences} \cite {Danecek2017}.}}{6}{figure.1.3}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
