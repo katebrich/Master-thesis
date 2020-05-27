@@ -1,11 +1,25 @@
 \begin{thebibliography}{1}
 
-\bibitem{test}
-Adam Frankish, Barbara Uszczynska, Graham R.~S. Ritchie, Jose~M. Gonzalez,
-  Dmitri Pervouchine, Robert Petryszak, Jonathan~M. Mudge, Nuno Fonseca, Alvis
-  Brazma, Roderic Guigo, et~al.
-\newblock {Comparison of GENCODE and RefSeq gene annotation and the impact of
-  reference geneset on variant effect prediction}.
-\newblock {\em BMC genomics}, 16(8):S2, 2015.
+\bibitem{casella}
+George Casella and Roger~L Berger.
+\newblock {\em Statistical inference}, volume~2.
+\newblock Duxbury Pacific Grove, CA, 2002.
+
+\bibitem{sham_purcell}
+Pak~C. Sham and Shaun~M. Purcell.
+\newblock Statistical power and significance testing in large-scale genetic
+  studies.
+\newblock {\em Nature Reviews Genetics}, 15(5):335--346, apr 2014.
+
+\bibitem{lehmann}
+Joseph P.~Romano Erich L.~Lehmann.
+\newblock {\em Testing Statistical Hypotheses}.
+\newblock Springer New York, 2008.
+
+\bibitem{neynman_pearson}
+Jerzy Neyman and Egon~S Pearson.
+\newblock {\em The testing of statistical hypotheses in relation to
+  probabilities a priori}, volume~29.
+\newblock 1933.
 
 \end{thebibliography}
