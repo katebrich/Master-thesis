@@ -1,0 +1,66 @@
+
+\chapter{Method}
+
+To find properties mapped on the protein primary structure which are possibly important for prediction of protein-ligand binding sites, statistical analysis will have the crucial role. It is a great way to explore the big amounts of accessible data and it can potentially help to discover underlying patterns and draw inferences from the data.
+
+This chapter describes the method that was used to analyse the \textit{statistical significance} of the properties and to distinguish the ones that stand out in the known protein-ligand binding sites.
+
+\section{Hypothesis testing}
+
+Hypothesis testing is a method of statistical inference. Its goal is to infer properties of a \textit{statistical population}, a set of similar items or events. To give an example of a population, in this work, two populations will be compared: we take values of a property for all the amino acids and compare the ones in binding sites and outside of binding sites.
+
+A dataset usually contains a subset collected from a larger population, rather than the whole population. This subset is called a \textit{statistical sample}. It should represent the population well and be unbiased.
+
+A \textit{hypothesis} makes a statement about an unknown population parameter. In a hypothesis testing problem, an experimenter states two complementary hypotheses: the \textit{null hypothesis} and the \textit{alternative hypothesis}, denoted by $H_{0}$ and $H_{1}$, respectively. The null hypothesis comprises a subset of possible parameters and the alternative hypothesis comprises the supplement, so that all the possible parameters are covered.
+
+In a hypothesis testing problem, an experimenter should come to one of the conclusions: to either accept $H_{0}$, or to reject $H_{0}$ and accept $H_{1}$.
+
+To decide which one of two complementary hypotheses is true, an experimenter employes a suitable \textit{hypothesis test}. A hypothesis test is a rule that specifies for which sample values the $H_{0}$ is accepted as true and for which sample values it is rejected, and therefore $H_{1}$ is accepted as true. A hypothesis test is usually specified in terms of a test statistic (i.g. a function of the sample). \cite{casella}
+
+As one may expect, the tests are not error-proof and a mistake can be made in the decision of whether to accept or reject the null hypothesis. There are two types of errors in hypothesis testing, commonly known as \textit{Type I Error} and \textit{Type II Error}. The test has made a Type I Error if it incorrectly rejects a true null hypothesis. If, on the other hand, a null hypothesis is accepted and it is not true, a Type II Error has been made. Both situations are depicted in the Table~\ref{tab:hypothesis_testing_errors}. The ideal test would have both error probabilities equal to zero. However, in most cases it is not possible to make both error probabilities arbitrarily small for a fixed sample size. \cite{casella}
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{2.5}
+\begin{tabular}{l|l|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{\begin{Large}Prediction \end{Large}}\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&\textbf{Accept H0}&\textbf{Reject H0}\\
+\cline{2-4}
+\multirow{2}{*}{\begin{Large}Truth\end{Large}}& \textbf{H0} & \shortstack{Correct\\(true positive)} & \shortstack{Type I Error\\(false positive)}\\
+\cline{2-4}
+& \textbf{H1} & \shortstack{Type II Error\\(false negative)} & \shortstack{Correct\\(true negative)} \\
+\cline{2-4}
+\end{tabular}
+\caption{Type I and II Error in hypothesis testing.}\label{tab:hypothesis_testing_errors}
+\end{table}
+
+To control statistical significance of the result, a study defines a threshold called \textit{significance level}, a constant denoted by $\alpha$. It is the probability  of making a Type I Error, in other words, the probability that the study rejects the null hypothesis when it is true.
+
+One way to report the result of the test would be simply to tell whether the null hypothesis was accepted or rejected at the given significance level. However, most researchers choose to report a certain kind of test statistic (function of a sample $X$), the so-called \textit{p-value}.
+Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. Hence, we are able to determine the smallest significance level at which the hypothesis would be accepted/rejected. P-value gives us an idea of how strongly the data contradict the null hypothesis and furthermore, it allows other researchers to make a decision according to the significance level of their choice. \cite{sham_purcell, casella, lehmann}
+
+It is suggested that the significance level for a study is set prior to any data collection. \cite{neynman_pearson}
+The typical choices are $\alpha =$ 0.01, 0.05 or 0.10. \cite{casella}
+
+Be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I Error probabilities. The probability of the Type II Error is subject to factors beyond the experimenter's control, such as the accuracy and completeness of the data. \cite{sham_purcell}
+
+Let's suppose an experimenter has a research hypothesis that he or she hopes to prove, but does not want to risk accepting it without convincing data support. In this case, the test should be set up in such a way that the research hypothesis corresponds to the alternative hypothesis, not the null hypothesis. By specifying a small significance level $\alpha$, the experimenter thus controls the probability of the Type I Error. In other words, the probability of accepting the research hypothesis when in is not true would be $\alpha$ at most. \cite{casella}
+
+
+
+
+\subsection{Welsch's test}
+
+\subsection{Fisher's exact test}
+
+\subsection{Chi-squared test}
+
+
+\section{Data}
+plus significance level, null hypothesis, alternative hypothesis
+
+
+\section{Implementation in Python}
+
+
