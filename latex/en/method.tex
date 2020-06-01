@@ -25,11 +25,11 @@ As one may expect, the tests are not error-proof and a mistake can be made in th
 \begin{tabular}{l|l|c|c|}
 \multicolumn{2}{c}{}&\multicolumn{2}{c}{\begin{Large}Prediction \end{Large}}\\
 \cline{3-4}
-\multicolumn{2}{c|}{}&\textbf{Accept H0}&\textbf{Reject H0}\\
+\multicolumn{2}{c|}{}&Accept $H_{0}$&Reject $H_{0}$\\
 \cline{2-4}
-\multirow{2}{*}{\begin{Large}Truth\end{Large}}& \textbf{H0} & \shortstack{Correct\\(true positive)} & \shortstack{Type I Error\\(false positive)}\\
+\multirow{2}{*}{\begin{Large}Truth\end{Large}}& \textbf{$H_{0}$} & \shortstack{Correct\\(true positive)} & \shortstack{\textbf{Type I Error}\\(false positive)}\\
 \cline{2-4}
-& \textbf{H1} & \shortstack{Type II Error\\(false negative)} & \shortstack{Correct\\(true negative)} \\
+& \textbf{$H_{1}$} & \shortstack{\textbf{Type II Error}\\(false negative)} & \shortstack{Correct\\(true negative)} \\
 \cline{2-4}
 \end{tabular}
 \caption{Type I and II Error in hypothesis testing.}\label{tab:hypothesis_testing_errors}
@@ -49,12 +49,25 @@ Let's suppose an experimenter has a research hypothesis that he or she hopes to 
 
 
 
-
 \subsection{Welsch's test}
+
+Welsch's unequal variances t-test, or Welsch's test in short, is a two-sample hypothesis test used to test whether two populations have different central tendencies (mean or median). The decision is made based on the samples from the two populations. It is a more robust alteration of the well-known Student's t-test. \cite{welsch}
+
+TODO assumption normality
+
+The problem of the Student's t-test is that it performs badly when the variances of the two compared populations are unequal. Both Type I and Type II Errors are negatively affected when the assumption of the equal variances is violated. The unequal variances can be less problematic if sample sizes are similar, but in practice, that is not always the case. \cite{ruxton}
+
+Unlike Student's t-test, Welsch's test does not have the assumption of the equal variances. It performs well when the samples have unequal variances; furthermore, it can be used even if the samples have unequal sizes.\cite{derrick}
+
+Some researchers tend to pre-test for variance equality by a preliminary test of variances (.....) and then choose whether to use Student's t-test or Welsch's t-test. However, although this approach can persist in textbooks and software packages, it is not recommended. As a preliminary test itself is subject to Type I and II errors, this two-stage procedure would not protect the significance level and could lead to incorrect decisions. We should be aware of the fact that even if the test suggested that the samples variances are nearly equal, it would not mean that the whole population variances could not differ to a larger extent. \cite{zimmerman} Some researchers may try to make the significance level of a preliminary test more strict, so that they could be more confident about the choice of the subsequent test; however, as the significance level decreases, the performance of the compound test paradoxically gets worse. According to the article \cite{zimmerman} TODO, a higher Type I error rate of the test of variances improves the performance of the compound test. This shows that using the preliminary test is in principle wrong.
+
+Welsch's test should be used whenever the researcher is not sure that the variances are truly equal. Ruxton \cite{ruxton} TODO even suggests the routine use of Welsch's test. When the sample sizes and variances are equal, both tests perform similarly. When dealing with unequal variances and unequal sample sizes, Welsch's test is more robust than Student's t-test and the Type I Error rate does not deviate far from the nominal value \cite{derrick}. Hence, Welsch's test can be applied without any significant disadvantages to Student's t-test.
 
 \subsection{Fisher's exact test}
 
 \subsection{Chi-squared test}
+
+
 
 
 \section{Data}
