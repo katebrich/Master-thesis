@@ -45,6 +45,133 @@
   year      = {2008},
 }
 
+@Article{Ruxton,
+  author    = {Graeme D. Ruxton},
+  title     = {The unequal variance t-test is an underused alternative to Student{\textquotesingle}s t-test and the Mann{\textendash}Whitney U test},
+  doi       = {10.1093/beheco/ark016},
+  number    = {4},
+  pages     = {688--690},
+  volume    = {17},
+  journal   = {Behavioral Ecology},
+  month     = {may},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {2006},
+}
+
+@Article{Derrick,
+  author    = {B. Derrick and P. White},
+  title     = {Why Welch{\textquotesingle}s test is Type I error robust},
+  doi       = {10.20982/tqmp.12.1.p030},
+  number    = {1},
+  pages     = {30--38},
+  volume    = {12},
+  journal   = {The Quantitative Methods for Psychology},
+  month     = {jan},
+  publisher = {The Quantitative Methods for Psychology},
+  year      = {2016},
+}
+
+@Article{WELCH,
+  author    = {B. L. WELCH},
+  title     = {{THE} {GENERALIZATION} {OF} `{STUDENT}{\textquotesingle}S' {PROBLEM} {WHEN} {SEVERAL} {DIFFERENT} {POPULATION} {VARLANCES} {ARE} {INVOLVED}},
+  doi       = {10.1093/biomet/34.1-2.28},
+  number    = {1-2},
+  pages     = {28--35},
+  volume    = {34},
+  journal   = {Biometrika},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {1947},
+}
+
+@Article{Zimmerman,
+  author    = {Donald W. Zimmerman},
+  title     = {A note on preliminary tests of equality of variances},
+  doi       = {10.1348/000711004849222},
+  number    = {1},
+  pages     = {173--181},
+  volume    = {57},
+  journal   = {British Journal of Mathematical and Statistical Psychology},
+  month     = {may},
+  publisher = {Wiley},
+  year      = {2004},
+}
+
+@InCollection{levene,
+  author    = {Levene, Howard},
+  booktitle = {Contributions to Probability and Statistics: Essays in Honor of Harold Hotelling},
+  date      = {1960},
+  title     = {Robust tests for equality of variances},
+  editor    = {Olkin, Ingram},
+  pages     = {278-292},
+  publisher = {Stanford University Press},
+}
+
+@InBook{,
+}
+
+@Article{Lumley,
+  author    = {Thomas Lumley and Paula Diehr and Scott Emerson and Lu Chen},
+  title     = {The Importance of the Normality Assumption in Large Public Health Data Sets},
+  doi       = {10.1146/annurev.publhealth.23.100901.140546},
+  number    = {1},
+  pages     = {151--169},
+  volume    = {23},
+  journal   = {Annual Review of Public Health},
+  month     = {may},
+  publisher = {Annual Reviews},
+  year      = {2002},
+}
+
+@Article{Zimmerman1998,
+  author    = {Donald W. Zimmerman},
+  title     = {Invalidation of Parametric and Nonparametric Statistical Tests by Concurrent Violation of Two Assumptions},
+  doi       = {10.1080/00220979809598344},
+  number    = {1},
+  pages     = {55--68},
+  volume    = {67},
+  journal   = {The Journal of Experimental Education},
+  month     = {jan},
+  publisher = {Informa {UK} Limited},
+  year      = {1998},
+}
+
+@Article{Zimmerman_zumbo_1993,
+  author    = {Donald W. Zimmerman and Bruno D. Zumbo},
+  title     = {Rank transformations and the power of the Student t test and Welch t{\textquotesingle} test for non-normal populations with unequal variances.},
+  doi       = {10.1037/h0078850},
+  number    = {3},
+  pages     = {523--539},
+  volume    = {47},
+  journal   = {Canadian Journal of Experimental Psychology/Revue canadienne de psychologie exp{\'{e}}rimentale},
+  publisher = {American Psychological Association ({APA})},
+  year      = {1993},
+}
+
+@Article{Zumbo_coulombe_1997,
+  author    = {Bruno D. Zumbo and Daniel Coulombe},
+  title     = {Investigation of the robust rank-order test for non-normal populations with unequal variances: The case of reaction time.},
+  doi       = {10.1037/1196-1961.51.2.139},
+  number    = {2},
+  pages     = {139--150},
+  volume    = {51},
+  journal   = {Canadian Journal of Experimental Psychology/Revue canadienne de psychologie exp{\'{e}}rimentale},
+  publisher = {American Psychological Association ({APA})},
+  year      = {1997},
+}
+
+@Article{Mann1947,
+  author    = {H. B. Mann and D. R. Whitney},
+  title     = {On a Test of Whether one of Two Random Variables is Stochastically Larger than the Other},
+  doi       = {10.1214/aoms/1177730491},
+  number    = {1},
+  pages     = {50--60},
+  volume    = {18},
+  journal   = {The Annals of Mathematical Statistics},
+  month     = {mar},
+  publisher = {Institute of Mathematical Statistics},
+  year      = {1947},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
 
 @Comment{jabref-meta: grouping:

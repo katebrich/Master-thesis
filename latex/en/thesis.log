@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  1 JUN 2020 17:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  2 JUN 2020 19:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -673,35 +673,13 @@ Chapter 2.
 
 
 
-]
+] [4]
 
-Package natbib Warning: Citation `welsch' on page 4 undefined on input line 54.
-
-
-
-Package natbib Warning: Citation `ruxton' on page 4 undefined on input line 58.
+Package natbib Warning: Citation `bartlett' on page 5 undefined on input line 6
+2.
 
 
-
-Package natbib Warning: Citation `derrick' on page 4 undefined on input line 60
-.
-
-
-Package natbib Warning: Citation `zimmerman' on page 4 undefined on input line 
-62.
-
-
-Package natbib Warning: Citation `zimmerman' on page 4 undefined on input line 
-62.
-
-[4]
-
-Package natbib Warning: Citation `ruxton' on page 5 undefined on input line 64.
-
-
-
-Package natbib Warning: Citation `derrick' on page 5 undefined on input line 64
-.
+Package natbib Warning: Citation `brown' on page 5 undefined on input line 62.
 
 ) [5]
 \openout2 = `epilog.aux'.
@@ -716,12 +694,48 @@ Package natbib Warning: Citation `derrick' on page 5 undefined on input line 64
 ]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl)) [8
+ (./bibliography.tex (./thesis.bbl
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+5.
+
+(/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
+26.
+
+(/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Underfull \hbox (badness 6141) in paragraph at lines 21--27
+[]\OT1/lmr/m/n/10.95 Joseph P. Ro-mano Erich L. Lehmann.  \OT1/lmr/m/it/10.95 T
+est-ing Sta-tis-ti-cal Hy-pothe-
+ []
 
 
-]
+Underfull \hbox (badness 3758) in paragraph at lines 21--27
+\OT1/lmr/m/it/10.95 ses\OT1/lmr/m/n/10.95 .  Springer New York, 2008.  ISBN 038
+7988645.  URL []$\OT1/lmtt/m/n/10.95 https :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--27
+\OT1/lmtt/m/n/10.95 / / www . ebook . de / de / product / 3186913 / erich _ l _
+ lehmann _ joseph _ p _ romano _
+ []
+
+
+Underfull \hbox (badness 2435) in paragraph at lines 74--79
+\OT1/lmr/m/n/10.95 SEV-ERAL DIF-FER-ENT POP-U-LA-TION VAR-LANCES ARE IN-VOLVED.
+
+ []
+
+[8
+
+
+])) [9]
 Appendix A.
-[9
+[10
 
 
 ]
@@ -735,29 +749,31 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 191.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 191.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 191.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3AC3D871A93DA4DCE4AD21687EF090BE;1784.
+(rerunfilecheck)             Checksum: EC71CF239A189507C16D8D8B91C904A3;1779.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 191.
  ) 
 Here is how much of TeX's memory you used:
- 15987 strings out of 483140
- 223542 string characters out of 5965151
- 465463 words of memory out of 5000000
- 30663 multiletter control sequences out of 15000+600000
- 583520 words of font info for 59 fonts, out of 8000000 for 9000
+ 16101 strings out of 483140
+ 225669 string characters out of 5965151
+ 465890 words of memory out of 5000000
+ 30758 multiletter control sequences out of 15000+600000
+ 584196 words of font info for 61 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 44i,12n,39p,1195b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/en
-c/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}</usr/s
-hare/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/
-texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fo
-nts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb
-></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (14 pages, 273261 bytes).
+ 44i,12n,39p,1310b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
+dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/sh
+are/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
+mathit.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf
+/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi1
+0.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts
+/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></
+usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmtt10.pfb>
+Output written on thesis.pdf (15 pages, 308194 bytes).
 PDF statistics:
- 232 PDF objects out of 1000 (max. 8388607)
- 189 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
+ 282 PDF objects out of 1000 (max. 8388607)
+ 234 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
  138 words of extra memory for PDF output out of 10000 (max. 10000000)
 

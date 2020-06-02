@@ -1,25 +1,111 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem{casella}
+\bibitem[Casella and Berger(2002)]{casella}
 George Casella and Roger~L Berger.
-\newblock {\em Statistical inference}, volume~2.
+\newblock \emph{Statistical inference}, volume~2.
 \newblock Duxbury Pacific Grove, CA, 2002.
 
-\bibitem{sham_purcell}
+\bibitem[Derrick and White(2016)]{derrick}
+B.~Derrick and P.~White.
+\newblock Why welch{\textquotesingle}s test is type i error robust.
+\newblock \emph{The Quantitative Methods for Psychology}, 12\penalty0
+  (1):\penalty0 30--38, jan 2016.
+\newblock \doi{10.20982/tqmp.12.1.p030}.
+
+\bibitem[Erich L.~Lehmann(2008)]{lehmann}
+Joseph P.~Romano Erich L.~Lehmann.
+\newblock \emph{Testing Statistical Hypotheses}.
+\newblock Springer New York, 2008.
+\newblock ISBN 0387988645.
+\newblock URL
+  \url{https://www.ebook.de/de/product/3186913/erich_l_lehmann_joseph_p_romano_testing_statistical_hypotheses.html}.
+
+\bibitem[Levene()]{levene}
+Howard Levene.
+\newblock Robust tests for equality of variances.
+\newblock In Ingram Olkin, editor, \emph{Contributions to Probability and
+  Statistics: Essays in Honor of Harold Hotelling}, pages 278--292. Stanford
+  University Press.
+
+\bibitem[Lumley et~al.(2002)Lumley, Diehr, Emerson, and Chen]{lumley}
+Thomas Lumley, Paula Diehr, Scott Emerson, and Lu~Chen.
+\newblock The importance of the normality assumption in large public health
+  data sets.
+\newblock \emph{Annual Review of Public Health}, 23\penalty0 (1):\penalty0
+  151--169, may 2002.
+\newblock \doi{10.1146/annurev.publhealth.23.100901.140546}.
+
+\bibitem[Mann and Whitney(1947)]{mann}
+H.~B. Mann and D.~R. Whitney.
+\newblock On a test of whether one of two random variables is stochastically
+  larger than the other.
+\newblock \emph{The Annals of Mathematical Statistics}, 18\penalty0
+  (1):\penalty0 50--60, mar 1947.
+\newblock \doi{10.1214/aoms/1177730491}.
+
+\bibitem[Neyman and Pearson(1933)]{neynman_pearson}
+Jerzy Neyman and Egon~S Pearson.
+\newblock \emph{The testing of statistical hypotheses in relation to
+  probabilities a priori}, volume~29.
+\newblock 1933.
+
+\bibitem[Ruxton(2006)]{ruxton}
+Graeme~D. Ruxton.
+\newblock The unequal variance t-test is an underused alternative to
+  student{\textquotesingle}s t-test and the mann{\textendash}whitney u test.
+\newblock \emph{Behavioral Ecology}, 17\penalty0 (4):\penalty0 688--690, may
+  2006.
+\newblock \doi{10.1093/beheco/ark016}.
+
+\bibitem[Sham and Purcell(2014)]{sham_purcell}
 Pak~C. Sham and Shaun~M. Purcell.
 \newblock Statistical power and significance testing in large-scale genetic
   studies.
-\newblock {\em Nature Reviews Genetics}, 15(5):335--346, apr 2014.
+\newblock \emph{Nature Reviews Genetics}, 15\penalty0 (5):\penalty0 335--346,
+  apr 2014.
+\newblock \doi{10.1038/nrg3706}.
 
-\bibitem{lehmann}
-Joseph P.~Romano Erich L.~Lehmann.
-\newblock {\em Testing Statistical Hypotheses}.
-\newblock Springer New York, 2008.
+\bibitem[WELCH(1947)]{welch}
+B.~L. WELCH.
+\newblock {THE} {GENERALIZATION} {OF} `{STUDENT}{\textquotesingle}s' {PROBLEM}
+  {WHEN} {SEVERAL} {DIFFERENT} {POPULATION} {VARLANCES} {ARE} {INVOLVED}.
+\newblock \emph{Biometrika}, 34\penalty0 (1-2):\penalty0 28--35, 1947.
+\newblock \doi{10.1093/biomet/34.1-2.28}.
 
-\bibitem{neynman_pearson}
-Jerzy Neyman and Egon~S Pearson.
-\newblock {\em The testing of statistical hypotheses in relation to
-  probabilities a priori}, volume~29.
-\newblock 1933.
+\bibitem[Zimmerman(1998)]{zimmerman1998}
+Donald~W. Zimmerman.
+\newblock Invalidation of parametric and nonparametric statistical tests by
+  concurrent violation of two assumptions.
+\newblock \emph{The Journal of Experimental Education}, 67\penalty0
+  (1):\penalty0 55--68, jan 1998.
+\newblock \doi{10.1080/00220979809598344}.
+
+\bibitem[Zimmerman(2004)]{zimmerman}
+Donald~W. Zimmerman.
+\newblock A note on preliminary tests of equality of variances.
+\newblock \emph{British Journal of Mathematical and Statistical Psychology},
+  57\penalty0 (1):\penalty0 173--181, may 2004.
+\newblock \doi{10.1348/000711004849222}.
+
+\bibitem[Zimmerman and Zumbo(1993)]{zimmerman_zumbo_1993}
+Donald~W. Zimmerman and Bruno~D. Zumbo.
+\newblock Rank transformations and the power of the student t test and welch
+  t{\textquotesingle} test for non-normal populations with unequal variances.
+\newblock \emph{Canadian Journal of Experimental Psychology/Revue canadienne de
+  psychologie exp{\'{e}}rimentale}, 47\penalty0 (3):\penalty0 523--539, 1993.
+\newblock \doi{10.1037/h0078850}.
+
+\bibitem[Zumbo and Coulombe(1997)]{zumbo_coulombe_1997}
+Bruno~D. Zumbo and Daniel Coulombe.
+\newblock Investigation of the robust rank-order test for non-normal
+  populations with unequal variances: The case of reaction time.
+\newblock \emph{Canadian Journal of Experimental Psychology/Revue canadienne de
+  psychologie exp{\'{e}}rimentale}, 51\penalty0 (2):\penalty0 139--150, 1997.
+\newblock \doi{10.1037/1196-1961.51.2.139}.
 
 \end{thebibliography}
