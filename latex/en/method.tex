@@ -23,11 +23,11 @@ As one may expect, the tests are not error-proof and a mistake can be made in th
 \centering
 \renewcommand{\arraystretch}{2.5}
 \begin{tabular}{l|l|c|c|}
-\multicolumn{2}{c}{}&\multicolumn{2}{c}{\begin{Large}Prediction \end{Large}}\\
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{\begin{large}Prediction \end{large}}\\
 \cline{3-4}
 \multicolumn{2}{c|}{}&Accept $H_{0}$&Reject $H_{0}$\\
 \cline{2-4}
-\multirow{2}{*}{\begin{Large}Truth\end{Large}}& \textbf{$H_{0}$} & \shortstack{Correct\\(true positive)} & \shortstack{\textbf{Type I error}\\(false positive)}\\
+\multirow{2}{*}{\begin{large}Truth\end{large}}& \textbf{$H_{0}$} & \shortstack{Correct\\(true positive)} & \shortstack{\textbf{Type I error}\\(false positive)}\\
 \cline{2-4}
 & \textbf{$H_{1}$} & \shortstack{\textbf{Type II error}\\(false negative)} & \shortstack{Correct\\(true negative)} \\
 \cline{2-4}
@@ -40,9 +40,7 @@ To control statistical significance of the result, a study defines a threshold c
 One way to report the result of the test would be simply to tell whether the null hypothesis was accepted or rejected at the given significance level. However, most researchers choose to report a certain kind of test statistic (function of a sample $X$), the so-called \textit{p-value}.
 Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. Hence, we are able to determine the smallest significance level at which the hypothesis would be accepted/rejected. P-value gives an idea of how strongly the data contradict the null hypothesis; furthermore, it allows other researchers to make a decision according to the significance level of their choice \cite{sham_purcell, casella, lehmann}.
 
-It is suggested that the significance level for a study is set prior to any data collection \cite{neynman_pearson}. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}.
-
-One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the accuracy and completeness of the data \cite{sham_purcell}.
+It is suggested that the significance level for a study is set prior to any data collection \cite{neynman_pearson}. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}. One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the accuracy and completeness of the data and most importantly, the true effect size \cite{sham_purcell}.
 
 Let's suppose an experimenter has a research hypothesis that he or she hopes to prove, but does not want to risk accepting it without convincing data support. In this case, the test should be set up in such a way that the research hypothesis corresponds to the alternative hypothesis, not the null hypothesis. By specifying a small significance level $\alpha$, the experimenter thus controls the probability of the Type I error. In other words, the probability of accepting the research hypothesis when in is not true would be $\alpha$ at most \cite{casella}.
 
@@ -65,9 +63,43 @@ Welch's test should be used whenever the researcher is not sure that the varianc
 
 For all the reasons stated above, Welch's test seems to be the best choice for the purpose of this study. It has the best combination of performance and ease of use, the calculation is straightforward and it is available in commonly used statistics packages.
 
-\subsection{Fisher's exact test}
+\subsection{Fisher's exact test and Chi-squared test of independence}
 
-\subsection{Chi-squared test}
+A different kind of tests will be needed for the analysis of categorical features. An example of a categorical feature is XXX. Moreover, quantitative features can be grouped into categories and analysed in the same way as categorical features. In this section, two widely-used tests of such kind will be presented and discussed.
+
+Both Fisher's exact test and Chi-squared test of independence are well-known hypothesis tests used for the analysis of data in contigency tables. A \textit{contigency table} is a table displayed in a form of a matrix where cells represent a frequency distribution of samples in the categories. An example of a contingency table can be seen in Table~\ref{tab:contingency_table_example}. The sums of frequencies in rows and columns are called \textit{marginal totals}.
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\newcolumntype{s}{>{\columncolor{lightgray}} p{3cm}}
+ \begin{tabular}{|c|c|c||c|} 
+ \hline
+  & PTM & Without PTM & Total \\ [0.5ex] 
+ \hline
+ Binding sites & XX & XX & XX \\ 
+ \hline
+ Non-binding sites & XX & XX & XX \\
+ \hline\hline
+ Total & XX & XX & XX \\
+ \hline
+\end{tabular}
+\caption{A $2\times 2$ contingency table. TODO real data}\label{tab:contingency_table_example}
+\end{table}
+
+The null hypothesis assumes independence of the groups; in our case, the assumption is that there is no difference in the proportions of the analysed feature between binding sites and non-binding sites.
+
+Fisher's exact test belongs to a class of so-called \textit{exact tests}; it means that the p-value is calculated accurately, not approximately, as is the case of many tests including Welch's test and Chi-squared test. Fisher's test is mostly used for $2\times 2$ contigency tables, although the principle of the computation can be extended to a general $m\times n$ table \cite{Mehta}. The principle of the test lies in computing the probability of obtaining a table that is more or equally extreme in the departure from the null hypothesis than the analysed table and has identical marginal totals \cite{bland}.
+
+Chi-squared ($\chi^{2}$) test if independence is able to decide whether the difference between the observed frequencies and the ``expected frequencies'' is statistically significant. The expected frequencies are computed for every cell as 
+$\dfrac{row\: total\times column\:total}{grand\:total}$.
+It can be imagined as the average frequencies we would get in the long run with the same marginal totals, assuming the null hypothesis is true (i.e. there is no association between groups). The result of the test tells how likely are we to observe given data under the assumption of the true null hypothesis \cite{bland}. TODO vysvetlit chi-sq rozdeleni a to jak se pocita ta testova statistika
+
+The biggest difference between the two mentioned tests is that the chi-squared test is based on a aproximation approach; therefore, it needs a ``large enough'' sample. TODO FISHERUV TEST OBECNE NA MENSI VZORKY, .... W. G. Cochran (1954) \cite{cochran} proposed a set of recommendations about the minimum expectations to be used in $\chi^{2}$ tests and about the choice between Fisher's test and $\chi^{2}$ test:
+
+
+These recommendations are presented in several textbooks and articles as a rule of thumb \cite{} and recommended to be used in practice.
+
 
 
 

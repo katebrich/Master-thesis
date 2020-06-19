@@ -1,5 +1,6 @@
 import urllib.request
 import json
+import sys
 
 #returns uniprotID, entityID, start, end
 def get_uniprot_entity(pdb_id, chain_id):
@@ -17,11 +18,12 @@ def get_uniprot_entity(pdb_id, chain_id):
                 entities.append((uniprot_ID, entity["entity_id"], entity["unp_start"], entity["unp_end"]))
 
     if len(entities) < 1:
-        print(f"Error: '{pdb_id}': no entity with chain id '{chain_id}' was found.")
+        sys.stderr.write(f"Error: '{pdb_id}': no entity with chain id '{chain_id}' was found.\n\n")
     elif len(entities) > 1:
-        print(f"Error: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:")
+        sys.stderr.write(f"Error: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
         for x in entities:
-                print(x[0])
+                sys.stderr.write(f"{x[0]}\n")
+        sys.stderr.write(f"\n")
     else:
         return entities[0]
 
