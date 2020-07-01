@@ -1,23 +1,37 @@
 from get_ligand_binding_sites import get_ligand_binding_sites
 from get_feature import get_PTM
+from parse_dataset import parse_dataset
 import statistical_analysis as stats
 import pandas as pd
 
-dataset = [("2rbt","X"), ("3cx5","O")] #todo
-feature = "PTM"
+filepath = f'/home/katebrich/Documents/diplomka/datasets/test.ds'
+
+dataset = parse_dataset(filepath)
+feature = "PTM" #todo
+
+df = pd.DataFrame(columns = ["ligand_binding_sites", "feature"])
 
 for structure in dataset:
+    #todo
     pdb_id = structure[0]
     chain_id = structure[1]
 
-    lbs = get_ligand_binding_sites(pdb_id, chain_id, f'/home/katebrich/Documents/diplomka/PDBe_files/pdb{structure[0]}.ent')
+    lbs = get_ligand_binding_sites(pdb_id, chain_id, f'/home/katebrich/Documents/diplomka/PDBe_files/coach420/{pdb_id}{chain_id}.pdb')
     feature_vals = get_PTM(pdb_id, chain_id)
-    #feature_vals[0] = 1 #todo smazat
-    #todo sanity check - same length
-    if (len(lbs) != len(feature_vals)):
-        print("error - length of lbs and feature_vals vectors is not the same")
 
-    df = pd.DataFrame(list(zip(lbs, feature_vals)),
-                      columns=['ligand_binding_sites', "feature"])
+    #pair feature values with ligand binding sites
+    # !! feature_vals numbered from 1 -> for example feature_vals[2] pairs with lbs[1]
+    pairs = []
+    for val in feature_vals:
+        pairs.append((lbs[val[0] - 1], val[1]))
 
-    stats.fischers_exact_test(df)
+    new_df = pd.DataFrame(pairs,
+                     columns=['ligand_binding_sites', "feature"])
+
+    df = pd.concat([df, new_df])
+
+    print(f"structure {pdb_id} {chain_id} processed.")
+
+print(df)
+#take the whole dataset and run statistical analysis
+stats.fischers_exact_test(df)
