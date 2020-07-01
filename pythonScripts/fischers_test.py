@@ -4,8 +4,6 @@ from scipy import stats
 
 alpha = 0.05 #todo script parameter
 
-#experimental data
-#counts of positives and negatives in both groups
 binding_positive, binding_negative = 8, 7
 non_binding_positive, non_binding_negative = 14, 1
 
