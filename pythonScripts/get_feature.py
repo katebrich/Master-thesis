@@ -1,4 +1,15 @@
-from functions import get_uniprot_entity, restAPI_get
+from functions import get_uniprot_entity, restAPI_get, get_fasta_path
+from AA_properties import *
+
+def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
+    if name_of_feature == 'PTM':
+        return get_PTM(pdb_id, chain_id)
+    elif name_of_feature == "hydropathy":
+        return get_hydropathy(data_dir, pdb_id, chain_id)
+    else:
+        print("Error: unknown feature")
+        #todo
+
 
 def get_PTM(pdb_id, chain_id):
     try:
@@ -17,18 +28,6 @@ def get_PTM(pdb_id, chain_id):
         unp_end = entity[3]
         start_res_num = entity[4]
         end_res_num = entity[5]
-
-        #print(pdb_id)
-        #print(chain_id)
-        #print(uniprot_id)
-        #print(entity_id)
-        #print(unp_start)
-        #print(unp_end)
-        #print(start_res_num)
-        #print(end_res_num)
-
-        # pdbe-kb - vraci neco uplne jineho nez uniprot a navic ani ne to same jako je na webu pdbe-kb...
-        # url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdb/modified_AA_or_NA/{pdb_id}"
 
         # uniprot - jen MOD_RES type (podkategorie PTM)
         # url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?types=MOD_RES"
@@ -57,7 +56,16 @@ def get_PTM(pdb_id, chain_id):
             feature_vals.append((res_num, feature_vector[i]))
             i += 1
 
-        #print(*feature_vector, sep=",")
-        #print(response)
-
     return feature_vals
+
+def get_hydropathy(data_dir, pdb_id, chain_id):
+    fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+    with open(fasta_file, 'r') as file:
+        seq = file.read()
+
+    result = get_AA_scores(hydropathy_kyte_doolitle, seq)
+
+    return result
+
+
+
