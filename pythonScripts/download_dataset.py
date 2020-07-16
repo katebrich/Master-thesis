@@ -51,9 +51,6 @@ for structure in dataset:
     output_path = get_mmcif_path(output_dir, pdb_id, chain_id)
     download_file(url, output_path)
 
-    output_path = get_mmcif_path(output_dir, pdb_id, chain_id)
-    download_file(url, output_path)
-
     # todo upravit soubory, aby tam byl jen ten jeden chain?
 
     print(f"{i}/{total}: {pdb_id} {chain_id} downloaded")

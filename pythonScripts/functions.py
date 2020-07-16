@@ -55,3 +55,18 @@ def get_pdb_path(data_dir, pdb_id, chain_id):
 
 def get_mmcif_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/mmCIF/{pdb_id}{chain_id}.cif"
+
+def get_entity_id(pdb_id, chain_id):
+    entities = get_uniprot_entity(pdb_id, chain_id)
+    if len(entities) == 0:
+        print(f"Error: no entity found for {pdb_id} {chain_id}")
+        return
+    entity_id = ""
+    for entity in entities:
+        new_entity_id = entity[1]
+        if new_entity_id != entity_id and entity_id != "":
+            print(f"Error: not all the entity IDs for {pdb_id} {chain_id} are the same!")
+            return
+        entity_id = new_entity_id
+
+    return entity_id

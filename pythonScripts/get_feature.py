@@ -1,14 +1,19 @@
 from functions import get_uniprot_entity, restAPI_get, get_fasta_path
 from AA_properties import *
+import random
 
 def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
     if name_of_feature == 'PTM':
         return get_PTM(pdb_id, chain_id)
     elif name_of_feature == "hydropathy":
-        return get_hydropathy(data_dir, pdb_id, chain_id)
+        return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "molecular_weight":
+        return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "random": #todo smazat
+        return get_random(data_dir, pdb_id, chain_id)
     else:
-        print("Error: unknown feature")
-        #todo
+        print(f"Error: unknown feature {name_of_feature}.") #todo
+        return
 
 
 def get_PTM(pdb_id, chain_id):
@@ -58,14 +63,21 @@ def get_PTM(pdb_id, chain_id):
 
     return feature_vals
 
-def get_hydropathy(data_dir, pdb_id, chain_id):
+def get_random(data_dir, pdb_id, chain_id):
     fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
     with open(fasta_file, 'r') as file:
         seq = file.read()
-
-    result = get_AA_scores(hydropathy_kyte_doolitle, seq)
-
+    result = []
+    for i in range(1, len(seq) + 1):
+        AA_score = random.uniform(1.0, 3.0)
+        result.append((i, AA_score))
     return result
 
+def get_AA_properties(scores_dict, data_dir, pdb_id, chain_id):
+    fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+    with open(fasta_file, 'r') as file:
+        seq = file.read()
+    result = get_AA_scores(scores_dict, seq)
+    return result
 
 
