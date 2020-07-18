@@ -4,23 +4,30 @@ import os as os
 from functions import get_fasta_path
 
 #todo parametry
-dataset_name = "coach420"
-dataset_file = f'/home/katebrich/Documents/diplomka/datasets/coach420.ds'
-dataset_dir = "/home/katebrich/Documents/diplomka/PDBe_files/coach420"
+dataset_name = "holo4k"
+dataset_file = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}.ds'
+dataset_dir = f"/home/katebrich/Documents/diplomka/PDBe_files/{dataset_name}"
 
 dataset = parse_dataset(dataset_file)
 
-i = 1
+i = 0
 total = len(dataset)
 
 for structure in dataset:
+    i += 1
     pdb_id = structure[0]
     chain_id = structure[1]
 
     #filter FASTA file - leave only sequence for this chain
     sequence = ""
     file_path = get_fasta_path(dataset_dir, pdb_id, chain_id)
-    records = list(SeqIO.parse(file_path, "fasta"))
+    try:
+        records = list(SeqIO.parse(file_path, "fasta"))
+    except Exception as e:
+        print(f"Error: {pdb_id} {chain_id}")
+        print(str(e))
+        continue
+
     for record in records:
         ids = record.description.split('|')
         chains = ids[2].split(' ')
@@ -30,7 +37,7 @@ for structure in dataset:
 
     if sequence == "":
         print(f"Error: sequence not found for {pdb_id} {chain_id}") #todo
-        break
+        continue
 
     #create temp file
     temp_file_path = file_path + ".temp"
@@ -42,5 +49,5 @@ for structure in dataset:
     os.rename(temp_file_path, file_path)
 
     print(f"{i}/{total}: {pdb_id} {chain_id} processed")
-    i += 1
+
 

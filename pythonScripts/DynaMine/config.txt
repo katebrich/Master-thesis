@@ -1,0 +1,11 @@
+############################
+#                          #
+# CONFIGURATION PARAMETERS #
+#                          #
+############################
+
+
+server_name = 'http://dynamine.ibsquare.be'
+
+json_api_key = '18fee11cd96949bb6bc57092dbf3c067e5bad66c0f7d442f31368f5f'
+
