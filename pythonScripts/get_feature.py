@@ -231,17 +231,23 @@ def get_dynamine(data_dir, pdb_id, chain_id):
     from DynaMine.predictor import DynaMine
 
     result_dir = f"{data_dir}dynamine/"
-    fasta_path = f"{data_dir}FASTA_original/{pdb_id}{chain_id}.fasta" #todo
+    fasta_path = get_fasta_path(data_dir, pdb_id, chain_id)
 
     if not os.path.exists(result_dir):
         os.mkdir(result_dir)
 
     dynamine = DynaMine(result_dir)
-    if dynamine.predict(fasta_path, f"{pdb_id}{chain_id}"):
+    if dynamine.predict(fasta_path, pdb_id, chain_id):
         print(f"DynaMine: {pdb_id} {chain_id} successfully processed.")
-        with open(f"{data_dir}/dynamine/{pdb_id}{chain_id}/pdb_{pdb_id}_{chain_id}_backbone.pred") as f: #todo ukladat si rovnoujen ten soubor co potrebuju
-            result = f.read()
-            print(result)
+        result = []
+        res_num = 1
+        with open(f"{data_dir}/dynamine/{pdb_id}{chain_id}.txt") as f: #todo ukladat si rovnoujen ten soubor co potrebuju
+            for line in f:
+                if (line[0] != '*'):
+                    val = float(line.split()[1])
+                    result.append((res_num, val))
+                    res_num += 1
+        return result
     else:
         print(f"Error: DynaMine: {pdb_id} {chain_id}")
 

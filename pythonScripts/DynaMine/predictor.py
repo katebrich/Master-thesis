@@ -36,8 +36,8 @@ class DynaMine:
             version = 'ERROR while communicating with the DynaMine server.'
         return version
 
-    def predict(self, filename, output_dir):
-        seqs = self._getinputsequences(filename)
+    def predict(self, fasta_path, pdb_id, chain_id):
+        seqs = self._getinputsequences(fasta_path, pdb_id, chain_id)
         ji = DynaMineJSONInterface(configuration_file['json_api_key'])
         results = ji.submit_sequences(seqs, predictions_only = self._light)
         # print(results)
@@ -45,10 +45,10 @@ class DynaMine:
             print(results['message'])
             return False
         else:
-            self._save(results, output_dir)
+            self._save(results, pdb_id, chain_id)
             return True
 
-    def _save(self, results, output_dir):
+    def _save(self, results, pdb_id, chain_id):
         filename = results['url'].split('/')[-1]
         path = os.path.join(self._jobdir, filename)
         try:
@@ -65,17 +65,18 @@ class DynaMine:
             sys.stderr.write(str(e))
         with zipfile.ZipFile(path) as zf:
             zf.extractall(self._jobdir)
-            output_dir_full_path = f"{self._jobdir}/{output_dir}"
-            if (os.path.exists(output_dir_full_path)):
-                shutil.rmtree(output_dir_full_path)
-            os.rename(f"{self._jobdir}/{filename[:-4]}", output_dir_full_path)
+            output_full_path = f"{self._jobdir}/{pdb_id}{chain_id}.txt"
+            unzipped_path = f"{self._jobdir}/{filename[:-4]}"
+            if (os.path.exists(output_full_path)):
+                os.remove(output_full_path)
+            os.rename(f"{unzipped_path}/{pdb_id}{chain_id}_backbone.pred", output_full_path)
         os.remove(path)
+        shutil.rmtree(unzipped_path)
 
-    def _getinputsequences(self, filename):
+    def _getinputsequences(self, fasta_path, pdb_id, chain_id):
         seqs = {}
-        sequences = SeqIO.parse(filename, "fasta")
-        for record in sequences:
-            s = re.sub('[^0-9a-zA-Z-]+', '_', record.id.lstrip('>'))
-            seqs[s] = str(record.seq)
+        with open(fasta_path, 'r') as f:
+            seq = f.read()
+            seqs[f"{pdb_id}{chain_id}"] = seq
         return seqs
 

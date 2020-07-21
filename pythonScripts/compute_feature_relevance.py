@@ -62,4 +62,5 @@ for structure in dataset:
 
 #stats.compute_AA_frequencies(pairs)
 
-stats.fischers_exact_test(pairs)
+#stats.fischers_exact_test(pairs)
+stats.welchs_t_test(pairs)
