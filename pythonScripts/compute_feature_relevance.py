@@ -7,15 +7,19 @@ import pandas as pd
 import os
 import pickle
 
-dataset_name = "coach420"
+dataset_name = "test_mine"
 dataset_path = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}.ds'
-data_dir = f"/home/katebrich/Documents/diplomka/PDBe_files/{dataset_name}/" #todo parametr
+data_dir = f"/home/katebrich/Documents/diplomka/datasets/{dataset_name}/" #todo parametr
 
 dataset = parse_dataset(dataset_path)
-feature = "dynamine" #todo
+feature = "unp_PTM" #todo
 pairs = []
 i = 1
 total = len(dataset)
+
+lbs_cache_dir = f"{data_dir}lbs/"
+if not os.path.exists(lbs_cache_dir):
+    os.makedirs(lbs_cache_dir)
 
 for structure in dataset:
     #todo
@@ -26,7 +30,7 @@ for structure in dataset:
 
     #todo definvat co ocekavam za typy
 
-    cache_file = f"{data_dir}lbs/{pdb_id}{chain_id}.txt"
+    cache_file = f"{lbs_cache_dir}/{pdb_id}{chain_id}.txt"
     if os.path.isfile(cache_file): # read cached values
         with open(cache_file, "rb") as fp:
             lbs = pickle.load(fp)

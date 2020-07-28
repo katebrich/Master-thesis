@@ -1,4 +1,4 @@
-from functions import get_uniprot_entity, restAPI_get
+from functions import get_uniprot_entity, restAPI_get_json
 import sys
 import getopt
 
@@ -41,7 +41,7 @@ print(end)
 
 url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?categories=PTM"
 
-response = restAPI_get(url)
+response = restAPI_get_json(url)
 
 feature_vector = [0] * (end-begin+1) #including both start and end AAs
 

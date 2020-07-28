@@ -1,4 +1,4 @@
-from functions import get_uniprot_entity, restAPI_get, get_fasta_path
+from functions import get_uniprot_entity, restAPI_get_json, get_fasta_path
 from AA_properties import *
 import random
 
@@ -49,7 +49,7 @@ def get_PTM(pdb_id, chain_id):
 
         url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?categories=PTM"
 
-        response = restAPI_get(url)
+        response = restAPI_get_json(url)
 
         feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs
 
@@ -96,7 +96,7 @@ def get_glycosylation(pdb_id, chain_id):
 
         url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?categories=PTM"
 
-        response = restAPI_get(url)
+        response = restAPI_get_json(url)
 
         feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs
 
@@ -139,7 +139,7 @@ def get_variants(pdb_id, chain_id):
 
         url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?categories=VARIANTS"
 
-        response = restAPI_get(url)
+        response = restAPI_get_json(url)
 
         feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs
 
@@ -179,7 +179,7 @@ def get_metal_binding(pdb_id, chain_id):
 
         url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?types=METAL"
 
-        response = restAPI_get(url)
+        response = restAPI_get_json(url)
 
         feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs
 

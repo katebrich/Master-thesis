@@ -1,11 +1,12 @@
 import urllib.request
 import json
 import sys
+import xmltodict
 
 #returns uniprotID, entityID, start, end
 def get_uniprot_entity(pdb_id, chain_id):
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot/{pdb_id}'
-    parsedResponse = restAPI_get(url)
+    parsedResponse = restAPI_get_json(url)
     uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
 
     #find entity with given chain_id
@@ -31,12 +32,20 @@ def get_uniprot_entity(pdb_id, chain_id):
         return entities
 
 #returns parsed .json response (dictionary)
-def restAPI_get(url):
+def restAPI_get_json(url):
     #todo check status
     req = urllib.request.Request(url)
     with urllib.request.urlopen(req) as f:
         responseBody = f.read()
     return json.loads(responseBody)
+
+#returns parsed .xml response (dictionary)
+def restAPI_get_xml(url):
+    #todo check status
+    req = urllib.request.Request(url)
+    with urllib.request.urlopen(req) as f:
+        responseBody = f.read()
+    return xmltodict.parse(responseBody) #todo neni neco rychlejsiho? nepotrebuju ordered dictionary...
 
 def isInDistance(threshold, residue1, residue2):
     #todo optimize
@@ -48,25 +57,86 @@ def isInDistance(threshold, residue1, residue2):
     return False
 
 def get_fasta_path(data_dir, pdb_id, chain_id):
-    return f"{data_dir}/FASTA/{pdb_id}{chain_id}.fasta"
+    return f"{data_dir}/FASTA_filtered/{pdb_id}{chain_id}.fasta"
 
 def get_pdb_path(data_dir, pdb_id, chain_id):
-    return f"{data_dir}/PDB/{pdb_id}{chain_id}.pdb"
+    return f"{data_dir}/PDB_filtered/{pdb_id}{chain_id}.pdb"
 
-def get_mmcif_path(data_dir, pdb_id, chain_id):
-    return f"{data_dir}/mmCIF/{pdb_id}{chain_id}.cif"
+#def get_mmcif_path(data_dir, pdb_id, chain_id):
+#    return f"{data_dir}/mmCIF/{pdb_id}{chain_id}.cif"
 
 def get_entity_id(pdb_id, chain_id):
-    entities = get_uniprot_entity(pdb_id, chain_id)
-    if len(entities) == 0:
-        print(f"Error: no entity found for {pdb_id} {chain_id}")
+    url = f"https://www.rcsb.org/pdb/rest/getEntityInfo?structureId={pdb_id}"
+    parsedResponse = restAPI_get_xml(url)
+    entities = parsedResponse["entityInfo"]["PDB"]["Entity"]
+    entities_list = []
+    if (type(entities) is not list): #jen 1 entita, rovnou ty atributy
+        entities_list.append(entities)
+    else:
+        entities_list = entities
+    if len(entities_list) == 0:
+        print(f"Error: no entity found for {pdb_id} {chain_id}") #todo tohle asi nebude fungovat
         return
     entity_id = ""
-    for entity in entities:
-        new_entity_id = entity[1]
-        if new_entity_id != entity_id and entity_id != "":
-            print(f"Error: not all the entity IDs for {pdb_id} {chain_id} are the same!")
-            return
-        entity_id = new_entity_id
+    for entity in entities_list:
+        success=False
+        chains_list = []
+        chains = entity["Chain"]
+        if (type(chains) is not list):  # jen 1 entita, rovnou ty atributy
+            chains_list.append(chains)
+        else:
+            chains_list = chains
+        for chain in chains_list:
+            if (chain["@id"] == chain_id):
+                success=True
+                break
+        if success:
+            new_entity_id = entity["@id"]
+            if new_entity_id != entity_id and entity_id != "":
+                print(f"Error: not all the entity IDs for {pdb_id} {chain_id} are the same!")
+                return #todo tohle pak smazat
+            entity_id = new_entity_id
+    return int(entity_id)
 
-    return entity_id
+def res_mappings_author_to_pdbe(pdb_id, chain_id):
+    mappings = []
+    response = restAPI_get_json(f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/residue_listing/{pdb_id}/chain/{chain_id}")
+    entity_id = get_entity_id(pdb_id, chain_id)
+    molecules = response[pdb_id]["molecules"]
+    count = 0
+    for molecule in molecules:
+        if molecule["entity_id"] == entity_id:
+            for residue in molecule["chains"][0]["residues"]:
+                key = str(residue["author_residue_number"]) + residue["author_insertion_code"] #author residue number
+                val = residue["residue_number"] #pdbe residue number
+                mappings.append((key, val))
+            count += 1
+    if count != 1:
+        print(f"Error: More or less than one molecule with entity number {entity_id} was found.")
+        return
+    return dict(mappings)
+
+
+    #### MAPOVANI POMOCI mmCIF ####
+    # mappings from author residue number to pdbe molecule residue number
+    # mmcif_dict = MMCIF2Dict(mmcif_file_path)
+    # group_PDB = mmcif_dict['_atom_site.group_PDB']
+    # pdbe_seq_id = mmcif_dict['_atom_site.pdbe_label_seq_id']
+    # author_seq_id = mmcif_dict['_atom_site.auth_seq_id']
+    # author_ins_code = mmcif_dict['_atom_site.pdbx_PDB_ins_code']
+    # author_chain_id = mmcif_dict['_atom_site.auth_asym_id']
+    # todo smazat, jen kontrola
+    # if (len(pdbe_seq_id) != len(group_PDB) or len(pdbe_seq_id) != len(author_seq_id) or len(pdbe_seq_id) != len(author_ins_code) or len(pdbe_seq_id) != len(author_chain_id) ):
+    #    print(f"Error: pdbe_seq_id not same lenght as author_seq_id")
+    #    return
+    # todo nekam si ukladat a priste cist ze souboru, nedelat pokazde znovu?
+    # mappings = []
+    # for i in range(0, len(pdbe_seq_id)):
+    #    if (group_PDB[i] != "ATOM" or author_chain_id[i] != chain_id):
+    #        continue;
+    #    val = pdbe_seq_id[i]
+    #    key = author_seq_id[i]
+    #    if (author_ins_code[i] != '?'):
+    #        key += author_ins_code[i]
+    #    mappings.append((key, val))
+    # mappings_dict = dict(mappings)
