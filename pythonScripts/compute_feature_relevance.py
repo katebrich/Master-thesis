@@ -7,6 +7,7 @@ import pandas as pd
 import os
 import pickle
 
+cache = True
 dataset_name = "test_mine"
 dataset_path = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}.ds'
 data_dir = f"/home/katebrich/Documents/diplomka/datasets/{dataset_name}/" #todo parametr
@@ -17,9 +18,10 @@ pairs = []
 i = 1
 total = len(dataset)
 
-lbs_cache_dir = f"{data_dir}lbs/"
-if not os.path.exists(lbs_cache_dir):
-    os.makedirs(lbs_cache_dir)
+if (cache):
+    lbs_cache_dir = f"{data_dir}lbs/"
+    if not os.path.exists(lbs_cache_dir):
+        os.makedirs(lbs_cache_dir)
 
 for structure in dataset:
     #todo
@@ -28,16 +30,17 @@ for structure in dataset:
 
     print(f"Processing structure {pdb_id} {chain_id}")
 
-    #todo definvat co ocekavam za typy
-
-    cache_file = f"{lbs_cache_dir}/{pdb_id}{chain_id}.txt"
-    if os.path.isfile(cache_file): # read cached values
-        with open(cache_file, "rb") as fp:
-            lbs = pickle.load(fp)
+    if (cache):
+        cache_file = f"{lbs_cache_dir}/{pdb_id}{chain_id}.txt"
+        if os.path.isfile(cache_file): # read cached values
+            with open(cache_file, "rb") as fp:
+                lbs = pickle.load(fp)
+        else:
+            lbs = get_ligand_binding_sites(pdb_id, chain_id, get_pdb_path(data_dir, pdb_id, chain_id))
+            with open(cache_file, "wb") as fp:  # save cache
+                pickle.dump(lbs, fp)
     else:
         lbs = get_ligand_binding_sites(pdb_id, chain_id, get_pdb_path(data_dir, pdb_id, chain_id))
-        with open(cache_file, "wb") as fp:  # save cache
-            pickle.dump(lbs, fp)
 
     feature_vals = get_feature(feature, data_dir, pdb_id, chain_id)
 

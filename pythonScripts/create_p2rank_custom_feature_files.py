@@ -27,20 +27,20 @@ import shutil
 #        file = arg
 #    #todo else unknown option
 
-
+label = "prank_dynamine_variants_PTM"
 dataset_name = "joined(mlig)"
 dataset_path = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}_prank.ds'
 data_dir = f"/home/katebrich/Documents/diplomka/datasets/{dataset_name}/" #todo parametr
 dataset_file_dir = os.path.dirname(dataset_path)
-output_dir = os.path.join(data_dir + "prank_hydropathy")
+output_dir = os.path.join(data_dir + label)
 #create the output directory or remove its contents, if it already exists
 if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
 os.makedirs(output_dir)
 
 dataset = parse_prank_dataset(dataset_path)
-features = ["hydropathy"] #todo
-defaults = [0] #todo
+features = ["dynamine", "unp_variants", "unp_PTM"] #todo
+defaults = [0.5, 0, 0] #todo
 
 i = 1
 total = len(dataset)
@@ -49,7 +49,7 @@ aa_codes = ["ALA", "ARG", "ASN", "ASP", "CYS", "GLU", "GLN", "GLY", "HIS", "ILE"
 for line in dataset:
     print(f"Processing {line}")
     df = pd.DataFrame(columns=["chain", "ins. code", "seq. code"] + features)
-    pdb_ids = re.findall(r"[0-9][A-Za-z0-9]{3}", str(line))
+    pdb_ids = re.findall(r"[0-9][A-Za-z0-9]{3}", str(line)) #todo test
     if (len(pdb_ids) != 1):
         print(f"Error: unable to determine PDB ID from the file name: {line}")
         continue
@@ -81,8 +81,9 @@ for line in dataset:
                 res_num = mappings[str(seq_code)+str(ins_code)]
                 feat_list = []
                 #todo missing feature vals for res_num
-                for feat in feature_vals:
-                    feat_list.append(feat[res_num])
+                for j in range(0, len(features)):
+                    val = feature_vals[j].get(res_num, defaults[j])
+                    feat_list.append(val)
                 feat_tuple = tuple(feat_list)
                # print(chain_id, ins_code, seq_code, feat_tuple)
                 df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code, seq_code) + feat_tuple

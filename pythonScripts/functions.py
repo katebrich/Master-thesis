@@ -1,7 +1,9 @@
+from __future__ import print_function
 import urllib.request
 import json
 import sys
 import xmltodict
+
 
 #returns uniprotID, entityID, start, end
 def get_uniprot_entity(pdb_id, chain_id):
@@ -32,20 +34,20 @@ def get_uniprot_entity(pdb_id, chain_id):
         return entities
 
 #returns parsed .json response (dictionary)
-def restAPI_get_json(url):
+def restAPI_get(url):
     #todo check status
     req = urllib.request.Request(url)
     with urllib.request.urlopen(req) as f:
         responseBody = f.read()
-    return json.loads(responseBody)
+    return responseBody
+
+#returns parsed .json response (dictionary)
+def restAPI_get_json(url):
+    return json.loads(restAPI_get(url))
 
 #returns parsed .xml response (dictionary)
 def restAPI_get_xml(url):
-    #todo check status
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req) as f:
-        responseBody = f.read()
-    return xmltodict.parse(responseBody) #todo neni neco rychlejsiho? nepotrebuju ordered dictionary...
+    return xmltodict.parse(restAPI_get(url)) #todo neni neco rychlejsiho? nepotrebuju ordered dictionary...
 
 def isInDistance(threshold, residue1, residue2):
     #todo optimize
@@ -98,7 +100,7 @@ def get_entity_id(pdb_id, chain_id):
             entity_id = new_entity_id
     return int(entity_id)
 
-def res_mappings_author_to_pdbe(pdb_id, chain_id):
+def res_mappings_author_to_pdbe(pdb_id, chain_id): #todo cache
     mappings = []
     response = restAPI_get_json(f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/residue_listing/{pdb_id}/chain/{chain_id}")
     entity_id = get_entity_id(pdb_id, chain_id)
@@ -115,6 +117,10 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id):
         print(f"Error: More or less than one molecule with entity number {entity_id} was found.")
         return
     return dict(mappings)
+
+
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 
     #### MAPOVANI POMOCI mmCIF ####
