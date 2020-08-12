@@ -70,3 +70,5 @@ fi
 echo "INFO: Downloading dataset ${dataset_file} to ${output_dir} started..."
 
 python3 ${python_scripts_path}download_dataset.py -d $dataset_file -o $output_dir -l $ligands
+
+echo "INFO: Downloading dataset ${dataset_file} to ${output_dir} finished."

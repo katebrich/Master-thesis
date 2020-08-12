@@ -59,10 +59,10 @@ def isInDistance(threshold, residue1, residue2):
     return False
 
 def get_fasta_path(data_dir, pdb_id, chain_id):
-    return f"{data_dir}/FASTA_filtered/{pdb_id}{chain_id}.fasta"
+    return f"{data_dir}/FASTA/{pdb_id}{chain_id}.fasta"
 
 def get_pdb_path(data_dir, pdb_id, chain_id):
-    return f"{data_dir}/PDB_filtered/{pdb_id}{chain_id}.pdb"
+    return f"{data_dir}/PDB/{pdb_id}{chain_id}.pdb"
 
 #def get_mmcif_path(data_dir, pdb_id, chain_id):
 #    return f"{data_dir}/mmCIF/{pdb_id}{chain_id}.cif"

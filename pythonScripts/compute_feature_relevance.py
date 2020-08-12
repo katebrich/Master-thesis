@@ -1,4 +1,4 @@
-from get_ligand_binding_sites import get_ligand_binding_sites
+from compute_ligand_binding_sites import get_ligand_binding_sites
 from get_feature import get_feature
 from helper import parse_dataset
 from helper import get_pdb_path
@@ -24,7 +24,6 @@ if (cache):
         os.makedirs(lbs_cache_dir)
 
 for structure in dataset:
-    #todo
     pdb_id = structure[0]
     chain_id = structure[1]
 

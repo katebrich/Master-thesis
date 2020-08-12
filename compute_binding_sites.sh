@@ -1,15 +1,9 @@
-# Downloads all structures defined in the dataset_file.
-# Creates a directory with output_dir path with all the downloaded data.
-# If the output directory is not defined, it is created in the dataset_file location. It has a name as the dataset_file plus unique uuid.
-# If the output directory is defined and it does not exist, it is created.
-# If the output directory is defined, it exists, it is nonempty and the -f (force) option is not given, the program ends with an error.
-# Ligands filtering...todo
-
 python_scripts_path=./pythonScripts/
 
+OPTIND=1 # reset
 # init parameters with defaults
 dataset_file=""
-filter_ligands=none #todo none, water, small molecules, given IDs, MOAD,...
+input_dir=""
 output_dir=""
 force=false
 
@@ -17,9 +11,8 @@ show_help() {
     echo TODO PRINT HELP
 }
 
-OPTIND=1 #reset
 ### parse arguments:
-while getopts ":h?d:o:l:f" opt; do
+while getopts ":h?d:i:o:f" opt; do
     case "$opt" in
         h)
             show_help
@@ -36,19 +29,21 @@ while getopts ":h?d:o:l:f" opt; do
             exit
             ;;
         d) dataset_file=$OPTARG ;;
+        i) input_dir=$OPTARG ;;
         o) output_dir=$OPTARG ;;
-        l) filter_ligands=$OPTARG ;;
         f) force=true ;;
     esac
 done
 shift $((OPTIND - 1))
 
 ### check arguments:
-#if dataset file missing, exit
 [ -z "$dataset_file" ] && echo "ERROR: Dataset file path must be entered." && show_help && exit
 
-if [ -z "$output_dir" ]; then # if output dir argument missing, create it in dataset file location with unique name
-    output_dir=${dataset_file%.*}_$(uuidgen)
+[ -z "$input_dir" ] && echo "ERROR: Input directory must be entered." && show_help && exit
+[ ! -d "$input_dir" ] && echo "ERROR: Input directory ${input_dir} does not exist." && show_help && exit
+
+if [ -z "$output_dir" ]; then      # if output dir argument missing, create it in input dir location
+    output_dir=${input_dir}/../lbs #todo check
     mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
 else                                # if the output directory argument was given
     if [ ! -d "$output_dir" ]; then # if the directory does not exist yet, it is created.
@@ -65,8 +60,6 @@ else                                # if the output directory argument was given
     fi
 fi
 
-#todo check ligands option
-
-echo "INFO: Downloading dataset ${dataset_file} to ${output_dir} started..."
-
-python3 ${python_scripts_path}download_dataset.py -d $dataset_file -o $output_dir -l $ligands
+echo "INFO: Computing ligand binding sites started..."
+python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i $input_dir -o $output_dir
+echo "INFO: Computing ligand binding sites finished." #todo co kdyz tam je chyba? nepsat finished
