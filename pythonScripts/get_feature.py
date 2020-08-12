@@ -1,4 +1,4 @@
-from functions import get_uniprot_entity, restAPI_get_json, get_fasta_path
+from helper import get_uniprot_entity, restAPI_get_json, get_fasta_path
 from AA_properties import *
 import random
 

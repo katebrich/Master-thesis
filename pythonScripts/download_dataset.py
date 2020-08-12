@@ -1,13 +1,9 @@
-import urllib.request
 import os, sys
-from parse_dataset import parse_dataset
-import itertools
-from functions import get_pdb_path, get_fasta_path
+from helper import parse_dataset
 import threading
 import traceback
-import shutil
 import getopt
-from functions import eprint, restAPI_get, get_entity_id
+from helper import eprint, restAPI_get, get_entity_id
 import uuid
 from Bio import SeqIO
 from Bio.PDB import PDBParser, PDBIO

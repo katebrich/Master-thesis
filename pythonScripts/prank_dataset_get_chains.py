@@ -1,5 +1,5 @@
 import os
-from parse_dataset import parse_prank_dataset
+from helper import parse_prank_dataset
 import re
 from Bio.PDB import *
 

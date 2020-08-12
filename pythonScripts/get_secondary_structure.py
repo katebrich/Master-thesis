@@ -1,4 +1,4 @@
-from functions import get_uniprot_entity, restAPI_get_json
+from helper import get_uniprot_entity, restAPI_get_json
 
 pdb_id = "3cx5"
 chain_id = "O"

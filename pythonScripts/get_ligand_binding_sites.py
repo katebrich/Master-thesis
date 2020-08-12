@@ -3,7 +3,7 @@ import array as array
 
 from Bio.PDB.MMCIF2Dict import *
 
-from functions import isInDistance, restAPI_get_json, get_entity_id, res_mappings_author_to_pdbe
+from helper import isInDistance, restAPI_get_json, get_entity_id, res_mappings_author_to_pdbe
 
 
 # returns list of tuples:

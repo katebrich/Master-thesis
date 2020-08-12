@@ -1,8 +1,8 @@
-from parse_dataset import parse_dataset
+from helper import parse_dataset
 
 import os as os
 import shutil
-from functions import restAPI_get, get_entity_id
+from helper import restAPI_get, get_entity_id
 import uuid
 
 

@@ -123,26 +123,24 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-    #### MAPOVANI POMOCI mmCIF ####
-    # mappings from author residue number to pdbe molecule residue number
-    # mmcif_dict = MMCIF2Dict(mmcif_file_path)
-    # group_PDB = mmcif_dict['_atom_site.group_PDB']
-    # pdbe_seq_id = mmcif_dict['_atom_site.pdbe_label_seq_id']
-    # author_seq_id = mmcif_dict['_atom_site.auth_seq_id']
-    # author_ins_code = mmcif_dict['_atom_site.pdbx_PDB_ins_code']
-    # author_chain_id = mmcif_dict['_atom_site.auth_asym_id']
-    # todo smazat, jen kontrola
-    # if (len(pdbe_seq_id) != len(group_PDB) or len(pdbe_seq_id) != len(author_seq_id) or len(pdbe_seq_id) != len(author_ins_code) or len(pdbe_seq_id) != len(author_chain_id) ):
-    #    print(f"Error: pdbe_seq_id not same lenght as author_seq_id")
-    #    return
-    # todo nekam si ukladat a priste cist ze souboru, nedelat pokazde znovu?
-    # mappings = []
-    # for i in range(0, len(pdbe_seq_id)):
-    #    if (group_PDB[i] != "ATOM" or author_chain_id[i] != chain_id):
-    #        continue;
-    #    val = pdbe_seq_id[i]
-    #    key = author_seq_id[i]
-    #    if (author_ins_code[i] != '?'):
-    #        key += author_ins_code[i]
-    #    mappings.append((key, val))
-    # mappings_dict = dict(mappings)
+
+def parse_dataset(filepath):
+    list = []
+    with open(filepath) as f:
+        for line in f:
+            pdb_id, chain_ids = line.split()
+            chain_ids = chain_ids.upper()
+            list.append((pdb_id, chain_ids))
+    return list
+
+def parse_prank_dataset(filepath):
+    pdb_files = []
+    with open(filepath) as f:
+        for line in f:
+            #todo jaka je presna struktura .ds souboru v pranku? nechybi mi neco?
+            if (line[0] != '#'): #skip comments
+                words = line.split()
+                if (len(words) > 0 and words[0] != 'HEADER:'): # skip empty lines and header
+                    pdb_files.append(words[0])
+
+    return pdb_files

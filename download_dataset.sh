@@ -3,10 +3,11 @@
 # If the output directory is not defined, it is created in the dataset_file location. It has a name as the dataset_file plus unique uuid.
 # If the output directory is defined and it does not exist, it is created.
 # If the output directory is defined, it exists, it is nonempty and the -f (force) option is not given, the program ends with an error.
-# Ligands filtering...todo
+# Ligands filtering...
 
 python_scripts_path=./pythonScripts/
 
+OPTIND=1 # reset
 # init parameters with defaults
 dataset_file=""
 filter_ligands=none #todo none, water, small molecules, given IDs, MOAD,...
@@ -17,7 +18,6 @@ show_help() {
     echo TODO PRINT HELP
 }
 
-OPTIND=1 #reset
 ### parse arguments:
 while getopts ":h?d:o:l:f" opt; do
     case "$opt" in

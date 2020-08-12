@@ -1,12 +1,12 @@
 import sys
 import getopt
 from Bio.PDB import PDBParser
-from parse_dataset import parse_prank_dataset
+from helper import parse_prank_dataset
 import os
 import pandas as pd
 import re
 from get_feature import get_feature
-from functions import res_mappings_author_to_pdbe
+from helper import res_mappings_author_to_pdbe
 import csv
 import shutil
 
@@ -27,8 +27,8 @@ import shutil
 #        file = arg
 #    #todo else unknown option
 
-label = "prank_dynamine_variants_PTM"
-dataset_name = "joined(mlig)"
+label = "prank_hydropathy_without_fix"
+dataset_name = "chen11"
 dataset_path = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}_prank.ds'
 data_dir = f"/home/katebrich/Documents/diplomka/datasets/{dataset_name}/" #todo parametr
 dataset_file_dir = os.path.dirname(dataset_path)
@@ -39,12 +39,12 @@ if os.path.exists(output_dir):
 os.makedirs(output_dir)
 
 dataset = parse_prank_dataset(dataset_path)
-features = ["dynamine", "unp_variants", "unp_PTM"] #todo
-defaults = [0.5, 0, 0] #todo
+features = ["hydropathy"] #todo
+defaults = [0] #todo
 
 i = 1
 total = len(dataset)
-aa_codes = ["ALA", "ARG", "ASN", "ASP", "CYS", "GLU", "GLN", "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"] #TODO smazat az se odstrani chyba v pranku
+#aa_codes = ["ALA", "ARG", "ASN", "ASP", "CYS", "GLU", "GLN", "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"] #TODO smazat az se odstrani chyba v pranku
 
 for line in dataset:
     print(f"Processing {line}")
@@ -63,7 +63,7 @@ for line in dataset:
             feature_vals.append(dict(get_feature(feature, data_dir, pdb_id, chain_id)))
         mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
         for residue in chain.get_residues():
-            if (residue.id[0][2:] in aa_codes): #todo smazat fix pro prank
+            if False:#(residue.id[0][2:] in aa_codes): #todo smazat fix pro prank
                 if (residue.id[2].isspace()):
                     ins_code = ""
                 else:

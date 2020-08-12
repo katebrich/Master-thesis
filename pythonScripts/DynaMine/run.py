@@ -1,5 +1,5 @@
 import os
-from functions import get_fasta_path
+from helper import get_fasta_path
 from predictor import DynaMine
 
 

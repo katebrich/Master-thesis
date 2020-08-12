@@ -1,14 +1,14 @@
 from get_ligand_binding_sites import get_ligand_binding_sites
 from get_feature import get_feature
-from parse_dataset import parse_dataset
-from functions import get_pdb_path
+from helper import parse_dataset
+from helper import get_pdb_path
 import statistical_analysis as stats
 import pandas as pd
 import os
 import pickle
 
 cache = True
-dataset_name = "test_mine"
+dataset_name = "chen11"
 dataset_path = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}.ds'
 data_dir = f"/home/katebrich/Documents/diplomka/datasets/{dataset_name}/" #todo parametr
 

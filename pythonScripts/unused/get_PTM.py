@@ -1,4 +1,4 @@
-from functions import get_uniprot_entity, restAPI_get_json
+from helper import get_uniprot_entity, restAPI_get_json
 import sys
 import getopt
 
