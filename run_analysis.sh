@@ -3,17 +3,19 @@ python_scripts_path=./pythonScripts/
 OPTIND=1 # reset
 # init parameters with defaults
 dataset_file=""
-input_dir=""
+lbs_dir=""
+feature_vals_dir=""
 output_dir=""
 strict=false
 threads=1
+feature_name=""
 
 show_help() {
     echo TODO PRINT HELP
 }
 
 ### parse arguments:
-while getopts ":h?d:i:o:t:s" opt; do
+while getopts ":h?d:l:o:t:v:f:s" opt; do
     case "$opt" in
         h)
             show_help
@@ -30,8 +32,10 @@ while getopts ":h?d:i:o:t:s" opt; do
             exit 1
             ;;
         d) dataset_file=$OPTARG ;;
-        i) input_dir=$OPTARG ;;
+        l) lbs_dir=$OPTARG ;;
+        v) feature_vals_dir=$OPTARG ;;
         o) output_dir=$OPTARG ;;
+        f) feature_name=$OPTARG ;;
         t) threads=$OPTARG ;;
         s) strict=true ;;
     esac
@@ -41,11 +45,17 @@ shift $((OPTIND - 1))
 ### check arguments:
 [ -z "$dataset_file" ] && echo "ERROR: Dataset file path must be entered." && show_help && exit
 
-[ -z "$input_dir" ] && echo "ERROR: Input directory must be entered." && show_help && exit
-[ ! -d "$input_dir" ] && echo "ERROR: Input directory ${input_dir} does not exist." && show_help && exit
+[ -z "$feature_name" ] && echo "ERROR: Feature name must be entered." && show_help && exit
 
-if [ -z "$output_dir" ]; then      # if output dir argument missing, create it in input dir location
-    output_dir=${input_dir}/../lbs #todo check
+[ -z "$lbs_dir" ] && echo "ERROR: Directory with ligand binding sites data must be entered." && show_help && exit
+[ ! -d "$lbs_dir" ] && echo "ERROR: Directory with ligand binding sites data ${lbs_dir} does not exist." && show_help && exit
+
+[ -z "$feature_vals_dir" ] && echo "ERROR: Directory with feature values must be entered." && show_help && exit
+[ ! -d "$feature_vals_dir" ] && echo "ERROR: Directory with feature values ${feature_vals_dir} does not exist." && show_help && exit
+
+if [ -z "$output_dir" ]; then # if output dir argument missing, create it in feature_vals_dir location
+    #todo chyba..nebo label...?
+    output_dir=${feature_vals_dir}/../analysis #todo check
     mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
 else                                # if the output directory argument was given
     if [ ! -d "$output_dir" ]; then # if the directory does not exist yet, it is created.
@@ -63,6 +73,6 @@ else                                # if the output directory argument was given
 fi
 #todo check threads argument
 
-echo "INFO: Computing ligand binding sites started..."
-python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i $input_dir -o $output_dir -t $threads
-echo "INFO: Computing ligand binding sites finished." #todo co kdyz tam je chyba? nepsat finished
+echo "INFO: Computing feature ${feature_name} started..."
+python3 ${python_scripts_path}run_analysis.py -d $dataset_file -l $lbs_dir -v $feature_vals_dir -o $output_dir -f $feature_name -t $threads
+echo "INFO: Computing feature ${feature_name} finished."

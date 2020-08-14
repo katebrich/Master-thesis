@@ -1,0 +1,9 @@
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_pipeline/features/dynamine created.
+INFO: Computing feature dynamine started...
+DEBUG: running on 4 threads.
+INFO: Computing feature dynamine finished.
+6
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_pipeline/analysis/dynamine created.
+INFO: Computing feature  started...
+INFO: Computing feature  finished.
+1

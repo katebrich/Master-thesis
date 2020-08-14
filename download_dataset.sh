@@ -12,14 +12,15 @@ OPTIND=1 # reset
 dataset_file=""
 filter_ligands=none #todo none, water, small molecules, given IDs, MOAD,...
 output_dir=""
-force=false
+strict=false
+threads=1
 
 show_help() {
     echo TODO PRINT HELP
 }
 
 ### parse arguments:
-while getopts ":h?d:o:l:f" opt; do
+while getopts ":h?d:o:l:t:s" opt; do
     case "$opt" in
         h)
             show_help
@@ -38,7 +39,8 @@ while getopts ":h?d:o:l:f" opt; do
         d) dataset_file=$OPTARG ;;
         o) output_dir=$OPTARG ;;
         l) filter_ligands=$OPTARG ;;
-        f) force=true ;;
+        t) threads=$OPTARG ;;
+        s) strict=true ;;
     esac
 done
 shift $((OPTIND - 1))
@@ -54,11 +56,11 @@ else                                # if the output directory argument was given
     if [ ! -d "$output_dir" ]; then # if the directory does not exist yet, it is created.
         mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
     elif [ -n "$(ls -A ${output_dir})" ]; then # it exists and it is not empty
-        if [ "$force" = true ]; then
+        if [ "$strict" = true ]; then
             rm -rf "$output_dir"
             mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
-        else # If it is nonempty and the -f (force) option is not given, the program ends.
-            echo "ERROR: Given output directory is not empty and option -f was not given."
+        else # If it is nonempty and the -s (strict) option is not given, the program ends.
+            echo "ERROR: Given output directory is not empty and option -s was not given."
             show_help
             exit
         fi
@@ -66,9 +68,10 @@ else                                # if the output directory argument was given
 fi
 
 #todo check ligands option
+#todo check threads
 
 echo "INFO: Downloading dataset ${dataset_file} to ${output_dir} started..."
 
-python3 ${python_scripts_path}download_dataset.py -d $dataset_file -o $output_dir -l $ligands
+python3 ${python_scripts_path}download_dataset.py -d $dataset_file -o $output_dir -l $ligands -t $threads
 
 echo "INFO: Downloading dataset ${dataset_file} to ${output_dir} finished."

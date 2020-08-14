@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 alpha = 0.05 #todo
 
 def welchs_t_test(data):
+    print("Running Welch's T test...")
     equal_var = False  # todo examine if variance is expected to be the same
     alpha = 0.05  # todo as script parameter
 
@@ -34,6 +35,7 @@ def welchs_t_test(data):
 
 def fischers_exact_test(data):
     #todo check data argument
+    print("Running Fisher's exact test...")
 
     counts = Counter(data)
 

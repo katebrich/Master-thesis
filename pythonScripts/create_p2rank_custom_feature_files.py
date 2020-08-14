@@ -5,7 +5,7 @@ from helper import parse_prank_dataset
 import os
 import pandas as pd
 import re
-from get_feature import get_feature
+from features import get_feature
 from helper import res_mappings_author_to_pdbe
 import csv
 import shutil

@@ -97,9 +97,9 @@ def download_structure(str):
                 os.remove(temp_file)
         #todo vypisovani, ale aby to bylo nejak rychlejsi
         with threadLock:
-            global global_counter
-            idx = global_counter
-            global_counter += 1
+            global counter
+            idx = counter
+            counter += 1
         print(f"{idx}/{total}: {pdb_id} {chain_ids} downloaded")
     except Exception as e:
         eprint(f"ERROR: downloading {pdb_id} {chain_ids}: {traceback.print_exc(e)}") #todo test
@@ -109,10 +109,11 @@ def download_structure(str):
 dataset_file = ""
 output_dir = ""
 ligands_filter = None
+threads = 1
 
 #parse arguments:
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:o:l')
+    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:l')
 except getopt.GetoptError as err:
     eprint(f"ERROR: {err}") #unknown option or missing argument
     sys.exit(1)
@@ -123,7 +124,8 @@ for opt, arg in opts:
         output_dir = arg
     elif opt in ("-l", "--ligands_filter"):
         ligands_filter = arg #todo check possible values
-#todo parameter number of threads
+    elif opt in ("-t", "--threads"): #todo check if threads >= 1, int
+        threads = arg
 
 if (dataset_file == ""):
     eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
@@ -141,16 +143,22 @@ if not os.path.exists(output_dir):
 os.makedirs(output_PDB)
 os.makedirs(output_FASTA) #todo co kdyz existuje?
 
-structures = parse_dataset(dataset_file)
+dataset = parse_dataset(dataset_file)  #todo co kdyz neni spravny format
 
-# global variables
-total = len(structures)     #todo otestovat jestli to multithreading zrychluje
+#todo pro jednu vlakno
+
+total = len(dataset)     #todo otestovat jestli to multithreading zrychluje
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
-global_counter = 1
+counter = 1
 
-from multiprocessing.dummy import Pool as ThreadPool
-pool = ThreadPool(4)
-pool.map(download_structure, structures)
-pool.close()
+if (threads == 1):
+    for structure in dataset:
+        download_structure(structure)
+else:
+    print(f"DEBUG: running on {threads} threads.")
+    from multiprocessing.dummy import Pool as ThreadPool
+    pool = ThreadPool(int(threads))
+    pool.map(download_structure, dataset)
+    pool.close()
 
 #todo vypsat kolik bylo chyb a kolik bylo stazeno uspesne

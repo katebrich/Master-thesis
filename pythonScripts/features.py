@@ -1,20 +1,22 @@
+from Bio import SeqIO
+
 from helper import get_uniprot_entity, restAPI_get_json, get_fasta_path
 from AA_properties import *
 import random
 
 def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
     if name_of_feature == 'unp_PTM':
-        return get_PTM(pdb_id, chain_id)
+        return get_PTM(data_dir, pdb_id, chain_id)
     elif name_of_feature == 'unp_glycosylation':
-        return get_glycosylation(pdb_id, chain_id)
+        return get_glycosylation(data_dir, pdb_id, chain_id)
     elif name_of_feature == 'unp_variants':
-        return get_variants(pdb_id, chain_id)
-    elif name_of_feature == 'unp_metal':
-        return get_metal_binding(pdb_id, chain_id)
+        return get_variants(data_dir, pdb_id, chain_id)
+    elif name_of_feature == 'unp_metal': #todo smazat, blbost
+        return get_metal_binding(data_dir, pdb_id, chain_id)
     elif name_of_feature == "hydropathy":
-        return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
+        return get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id)
     elif name_of_feature == "molecular_weight":
-        return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
+        return get_molecular_weight(data_dir, pdb_id, chain_id)
     elif name_of_feature == "random": #todo smazat
         return get_random(data_dir, pdb_id, chain_id)
     elif name_of_feature == "AA": #todo smazat
@@ -25,8 +27,22 @@ def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
         print(f"Error: unknown feature {name_of_feature}.") #todo
         return
 
+types_of_features = {
+    "unp_PTM" : "discrete",
+    "unp_glycosylation" : "discrete",
+    "unp_variants" : "discrete",
+    "hydropathy" : "continuous",
+    "molecular_weight" : "continuous",
+    "dynamine" : "continuous"
+}
 
-def get_PTM(pdb_id, chain_id):
+def get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id):
+    return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
+
+def get_molecular_weight(data_dir, pdb_id, chain_id):
+    return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
+
+def get_PTM(data_dir, pdb_id, chain_id):
     try:
         entities = get_uniprot_entity(pdb_id, chain_id)
     except:
@@ -73,7 +89,7 @@ def get_PTM(pdb_id, chain_id):
 
     return feature_vals
 
-def get_glycosylation(pdb_id, chain_id):
+def get_glycosylation(data_dir, pdb_id, chain_id):
     try:
         entities = get_uniprot_entity(pdb_id, chain_id)
     except:
@@ -119,7 +135,7 @@ def get_glycosylation(pdb_id, chain_id):
 
     return feature_vals
 
-def get_variants(pdb_id, chain_id):
+def get_variants(data_dir, pdb_id, chain_id):
     try:
         entities = get_uniprot_entity(pdb_id, chain_id)
     except:
@@ -159,7 +175,7 @@ def get_variants(pdb_id, chain_id):
 
     return feature_vals
 
-def get_metal_binding(pdb_id, chain_id):
+def get_metal_binding(data_dir, pdb_id, chain_id):
     try:
         entities = get_uniprot_entity(pdb_id, chain_id)
     except:
@@ -221,10 +237,8 @@ def get_random(data_dir, pdb_id, chain_id):
 
 def get_AA_properties(scores_dict, data_dir, pdb_id, chain_id):
     fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
-    with open(fasta_file, 'r') as file:
-        seq = file.read()
-    result = get_AA_scores(scores_dict, seq)
-    return result
+    seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
+    return get_AA_scores(scores_dict, seq)
 
 def get_dynamine(data_dir, pdb_id, chain_id):
     import os
