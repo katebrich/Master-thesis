@@ -36,6 +36,15 @@ types_of_features = {
     "dynamine" : "continuous"
 }
 
+default_values = {
+    "unp_PTM" : 0,
+    "unp_glycosylation" : 0,
+    "unp_variants" : 0,
+    "hydropathy" : 0,
+    "molecular_weight" : 110,
+    "dynamine" : 5
+} #todo
+
 def get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id):
     return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
 
@@ -43,12 +52,7 @@ def get_molecular_weight(data_dir, pdb_id, chain_id):
     return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
 
 def get_PTM(data_dir, pdb_id, chain_id):
-    try:
-        entities = get_uniprot_entity(pdb_id, chain_id)
-    except:
-        print("error")
-        #sys.exit(3)
-        #todo
+    entities = get_uniprot_entity(pdb_id, chain_id)
 
     feature_vals = []
 
@@ -90,12 +94,7 @@ def get_PTM(data_dir, pdb_id, chain_id):
     return feature_vals
 
 def get_glycosylation(data_dir, pdb_id, chain_id):
-    try:
-        entities = get_uniprot_entity(pdb_id, chain_id)
-    except:
-        print("error")
-        #sys.exit(3)
-        #todo
+    entities = get_uniprot_entity(pdb_id, chain_id)
 
     feature_vals = []
 
@@ -136,12 +135,7 @@ def get_glycosylation(data_dir, pdb_id, chain_id):
     return feature_vals
 
 def get_variants(data_dir, pdb_id, chain_id):
-    try:
-        entities = get_uniprot_entity(pdb_id, chain_id)
-    except:
-        print("error")
-        #sys.exit(3)
-        #todo
+    entities = get_uniprot_entity(pdb_id, chain_id)
 
     feature_vals = []
 
@@ -176,12 +170,8 @@ def get_variants(data_dir, pdb_id, chain_id):
     return feature_vals
 
 def get_metal_binding(data_dir, pdb_id, chain_id):
-    try:
-        entities = get_uniprot_entity(pdb_id, chain_id)
-    except:
-        print("error")
-        #sys.exit(3)
-        #todo
+
+    entities = get_uniprot_entity(pdb_id, chain_id)
 
     feature_vals = []
 

@@ -3,6 +3,7 @@ import urllib.request
 import json
 import sys
 import xmltodict
+import numpy as np
 
 
 #returns uniprotID, entityID, start, end
@@ -25,10 +26,10 @@ def get_uniprot_entity(pdb_id, chain_id):
     if len(entities) < 1:
         sys.stderr.write(f"Error: '{pdb_id}': no entity with chain id '{chain_id}' was found.\n\n")
     elif len(entities) > 1:
-        sys.stderr.write(f"Warning: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
-        for x in entities:
-                sys.stderr.write(f"{x[0]}\n")
-        sys.stderr.write(f"\n")
+        #sys.stderr.write(f"Warning: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
+        #for x in entities:
+        #        sys.stderr.write(f"{x[0]}\n")
+        #sys.stderr.write(f"\n") #todo
         return entities
     else:
         return entities
@@ -100,23 +101,29 @@ def get_entity_id(pdb_id, chain_id):
             entity_id = new_entity_id
     return int(entity_id)
 
-def res_mappings_author_to_pdbe(pdb_id, chain_id): #todo cache
-    mappings = []
-    response = restAPI_get_json(f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/residue_listing/{pdb_id}/chain/{chain_id}")
-    entity_id = get_entity_id(pdb_id, chain_id)
-    molecules = response[pdb_id]["molecules"]
-    count = 0
-    for molecule in molecules:
-        if molecule["entity_id"] == entity_id:
-            for residue in molecule["chains"][0]["residues"]:
-                key = str(residue["author_residue_number"]) + residue["author_insertion_code"] #author residue number
-                val = residue["residue_number"] #pdbe residue number
-                mappings.append((key, val))
-            count += 1
-    if count != 1:
-        print(f"Error: More or less than one molecule with entity number {entity_id} was found.")
-        return
-    return dict(mappings)
+def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""): #todo cache
+    if (cache_file != ""):
+        #print("DEBUG: reading mappings from file...")
+        mappings = np.genfromtxt(cache_file, delimiter=' ', dtype='str')
+        return list(mappings)
+    else:
+        #todo zrychlit!!! treba dat vsechny chainy najednou? lepsi vyhledavani?
+        mappings = []
+        response = restAPI_get_json(f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/residue_listing/{pdb_id}/chain/{chain_id}")
+        entity_id = get_entity_id(pdb_id, chain_id)
+        molecules = response[pdb_id]["molecules"]
+        count = 0
+        for molecule in molecules:
+            if molecule["entity_id"] == entity_id:
+                for residue in molecule["chains"][0]["residues"]:
+                    key = str(residue["author_residue_number"]) + residue["author_insertion_code"] #author residue number
+                    val = residue["residue_number"] #pdbe residue number
+                    mappings.append((key, val))
+                count += 1
+        if count != 1:
+            print(f"Error: More or less than one molecule with entity number {entity_id} was found.")
+            return
+        return list(mappings)
 
 
 def eprint(*args, **kwargs):
@@ -131,6 +138,16 @@ def parse_dataset(filepath):
             pdb_id, chain_ids = line.split()
             chain_ids = chain_ids.upper()
             list.append((pdb_id, chain_ids))
+    return list
+
+def parse_dataset_split_chains(filepath):
+    list = []
+    with open(filepath) as f:
+        for line in f:
+            pdb_id, chain_ids = line.split()
+            chain_ids = chain_ids.upper()
+            for chain in chain_ids.split(','):
+                list.append((pdb_id, chain))
     return list
 
 def parse_prank_dataset(filepath):

@@ -98,10 +98,11 @@ for structure in dataset:
 
 type_of_feature = types_of_features[feature_name]
 
+file = os.path.join(output_dir, "results.txt")
 if (type_of_feature == "discrete"):
-    fischers_exact_test(pairs)
+    fischers_exact_test(pairs, file)
 elif (type_of_feature == "continuous"):
-    welchs_t_test(pairs)
+    welchs_t_test(pairs, file)
 else:
     eprint(f"ERROR: Unknown type of feature '{type_of_feature}'")
     sys.exit(1)

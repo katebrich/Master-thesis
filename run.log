@@ -1,9 +1,226 @@
-INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_pipeline/features/dynamine created.
-INFO: Computing feature dynamine started...
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_1/chen11 created.
+INFO: Downloading dataset /home/katebrich/Documents/diplomka/datasets/chen11.txt to /home/katebrich/Documents/diplomka/datasets/TEST_1/chen11 started...
 DEBUG: running on 4 threads.
-INFO: Computing feature dynamine finished.
-6
-INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_pipeline/analysis/dynamine created.
-INFO: Computing feature  started...
-INFO: Computing feature  finished.
-1
+1/250: 1s69 A downloaded
+2/250: 2vbu A downloaded
+3/250: 2nw8 A downloaded
+4/250: 1v7w A downloaded
+5/250: 1do1 A downloaded
+6/250: 2i02 A downloaded
+7/250: 1d7b A downloaded
+8/250: 1dl2 A downloaded
+9/250: 1qgw C downloaded
+10/250: 1usf A downloaded
+11/250: 1uh4 A downloaded
+12/250: 1ld8 B downloaded
+13/250: 4eng A downloaded
+14/250: 1oio A downloaded
+15/250: 1al6 A downloaded
+16/250: 2r09 A downloaded
+17/250: 3cx5 O downloaded
+18/250: 1d3c A downloaded
+19/250: 1dz4 A downloaded
+20/250: 1uyy A downloaded
+21/250: 1n9y C downloaded
+22/250: 1n8u A downloaded
+23/250: 1m6z B downloaded
+24/250: 1vi0 A downloaded
+25/250: 2np5 A downloaded
+26/250: 1w2t A downloaded
+27/250: 2amb A downloaded
+28/250: 2vxj A downloaded
+29/250: 1i5z A downloaded
+30/250: 1s1d A downloaded
+31/250: 1n5u A downloaded
+32/250: 1urx A downloaded
+33/250: 1f8b A downloaded
+34/250: 1rqj A downloaded
+35/250: 6cel A downloaded
+36/250: 1rx0 A downloaded
+37/250: 1cq1 A downloaded
+38/250: 2aib A downloaded
+39/250: 3cr5 X downloaded
+40/250: 1w3y A downloaded
+41/250: 1pjx A downloaded
+42/250: 1rzl A downloaded
+43/250: 2rk1 A downloaded
+44/250: 19hc A downloaded
+45/250: 1ofz A downloaded
+46/250: 2rbt X downloaded
+47/250: 2cz6 B downloaded
+48/250: 1mud A downloaded
+49/250: 1qdb B downloaded
+50/250: 1loj B downloaded
+51/250: 1w2y A downloaded
+52/250: 2ajc A downloaded
+53/250: 2zqn B downloaded
+54/250: 1tez A downloaded
+55/250: 2hyr A downloaded
+56/250: 1ja1 A downloaded
+57/250: 2jf2 A downloaded
+58/250: 1tb7 A downloaded
+59/250: 1nb9 A downloaded
+60/250: 1sx6 A downloaded
+61/250: 1qmg A downloaded
+62/250: 3bsy A downloaded
+63/250: 1nyw A downloaded
+64/250: 1g67 A downloaded
+65/250: 1bw9 A downloaded
+66/250: 1mv8 A downloaded
+67/250: 1lrh A downloaded
+68/250: 1d3g A downloaded
+69/250: 1qje A downloaded
+70/250: 2b4f A downloaded
+71/250: 2fzb A downloaded
+72/250: 1x7d A downloaded
+73/250: 1wxi A downloaded
+74/250: 1dry A downloaded
+75/250: 1gvy A downloaded
+76/250: 1ez1 A downloaded
+77/250: 1oja A downloaded
+78/250: 2fct A downloaded
+79/250: 1x38 A downloaded
+80/250: 1c0i A downloaded
+81/250: 2ji7 A downloaded
+82/250: 1i5z A downloaded
+83/250: 2j8f A downloaded
+84/250: 1h16 A downloaded
+85/250: 2hxf B downloaded
+86/250: 1p6b B downloaded
+87/250: 1c9s A downloaded
+88/250: 2or4 A downloaded
+89/250: 1j79 A downloaded
+90/250: 2ji7 A downloaded
+91/250: 1sjn B downloaded
+92/250: 1oiz A downloaded
+93/250: 1fxq A downloaded
+94/250: 2r5n A downloaded
+95/250: 1mdl A downloaded
+96/250: 1o9s A downloaded
+97/250: 2ji7 A downloaded
+98/250: 1p7t B downloaded
+99/250: 1on3 B downloaded
+100/250: 1ag9 A downloaded
+101/250: 2r5n A downloaded
+INFO: Downloading dataset /home/katebrich/Documents/diplomka/datasets/chen11.txt to /home/katebrich/Documents/diplomka/datasets/TEST_1/chen11 finished.
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_1/joined(mlig) created.
+INFO: Downloading dataset /home/katebrich/Documents/diplomka/datasets/joined(mlig).txt to /home/katebrich/Documents/diplomka/datasets/TEST_1/joined(mlig) started...
+DEBUG: running on 4 threads.
+INFO: Downloading dataset /home/katebrich/Documents/diplomka/datasets/joined(mlig).txt to /home/katebrich/Documents/diplomka/datasets/TEST_1/joined(mlig) finished.
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_1/chen11/features/unp_variants created.
+INFO: Computing feature unp_variants started...
+DEBUG: running on 4 threads.
+INFO: Computing feature unp_variants finished.
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_1/chen11/features/hydropathy created.
+INFO: Computing feature hydropathy started...
+DEBUG: running on 4 threads.
+1/250: 1s69 A processed.
+2/250: 1v7w A processed.
+3/250: 2nw8 A processed.
+4/250: 1dl2 A processed.
+5/250: 2vbu A processed.
+6/250: 1do1 A processed.
+7/250: 1d7b A processed.
+8/250: 1ld8 B processed.
+9/250: 2i02 A processed.
+10/250: 1qgw C processed.
+11/250: 1uh4 A processed.
+12/250: 1al6 A processed.
+13/250: 1dz4 A processed.
+14/250: 1usf A processed.
+15/250: 1n8u A processed.
+16/250: 3cx5 O processed.
+17/250: 1oio A processed.
+18/250: 1vi0 A processed.
+19/250: 1m6z B processed.
+20/250: 4eng A processed.
+21/250: 2amb A processed.
+22/250: 1d3c A processed.
+23/250: 2np5 A processed.
+24/250: 1n5u A processed.
+25/250: 2r09 A processed.
+26/250: 1uyy A processed.
+27/250: 1rqj A processed.
+28/250: 1i5z A processed.
+29/250: 2vxj A processed.
+30/250: 2aib A processed.
+31/250: 1n9y C processed.
+32/250: 1rx0 A processed.
+33/250: 1urx A processed.
+34/250: 19hc A processed.
+35/250: 3cr5 X processed.
+36/250: 1w2t A processed.
+37/250: 6cel A processed.
+38/250: 1rzl A processed.
+39/250: 1qdb B processed.
+40/250: 1s1d A processed.
+41/250: 2rbt X processed.
+42/250: 1w3y A processed.
+43/250: 1w2y A processed.
+44/250: 1f8b A processed.
+45/250: 1mud A processed.
+46/250: 2rk1 A processed.
+47/250: 1cq1 A processed.
+48/250: 1tb7 A processed.
+49/250: 1tez A processed.
+50/250: 1pjx A processed.
+51/250: 2cz6 B processed.
+52/250: 1qmg A processed.
+53/250: 1sx6 A processed.
+54/250: 1mv8 A processed.
+55/250: 1loj B processed.
+56/250: 1ofz A processed.
+57/250: 1nyw A processed.
+58/250: 1lrh A processed.
+59/250: 2b4f A processed.
+60/250: 2zqn B processed.
+61/250: 2ajc A processed.
+62/250: 1ja1 A processed.
+63/250: 1g67 A processed.
+64/250: 1qje A processed.
+65/250: 1nb9 A processed.
+66/250: 2hyr A processed.
+67/250: 1dry A processed.
+68/250: 1d3g A processed.
+69/250: 1bw9 A processed.
+70/250: 2jf2 A processed.
+71/250: 2fzb A processed.
+72/250: 1gvy A processed.
+73/250: 2fct A processed.
+74/250: 1x7d A processed.
+75/250: 3bsy A processed.
+76/250: 1i5z A processed.
+77/250: 1x38 A processed.
+78/250: 1oja A processed.
+79/250: 1wxi A processed.
+80/250: 1c9s A processed.
+81/250: 1c0i A processed.
+82/250: 2j8f A processed.
+83/250: 1ez1 A processed.
+84/250: 1h16 A processed.
+85/250: 1sjn B processed.
+86/250: 2or4 A processed.
+87/250: 1o9s A processed.
+88/250: 1p6b B processed.
+89/250: 2ji7 A processed.
+90/250: 1oiz A processed.
+91/250: 2hxf B processed.
+92/250: 1on3 B processed.
+93/250: 1j79 A processed.
+94/250: 1ag9 A processed.
+95/250: 2ji7 A processed.
+96/250: 1fxq A processed.
+97/250: 2r5n A processed.
+98/250: 1mdl A processed.
+99/250: 2ji7 A processed.
+100/250: 1p7t B processed.
+101/250: 2r5n A processed.
+INFO: Computing feature hydropathy finished.
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_1/joined(mlig)/features/unp_variants created.
+INFO: Computing feature unp_variants started...
+DEBUG: running on 4 threads.
+INFO: Computing feature unp_variants finished.
+INFO: Output directory /home/katebrich/Documents/diplomka/datasets/TEST_1/joined(mlig)/features/hydropathy created.
+INFO: Computing feature hydropathy started...
+DEBUG: running on 4 threads.
+INFO: Computing feature hydropathy finished.

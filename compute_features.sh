@@ -1,3 +1,5 @@
+set -e
+
 python_scripts_path=./pythonScripts/
 
 OPTIND=1 # reset
@@ -48,7 +50,7 @@ shift $((OPTIND - 1))
 
 if [ -z "$output_dir" ]; then           # if output dir argument missing, create it in input dir location
     output_dir=${input_dir}/../features #todo check
-    mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
+    mkdir -p "$output_dir" && echo "INFO: Output directory ${output_dir} created."
 fi
 #todo check threads argument
 #todo check features argument
@@ -58,11 +60,11 @@ IFS=','
 for feature in $features_list; do
     feature_output_dir=${output_dir}/${feature}
     if [ ! -d "$feature_output_dir" ]; then # if the directory does not exist yet, it is created.
-        mkdir "$feature_output_dir" && echo "INFO: Output directory ${feature_output_dir} created."
+        mkdir -p "$feature_output_dir" && echo "INFO: Output directory ${feature_output_dir} created."
     elif [ -n "$(ls -A ${feature_output_dir})" ]; then # it exists and it is not empty
         if [ "$strict" = true ]; then
             rm -rf "$feature_output_dir"
-            mkdir "$feature_output_dir" && echo "INFO: Output directory ${feature_output_dir} was emptied."
+            mkdir -p "$feature_output_dir" && echo "INFO: Output directory ${feature_output_dir} was emptied."
         else # If it is nonempty and the -s (strict) option is not given, the program ends.
             echo "ERROR: The output directory ${feature_output_dir} is not empty and option -s was not given."
             show_help

@@ -1,3 +1,5 @@
+set -e
+
 python_scripts_path=./pythonScripts/
 
 OPTIND=1 # reset

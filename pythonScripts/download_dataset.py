@@ -71,39 +71,33 @@ def get_FASTA(temp_file, out_dir, pdb_id, chain_ids): #todo zapsat tam i ten hea
             with open(out_fasta_file_path, 'wb') as file:
                 file.write(response)
 
-def download_structure(str):
+def download_structure(structure):
+    pdb_id = structure[0]
+    chain_ids = structure[1]
+    error=False
     try:
-        pdb_id = str[0]
-        chain_ids = str[1]
-        #PDB
         temp_file = f"temp_{uuid.uuid1()}"
-        try:
-            get_PDB(temp_file, output_PDB, pdb_id, chain_ids, ligands_filter)
-        except:
-            eprint(f"ERROR: downloading PDB file - {pdb_id}") #todo test jestli se dostane do chyboveho vystupu shell skriptu
-            raise
-        finally:
-            if os.path.exists(temp_file):
-                os.remove(temp_file)
-        #FASTA
-        try:
-            #download_file(url, output_path)
-            get_FASTA(temp_file, output_FASTA, pdb_id, chain_ids)
-        except:
-            eprint(f"ERROR: downloading FASTA file - {pdb_id}")
-            raise
-        finally:
-            if os.path.exists(temp_file):
-                os.remove(temp_file)
-        #todo vypisovani, ale aby to bylo nejak rychlejsi
+        get_PDB(temp_file, output_PDB, pdb_id, chain_ids, ligands_filter)
+        os.remove(temp_file)
+        temp_file = f"temp_{uuid.uuid1()}"
+        get_FASTA(temp_file, output_FASTA, pdb_id, chain_ids)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except Exception as ex:
+        error=True
+        print(f"ERROR: downloading {pdb_id} {chain_ids}: {ex}")  #todo test jestli se dostane do chyboveho vystupu shell skriptu
+        traceback.print_exception(type(ex), ex, ex.__traceback__)
+    finally:
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
         with threadLock:
             global counter
             idx = counter
             counter += 1
-        print(f"{idx}/{total}: {pdb_id} {chain_ids} downloaded")
-    except Exception as e:
-        eprint(f"ERROR: downloading {pdb_id} {chain_ids}: {traceback.print_exc(e)}") #todo test
-        # todo log error structures, count
+        if (error):
+            print(f"{idx}/{total}: {pdb_id} {chain_ids} NOT DOWNLOADED !")
+        else:
+            print(f"{idx}/{total}: {pdb_id} {chain_ids} downloaded")
 
 
 dataset_file = ""
@@ -144,8 +138,6 @@ os.makedirs(output_PDB)
 os.makedirs(output_FASTA) #todo co kdyz existuje?
 
 dataset = parse_dataset(dataset_file)  #todo co kdyz neni spravny format
-
-#todo pro jednu vlakno
 
 total = len(dataset)     #todo otestovat jestli to multithreading zrychluje
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur

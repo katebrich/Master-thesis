@@ -32,7 +32,7 @@ def compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
     structure = parser.get_structure(pdb_id + chain_id, pdb_file_path)
     chain = structure[0][chain_id]
 
-    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+    mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id)) #todo cache
 
     AAs = []
     ligands = []

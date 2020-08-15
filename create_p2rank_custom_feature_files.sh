@@ -9,13 +9,14 @@ input_dir=""
 output_dir=""
 strict=false
 threads=1
+features_list=""
 
 show_help() {
     echo TODO PRINT HELP
 }
 
 ### parse arguments:
-while getopts ":h?d:i:o:t:s" opt; do
+while getopts ":h?d:i:o:t:f:s" opt; do
     case "$opt" in
         h)
             show_help
@@ -35,6 +36,7 @@ while getopts ":h?d:i:o:t:s" opt; do
         i) input_dir=$OPTARG ;;
         o) output_dir=$OPTARG ;;
         t) threads=$OPTARG ;;
+        f) features_list=$OPTARG ;;
         s) strict=true ;;
     esac
 done
@@ -64,7 +66,9 @@ else                                # if the output directory argument was given
     fi
 fi
 #todo check threads argument
+#todo check features
+#todo jestli existuje vsechny potrebne slozky s features?
 
-echo "INFO: Computing ligand binding sites started..."
-python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i $input_dir -o $output_dir -t $threads
-echo "INFO: Computing ligand binding sites finished." #todo co kdyz tam je chyba? nepsat finished
+echo "INFO: Creating prank custom feature files..."
+python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_file -i $input_dir -o $output_dir -t $threads -f $features_list
+echo "INFO: Creating prank custom feature files finished."

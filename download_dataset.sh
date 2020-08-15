@@ -5,6 +5,8 @@
 # If the output directory is defined, it exists, it is nonempty and the -f (force) option is not given, the program ends with an error.
 # Ligands filtering...
 
+set -e
+
 python_scripts_path=./pythonScripts/
 
 OPTIND=1 # reset
@@ -29,12 +31,12 @@ while getopts ":h?d:o:l:t:s" opt; do
         \?)
             echo "ERROR: Unknown option $OPTARG"
             show_help
-            exit
+            exit 1
             ;;
         :)
             echo "ERROR: Missing argument for option $OPTARG"
             show_help
-            exit
+            exit 1
             ;;
         d) dataset_file=$OPTARG ;;
         o) output_dir=$OPTARG ;;
@@ -51,18 +53,18 @@ shift $((OPTIND - 1))
 
 if [ -z "$output_dir" ]; then # if output dir argument missing, create it in dataset file location with unique name
     output_dir=${dataset_file%.*}_$(uuidgen)
-    mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
+    mkdir -p "$output_dir" && echo "INFO: Output directory ${output_dir} created."
 else                                # if the output directory argument was given
     if [ ! -d "$output_dir" ]; then # if the directory does not exist yet, it is created.
-        mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
+        mkdir -p "$output_dir" && echo "INFO: Output directory ${output_dir} created."
     elif [ -n "$(ls -A ${output_dir})" ]; then # it exists and it is not empty
         if [ "$strict" = true ]; then
             rm -rf "$output_dir"
-            mkdir "$output_dir" && echo "INFO: Output directory ${output_dir} created."
+            mkdir -p "$output_dir" && echo "INFO: Output directory ${output_dir} created."
         else # If it is nonempty and the -s (strict) option is not given, the program ends.
             echo "ERROR: Given output directory is not empty and option -s was not given."
             show_help
-            exit
+            exit 1
         fi
     fi
 fi
