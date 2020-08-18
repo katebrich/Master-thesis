@@ -3,7 +3,7 @@ from helper import parse_prank_dataset
 import re
 from Bio.PDB import *
 
-dataset_name = "joined(mlig)"
+dataset_name = "mine_holo4k_part2"
 datasets_dir = f"/home/katebrich/Documents/diplomka/P2Rank_with_csv_feature/datasets_old/"
 dataset_path = f"{datasets_dir}/{dataset_name}.ds"
 
@@ -19,7 +19,7 @@ total = len(dataset)
 
 with open(output_path, 'w') as file:
     for line in dataset:
-        print(f"Processing {line}")
+        #print(f"Processing {line}")
         pdb_ids = re.findall(r"[0-9][A-Za-z0-9]{3}", str(line))
         if (len(pdb_ids) != 1):
             print(f"Error: unable to determine PDB ID from the file name: {line}")

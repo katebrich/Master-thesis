@@ -47,6 +47,56 @@ molecular_weight = {
     'X': None #unknown AA
 }
 
+pKa_COOH = {
+    'A': 2.4,   #alanine
+    'C': 1.7,   #cystein
+    'D': 2.1,  #aspartic acid
+    'E': 2.2,  #glumatic acid
+    'F': 1.8,   #phenylalanine
+    'G': 2.3,  #glycine
+    'H': 1.8,  #histidine
+    'I': 2.4,   #isoleucine
+    'K': 2.2,  #lysine
+    'L': 2.4,   #leucine
+    'M': 2.3,   #methionine
+    'N': 2.0,  #asparagine
+    'P': 2.1,  #proline
+    'Q': 2.2,  #glutamine
+    'R': 2.2,  #arginine
+    'S': 2.2,  #serine
+    'T': 2.6,  #threonine
+    'V': 2.3,   #valine
+    'W': 2.4,  #tryptophan
+    'Y': 2.2,   #tyrosin
+    'X': None #unknown AA
+}
+
+pKa_NH3 = {
+    'A': 9.7,   #alanine
+    'C': 10.8,   #cystein
+    'D': 9.8,  #aspartic acid
+    'E': 9.7,  #glumatic acid
+    'F': 9.1,   #phenylalanine
+    'G': 9.6,  #glycine
+    'H': 9.2,  #histidine
+    'I': 9.7,   #isoleucine
+    'K': 9.0,  #lysine
+    'L': 9.6,   #leucine
+    'M': 9.2,   #methionine
+    'N': 8.8,  #asparagine
+    'P': 10.6,  #proline
+    'Q': 9.2,  #glutamine
+    'R': 9.0,  #arginine
+    'S': 9.2,  #serine
+    'T': 10.4,  #threonine
+    'V': 9.6,   #valine
+    'W': 9.4,  #tryptophan
+    'Y': 9.1,   #tyrosin
+    'X': None #unknown AA
+}
+
+
+
 random_prop = {
     'A': 54,   #alanine
     'C': 73,   #cystein

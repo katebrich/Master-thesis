@@ -1,11 +1,57 @@
 import getopt
 import os
 import sys
+import traceback
+
 import numpy as np
 
-from helper import parse_dataset, eprint
+from helper import parse_dataset_split_chains, eprint
 from statistical_analysis import welchs_t_test, fischers_exact_test
 from features import types_of_features
+
+def compute_pairs(structure):
+    pdb_id = structure[0]
+    chain_id = structure[1]
+    error = False
+    missing_vals = []
+
+    try:
+        # get ligand binding sites values
+        output_file = f"{lbs_dir}/{pdb_id}{chain_id}.txt"
+        lbs = np.genfromtxt(output_file, delimiter=' ')
+        lbs_dict = dict(lbs)
+
+        # get feature values
+        output_file = f"{feature_dir}/{pdb_id}{chain_id}.txt"
+        feature = np.genfromtxt(output_file, delimiter=' ')
+        feature_vals = list(feature)
+
+        for val in feature_vals:
+            res_num = val[0]
+            feature_val = val[1]
+            if res_num in lbs_dict:
+                lbs_val = lbs_dict[res_num]
+            else:
+                missing_vals.append(res_num)
+                continue;
+            global pairs
+            pairs.append((lbs_val, feature_val))
+        #if (len(missing_vals) > 0):
+        #    print(f"Warning: missing feature values for residues: {missing_vals}") #todo vyresit to
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except Exception as ex:
+        error = True
+        print(
+            f"ERROR: processing {pdb_id} {chain_id}: {ex}")
+        traceback.print_exception(type(ex), ex, ex.__traceback__)
+    finally:
+        global counter
+        counter  += 1
+        if (error):
+            print(f"{counter}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
+        else:
+            print(f"{counter}/{total}: {pdb_id} {chain_id} processed")
 
 dataset_file = ""
 output_dir = ""
@@ -55,41 +101,13 @@ if not os.path.exists(output_dir):
 #todo else smazat??
 
 
-dataset = parse_dataset(dataset_file)
+dataset = parse_dataset_split_chains(dataset_file)
 pairs = []
 total = len(dataset)
-i = 1
+counter = 1
 #pair feature values with ligand binding sites
 for structure in dataset:
-    pdb_id = structure[0]
-    chain_id = structure[1]
-    # numbering is corresponding to the PDBe molecule
-    missing_vals = []
-
-    # get ligand binding sites values
-    output_file = f"{lbs_dir}/{pdb_id}{chain_id}.txt"
-    lbs = np.genfromtxt(output_file, delimiter=' ')
-    lbs_dict = dict(lbs)
-
-    # get feature values
-    output_file = f"{feature_dir}/{pdb_id}{chain_id}.txt"
-    feature = np.genfromtxt(output_file, delimiter=' ')
-    feature_vals = list(feature)
-
-    for val in feature_vals:
-        res_num = val[0]
-        feature_val = val[1]
-        if res_num in lbs_dict:
-            lbs_val = lbs_dict[res_num]
-        else:
-            missing_vals.append(res_num)
-            continue;
-        pairs.append((lbs_val, feature_val))
-
-    if (len(missing_vals) > 0):
-        print(f"Warning: missing feature values for residues: {missing_vals}")
-    print(f"{i}/{total}: structure {pdb_id} {chain_id} processed.")
-    i += 1
+    compute_pairs(structure)
 
 #take the whole dataset and run statistical analysis
 #print(pairs)

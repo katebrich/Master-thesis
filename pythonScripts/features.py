@@ -11,16 +11,20 @@ def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
         return get_glycosylation(data_dir, pdb_id, chain_id)
     elif name_of_feature == 'unp_variants':
         return get_variants(data_dir, pdb_id, chain_id)
-    elif name_of_feature == 'unp_metal': #todo smazat, blbost
-        return get_metal_binding(data_dir, pdb_id, chain_id)
+    #elif name_of_feature == 'unp_metal': #todo smazat, blbost
+    #    return get_metal_binding(data_dir, pdb_id, chain_id)
     elif name_of_feature == "hydropathy":
         return get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "pKa_COOH":
+        return get_pKa_COOH(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "pKa_NH3":
+        return get_pKa_NH3(data_dir, pdb_id, chain_id)
     elif name_of_feature == "molecular_weight":
         return get_molecular_weight(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "random": #todo smazat
-        return get_random(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "AA": #todo smazat
-        return get_AAs(data_dir, pdb_id, chain_id)
+    #elif name_of_feature == "random": #todo smazat
+    #    return get_random(data_dir, pdb_id, chain_id)
+    #elif name_of_feature == "AA": #todo smazat
+    #    return get_AAs(data_dir, pdb_id, chain_id)
     elif name_of_feature == "dynamine":
         return get_dynamine(data_dir, pdb_id, chain_id)
     else:
@@ -33,7 +37,9 @@ types_of_features = {
     "unp_variants" : "discrete",
     "hydropathy" : "continuous",
     "molecular_weight" : "continuous",
-    "dynamine" : "continuous"
+    "dynamine" : "continuous",
+    "pKa_COOH" : "continuous",
+    "pKa_NH3" : "continuous"
 }
 
 default_values = {
@@ -42,7 +48,9 @@ default_values = {
     "unp_variants" : 0,
     "hydropathy" : 0,
     "molecular_weight" : 110,
-    "dynamine" : 5
+    "dynamine" : 5,
+    "pKa_COOH" : 9.5,
+    "pKa_NH3" : 2.2
 } #todo
 
 def get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id):
@@ -50,6 +58,12 @@ def get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id):
 
 def get_molecular_weight(data_dir, pdb_id, chain_id):
     return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
+
+def get_pKa_COOH(data_dir, pdb_id, chain_id):
+    return get_AA_properties(pKa_COOH, data_dir, pdb_id, chain_id)
+
+def get_pKa_NH3(data_dir, pdb_id, chain_id):
+    return get_AA_properties(pKa_NH3, data_dir, pdb_id, chain_id)
 
 def get_PTM(data_dir, pdb_id, chain_id):
     entities = get_uniprot_entity(pdb_id, chain_id)

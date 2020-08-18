@@ -2,7 +2,7 @@ from Bio.PDB import *
 from helper import isInDistance, restAPI_get_json, get_entity_id, res_mappings_author_to_pdbe
 import getopt
 import sys
-from helper import eprint, parse_dataset
+from helper import eprint, parse_dataset_split_chains
 import os
 import threading
 
@@ -102,7 +102,7 @@ if (input_dir == ""):
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-dataset = parse_dataset(dataset_file) #todo co kdyz neni spravny format
+dataset = parse_dataset_split_chains(dataset_file) #todo co kdyz neni spravny format
 
 total = len(dataset)
 counter = 1
