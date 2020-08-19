@@ -5,7 +5,9 @@ import threading
 import traceback
 
 from helper import eprint, parse_dataset_split_chains, res_mappings_author_to_pdbe
+import logger
 
+logger = logger.get_logger(os.path.basename(__file__))
 
 def create_mappings_cache(structure):
     pdb_id = structure[0]
@@ -20,18 +22,18 @@ def create_mappings_cache(structure):
         raise
     except Exception as ex:
         error = True
-        print(f"ERROR: processing {pdb_id} {chain_id}: {ex}")
-        traceback.print_exception(type(ex), ex, ex.__traceback__)
+        logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}")
     finally:
         with threadLock:
             global counter
             idx = counter
             counter += 1
         if (error):
-            print(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
+            errors.append(structure)
+            logger.error(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
             #todo zapsat nekam chybu
         else:
-            print(f"{idx}/{total}: {pdb_id} {chain_id} processed")
+            logger.debug(f"{idx}/{total}: {pdb_id} {chain_id} processed")
 
 dataset_file = ""
 output_dir = ""
@@ -41,7 +43,7 @@ threads = 1
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:')
 except getopt.GetoptError as err:
-    eprint(f"ERROR: {err}") #unknown option or missing argument
+    logger.error(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-d", "--dataset"):
@@ -52,10 +54,10 @@ for opt, arg in opts:
         threads = arg
 
 if (dataset_file == ""):
-    eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
     sys.exit(1)
 if (output_dir == ""):
-    eprint("ERROR: Output directory must be specified.")
+    logger.error("Output directory must be specified.")
     sys.exit(1)
 
 if not os.path.exists(output_dir):
@@ -64,16 +66,24 @@ if not os.path.exists(output_dir):
 
 dataset = parse_dataset_split_chains(dataset_file)  #todo co kdyz neni spravny format
 
+logger.info(f"Creating mapping cache started...")
+
 total = len(dataset)
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
 counter = 1
+errors = []
 
 if (threads == 1):
     for structure in dataset:
         create_mappings_cache(structure)
 else:
-    print(f"DEBUG: running on {threads} threads.")
     from multiprocessing.dummy import Pool as ThreadPool
     pool = ThreadPool(int(threads))
     pool.map(create_mappings_cache, dataset)
     pool.close()
+
+if (len(errors) == 0):
+    logger.info(f"Creating mapping cache finished: All structures processed successfully.")
+else:
+    errors_format = '\n'.join('%s %s' % x for x in errors)
+    logger.warning(f"Creating mapping cache finished: Some structures were not processed successfully: \n {errors_format}")

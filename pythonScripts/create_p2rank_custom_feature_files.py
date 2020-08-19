@@ -12,6 +12,9 @@ from helper import res_mappings_author_to_pdbe
 import csv
 import shutil
 import numpy as np
+import logger
+
+logger = logger.get_logger(os.path.basename(__file__))
 
 def read_feature_vals(feature, data_dir, pdb_id, chain_id):
     path = os.path.join(data_dir, "features", feature, f"{pdb_id}{chain_id}.txt")
@@ -34,7 +37,6 @@ def create_file(structure):
             feature_vals.append(read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
 
         mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, os.path.join(mappings_cache_dir, f"{pdb_id}{chain_id}.txt"))) #todo cache
-        #print(mappings)
         for residue in struct.get_residues():
             if (residue.id[0][2:] in aa_codes):  # todo smazat fix pro prank
                 if (residue.id[2].isspace()):
@@ -44,7 +46,6 @@ def create_file(structure):
                 seq_code = residue.id[1]
                 #res_num = str(seq_code) + str(ins_code)
                 feat_tuple = tuple(defaults)
-                # print(chain_id, ins_code, seq_code, feat_tuple)
                 df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
                                                                                   seq_code) + feat_tuple
             elif (residue.id[0].isspace() or residue.id[0] == "H_MSE"):  # skip hetero-residues #todo selenomethionine???
@@ -60,7 +61,6 @@ def create_file(structure):
                     val = feature_vals[j].get(res_num, defaults[j])
                     feat_list.append(val)
                 feat_tuple = tuple(feat_list)
-                # print(chain_id, ins_code, seq_code, feat_tuple)
                 df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
                                                                                   seq_code) + feat_tuple
         output_path = os.path.join(output_dir, os.path.basename(pdb_path) + ".csv")
@@ -70,17 +70,17 @@ def create_file(structure):
         raise
     except Exception as ex:
         error=True
-        print(f"ERROR: downloading {pdb_id} {chain_id}: {ex}")  #todo test jestli se dostane do chyboveho vystupu shell skriptu
-        traceback.print_exception(type(ex), ex, ex.__traceback__)
+        logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}")
     finally:
         with threadLock:
             global counter
             idx = counter
             counter += 1
         if (error):
-            print(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
+            errors.append(structure)
+            logger.error(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
         else:
-            print(f"{idx}/{total}: {pdb_id} {chain_id} processed")
+            logger.debug(f"{idx}/{total}: {pdb_id} {chain_id} processed")
 
 #todo zrychlit to!!!
 
@@ -94,7 +94,7 @@ features={}
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'f:d:o:i:t:')
 except getopt.GetoptError as err:
-    eprint(f"ERROR: {err}") #unknown option or missing argument
+    logger.error(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-d", "--dataset"):
@@ -109,13 +109,13 @@ for opt, arg in opts:
         features = arg.split(',') #todo check
 
 if (dataset_file == ""):
-    eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.")
     sys.exit(1)
 if (output_dir == ""):
-    eprint("ERROR: Output directory must be specified.")
+    logger.error("Output directory must be specified.")
     sys.exit(1)
 if (input_dir == ""):
-    eprint("ERROR: Input directory must be specified.")
+    logger.error("Input directory must be specified.")
     sys.exit(1)
 #todo check features
 
@@ -125,16 +125,17 @@ if not os.path.exists(output_dir):
 
 dataset = parse_dataset_split_chains(dataset_file) #todo co kdyz neni spravny format
 
+logger.info("Creating p2rank custom feature files started...")
+
 defaults = [default_values[f] for f in features]
-print("DEFAULTS:", defaults)
+logger.debug("DEFAULTS:", defaults)
 
 mappings_cache_dir = os.path.join(input_dir, "mappings")
 aa_codes = ["ALA", "ARG", "ASN", "ASP", "CYS", "GLU", "GLN", "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"] #TODO smazat az se odstrani chyba v pranku
 total = len(dataset)
 counter = 1
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
-
-print(f"DEBUG: running on {threads} threads.")
+errors = []
 
 if (threads == 1):
     for structure in dataset:
@@ -145,5 +146,9 @@ else:
     pool.map(create_file, dataset)
     pool.close()
 
-
+if (len(errors) == 0):
+    logger.info(f"Creating p2rank custom feature files finished: All structures processed successfully.")
+else:
+    errors_format = '\n'.join('%s %s' % x for x in errors)
+    logger.warning(f"Creating p2rank custom feature files finished: Some structures were not processed successfully: \n {errors_format}")
 

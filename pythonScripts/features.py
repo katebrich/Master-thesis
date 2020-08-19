@@ -11,6 +11,8 @@ def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
         return get_glycosylation(data_dir, pdb_id, chain_id)
     elif name_of_feature == 'unp_variants':
         return get_variants(data_dir, pdb_id, chain_id)
+    elif name_of_feature == 'pdbkb_conservation':
+        return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
     #elif name_of_feature == 'unp_metal': #todo smazat, blbost
     #    return get_metal_binding(data_dir, pdb_id, chain_id)
     elif name_of_feature == "hydropathy":
@@ -50,7 +52,8 @@ default_values = {
     "molecular_weight" : 110,
     "dynamine" : 5,
     "pKa_COOH" : 9.5,
-    "pKa_NH3" : 2.2
+    "pKa_NH3" : 2.2,
+    "pdbkb_conservation" : 0
 } #todo
 
 def get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id):
@@ -183,6 +186,35 @@ def get_variants(data_dir, pdb_id, chain_id):
 
     return feature_vals
 
+def get_pdbkb_conservation(data_dir, pdb_id, chain_id):
+    entities = get_uniprot_entity(pdb_id, chain_id)
+
+    feature_vals = []
+
+    for entity in entities:
+        uniprot_id = entity[0]
+        entity_id = entity[1]
+        unp_start = entity[2]
+        unp_end = entity[3]
+        start_res_num = entity[4]
+        end_res_num = entity[5]
+
+        url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdb/sequence_conservation/{pdb_id}/{entity_id}"
+
+        response = restAPI_get_json(url)
+
+        feature_vector = [0] * (end_res_num - start_res_num + 1)  # including both start and end AAs
+
+        for resi in response[pdb_id]["data"]:
+            feat_begin = int(resi["start"])
+            feat_end = int(resi["end"])
+            if (feat_begin != feat_end):
+                raise ValueError("Pdb KB conservation: start is not same as end!!") #todo only for debug
+
+            feature_vector[feat_begin-1] = resi["conservation_score"]
+
+    return feature_vector
+
 def get_metal_binding(data_dir, pdb_id, chain_id):
 
     entities = get_uniprot_entity(pdb_id, chain_id)
@@ -270,3 +302,7 @@ def get_dynamine(data_dir, pdb_id, chain_id):
         print(f"Error: DynaMine: {pdb_id} {chain_id}")
 
 
+###### DEBUGGING ###############3
+pdb_id = "1cbs"
+chain_id = "A"
+get_pdbkb_conservation(None, pdb_id, chain_id)

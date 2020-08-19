@@ -8,6 +8,9 @@ import uuid
 from Bio import SeqIO
 from Bio.PDB import PDBParser, PDBIO
 from Bio.PDB.PDBIO import Select
+import logger
+
+logger = logger.get_logger(os.path.basename(__file__))
 
 class ChainSelect(Select):
     def __init__(self, chain):
@@ -76,17 +79,16 @@ def download_structure(structure):
     chain_ids = structure[1]
     error=False
     try:
-        temp_file = f"temp_{uuid.uuid1()}"
+        temp_file = os.path.join(output_PDB, f"temp_{uuid.uuid1()}")
         get_PDB(temp_file, output_PDB, pdb_id, chain_ids, ligands_filter)
         os.remove(temp_file)
-        temp_file = f"temp_{uuid.uuid1()}"
+        temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
         get_FASTA(temp_file, output_FASTA, pdb_id, chain_ids)
     except (KeyboardInterrupt, SystemExit):
         raise
     except Exception as ex:
         error=True
-        print(f"ERROR: downloading {pdb_id} {chain_ids}: {ex}")  #todo test jestli se dostane do chyboveho vystupu shell skriptu
-        traceback.print_exception(type(ex), ex, ex.__traceback__)
+        logger.exception(f"Error while downloading {pdb_id} {chain_ids}: {ex}", exc_info=True)
     finally:
         if os.path.exists(temp_file):
             os.remove(temp_file)
@@ -95,9 +97,10 @@ def download_structure(structure):
             idx = counter
             counter += 1
         if (error):
-            print(f"{idx}/{total}: {pdb_id} {chain_ids} NOT DOWNLOADED !")
+            errors.append(structure)
+            logger.error(f"{idx}/{total}: {pdb_id} {chain_ids} NOT DOWNLOADED !")
         else:
-            print(f"{idx}/{total}: {pdb_id} {chain_ids} downloaded")
+            logger.debug(f"{idx}/{total}: {pdb_id} {chain_ids} downloaded")
 
 
 dataset_file = ""
@@ -109,7 +112,7 @@ threads = 1
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:l')
 except getopt.GetoptError as err:
-    eprint(f"ERROR: {err}") #unknown option or missing argument
+    logger.error(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-d", "--dataset"):
@@ -122,11 +125,11 @@ for opt, arg in opts:
         threads = arg
 
 if (dataset_file == ""):
-    eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
     sys.exit(1)
 #output_dir = os.path.join(os.path.dirname(dataset_file), f"test_{uuid.uuid1()}")  #todo jen pro debugovani
 if (output_dir == ""):
-    eprint("ERROR: Output directory must be specified.")
+    logger.error("Output directory must be specified.")
     sys.exit(1)
 
 output_PDB = os.path.join(output_dir, "PDB")
@@ -139,18 +142,25 @@ os.makedirs(output_FASTA) #todo co kdyz existuje?
 
 dataset = parse_dataset(dataset_file)  #todo co kdyz neni spravny format
 
+logger.info(f"Downloading structures from {dataset_file} to {output_dir} started...")
+
 total = len(dataset)     #todo otestovat jestli to multithreading zrychluje
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
 counter = 1
+errors=[]
 
 if (threads == 1):
     for structure in dataset:
         download_structure(structure)
 else:
-    print(f"DEBUG: running on {threads} threads.")
+    logger.debug(f"Running on {threads} threads.")
     from multiprocessing.dummy import Pool as ThreadPool
     pool = ThreadPool(int(threads))
     pool.map(download_structure, dataset)
     pool.close()
 
-#todo vypsat kolik bylo chyb a kolik bylo stazeno uspesne
+if (len(errors) == 0):
+    logger.info(f"Downloading structures finished: All structures downloaded successfully.")
+else:
+    errors_format = '\n'.join('%s %s' % x for x in errors)
+    logger.warning(f"Downloading structures finished: Some structures were not downloaded successfully: \n {errors_format}")

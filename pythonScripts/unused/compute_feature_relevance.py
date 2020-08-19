@@ -1,4 +1,4 @@
-from compute_ligand_binding_sites import compute_ligand_binding_sites
+from compute_ligand_binding_sites import __compute_ligand_binding_sites
 from features import get_feature
 from helper import parse_dataset
 from helper import get_pdb_path
@@ -35,11 +35,11 @@ for structure in dataset:
             with open(cache_file, "rb") as fp:
                 lbs = pickle.load(fp)
         else:
-            lbs = compute_ligand_binding_sites(pdb_id, chain_id, get_pdb_path(data_dir, pdb_id, chain_id))
+            lbs = __compute_ligand_binding_sites(pdb_id, chain_id, get_pdb_path(data_dir, pdb_id, chain_id))
             with open(cache_file, "wb") as fp:  # save cache
                 pickle.dump(lbs, fp)
     else:
-        lbs = compute_ligand_binding_sites(pdb_id, chain_id, get_pdb_path(data_dir, pdb_id, chain_id))
+        lbs = __compute_ligand_binding_sites(pdb_id, chain_id, get_pdb_path(data_dir, pdb_id, chain_id))
 
     feature_vals = get_feature(feature, data_dir, pdb_id, chain_id)
 

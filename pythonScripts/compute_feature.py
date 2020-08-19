@@ -7,11 +7,13 @@ import traceback
 
 from helper import eprint, parse_dataset_split_chains
 from features import *
+import logger
 
+logger = logger.get_logger(os.path.basename(__file__))
 
-def __compute_feature(str, name_of_feature):
-    pdb_id = str[0]
-    chain_id = str[1]
+def __compute_feature(structure, name_of_feature):
+    pdb_id = structure[0]
+    chain_id = structure[1]
     error=False
     try:
         feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
@@ -23,17 +25,17 @@ def __compute_feature(str, name_of_feature):
         raise
     except Exception as ex:
         error=True
-        print(f"ERROR: downloading {pdb_id} {chain_id}: {ex}")  #todo test jestli se dostane do chyboveho vystupu shell skriptu
-        traceback.print_exception(type(ex), ex, ex.__traceback__)
+        logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}", exc_info=True)
     finally:
         with threadLock:
             global counter
             idx = counter
             counter += 1
         if (error):
-            print(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
+            errors.append(structure)
+            logger.error(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
         else:
-            print(f"{idx}/{total}: {pdb_id} {chain_id} processed")
+            logger.debug(f"{idx}/{total}: {pdb_id} {chain_id} processed")
 
 
 dataset_file = ""
@@ -46,7 +48,7 @@ feature=""
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'f:d:o:i:t:')
 except getopt.GetoptError as err:
-    eprint(f"ERROR: {err}") #unknown option or missing argument
+    logger.error(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-d", "--dataset"):
@@ -61,13 +63,13 @@ for opt, arg in opts:
         feature = arg
 
 if (dataset_file == ""):
-    eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.")
     sys.exit(1)
 if (output_dir == ""):
-    eprint("ERROR: Output directory must be specified.")
+    logger.error("Output directory must be specified.")
     sys.exit(1)
 if (input_dir == ""):
-    eprint("ERROR: Input directory must be specified.")
+    logger.error("Input directory must be specified.")
     sys.exit(1)
 
 if not os.path.exists(output_dir):
@@ -76,11 +78,12 @@ if not os.path.exists(output_dir):
 
 dataset = parse_dataset_split_chains(dataset_file) #todo co kdyz neni spravny format
 
+logger.info(f"Computing feature {feature} started...")
+
 total = len(dataset)
 counter = 1
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
-
-print(f"DEBUG: running on {threads} threads.")
+errors=[]
 
 if (threads == 1):
     for structure in dataset:
@@ -92,5 +95,8 @@ else:
     pool.starmap(__compute_feature, args)
     pool.close()
 
-#todo vypsat v jakych byla chyba
-#todo error handling
+if (len(errors) == 0):
+    logger.info(f"Computing feature {feature} finished: All structures processed successfully.")
+else:
+    errors_format = '\n'.join('%s %s' % x for x in errors)
+    logger.warning(f"Computing feature {feature} finished: Some structures were not processed successfully: \n {errors_format}")

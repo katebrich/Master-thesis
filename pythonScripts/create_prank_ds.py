@@ -2,9 +2,9 @@ import getopt
 import sys
 from os.path import isfile
 import os
+import logger
 
-#dataset_file = f'/home/katebrich/Documents/diplomka/datasets/{dataset_name}.txt'
-from helper import eprint
+logger = logger.get_logger(os.path.basename(__file__))
 
 dataset_dir = ""
 out_path = ""
@@ -13,7 +13,7 @@ out_path = ""
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'd:o:')
 except getopt.GetoptError as err:
-    eprint(f"ERROR: {err}") #unknown option or missing argument
+    logger.error(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-d", "--data_dir"):
@@ -22,10 +22,10 @@ for opt, arg in opts:
         out_path = arg
 
 if (dataset_dir == ""):
-    eprint("ERROR: Dataset directory must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset directory must be specified.") #todo psat z jakeho skriptu je chyba
     sys.exit(1)
 if (out_path == ""):
-    eprint("ERROR: Output file pathmust be specified.")
+    logger.error("Output file pathmust be specified.")
     sys.exit(1)
 
 out_dir = os.path.dirname(dataset_dir) #go one level up

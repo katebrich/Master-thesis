@@ -5,9 +5,12 @@ import traceback
 
 import numpy as np
 
-from helper import parse_dataset_split_chains, eprint
+from helper import parse_dataset_split_chains
 from statistical_analysis import welchs_t_test, fischers_exact_test
 from features import types_of_features
+import logger
+
+logger = logger.get_logger(os.path.basename(__file__))
 
 def compute_pairs(structure):
     pdb_id = structure[0]
@@ -17,13 +20,13 @@ def compute_pairs(structure):
 
     try:
         # get ligand binding sites values
-        output_file = f"{lbs_dir}/{pdb_id}{chain_id}.txt"
-        lbs = np.genfromtxt(output_file, delimiter=' ')
+        file = os.path.join(lbs_dir, f"{pdb_id}{chain_id}.txt")
+        lbs = np.genfromtxt(file, delimiter=' ')
         lbs_dict = dict(lbs)
 
         # get feature values
-        output_file = f"{feature_dir}/{pdb_id}{chain_id}.txt"
-        feature = np.genfromtxt(output_file, delimiter=' ')
+        file = os.path.join(feature_dir, f"{pdb_id}{chain_id}.txt")
+        feature = np.genfromtxt(file, delimiter=' ')
         feature_vals = list(feature)
 
         for val in feature_vals:
@@ -36,22 +39,21 @@ def compute_pairs(structure):
                 continue;
             global pairs
             pairs.append((lbs_val, feature_val))
-        #if (len(missing_vals) > 0):
-        #    print(f"Warning: missing feature values for residues: {missing_vals}") #todo vyresit to
+        if (len(missing_vals) > 0):
+            logger.debug(f"Missing feature values for residues: {missing_vals}") #todo vyresit to
     except (KeyboardInterrupt, SystemExit):
         raise
     except Exception as ex:
         error = True
-        print(
-            f"ERROR: processing {pdb_id} {chain_id}: {ex}")
-        traceback.print_exception(type(ex), ex, ex.__traceback__)
+        logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}")
     finally:
         global counter
         counter  += 1
         if (error):
-            print(f"{counter}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
+            errors.append(structure)
+            logger.error(f"{counter}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
         else:
-            print(f"{counter}/{total}: {pdb_id} {chain_id} processed")
+            logger.debug(f"{counter}/{total}: {pdb_id} {chain_id} processed")
 
 dataset_file = ""
 output_dir = ""
@@ -64,7 +66,7 @@ threads = 1 #todo asi nebude potreba
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'f:v:d:o:l:t:')
 except getopt.GetoptError as err:
-    eprint(f"ERROR: {err}") #unknown option or missing argument
+    logger.error(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-d", "--dataset"):
@@ -81,36 +83,43 @@ for opt, arg in opts:
         feature_name = arg
 
 if (dataset_file == ""):
-    eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
     sys.exit(1)
 if (dataset_file == ""):
-    eprint("ERROR: Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
     sys.exit(1)
 if (feature_name == ""):
-    eprint("ERROR: Feature name must be specified.")
+    logger.error("Feature name must be specified.")
     sys.exit(1)
 if (lbs_dir == ""):
-    eprint("ERROR: Directory with ligand binding sites data must be specified.")
+    logger.error("Directory with ligand binding sites data must be specified.")
     sys.exit(1)
 if (feature_dir == ""):
-    eprint("ERROR: Directory with feature values must be specified.")
+    logger.error("Directory with feature values must be specified.")
     sys.exit(1)
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 #todo else smazat??
 
-
 dataset = parse_dataset_split_chains(dataset_file)
+
+logger.info("Running analysis started...")
+
 pairs = []
 total = len(dataset)
 counter = 1
+errors = []
 #pair feature values with ligand binding sites
 for structure in dataset:
     compute_pairs(structure)
 
-#take the whole dataset and run statistical analysis
-#print(pairs)
+if (len(errors) == 0):
+    logger.info(f"All structures processed successfully.")
+else:
+    errors_format = '\n'.join('%s %s' % x for x in errors)
+    logger.warning(f"Some structures were not processed successfully: skipping them in the analysis...\n {errors_format}")
+
 
 #stats.compute_AA_frequencies(pairs)
 
@@ -122,5 +131,7 @@ if (type_of_feature == "discrete"):
 elif (type_of_feature == "continuous"):
     welchs_t_test(pairs, file)
 else:
-    eprint(f"ERROR: Unknown type of feature '{type_of_feature}'")
+    logger.error(f"Unknown type of feature '{type_of_feature}'")
     sys.exit(1)
+
+logger.info(f"Running analysis finished. Results saved to {file}")
