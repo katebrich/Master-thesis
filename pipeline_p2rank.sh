@@ -7,10 +7,10 @@ dataset_train="/home/katebrich/Documents/diplomka/datasets/chen11.txt"
 dataset_eval="/home/katebrich/Documents/diplomka/datasets/coach420.txt"
 data_dir_train="/home/katebrich/Documents/diplomka/datasets/chen11_coach420/chen11"
 data_dir_eval="/home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420"
-features_list=hydropathy
+features_list=pdbkb_conservation
 filter_ligands=none #todo
 threads=4
-label=chen11_coach420_hydropathy
+label=chen11_coach420_pdbkbConservation
 #strict=true #todo
 
 filename=$(basename -- "$dataset_train")
@@ -22,12 +22,12 @@ filename="${filename%.*}"
 dataset_prank_eval="${data_dir_eval}/${filename##*/}.ds"
 
 #stahnout PDB a FASTA soubory pro oba datasety z databaze
-bash download_dataset.sh -d $dataset_train -o $data_dir_train -l $filter_ligands -t $threads -s
-bash download_dataset.sh -d $dataset_eval -o $data_dir_eval -l $filter_ligands -t $threads -s
+#bash download_dataset.sh -d $dataset_train -o $data_dir_train -l $filter_ligands -t $threads -s
+#bash download_dataset.sh -d $dataset_eval -o $data_dir_eval -l $filter_ligands -t $threads -s
 
 #vytvorit cache mapovani author residue number : pdbe sequence number
-python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_train -o $data_dir_train/mappings -t $threads
-python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_eval -o $data_dir_eval/mappings -t $threads
+#python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_train -o $data_dir_train/mappings -t $threads
+#python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_eval -o $data_dir_eval/mappings -t $threads
 
 #vypocitat hodnoty zadanych featur
 bash compute_features.sh -f $features_list -d $dataset_train -i $data_dir_train -o $data_dir_train/features -t $threads -s

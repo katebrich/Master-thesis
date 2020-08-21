@@ -1308,3 +1308,371 @@ OSError: /home/katebrich/Documents/diplomka/datasets/pipeline_test/features/pdbk
  XXXX X
 1igy B
 3ldk A
+2020-08-19 18:03:11,672 [INFO] compute_feature.py(line 81) Computing feature pdbkb_conservation started...
+2020-08-19 18:03:12,021 [ERROR] compute_feature.py(line 28) Error while processing XXXX X: HTTP Error 404: Not Found
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 190, in get_pdbkb_conservation
+    entities = get_uniprot_entity(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 12, in get_uniprot_entity
+    parsedResponse = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+2020-08-19 18:03:12,064 [ERROR] compute_feature.py(line 36) 1/8: XXXX X NOT PROCESSED !
+2020-08-19 18:03:12,828 [ERROR] compute_feature.py(line 28) Error while processing 2g46 A: 'int' object is not subscriptable
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 23, in __compute_feature
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+  File "./pythonScripts/compute_feature.py", line 23, in <genexpr>
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+TypeError: 'int' object is not subscriptable
+2020-08-19 18:03:12,828 [ERROR] compute_feature.py(line 36) 2/8: 2g46 A NOT PROCESSED !
+2020-08-19 18:03:13,083 [ERROR] compute_feature.py(line 28) Error while processing 148l E: 'int' object is not subscriptable
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 23, in __compute_feature
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+  File "./pythonScripts/compute_feature.py", line 23, in <genexpr>
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+TypeError: 'int' object is not subscriptable
+2020-08-19 18:03:13,083 [ERROR] compute_feature.py(line 36) 3/8: 148l E NOT PROCESSED !
+2020-08-19 18:03:13,256 [ERROR] compute_feature.py(line 28) Error while processing 1igy B: list assignment index out of range
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 214, in get_pdbkb_conservation
+    feature_vector[feat_begin-1] = resi["conservation_score"]
+IndexError: list assignment index out of range
+2020-08-19 18:03:13,258 [ERROR] compute_feature.py(line 36) 4/8: 1igy B NOT PROCESSED !
+2020-08-19 18:03:13,504 [ERROR] compute_feature.py(line 28) Error while processing 1exa A: 'int' object is not subscriptable
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 23, in __compute_feature
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+  File "./pythonScripts/compute_feature.py", line 23, in <genexpr>
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+TypeError: 'int' object is not subscriptable
+2020-08-19 18:03:13,504 [ERROR] compute_feature.py(line 36) 5/8: 1exa A NOT PROCESSED !
+2020-08-19 18:03:14,374 [ERROR] compute_feature.py(line 28) Error while processing 1qhi A: 'int' object is not subscriptable
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 23, in __compute_feature
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+  File "./pythonScripts/compute_feature.py", line 23, in <genexpr>
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+TypeError: 'int' object is not subscriptable
+2020-08-19 18:03:14,375 [ERROR] compute_feature.py(line 36) 6/8: 1qhi A NOT PROCESSED !
+2020-08-19 18:03:14,884 [ERROR] compute_feature.py(line 28) Error while processing 3ldk A: list assignment index out of range
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 214, in get_pdbkb_conservation
+    feature_vector[feat_begin-1] = resi["conservation_score"]
+IndexError: list assignment index out of range
+2020-08-19 18:03:14,887 [ERROR] compute_feature.py(line 36) 7/8: 3ldk A NOT PROCESSED !
+2020-08-19 18:03:15,596 [ERROR] compute_feature.py(line 28) Error while processing 2amb A: 'int' object is not subscriptable
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 23, in __compute_feature
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+  File "./pythonScripts/compute_feature.py", line 23, in <genexpr>
+    f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
+TypeError: 'int' object is not subscriptable
+2020-08-19 18:03:15,596 [ERROR] compute_feature.py(line 36) 8/8: 2amb A NOT PROCESSED !
+2020-08-19 18:03:15,596 [WARNING] compute_feature.py(line 102) Computing feature pdbkb_conservation finished: Some structures were not processed successfully: 
+ XXXX X
+2g46 A
+148l E
+1igy B
+1exa A
+1qhi A
+3ldk A
+2amb A
+2020-08-19 18:05:04,587 [INFO] compute_feature.py(line 81) Computing feature pdbkb_conservation started...
+2020-08-19 18:05:04,911 [ERROR] compute_feature.py(line 28) Error while processing XXXX X: HTTP Error 404: Not Found
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 190, in get_pdbkb_conservation
+    entities = get_uniprot_entity(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 12, in get_uniprot_entity
+    parsedResponse = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+2020-08-19 18:05:04,979 [ERROR] compute_feature.py(line 36) 1/8: XXXX X NOT PROCESSED !
+2020-08-19 18:05:26,499 [WARNING] compute_feature.py(line 102) Computing feature pdbkb_conservation finished: Some structures were not processed successfully: 
+ XXXX X
+2020-08-19 18:07:14,710 [INFO] compute_feature.py(line 81) Computing feature pdbkb_conservation started...
+2020-08-19 18:10:04,107 [INFO] compute_feature.py(line 99) Computing feature pdbkb_conservation finished: All structures processed successfully.
+2020-08-19 18:10:06,099 [INFO] run_analysis.py(line 107) Running analysis started...
+2020-08-19 18:10:07,188 [INFO] run_analysis.py(line 118) All structures processed successfully.
+2020-08-21 09:25:28,825 [INFO] run_analysis.py(line 107) Running analysis started...
+2020-08-21 09:25:29,598 [INFO] run_analysis.py(line 118) All structures processed successfully.
+2020-08-21 09:25:29,667 [INFO] run_analysis.py(line 137) Running analysis finished. Results saved to /home/katebrich/Documents/diplomka/datasets/TEST_pipeline/analysis/pdbkb_conservation/results.txt
+2020-08-21 10:36:05,266 [INFO] run_analysis.py(line 107) Running analysis started...
+2020-08-21 10:36:06,017 [INFO] run_analysis.py(line 118) All structures processed successfully.
+2020-08-21 10:36:25,799 [INFO] run_analysis.py(line 107) Running analysis started...
+2020-08-21 10:36:26,540 [INFO] run_analysis.py(line 118) All structures processed successfully.
+2020-08-21 10:36:50,822 [INFO] run_analysis.py(line 107) Running analysis started...
+2020-08-21 10:36:51,592 [INFO] run_analysis.py(line 118) All structures processed successfully.
+2020-08-21 10:36:51,593 [INFO] run_analysis.py(line 133) Running Welch's T-test
+2020-08-21 10:36:51,663 [INFO] run_analysis.py(line 142) Running analysis finished. Results saved to /home/katebrich/Documents/diplomka/datasets/TEST_pipeline/analysis/pdbkb_conservation/results.txt
+2020-08-21 15:18:43,584 [INFO] compute_feature.py(line 81) Computing feature pdbkb_conservation started...
+2020-08-21 15:19:42,762 [ERROR] compute_feature.py(line 28) Error while processing 1rqj A: HTTP Error 500: Internal Server Error
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 200, in get_pdbkb_conservation
+    response = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+2020-08-21 15:19:42,767 [ERROR] compute_feature.py(line 36) 46/250: 1rqj A NOT PROCESSED !
+2020-08-21 15:22:41,662 [ERROR] compute_feature.py(line 28) Error while processing 1lii A: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:1076)>
+Traceback (most recent call last):
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 1319, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1422, in connect
+    server_hostname=server_hostname)
+  File "/home/katebrich/anaconda3/lib/python3.7/ssl.py", line 423, in wrap_socket
+    session=session
+  File "/home/katebrich/anaconda3/lib/python3.7/ssl.py", line 870, in _create
+    self.do_handshake()
+  File "/home/katebrich/anaconda3/lib/python3.7/ssl.py", line 1139, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:1076)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 200, in get_pdbkb_conservation
+    response = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 525, in open
+    response = self._open(req, data)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 543, in _open
+    '_open', req)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 1362, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 1321, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:1076)>
+2020-08-21 15:22:41,664 [ERROR] compute_feature.py(line 36) 169/250: 1lii A NOT PROCESSED !
+2020-08-21 15:24:41,356 [WARNING] compute_feature.py(line 102) Computing feature pdbkb_conservation finished: Some structures were not processed successfully: 
+ 1rqj A
+1lii A
+2020-08-21 15:24:41,596 [INFO] compute_feature.py(line 81) Computing feature pdbkb_conservation started...
+2020-08-21 15:30:30,127 [ERROR] compute_feature.py(line 28) Error while processing 2q6v A: HTTP Error 500: Internal Server Error
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 200, in get_pdbkb_conservation
+    response = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+2020-08-21 15:30:30,131 [ERROR] compute_feature.py(line 36) 273/418: 2q6v A NOT PROCESSED !
+2020-08-21 15:30:37,811 [ERROR] compute_feature.py(line 28) Error while processing 2gfx A: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:1076)>
+Traceback (most recent call last):
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 1319, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/home/katebrich/anaconda3/lib/python3.7/http/client.py", line 1422, in connect
+    server_hostname=server_hostname)
+  File "/home/katebrich/anaconda3/lib/python3.7/ssl.py", line 423, in wrap_socket
+    session=session
+  File "/home/katebrich/anaconda3/lib/python3.7/ssl.py", line 870, in _create
+    self.do_handshake()
+  File "/home/katebrich/anaconda3/lib/python3.7/ssl.py", line 1139, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLZeroReturnError: TLS/SSL connection has been closed (EOF) (_ssl.c:1076)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 191, in get_pdbkb_conservation
+    entities = get_uniprot_entity(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 12, in get_uniprot_entity
+    parsedResponse = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 525, in open
+    response = self._open(req, data)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 543, in _open
+    '_open', req)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 1362, in https_open
+    context=self._context, check_hostname=self._check_hostname)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 1321, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:1076)>
+2020-08-21 15:30:37,814 [ERROR] compute_feature.py(line 36) 280/418: 2gfx A NOT PROCESSED !
+2020-08-21 15:31:48,874 [ERROR] compute_feature.py(line 28) Error while processing 3dzl B: HTTP Error 500: Internal Server Error
+Traceback (most recent call last):
+  File "./pythonScripts/compute_feature.py", line 19, in __compute_feature
+    feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 15, in get_feature
+    return get_pdbkb_conservation(data_dir, pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/features.py", line 200, in get_pdbkb_conservation
+    response = restAPI_get_json(url)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 47, in restAPI_get_json
+    return json.loads(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 41, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+2020-08-21 15:31:48,877 [ERROR] compute_feature.py(line 36) 338/418: 3dzl B NOT PROCESSED !
+2020-08-21 15:34:08,965 [WARNING] compute_feature.py(line 102) Computing feature pdbkb_conservation finished: Some structures were not processed successfully: 
+ 2q6v A
+2gfx A
+3dzl B
+2020-08-21 15:34:09,500 [INFO] create_p2rank_custom_feature_files.py(line 128) Creating p2rank custom feature files started...
+2020-08-21 15:35:21,103 [ERROR] create_p2rank_custom_feature_files.py(line 73) Error while processing 1rqj A: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/chen11/features/pdbkb_conservation/1rqjA.txt not found.
+Traceback (most recent call last):
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 37, in create_file
+    feature_vals.append(read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 21, in read_feature_vals
+    feature_vals = np.genfromtxt(path, delimiter=' ')
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/npyio.py", line 1772, in genfromtxt
+    fid = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 269, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 623, in open
+    raise IOError("%s not found." % path)
+OSError: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/chen11/features/pdbkb_conservation/1rqjA.txt not found.
+2020-08-21 15:35:21,127 [ERROR] create_p2rank_custom_feature_files.py(line 81) 48/250: 1rqj A NOT PROCESSED !
+2020-08-21 15:38:22,233 [ERROR] create_p2rank_custom_feature_files.py(line 73) Error while processing 1lii A: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/chen11/features/pdbkb_conservation/1liiA.txt not found.
+Traceback (most recent call last):
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 37, in create_file
+    feature_vals.append(read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 21, in read_feature_vals
+    feature_vals = np.genfromtxt(path, delimiter=' ')
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/npyio.py", line 1772, in genfromtxt
+    fid = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 269, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 623, in open
+    raise IOError("%s not found." % path)
+OSError: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/chen11/features/pdbkb_conservation/1liiA.txt not found.
+2020-08-21 15:38:22,238 [ERROR] create_p2rank_custom_feature_files.py(line 81) 166/250: 1lii A NOT PROCESSED !
+2020-08-21 15:40:18,834 [WARNING] create_p2rank_custom_feature_files.py(line 153) Creating p2rank custom feature files finished: Some structures were not processed successfully: 
+ 1rqj A
+1lii A
+2020-08-21 15:40:19,327 [INFO] create_p2rank_custom_feature_files.py(line 128) Creating p2rank custom feature files started...

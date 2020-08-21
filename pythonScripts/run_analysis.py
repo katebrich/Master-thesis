@@ -6,7 +6,7 @@ import traceback
 import numpy as np
 
 from helper import parse_dataset_split_chains
-from statistical_analysis import welchs_t_test, fischers_exact_test
+from statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
 from features import types_of_features
 import logger
 
@@ -21,12 +21,12 @@ def compute_pairs(structure):
     try:
         # get ligand binding sites values
         file = os.path.join(lbs_dir, f"{pdb_id}{chain_id}.txt")
-        lbs = np.genfromtxt(file, delimiter=' ')
+        lbs = np.genfromtxt(file, delimiter=' ', dtype=None)
         lbs_dict = dict(lbs)
 
         # get feature values
         file = os.path.join(feature_dir, f"{pdb_id}{chain_id}.txt")
-        feature = np.genfromtxt(file, delimiter=' ')
+        feature = np.genfromtxt(file, delimiter=' ', dtype=None)
         feature_vals = list(feature)
 
         for val in feature_vals:
@@ -126,10 +126,15 @@ else:
 type_of_feature = types_of_features[feature_name]
 
 file = os.path.join(output_dir, "results.txt")
-if (type_of_feature == "discrete"):
+if (type_of_feature == "binary"):
+    logger.info("Running Fischer's exact test")
     fischers_exact_test(pairs, file)
 elif (type_of_feature == "continuous"):
+    logger.info("Running Welch's T-test")
     welchs_t_test(pairs, file)
+elif (type_of_feature == "categorical"):
+    logger.info("Running Chi-squared test")
+    chi_squared_test(pairs, file)
 else:
     logger.error(f"Unknown type of feature '{type_of_feature}'")
     sys.exit(1)

@@ -34,14 +34,15 @@ def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
         return
 
 types_of_features = {
-    "unp_PTM" : "discrete",
-    "unp_glycosylation" : "discrete",
-    "unp_variants" : "discrete",
+    "unp_PTM" : "binary",
+    "unp_glycosylation" : "binary",
+    "unp_variants" : "binary",
     "hydropathy" : "continuous",
     "molecular_weight" : "continuous",
     "dynamine" : "continuous",
     "pKa_COOH" : "continuous",
-    "pKa_NH3" : "continuous"
+    "pKa_NH3" : "continuous",
+    "pdbkb_conservation" : "categorical" #todo aby tohle nebylo potreba
 }
 
 default_values = {
@@ -192,18 +193,11 @@ def get_pdbkb_conservation(data_dir, pdb_id, chain_id):
     feature_vals = []
 
     for entity in entities:
-        uniprot_id = entity[0]
         entity_id = entity[1]
-        unp_start = entity[2]
-        unp_end = entity[3]
-        start_res_num = entity[4]
-        end_res_num = entity[5]
 
         url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdb/sequence_conservation/{pdb_id}/{entity_id}"
 
         response = restAPI_get_json(url)
-
-        feature_vector = [0] * (end_res_num - start_res_num + 1)  # including both start and end AAs
 
         for resi in response[pdb_id]["data"]:
             feat_begin = int(resi["start"])
@@ -211,9 +205,9 @@ def get_pdbkb_conservation(data_dir, pdb_id, chain_id):
             if (feat_begin != feat_end):
                 raise ValueError("Pdb KB conservation: start is not same as end!!") #todo only for debug
 
-            feature_vector[feat_begin-1] = resi["conservation_score"]
+            feature_vals.append((feat_begin, resi["conservation_score"]))
 
-    return feature_vector
+    return feature_vals
 
 def get_metal_binding(data_dir, pdb_id, chain_id):
 
@@ -303,6 +297,6 @@ def get_dynamine(data_dir, pdb_id, chain_id):
 
 
 ###### DEBUGGING ###############3
-pdb_id = "1cbs"
-chain_id = "A"
-get_pdbkb_conservation(None, pdb_id, chain_id)
+#pdb_id = "1cbs"
+#chain_id = "A"
+#get_pdbkb_conservation(None, pdb_id, chain_id)
