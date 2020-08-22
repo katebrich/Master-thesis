@@ -36,7 +36,7 @@ def get_uniprot_entity(pdb_id, chain_id):
 
 #returns parsed .json response (dictionary)
 def restAPI_get(url):
-    #todo check status
+    #todo check status?
     req = urllib.request.Request(url)
     with urllib.request.urlopen(req) as f:
         responseBody = f.read()
@@ -68,42 +68,21 @@ def get_pdb_path(data_dir, pdb_id, chain_id):
 #def get_mmcif_path(data_dir, pdb_id, chain_id):
 #    return f"{data_dir}/mmCIF/{pdb_id}{chain_id}.cif"
 
+
 def get_entity_id(pdb_id, chain_id):
-    url = f"https://www.rcsb.org/pdb/rest/getEntityInfo?structureId={pdb_id}"
-    parsedResponse = restAPI_get_xml(url)
-    entities = parsedResponse["entityInfo"]["PDB"]["Entity"]
-    entities_list = []
-    if (type(entities) is not list): #jen 1 entita, rovnou ty atributy
-        entities_list.append(entities)
-    else:
-        entities_list = entities
-    if len(entities_list) == 0:
-        print(f"Error: no entity found for {pdb_id} {chain_id}") #todo tohle asi nebude fungovat
-        return
-    entity_id = ""
-    for entity in entities_list:
-        success=False
-        chains_list = []
-        chains = entity["Chain"]
-        if (type(chains) is not list):  # jen 1 entita, rovnou ty atributy
-            chains_list.append(chains)
-        else:
-            chains_list = chains
-        for chain in chains_list:
-            if (chain["@id"] == chain_id):
-                success=True
-                break
-        if success:
-            new_entity_id = entity["@id"]
-            if new_entity_id != entity_id and entity_id != "":
-                print(f"Error: not all the entity IDs for {pdb_id} {chain_id} are the same!")
-                return #todo tohle pak smazat
-            entity_id = new_entity_id
+    url = f"https://www.rcsb.org/pdb/rest/describeMol?structureId={pdb_id}.{chain_id}"
+    response = str(restAPI_get(url))
+    import re
+    matches = re.findall("entityNr=\".+?\"", response)
+    if (len(matches) != 1):
+        raise ValueError(f"get_entity_id: wrong number of matches: {pdb_id} {chain_id}: {matches}") #todo smazat, jen pro debugovani
+    match=matches[0]
+    entity_id = match.split('=')[1]
+    entity_id = entity_id[1:-1] #remove ""
     return int(entity_id)
 
-def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""): #todo cache
+def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
     if (cache_file != ""):
-        #print("DEBUG: reading mappings from file...")
         mappings = np.genfromtxt(cache_file, delimiter=' ', dtype='str')
         return list(mappings)
     else:

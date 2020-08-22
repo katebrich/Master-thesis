@@ -135,4 +135,4 @@ if (len(errors) == 0):
     logger.info(f"Computing ligand binding sites finished: All structures processed successfully.")
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
-    logger.warning(f"Computing ligand binding sites finished: Some structures were not processed successfully: \n {errors_format}")
+    logger.warning(f"Computing ligand binding sites finished: Some structures were not processed successfully: \n{errors_format}")

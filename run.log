@@ -1676,3 +1676,404 @@ OSError: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/chen11/feat
  1rqj A
 1lii A
 2020-08-21 15:40:19,327 [INFO] create_p2rank_custom_feature_files.py(line 128) Creating p2rank custom feature files started...
+2020-08-21 15:45:51,951 [ERROR] create_p2rank_custom_feature_files.py(line 73) Error while processing 2gfx A: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/features/pdbkb_conservation/2gfxA.txt not found.
+Traceback (most recent call last):
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 37, in create_file
+    feature_vals.append(read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 21, in read_feature_vals
+    feature_vals = np.genfromtxt(path, delimiter=' ')
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/npyio.py", line 1772, in genfromtxt
+    fid = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 269, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 623, in open
+    raise IOError("%s not found." % path)
+OSError: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/features/pdbkb_conservation/2gfxA.txt not found.
+2020-08-21 15:45:52,000 [ERROR] create_p2rank_custom_feature_files.py(line 81) 268/418: 2gfx A NOT PROCESSED !
+2020-08-21 15:45:54,718 [ERROR] create_p2rank_custom_feature_files.py(line 73) Error while processing 2q6v A: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/features/pdbkb_conservation/2q6vA.txt not found.
+Traceback (most recent call last):
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 37, in create_file
+    feature_vals.append(read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 21, in read_feature_vals
+    feature_vals = np.genfromtxt(path, delimiter=' ')
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/npyio.py", line 1772, in genfromtxt
+    fid = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 269, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 623, in open
+    raise IOError("%s not found." % path)
+OSError: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/features/pdbkb_conservation/2q6vA.txt not found.
+2020-08-21 15:45:54,732 [ERROR] create_p2rank_custom_feature_files.py(line 81) 271/418: 2q6v A NOT PROCESSED !
+2020-08-21 15:47:20,831 [ERROR] create_p2rank_custom_feature_files.py(line 73) Error while processing 3dzl B: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/features/pdbkb_conservation/3dzlB.txt not found.
+Traceback (most recent call last):
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 37, in create_file
+    feature_vals.append(read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 21, in read_feature_vals
+    feature_vals = np.genfromtxt(path, delimiter=' ')
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/npyio.py", line 1772, in genfromtxt
+    fid = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 269, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/numpy/lib/_datasource.py", line 623, in open
+    raise IOError("%s not found." % path)
+OSError: /home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/features/pdbkb_conservation/3dzlB.txt not found.
+2020-08-21 15:47:20,848 [ERROR] create_p2rank_custom_feature_files.py(line 81) 335/418: 3dzl B NOT PROCESSED !
+2020-08-21 15:47:21,129 [ERROR] create_p2rank_custom_feature_files.py(line 73) Error while processing 3w7f A: [Errno 2] No such file or directory: '/home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/PDB/3w7fA.pdb'
+Traceback (most recent call last):
+  File "./pythonScripts/create_p2rank_custom_feature_files.py", line 33, in create_file
+    struct = parser.get_structure(pdb_id, pdb_path)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/Bio/PDB/PDBParser.py", line 88, in get_structure
+    with as_handle(file, mode="rU") as handle:
+  File "/home/katebrich/anaconda3/lib/python3.7/contextlib.py", line 112, in __enter__
+    return next(self.gen)
+  File "/home/katebrich/anaconda3/lib/python3.7/site-packages/Bio/File.py", line 120, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/katebrich/Documents/diplomka/datasets/chen11_coach420/coach420/PDB/3w7fA.pdb'
+2020-08-21 15:47:21,155 [ERROR] create_p2rank_custom_feature_files.py(line 81) 337/418: 3w7f A NOT PROCESSED !
+2020-08-21 15:48:55,932 [WARNING] create_p2rank_custom_feature_files.py(line 153) Creating p2rank custom feature files finished: Some structures were not processed successfully: 
+ 2gfx A
+2q6v A
+3dzl B
+3w7f A
+2020-08-22 15:28:36,198 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:29:58,511 [INFO] create_mappings_cache.py(line 89) Creating mapping cache finished: All structures processed successfully.
+2020-08-22 15:30:22,115 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:31:34,563 [INFO] create_mappings_cache.py(line 89) Creating mapping cache finished: All structures processed successfully.
+2020-08-22 15:31:49,392 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:33:02,752 [INFO] create_mappings_cache.py(line 89) Creating mapping cache finished: All structures processed successfully.
+2020-08-22 15:34:29,529 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:35:44,012 [INFO] create_mappings_cache.py(line 89) Creating mapping cache finished: All structures processed successfully.
+2020-08-22 15:36:00,460 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:36:01,488 [ERROR] create_mappings_cache.py(line 26) Error while processing 2vbu A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:01,492 [ERROR] create_mappings_cache.py(line 26) Error while processing 1s69 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:01,493 [ERROR] create_mappings_cache.py(line 34) 1/250: 2vbu A NOT PROCESSED !
+2020-08-22 15:36:01,494 [ERROR] create_mappings_cache.py(line 34) 2/250: 1s69 A NOT PROCESSED !
+2020-08-22 15:36:01,564 [ERROR] create_mappings_cache.py(line 26) Error while processing 2nw8 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:01,565 [ERROR] create_mappings_cache.py(line 34) 3/250: 2nw8 A NOT PROCESSED !
+2020-08-22 15:36:01,908 [ERROR] create_mappings_cache.py(line 26) Error while processing 1v7w A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:01,909 [ERROR] create_mappings_cache.py(line 34) 4/250: 1v7w A NOT PROCESSED !
+2020-08-22 15:36:02,557 [ERROR] create_mappings_cache.py(line 26) Error while processing 1do1 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:02,560 [ERROR] create_mappings_cache.py(line 34) 5/250: 1do1 A NOT PROCESSED !
+2020-08-22 15:36:02,562 [ERROR] create_mappings_cache.py(line 26) Error while processing 1d7b A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:02,563 [ERROR] create_mappings_cache.py(line 34) 6/250: 1d7b A NOT PROCESSED !
+2020-08-22 15:36:02,566 [ERROR] create_mappings_cache.py(line 26) Error while processing 2i02 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:02,628 [ERROR] create_mappings_cache.py(line 34) 7/250: 2i02 A NOT PROCESSED !
+2020-08-22 15:36:03,146 [ERROR] create_mappings_cache.py(line 26) Error while processing 1dl2 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:03,147 [ERROR] create_mappings_cache.py(line 34) 8/250: 1dl2 A NOT PROCESSED !
+2020-08-22 15:36:03,622 [ERROR] create_mappings_cache.py(line 26) Error while processing 1usf A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:03,623 [ERROR] create_mappings_cache.py(line 34) 9/250: 1usf A NOT PROCESSED !
+2020-08-22 15:36:03,722 [ERROR] create_mappings_cache.py(line 26) Error while processing 1qgw C: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:03,723 [ERROR] create_mappings_cache.py(line 34) 10/250: 1qgw C NOT PROCESSED !
+2020-08-22 15:36:03,920 [ERROR] create_mappings_cache.py(line 26) Error while processing 1uh4 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:03,921 [ERROR] create_mappings_cache.py(line 34) 11/250: 1uh4 A NOT PROCESSED !
+2020-08-22 15:36:04,360 [ERROR] create_mappings_cache.py(line 26) Error while processing 1ld8 B: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:04,361 [ERROR] create_mappings_cache.py(line 34) 12/250: 1ld8 B NOT PROCESSED !
+2020-08-22 15:36:04,662 [ERROR] create_mappings_cache.py(line 26) Error while processing 4eng A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:04,663 [ERROR] create_mappings_cache.py(line 34) 13/250: 4eng A NOT PROCESSED !
+2020-08-22 15:36:04,840 [ERROR] create_mappings_cache.py(line 26) Error while processing 3cx5 O: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:04,841 [ERROR] create_mappings_cache.py(line 34) 14/250: 3cx5 O NOT PROCESSED !
+2020-08-22 15:36:04,955 [ERROR] create_mappings_cache.py(line 26) Error while processing 1oio A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:04,956 [ERROR] create_mappings_cache.py(line 34) 15/250: 1oio A NOT PROCESSED !
+2020-08-22 15:36:05,556 [ERROR] create_mappings_cache.py(line 26) Error while processing 1al6 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:05,556 [ERROR] create_mappings_cache.py(line 34) 16/250: 1al6 A NOT PROCESSED !
+2020-08-22 15:36:05,829 [ERROR] create_mappings_cache.py(line 26) Error while processing 2r09 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:05,830 [ERROR] create_mappings_cache.py(line 34) 17/250: 2r09 A NOT PROCESSED !
+2020-08-22 15:36:05,906 [ERROR] create_mappings_cache.py(line 26) Error while processing 1m6z B: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:05,907 [ERROR] create_mappings_cache.py(line 34) 18/250: 1m6z B NOT PROCESSED !
+2020-08-22 15:36:06,280 [ERROR] create_mappings_cache.py(line 26) Error while processing 1d3c A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:06,281 [ERROR] create_mappings_cache.py(line 34) 19/250: 1d3c A NOT PROCESSED !
+2020-08-22 15:36:06,764 [ERROR] create_mappings_cache.py(line 26) Error while processing 1dz4 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:06,765 [ERROR] create_mappings_cache.py(line 34) 20/250: 1dz4 A NOT PROCESSED !
+2020-08-22 15:36:06,869 [ERROR] create_mappings_cache.py(line 26) Error while processing 1n9y C: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:06,872 [ERROR] create_mappings_cache.py(line 26) Error while processing 2np5 A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:06,872 [ERROR] create_mappings_cache.py(line 34) 21/250: 1n9y C NOT PROCESSED !
+2020-08-22 15:36:06,873 [ERROR] create_mappings_cache.py(line 34) 22/250: 2np5 A NOT PROCESSED !
+2020-08-22 15:36:07,341 [ERROR] create_mappings_cache.py(line 26) Error while processing 1uyy A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:07,342 [ERROR] create_mappings_cache.py(line 34) 23/250: 1uyy A NOT PROCESSED !
+2020-08-22 15:36:07,699 [ERROR] create_mappings_cache.py(line 26) Error while processing 1n8u A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:07,700 [ERROR] create_mappings_cache.py(line 34) 24/250: 1n8u A NOT PROCESSED !
+2020-08-22 15:36:07,915 [ERROR] create_mappings_cache.py(line 26) Error while processing 1i5z A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:07,916 [ERROR] create_mappings_cache.py(line 34) 25/250: 1i5z A NOT PROCESSED !
+2020-08-22 15:36:08,032 [ERROR] create_mappings_cache.py(line 26) Error while processing 1w2t A: 're.Match' object has no attribute 'split'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 112, in get_entity_id_new
+    entity_id = match.split('=')[1]
+AttributeError: 're.Match' object has no attribute 'split'
+2020-08-22 15:36:08,033 [ERROR] create_mappings_cache.py(line 34) 26/250: 1w2t A NOT PROCESSED !
+2020-08-22 15:36:30,183 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:36:31,206 [ERROR] create_mappings_cache.py(line 26) Error while processing 1s69 A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:31,207 [ERROR] create_mappings_cache.py(line 34) 1/250: 1s69 A NOT PROCESSED !
+2020-08-22 15:36:31,329 [ERROR] create_mappings_cache.py(line 26) Error while processing 2nw8 A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:31,329 [ERROR] create_mappings_cache.py(line 34) 2/250: 2nw8 A NOT PROCESSED !
+2020-08-22 15:36:31,352 [ERROR] create_mappings_cache.py(line 26) Error while processing 2vbu A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:31,352 [ERROR] create_mappings_cache.py(line 34) 3/250: 2vbu A NOT PROCESSED !
+2020-08-22 15:36:31,622 [ERROR] create_mappings_cache.py(line 26) Error while processing 1v7w A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:31,623 [ERROR] create_mappings_cache.py(line 34) 4/250: 1v7w A NOT PROCESSED !
+2020-08-22 15:36:32,142 [ERROR] create_mappings_cache.py(line 26) Error while processing 1do1 A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:32,143 [ERROR] create_mappings_cache.py(line 34) 5/250: 1do1 A NOT PROCESSED !
+2020-08-22 15:36:32,292 [ERROR] create_mappings_cache.py(line 26) Error while processing 2i02 A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:32,292 [ERROR] create_mappings_cache.py(line 34) 6/250: 2i02 A NOT PROCESSED !
+2020-08-22 15:36:32,300 [ERROR] create_mappings_cache.py(line 26) Error while processing 1d7b A: invalid literal for int() with base 10: '116, 128), matc'
+Traceback (most recent call last):
+  File "./pythonScripts/create_mappings_cache.py", line 18, in create_mappings_cache
+    mappings = res_mappings_author_to_pdbe(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 124, in res_mappings_author_to_pdbe
+    entity_id = get_entity_id_new(pdb_id, chain_id)
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 114, in get_entity_id_new
+    return int(entity_id)
+ValueError: invalid literal for int() with base 10: '116, 128), matc'
+2020-08-22 15:36:32,301 [ERROR] create_mappings_cache.py(line 34) 7/250: 1d7b A NOT PROCESSED !
+2020-08-22 15:38:34,247 [INFO] create_mappings_cache.py(line 72) Creating mapping cache started...
+2020-08-22 15:39:46,288 [INFO] create_mappings_cache.py(line 89) Creating mapping cache finished: All structures processed successfully.

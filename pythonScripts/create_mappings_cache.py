@@ -3,6 +3,7 @@ import os
 import sys
 import threading
 import traceback
+import time
 
 from helper import eprint, parse_dataset_split_chains, res_mappings_author_to_pdbe
 import logger
@@ -54,7 +55,7 @@ for opt, arg in opts:
         threads = arg
 
 if (dataset_file == ""):
-    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
+    logger.error("Dataset must be specified.")
     sys.exit(1)
 if (output_dir == ""):
     logger.error("Output directory must be specified.")
@@ -64,12 +65,14 @@ if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
 
-dataset = parse_dataset_split_chains(dataset_file)  #todo co kdyz neni spravny format
+dataset = parse_dataset_split_chains(dataset_file)
+
+start = time.time()
 
 logger.info(f"Creating mapping cache started...")
 
 total = len(dataset)
-threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
+threadLock = threading.Lock()
 counter = 1
 errors = []
 
@@ -86,4 +89,6 @@ if (len(errors) == 0):
     logger.info(f"Creating mapping cache finished: All structures processed successfully.")
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
-    logger.warning(f"Creating mapping cache finished: Some structures were not processed successfully: \n {errors_format}")
+    logger.warning(f"Creating mapping cache finished: Some structures were not processed successfully: \n{errors_format}")
+
+logger.debug(f"Finished in {time.time() - start}")

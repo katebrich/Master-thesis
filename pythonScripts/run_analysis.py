@@ -118,7 +118,7 @@ if (len(errors) == 0):
     logger.info(f"All structures processed successfully.")
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
-    logger.warning(f"Some structures were not processed successfully: skipping them in the analysis...\n {errors_format}")
+    logger.warning(f"Some structures were not processed successfully: skipping them in the analysis...\n{errors_format}")
 
 
 #stats.compute_AA_frequencies(pairs)

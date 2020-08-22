@@ -18,7 +18,7 @@ analysis_dir="${out_dir}/analysis"
 
 #python3 ${python_scripts_path}download_dataset.py -d $dataset_file -o $out_dir -l $filter_ligands -t $threads
 
-#python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_file -o $out_dir/mappings -t $threads
+python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_file -o $out_dir/mappings -t $threads
 
 #python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i ${out_dir}/PDB -o ${out_dir}/lbs -t $threads
 
@@ -31,12 +31,11 @@ IFS=','
 
 #mkdir -p $analysis_dir #todo dovnitr skriptu
 
-for feature in $features_list; do
-    #todo check jestli ta slozka s hodnotami featury existuje
-    #echo "bash run_analysis.sh -d $dataset_file -l $out_dir/lbs -v $features_dir/$feature -o $analysis_dir/$feature -f $feature -t $threads -s"
-    python3 ${python_scripts_path}run_analysis.py -d $dataset_file -l $out_dir/lbs -v $features_dir/$feature -o $analysis_dir/$feature -f $feature -t $threads
-done
+#for feature in $features_list; do
+#todo check jestli ta slozka s hodnotami featury existuje
+#    python3 ${python_scripts_path}run_analysis.py -d $dataset_file -l $out_dir/lbs -v $features_dir/$feature -o $analysis_dir/$feature -f $feature -t $threads
+#done
 
 IFS=$oldIFS #todo je to potreba?
 
-cp ./run.log ${out_dir}/run.log
+#cp ./run.log ${out_dir}/run.log

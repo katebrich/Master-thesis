@@ -163,4 +163,4 @@ if (len(errors) == 0):
     logger.info(f"Downloading structures finished: All structures downloaded successfully.")
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
-    logger.warning(f"Downloading structures finished: Some structures were not downloaded successfully: \n {errors_format}")
+    logger.warning(f"Downloading structures finished: Some structures were not downloaded successfully: \n{errors_format}")
