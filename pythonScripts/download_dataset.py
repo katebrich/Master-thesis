@@ -9,6 +9,7 @@ from Bio import SeqIO
 from Bio.PDB import PDBParser, PDBIO
 from Bio.PDB.PDBIO import Select
 import logger
+import time
 
 logger = logger.get_logger(os.path.basename(__file__))
 
@@ -142,6 +143,7 @@ os.makedirs(output_FASTA) #todo co kdyz existuje?
 
 dataset = parse_dataset(dataset_file)  #todo co kdyz neni spravny format
 
+start = time.time()
 logger.info(f"Downloading structures from {dataset_file} to {output_dir} started...")
 
 total = len(dataset)     #todo otestovat jestli to multithreading zrychluje
@@ -164,3 +166,4 @@ if (len(errors) == 0):
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
     logger.warning(f"Downloading structures finished: Some structures were not downloaded successfully: \n{errors_format}")
+logger.debug(f"Finished in {time.time() - start}")

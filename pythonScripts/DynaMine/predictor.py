@@ -37,12 +37,12 @@ class DynaMine:
         return version
 
     def predict(self, fasta_path, pdb_id, chain_id):
-        seqs = self._getinputsequences(fasta_path, pdb_id, chain_id)
+        seqs = self._getinputsequence(fasta_path, pdb_id, chain_id)
         ji = DynaMineJSONInterface(configuration_file['json_api_key'])
-        results = ji.submit_sequences(seqs, predictions_only = self._light)
+        results = ji.submit_sequences(seqs, predictions_only = self._light) #todo submit po vice sekvencich
         # print(results)
         if 'status' in results and results['status'] == 'error':
-            print(results['message'])
+            #print(results['message'])
             return False
         else:
             self._save(results, pdb_id, chain_id)
@@ -51,18 +51,18 @@ class DynaMine:
     def _save(self, results, pdb_id, chain_id):
         filename = results['url'].split('/')[-1]
         path = os.path.join(self._jobdir, filename)
-        try:
-            with urllib.request.urlopen(results['url']) as dl_file:
-                with open(path, 'wb') as out_file:
-                    out_file.write(dl_file.read())
+        #try:
+        with urllib.request.urlopen(results['url']) as dl_file:
+            with open(path, 'wb') as out_file:
+                out_file.write(dl_file.read())
             #data = urllib.request.urlopen(results['url'])
             #fd = open(path, 'w')
             #fd.write(data)
             #fd.close()
-        except urllib.error.HTTPError:
-            sys.stderr.write("\nData %s not found on the server.\n" % (filename))
-        except Exception as e:
-            sys.stderr.write(str(e))
+        #except urllib.error.HTTPError:
+            #sys.stderr.write("\nData %s not found on the server.\n" % (filename))
+        #except Exception as e:
+            #sys.stderr.write(str(e))
         with zipfile.ZipFile(path) as zf:
             zf.extractall(self._jobdir)
             output_full_path = f"{self._jobdir}/{pdb_id}{chain_id}.txt"
@@ -73,10 +73,9 @@ class DynaMine:
         os.remove(path)
         shutil.rmtree(unzipped_path)
 
-    def _getinputsequences(self, fasta_path, pdb_id, chain_id):
+    def _getinputsequence(self, fasta_path, pdb_id, chain_id):
         seqs = {}
-        with open(fasta_path, 'r') as f:
-            seq = f.read()
-            seqs[f"{pdb_id}{chain_id}"] = seq
+        seq = (list(SeqIO.parse(fasta_path, "fasta"))[0]).seq
+        seqs[f"{pdb_id}{chain_id}"] = str(seq)
         return seqs
 

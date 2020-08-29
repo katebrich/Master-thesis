@@ -22,28 +22,28 @@ filename="${filename%.*}"
 dataset_prank_eval="${data_dir_eval}/${filename##*/}.ds"
 
 #stahnout PDB a FASTA soubory pro oba datasety z databaze
-#bash download_dataset.sh -d $dataset_train -o $data_dir_train -l $filter_ligands -t $threads -s
-#bash download_dataset.sh -d $dataset_eval -o $data_dir_eval -l $filter_ligands -t $threads -s
+bash download_dataset.sh -d $dataset_train -o $data_dir_train -l $filter_ligands -t $threads -s
+bash download_dataset.sh -d $dataset_eval -o $data_dir_eval -l $filter_ligands -t $threads -s
 
 #vytvorit cache mapovani author residue number : pdbe sequence number
-#python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_train -o $data_dir_train/mappings -t $threads
-#python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_eval -o $data_dir_eval/mappings -t $threads
+python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_train -o $data_dir_train/mappings -t $threads
+python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_eval -o $data_dir_eval/mappings -t $threads
 
 #vypocitat hodnoty zadanych featur
-#bash compute_features.sh -f $features_list -d $dataset_train -i $data_dir_train -o $data_dir_train/features -t $threads -s
-#bash compute_features.sh -f $features_list -d $dataset_eval -i $data_dir_eval -o $data_dir_eval/features -t $threads -s
+bash compute_features.sh -f $features_list -d $dataset_train -i $data_dir_train -o $data_dir_train/features -t $threads -s
+bash compute_features.sh -f $features_list -d $dataset_eval -i $data_dir_eval -o $data_dir_eval/features -t $threads -s
 
 #vytvorit soubory s hodnotami featur pro p2rank
-#bash create_p2rank_custom_feature_files.sh -f $features_list -d $dataset_train -i $data_dir_train -o $data_dir_train/p2rank/$label -t $threads -s
-#bash create_p2rank_custom_feature_files.sh -f $features_list -d $dataset_eval -i $data_dir_eval -o $data_dir_eval/p2rank/$label -t $threads -s
+bash create_p2rank_custom_feature_files.sh -f $features_list -d $dataset_train -i $data_dir_train -o $data_dir_train/p2rank/$label -t $threads -s
+bash create_p2rank_custom_feature_files.sh -f $features_list -d $dataset_eval -i $data_dir_eval -o $data_dir_eval/p2rank/$label -t $threads -s
 
 #zkopirovat tyto soubory do podslozky pranku
 cp -a $data_dir_train/p2rank/$label/. ${p2rank_location}/custom_feature/${label}
 cp -a $data_dir_eval/p2rank/$label/. ${p2rank_location}/custom_feature/${label}
 
 #vytvorit soubory s datasety pro p2rank
-#python3 ${python_scripts_path}create_prank_ds.py -d $data_dir_train/PDB -o $dataset_prank_train
-#python3 ${python_scripts_path}create_prank_ds.py -d $data_dir_eval/PDB -o $dataset_prank_eval
+python3 ${python_scripts_path}create_prank_ds.py -d $data_dir_train/PDB -o $dataset_prank_train
+python3 ${python_scripts_path}create_prank_ds.py -d $data_dir_eval/PDB -o $dataset_prank_eval
 
 #spustit natrenovani noveho modelu v p2rank
 #todo vytvorit config, slozku custom_feature atd. pokud chybi

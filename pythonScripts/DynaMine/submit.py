@@ -43,18 +43,17 @@ class DynaMineJSONInterface:
         # response gives us a job_id
         response = self._dynamine_request(job)
         if response['status'] == 'error':
-            sys.stderr.write(response['message'] + '\n')
-            sys.exit(1)
+            raise ValueError(response['message'])
+            #sys.exit(1)
         job_id = response['job_id']
-        self._print_progress(response['status'], False)
+        #self._print_progress(response['status'], False)
         # this makes the call blocking until the results are ready
         while response['status'] != 'completed':
             time.sleep(1.5)
             response = self._poll_results(job_id)
             if response['status'] == 'error':
-                sys.stderr.write(response['message'] + '\n')
-                sys.exit(1)
-            self._print_progress(response['status'], True)
+                raise ValueError(response['message'])
+            #self._print_progress(response['status'], True)
         return response['results']
 
     def _dynamine_request(self, request):
@@ -159,10 +158,10 @@ NQVRSPAPVQSPRPQSQPPHSSPSPRIQPQPSPHHVSPQTGSPHPGLAVTMASSIDQGHL
 GNPEQSAMLPQLNTPSRSALSSELSLVGDTTGDTLEKFVEGL'''
     }
     results = dynamine.submit_sequences(proteins, predictions_only = False)
-    print(results)
+    #print(results)
 
     uniprot_ids = ['P04637', 'P04638']
     results = dynamine.submit_uniprot_ids(uniprot_ids, predictions_only = True)
-    print(results)
+    #print(results)
 
 

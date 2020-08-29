@@ -13,6 +13,7 @@ import csv
 import shutil
 import numpy as np
 import logger
+import time
 
 logger = logger.get_logger(os.path.basename(__file__))
 
@@ -125,6 +126,7 @@ if not os.path.exists(output_dir):
 
 dataset = parse_dataset_split_chains(dataset_file) #todo co kdyz neni spravny format
 
+start = time.time()
 logger.info("Creating p2rank custom feature files started...")
 
 defaults = [default_values[f] for f in features]
@@ -151,4 +153,4 @@ if (len(errors) == 0):
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
     logger.warning(f"Creating p2rank custom feature files finished: Some structures were not processed successfully: \n{errors_format}")
-
+logger.debug(f"Finished in {time.time() - start}")

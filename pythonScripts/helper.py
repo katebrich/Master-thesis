@@ -5,9 +5,8 @@ import sys
 import xmltodict
 import numpy as np
 
-
 #returns uniprotID, entityID, start, end
-def get_uniprot_entity(pdb_id, chain_id):
+def get_uniprot_entity(pdb_id, chain_id): #todo cache
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot/{pdb_id}'
     parsedResponse = restAPI_get_json(url)
     uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
@@ -18,13 +17,18 @@ def get_uniprot_entity(pdb_id, chain_id):
         uniprot_ID = record
         mappings = uniprotRecords[record]["mappings"]
         for entity in mappings:
-            start_res_num = entity["start"]["residue_number"]
-            end_res_num = entity["end"]["residue_number"]
             if entity["chain_id"] == chain_id:
-                entities.append((uniprot_ID, entity["entity_id"], entity["unp_start"], entity["unp_end"], start_res_num, end_res_num))
+                start_res_num = entity["start"]["residue_number"]
+                end_res_num = entity["end"]["residue_number"]
+                unp_start =  entity["unp_start"]
+                unp_end =  entity["unp_end"]
+                if (unp_end - unp_start != end_res_num - start_res_num):
+                    raise ValueError(
+                        f"Incorrect mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")  # todo debug
+                entities.append((uniprot_ID,unp_start, unp_end, start_res_num, end_res_num))
 
     if len(entities) < 1:
-        sys.stderr.write(f"Error: '{pdb_id}': no entity with chain id '{chain_id}' was found.\n\n")
+        sys.stderr.write(f"Error: '{pdb_id}': no entity with chain id '{chain_id}' was found.\n\n") #todo log
     elif len(entities) > 1:
         #sys.stderr.write(f"Warning: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
         #for x in entities:
@@ -33,6 +37,41 @@ def get_uniprot_entity(pdb_id, chain_id):
         return entities
     else:
         return entities
+
+#returns uniprotID, entityID, start, end
+def get_uniprot_segments(pdb_id, chain_id): #todo cache
+    url = f'https://www.ebi.ac.uk/pdbe/graph-api/mappings/uniprot_segments/{pdb_id}'
+    parsedResponse = restAPI_get_json(url)
+    uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
+
+    import re
+    pattern = re.compile("^[OPQ][0-9][A-Z0-9]{3}[0-9]$|^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$") #UniProt accession format
+    segments = [] #todo dictionary?
+    for id in uniprotRecords:
+        if (pattern.match(id)):
+            uniprot_ID = id
+            mappings = uniprotRecords[uniprot_ID]["mappings"]
+            for entity in mappings:
+                if entity["chain_id"] == chain_id:
+                    start_res_num = entity["start"]["residue_number"]
+                    end_res_num = entity["end"]["residue_number"]
+                    unp_start = entity["unp_start"]
+                    unp_end = entity["unp_end"]
+                    if (unp_end - unp_start != end_res_num - start_res_num):
+                        raise ValueError(
+                            f"Incorrect mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")  # todo debug
+                    segments.append((uniprot_ID, unp_start, unp_end, start_res_num, end_res_num))
+
+    if len(segments) < 1:
+        sys.stderr.write(f"Error: '{pdb_id}': no segments with chain id '{chain_id}' was found.\n\n") #todo log
+    elif len(segments) > 1:
+        #sys.stderr.write(f"Warning: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
+        #for x in entities:
+        #        sys.stderr.write(f"{x[0]}\n")
+        #sys.stderr.write(f"\n") #todo
+        return segments
+    else:
+        return segments
 
 #returns parsed .json response (dictionary)
 def restAPI_get(url):
@@ -65,9 +104,14 @@ def get_fasta_path(data_dir, pdb_id, chain_id):
 def get_pdb_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/PDB/{pdb_id}{chain_id}.pdb"
 
-#def get_mmcif_path(data_dir, pdb_id, chain_id):
-#    return f"{data_dir}/mmCIF/{pdb_id}{chain_id}.cif"
+def get_lbs_path(data_dir, pdb_id, chain_id):
+    return f"{data_dir}/lbs/{pdb_id}{chain_id}.txt"
 
+def get_mappings_path(data_dir, pdb_id, chain_id):
+    return f"{data_dir}/mappings/{pdb_id}{chain_id}.txt"
+
+def get_feature_path(data_dir, feature, pdb_id, chain_id):
+    return f"{data_dir}/features/{feature}/{pdb_id}{chain_id}.txt"
 
 def get_entity_id(pdb_id, chain_id):
     url = f"https://www.rcsb.org/pdb/rest/describeMol?structureId={pdb_id}.{chain_id}"
@@ -82,11 +126,11 @@ def get_entity_id(pdb_id, chain_id):
     return int(entity_id)
 
 def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
+    #todo udelat vsechny chainy najednou
     if (cache_file != ""):
         mappings = np.genfromtxt(cache_file, delimiter=' ', dtype='str')
         return list(mappings)
     else:
-        #todo zrychlit!!! treba dat vsechny chainy najednou? lepsi vyhledavani?
         mappings = []
         response = restAPI_get_json(f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/residue_listing/{pdb_id}/chain/{chain_id}")
         entity_id = get_entity_id(pdb_id, chain_id)
@@ -100,7 +144,7 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
                     mappings.append((key, val))
                 count += 1
         if count != 1:
-            print(f"Error: More or less than one molecule with entity number {entity_id} was found.")
+            raise ValueError(f"Error: More or less than one molecule with entity number {entity_id} was found.")
             return
         return list(mappings)
 
@@ -108,13 +152,13 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-
-
 def parse_dataset(filepath):
     list = []
     with open(filepath) as f:
         for line in f:
-            pdb_id, chain_ids = line.split()
+            line = line.split()
+            pdb_id = line[0]
+            chain_ids = line[1] #todo check
             chain_ids = chain_ids.upper()
             list.append((pdb_id, chain_ids))
     return list
@@ -123,7 +167,9 @@ def parse_dataset_split_chains(filepath):
     list = []
     with open(filepath) as f:
         for line in f:
-            pdb_id, chain_ids = line.split()
+            line = line.split()
+            pdb_id = line[0]
+            chain_ids = line[1]  # todo check
             chain_ids = chain_ids.upper()
             for chain in chain_ids.split(','):
                 list.append((pdb_id, chain))

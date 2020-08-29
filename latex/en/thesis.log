@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  6 JUN 2020 12:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  23 AUG 2020 10:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -522,8 +522,14 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count286
 \l__pdf_internal_box=\box52
 )
-(./thesis.aux (./title.aux) (./introduction.aux) (./method.aux) (./epilog.aux)
-(./bibliography.aux))
+(./thesis.aux (./title.aux) (./introduction.aux) (./method.aux) (./features.aux
+
+LaTeX Warning: Label `tab:hypothesis_testing_errors' multiply defined.
+
+
+LaTeX Warning: Label `tab:contingency_table_example' multiply defined.
+
+) (./epilog.aux) (./bibliography.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 128.
@@ -548,8 +554,7 @@ LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
 28.
  (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count287
 \scratchdimen=\dimen170
@@ -635,7 +640,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<../img/logo2.pdf, id=63, 212.795pt x 213.39726pt>
+<../img/logo2.pdf, id=87, 212.795pt x 213.39726pt>
 File: ../img/logo2.pdf Graphic file (type pdf)
 <use ../img/logo2.pdf>
 Package pdftex.def Info: ../img/logo2.pdf  used on input line 25.
@@ -698,13 +703,39 @@ Package natbib Warning: Citation `cochran' on page 6 undefined on input line 98
 .
 
 ) [6]
+\openout2 = `features.aux'.
+
+ (./features.tex
+Chapter 3.
+[7
+
+
+
+]
+
+Package natbib Warning: Citation `mann' on page 8 undefined on input line 53.
+
+[8]
+
+Package natbib Warning: Citation `bartlett' on page 9 undefined on input line 6
+0.
+
+
+Package natbib Warning: Citation `brown' on page 9 undefined on input line 60.
+
+[9]
+
+Package natbib Warning: Citation `cochran' on page 10 undefined on input line 9
+8.
+
+) [10]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [7
+ (./epilog.tex) [11
 
 
 
-] [8
+] [12
 
 
 ]
@@ -746,36 +777,40 @@ Underfull \hbox (badness 2435) in paragraph at lines 83--88
 
  []
 
-[9
+[13
 
 
-])) [10]
+])) [14]
 Appendix A.
-[11
+[15
 
 
 ]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 192.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 192.
-(./thesis.aux (./title.aux) (./introduction.aux) (./method.aux) (./epilog.aux)
-(./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 192.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 192.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 193.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 193.
+(./thesis.aux (./title.aux) (./introduction.aux) (./method.aux) (./features.aux
+) (./epilog.aux) (./bibliography.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 193.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 193.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: A8BC2C754BB2217557A67CB120262295;1834.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 192.
+(rerunfilecheck)             Checksum: B255DD83C53CE05FCCC8876F2BB012A3;2800.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 193.
  ) 
 Here is how much of TeX's memory you used:
- 16159 strings out of 483140
- 226402 string characters out of 5965151
- 467528 words of memory out of 5000000
- 30809 multiletter control sequences out of 15000+600000
+ 16188 strings out of 483140
+ 226738 string characters out of 5965151
+ 468002 words of memory out of 5000000
+ 30819 multiletter control sequences out of 15000+600000
  584196 words of font info for 61 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 44i,13n,39p,1310b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,13n,39p,1312b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/sh
 are/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
@@ -786,10 +821,10 @@ mathit.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf
 usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/sha
 re/texmf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on thesis.pdf (16 pages, 320952 bytes).
+Output written on thesis.pdf (20 pages, 334900 bytes).
 PDF statistics:
- 288 PDF objects out of 1000 (max. 8388607)
- 239 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
- 130 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 371 PDF objects out of 1000 (max. 8388607)
+ 317 compressed objects within 4 object streams
+ 61 named destinations out of 1000 (max. 500000)
+ 178 words of extra memory for PDF output out of 10000 (max. 10000000)
 

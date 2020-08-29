@@ -62,16 +62,8 @@ def chi_squared_test(data, results_file):
 
         res = {k: list(map(itemgetter(1), v)) for k, v in grouper}
 
-        #print(res)
-
-
-        #counts = Counter(data)
-
         binding = res[1]
         non_binding = res[0]
-
-        print(binding)
-        print(non_binding)
 
        # binding_counts = Counter(binding)
         binding_counts = Counter(binding)

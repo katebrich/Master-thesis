@@ -2,6 +2,7 @@ import getopt
 import os
 import sys
 import traceback
+import time
 
 import numpy as np
 
@@ -26,7 +27,7 @@ def compute_pairs(structure):
 
         # get feature values
         file = os.path.join(feature_dir, f"{pdb_id}{chain_id}.txt")
-        feature = np.genfromtxt(file, delimiter=' ', dtype=None)
+        feature = np.genfromtxt(file, delimiter=' ', dtype=None, encoding=None)
         feature_vals = list(feature)
 
         for val in feature_vals:
@@ -40,7 +41,7 @@ def compute_pairs(structure):
             global pairs
             pairs.append((lbs_val, feature_val))
         if (len(missing_vals) > 0):
-            logger.debug(f"Missing feature values for residues: {missing_vals}") #todo vyresit to
+            logger.debug(f"{pdb_id} {chain_id}: Missing feature values for residues: {missing_vals}") #todo vyresit to
     except (KeyboardInterrupt, SystemExit):
         raise
     except Exception as ex:
@@ -104,6 +105,7 @@ if not os.path.exists(output_dir):
 
 dataset = parse_dataset_split_chains(dataset_file)
 
+start = time.time()
 logger.info("Running analysis started...")
 
 pairs = []
@@ -140,3 +142,5 @@ else:
     sys.exit(1)
 
 logger.info(f"Running analysis finished. Results saved to {file}")
+
+logger.debug(f"Finished in {time.time() - start}")

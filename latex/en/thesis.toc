@@ -6,9 +6,15 @@
 \contentsline {subsection}{\numberline {2.1.2}Fisher's exact test and Chi-squared test of independence}{5}{subsection.2.1.2}%
 \contentsline {section}{\numberline {2.2}Data}{6}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Implementation in Python}{6}{section.2.3}%
-\contentsline {chapter}{Conclusion}{7}{chapter*.2}%
-\contentsline {chapter}{List of Abbreviations}{8}{chapter*.3}%
-\contentsline {chapter}{Bibliography}{9}{chapter*.4}%
-\contentsline {chapter}{\numberline {A}Attachments}{11}{appendix.A}%
-\contentsline {section}{\numberline {A.1}attachment1}{11}{section.A.1}%
-\contentsline {section}{\numberline {A.2}attachment2}{11}{section.A.2}%
+\contentsline {chapter}{\numberline {3}Method}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Hypothesis testing}{7}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Welch's test}{8}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Fisher's exact test and Chi-squared test of independence}{9}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Data}{10}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Implementation in Python}{10}{section.3.3}%
+\contentsline {chapter}{Conclusion}{11}{chapter*.2}%
+\contentsline {chapter}{List of Abbreviations}{12}{chapter*.3}%
+\contentsline {chapter}{Bibliography}{13}{chapter*.4}%
+\contentsline {chapter}{\numberline {A}Attachments}{15}{appendix.A}%
+\contentsline {section}{\numberline {A.1}attachment1}{15}{section.A.1}%
+\contentsline {section}{\numberline {A.2}attachment2}{15}{section.A.2}%

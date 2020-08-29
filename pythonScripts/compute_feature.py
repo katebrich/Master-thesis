@@ -4,6 +4,7 @@ import os
 import sys
 import threading
 import traceback
+import time
 
 from helper import eprint, parse_dataset_split_chains
 from features import *
@@ -78,6 +79,7 @@ if not os.path.exists(output_dir):
 
 dataset = parse_dataset_split_chains(dataset_file) #todo co kdyz neni spravny format
 
+start = time.time()
 logger.info(f"Computing feature {feature} started...")
 
 total = len(dataset)
@@ -85,9 +87,13 @@ counter = 1
 threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
 errors=[]
 
+# run dynamine in 1 thread only !!!
+if (feature == "dynamine"): #todo neni asi potreba
+    threads = 1
+
 if (threads == 1):
     for structure in dataset:
-        __compute_feature(feature, structure)
+        __compute_feature(structure, feature)
 else:
     args = zip(dataset, itertools.repeat(feature, len(dataset)))
     from multiprocessing.dummy import Pool as ThreadPool
@@ -100,3 +106,4 @@ if (len(errors) == 0):
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
     logger.warning(f"Computing feature {feature} finished: Some structures were not processed successfully: \n{errors_format}")
+logger.debug(f"Finished in {time.time() - start}")

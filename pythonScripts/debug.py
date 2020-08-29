@@ -1,3 +1,5 @@
 from helper import *
+from propka.run import single
 
-entity_id = get_entity_id_new("1a4k", "H")
+
+get_uniprot_segments("1lbc", "A")

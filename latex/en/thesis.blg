@@ -4,6 +4,7 @@ The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: title.aux
 A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: method.aux
+A level-1 auxiliary file: features.aux
 A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
@@ -25,7 +26,7 @@ Warning--can't use both volume and number fields in neynman_pearson
 Warning--empty publisher in neynman_pearson
 You've used 16 entries,
             2773 wiz_defined-function locations,
-            722 strings with 7987 characters,
+            723 strings with 7999 characters,
 and the built_in function-call counts, 6657 in all, are:
 = -- 614
 > -- 260

@@ -68,7 +68,6 @@ if not os.path.exists(output_dir):
 dataset = parse_dataset_split_chains(dataset_file)
 
 start = time.time()
-
 logger.info(f"Creating mapping cache started...")
 
 total = len(dataset)
@@ -90,5 +89,4 @@ if (len(errors) == 0):
 else:
     errors_format = '\n'.join('%s %s' % x for x in errors)
     logger.warning(f"Creating mapping cache finished: Some structures were not processed successfully: \n{errors_format}")
-
 logger.debug(f"Finished in {time.time() - start}")

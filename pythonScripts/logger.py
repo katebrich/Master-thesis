@@ -11,11 +11,11 @@ def get_logger(name):
     #                                 backupCount=5, encoding=None, delay=0)
     file_handler = FileHandler(file, mode='a', encoding=None)
     file_handler.setFormatter(log_formatter)
-    file_handler.setLevel(logging.INFO)
+    file_handler.setLevel(logging.DEBUG)
 
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(log_formatter)
-    console_handler.setLevel(logging.DEBUG)
+    console_handler.setLevel(logging.INFO)
 
     #error_handler = logging.StreamHandler()
     #error_handler.setFormatter(log_formatter)
