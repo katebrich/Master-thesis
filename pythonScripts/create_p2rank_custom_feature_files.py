@@ -49,17 +49,18 @@ def create_file(structure):
                 feat_tuple = tuple(defaults)
                 df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
                                                                                   seq_code) + feat_tuple
-            elif (residue.id[0].isspace() or residue.id[0] == "H_MSE"):  # skip hetero-residues #todo selenomethionine???
+            elif (residue.id[0].isspace() or residue.id[0] == "H_MSE"):  # skip hetero-residues #todo selenomethionine??? #todo nonstandard residues...jako pri pocitani LBS
                 if (residue.id[2].isspace()):  # biopython returns a space instead of empty string
                     ins_code = ""
                 else:
                     ins_code = residue.id[2]
                 seq_code = residue.id[1]
-                res_num = mappings[str(seq_code) + str(ins_code)]
+                auth_res_num = str(seq_code) + str(ins_code)
+                pdbe_res_num = mappings[auth_res_num]
                 feat_list = []
                 # todo missing feature vals for res_num
                 for j in range(0, len(features)):
-                    val = feature_vals[j].get(res_num, defaults[j])
+                    val = feature_vals[j].get(pdbe_res_num, defaults[j])
                     feat_list.append(val)
                 feat_tuple = tuple(feat_list)
                 df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,

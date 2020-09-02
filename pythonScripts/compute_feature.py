@@ -7,7 +7,7 @@ import traceback
 import time
 
 from helper import eprint, parse_dataset_split_chains
-from features import *
+from features import get_feature
 import logger
 
 logger = logger.get_logger(os.path.basename(__file__))
@@ -18,7 +18,6 @@ def __compute_feature(structure, name_of_feature):
     error=False
     try:
         feat_vals = get_feature(name_of_feature, input_dir, pdb_id, chain_id)
-
         output_file = f"{output_dir}/{pdb_id}{chain_id}.txt"
         with open(output_file, 'w') as f:
             f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))

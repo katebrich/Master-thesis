@@ -125,7 +125,7 @@ else:
 
 #stats.compute_AA_frequencies(pairs)
 
-type_of_feature = types_of_features[feature_name]
+type_of_feature = types_of_features[feature_name] #todo kdyz nezmany typ, tak aby to nespadlo..asi
 
 file = os.path.join(output_dir, "results.txt")
 if (type_of_feature == "binary"):

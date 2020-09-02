@@ -2,17 +2,18 @@ set -e
 python_scripts_path=./pythonScripts/
 
 #todo parsovani argumentu
-dataset_file="/home/katebrich/Documents/diplomka/datasets/test.txt"  #povinny
-data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_test" #nepovinny. Kdyz neni zadan, vytvori se v umisteni dataset_file
-features_dir="${data_dir}/features"                                  #nepovinny. Default podslozka data_dir
-filter_ligands=none                                                  #todo none, water, small molecules, given IDs, MOAD,...
-features_list=HSE                                                    #povinny
+dataset_name="chen11"
+dataset_file="/home/katebrich/Documents/diplomka/datasets/${dataset_name}.txt"  #povinny
+data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_${dataset_name}" #nepovinny. Kdyz neni zadan, vytvori se v umisteni dataset_file
+features_dir="${data_dir}/features"                                             #nepovinny. Default podslozka data_dir
+filter_ligands=none                                                             #todo none, water, small molecules, given IDs, MOAD,...
+features_list=b_factor                                                          #exposureCN,unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_compbias,pdbkb_sec_str,pdbkb_conservation,aa,aa_hydropathy,aa_molecular_weight,dynamine,mobiDB,HSE #povinny
 threads=1
 #log_file="${data_dir}/run.log"
 #strict=true #todo
 analysis_dir="${data_dir}/analysis"
 
-#rm ./run.log
+rm ./run.log
 
 #if [ -d "$data_dir" ]; then
 #    rm -rf "$data_dir"
@@ -22,7 +23,7 @@ analysis_dir="${data_dir}/analysis"
 
 #python3 ${python_scripts_path}create_mappings_cache.py -d $dataset_file -o $data_dir/mappings -t $threads
 
-#python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i ${data_dir} -t $threads
+python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i ${data_dir} -t $threads
 
 oldIFS=$IFS
 IFS=','
@@ -40,4 +41,4 @@ done
 
 IFS=$oldIFS #todo je to potreba?
 
-cp ./run.log ${data_dir}/run.log
+cp ./run.log ${data_dir}/run.log #todo zkopirovat i kdyz ten skript rpedtim spadne na chybu a nedobehne to sem

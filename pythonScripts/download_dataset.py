@@ -18,7 +18,7 @@ class ChainSelect(Select):
         super(Select, self).__init__()
         self.chain = chain
     def accept_residue(self, residue):
-        if residue.parent.id ==self.chain and residue.id[0] != 'W': #todo filtrovani ligandu
+        if residue.parent.id ==self.chain and residue.id[0] != 'W': #do not save water hetatoms
             return 1
         else:
             return 0

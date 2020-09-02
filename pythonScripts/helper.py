@@ -186,3 +186,22 @@ def parse_prank_dataset(filepath):
                     pdb_files.append(words[0])
 
     return pdb_files
+
+def getCenterOfMass(atoms):
+    totalMass = 0.0
+    x = 0
+    y = 0
+    z = 0
+    for a in atoms:
+        m = a.mass
+        totalMass += m
+        x += a.coord[0] * m
+        y += a.coord[1] * m
+        z += a.coord[2] * m
+    return (x / totalMass, y / totalMass, z / totalMass)
+
+def getFullAuthorResNum(residue_id):
+    auth_res_num = str(residue_id[1])
+    if not (residue_id[2].isspace()): # biopython returns a space instead of empty string
+        auth_res_num += str(residue_id[2])  # insertion code
+    return auth_res_num

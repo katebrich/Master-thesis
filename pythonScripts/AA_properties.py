@@ -19,8 +19,8 @@ hydropathy_kyte_doolitle = {
     'T': -0.7,  #threonine
     'V': 4.2,   #valine
     'W': -0.9,  #tryptophan
-    'Y': -1.3,   #tyrosin
-    'X': None #unknown AA
+    'Y': -1.3,  #tyrosin
+    'X': None   #unknown AA
 }
 
 molecular_weight = {
