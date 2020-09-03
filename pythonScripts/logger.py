@@ -15,7 +15,7 @@ def get_logger(name):
 
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(log_formatter)
-    console_handler.setLevel(logging.INFO)
+    console_handler.setLevel(logging.DEBUG)
 
     #error_handler = logging.StreamHandler()
     #error_handler.setFormatter(log_formatter)

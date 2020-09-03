@@ -45,6 +45,8 @@ def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
         return get_mobiDB_lite(pdb_id, chain_id)
     elif name_of_feature == "HSE":
         return get_HSE(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "HSE_down":
+        return get_HSE_down(data_dir, pdb_id, chain_id)
     elif name_of_feature == "exposureCN":
         return get_exposureCN(data_dir, pdb_id, chain_id)
     elif name_of_feature == "b_factor":
@@ -70,6 +72,7 @@ types_of_features = {
     "mobiDB" : "continuous",
     "aa" : "categorical",
     "HSE" : "continuous",
+    "HSE_down" : "continuous",
     "exposureCN" : "continuous",
     "b_factor" : "continuous"
 }
@@ -314,18 +317,40 @@ def get_HSE(data_dir, pdb_id, chain_id):
     feature_vals = []
     mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
     for r in model.get_residues():
-        if is_aa(r) and r.id[0] == ' ':#todo nonstandard residues
-            try:
-                hse = abs(int(r.xtra["EXP_HSE_B_U"]) - int(r.xtra["EXP_HSE_B_D"]))
-                auth_res_num = getFullAuthorResNum(r.id)
-                #auth_res_num = str(r.id[1])
-                #if (r.id[2] != ' '):
-                #   auth_res_num += str(r.id[2])  # insertion code
-                pdbe_res_num = mappings[auth_res_num]
-                feature_vals.append((pdbe_res_num, hse))
-            except:
-                pass
-                #print(f"Error HSE: {pdb_id} {chain_id}: residue {r}") #todo
+        if not (r.id[0].isspace()): #is HETATM
+            continue
+        try:
+            hse = abs(int(r.xtra["EXP_HSE_B_U"]) - int(r.xtra["EXP_HSE_B_D"]))
+            auth_res_num = getFullAuthorResNum(r.id)
+            #auth_res_num = str(r.id[1])
+            #if (r.id[2] != ' '):
+            #   auth_res_num += str(r.id[2])  # insertion code
+            pdbe_res_num = mappings[auth_res_num]
+            feature_vals.append((pdbe_res_num, hse))
+        except:
+            print(f"Error HSE: {pdb_id} {chain_id}: residue {r}") #todo
+
+    return feature_vals
+
+def get_HSE_down(data_dir, pdb_id, chain_id):
+    pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
+    parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+    structure = parser.get_structure(pdb_id, pdb_file)
+    model = structure[0]
+    HSExposure.HSExposureCB(model)
+    feature_vals = []
+    mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
+    for r in model.get_residues():
+        if not (r.id[0].isspace()):  # is HETATM
+            continue
+        try:
+            hse = int(r.xtra["EXP_HSE_B_D"])
+            auth_res_num = getFullAuthorResNum(r.id)
+            pdbe_res_num = mappings[auth_res_num]
+            feature_vals.append((pdbe_res_num, hse))
+        except:
+            pass
+            #print(f"Error HSE: {pdb_id} {chain_id}: residue {r}") #todo
 
     return feature_vals
 
@@ -338,18 +363,18 @@ def get_exposureCN(data_dir, pdb_id, chain_id):
     feature_vals = []
     mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
     for r in model.get_residues():
-        if is_aa(r) and r.id[0] == ' ':#todo nonstandard residues
-            try:
-                cn = int(r.xtra["EXP_CN"])
-                auth_res_num = getFullAuthorResNum(r.id)
-                #auth_res_num = str(r.id[1])
-                #if (r.id[2] != ' '):
-                #    auth_res_num += str(r.id[2])  # insertion code
-                pdbe_res_num = mappings[auth_res_num]
-                feature_vals.append((pdbe_res_num, cn))
-            except:
-                #pass
-                print(f"Error HSE: {pdb_id} {chain_id}: residue {r}") #todo
+        if not (r.id[0].isspace()):  # is HETATM
+            continue
+        try:
+            cn = int(r.xtra["EXP_CN"])
+            auth_res_num = getFullAuthorResNum(r.id)
+            #auth_res_num = str(r.id[1])
+            #if (r.id[2] != ' '):
+            #    auth_res_num += str(r.id[2])  # insertion code
+            pdbe_res_num = mappings[auth_res_num]
+            feature_vals.append((pdbe_res_num, cn))
+        except:
+            print(f"Error CN: {pdb_id} {chain_id}: residue {r}") #todo
 
     return feature_vals
 
@@ -361,6 +386,8 @@ def get_b_factor(data_dir, pdb_id, chain_id):
     mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
     feature_vals = []
     for residue in chain.get_residues():
+        if not isPartOfChain(residue, mappings):
+            continue
         sum = 0
         for atom in residue.child_list:
             sum += atom.bfactor
@@ -372,7 +399,7 @@ def get_b_factor(data_dir, pdb_id, chain_id):
 
 
 ###DEBGUG###
-data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_test"
-pdb_id = "1qhi"
-chain_id = "A"
-print(get_b_factor(data_dir, pdb_id, chain_id))
+#data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_test"
+#pdb_id = "1qhi"
+#chain_id = "A"
+#print(get_b_factor(data_dir, pdb_id, chain_id))

@@ -6,6 +6,9 @@ import xmltodict
 import numpy as np
 
 #returns uniprotID, entityID, start, end
+from Bio.PDB import is_aa
+
+
 def get_uniprot_entity(pdb_id, chain_id): #todo cache
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot/{pdb_id}'
     parsedResponse = restAPI_get_json(url)
@@ -205,3 +208,16 @@ def getFullAuthorResNum(residue_id):
     if not (residue_id[2].isspace()): # biopython returns a space instead of empty string
         auth_res_num += str(residue_id[2])  # insertion code
     return auth_res_num
+
+def isPartOfChain(residue, mappings):
+    if (residue.id[0].isspace()):  # hetero flag is empty
+        return True
+    elif (is_aa(residue, standard=False)):  # HETATM, but nonstandard AA code (MSE, LYZ etc.)
+        # check if mapping exist for this residue number:
+        auth_res_num = getFullAuthorResNum(residue.id)
+        if (auth_res_num in mappings):
+            return True # is part of the chain, not ligand
+        else:
+            return False  # is truly a ligand
+    else:
+        return False

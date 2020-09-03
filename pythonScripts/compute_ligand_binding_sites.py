@@ -10,10 +10,12 @@ from MOAD import MOAD
 from scipy.spatial import distance
 
 logger = logger.get_logger(os.path.basename(__file__))
+counter = None
 
 def __get_ligand_binding_site(structure):
     pdb_id = structure[0]
     chain_id = structure[1]
+    errors = []
     error=False
     pdb_path = get_pdb_path(data_dir, pdb_id, chain_id)
     try:
@@ -27,15 +29,17 @@ def __get_ligand_binding_site(structure):
         error=True
         logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}", exc_info=True)
     finally:
-        with threadLock:
-            global counter
-            idx = counter
-            counter += 1
+        global counter
+        with counter.get_lock():
+            idx = counter.value
+            counter.value += 1
         if (error):
             errors.append(structure)
             logger.error(f"{idx}/{total}: {pdb_id} {chain_id} NOT PROCESSED !")
         else:
+            #pass #todo
             logger.debug(f"{idx}/{total}: {pdb_id} {chain_id} processed")
+        return errors
 
 def filter_ligands(ligands, AAs, pdb_id, chain_id):
     result = []
@@ -72,8 +76,8 @@ def filter_ligands(ligands, AAs, pdb_id, chain_id):
                 center_far.append(ligand.resname)  # todo debug
                 continue
             result.append(ligand)
-            print(
-                f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {[x.resname for x in result]}\nFar: {center_far}, Small: {small}, Ignored: {skipped}\n") #todo debug only
+        #print(
+        #    f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {[x.resname for x in result]}\nFar: {center_far}, Small: {small}, Ignored: {skipped}\n") #todo debug only
     elif (filter_level == "MOAD"):
         relevant = MOAD.get_relevant_ligands(pdb_id, chain_id)
         if (relevant == None):
@@ -103,23 +107,12 @@ def __compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
     ligands_all = []
     ids = [] #todo only for debug
 
+    #todo KD tree, optimization
     for residue in chain.get_residues():
-        if (residue.id[0] == ' '):  # hetero flag is empty
+        if (isPartOfChain(residue, mappings)):
             AAs.append(residue)
-        elif (is_aa(residue, standard=False)): #HETATM, but nonstandard AA code (MSE, LYZ etc.)
-            #check if mapping exist for this residue number:
-            auth_res_num = getFullAuthorResNum(residue.id)
-            #auth_res_num = str(residue.id[1])
-            #if (residue.id[2] != ' '):
-            #    auth_res_num += str(residue.id[2])  # insertion code
-            if (auth_res_num in mappings):
-                AAs.append(residue) #is part of the chain, not ligand
-            else:
-                ligands_all.append(residue) #is truly a ligand
         else:
-            # todo filter relevant ligands
             ligands_all.append(residue)
-            #ids.append(residue.id[0])
 
     ligands = filter_ligands(ligands_all, AAs, pdb_id, chain_id)
 
@@ -128,9 +121,6 @@ def __compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
     for AA in AAs:
         success = False
         auth_res_num = getFullAuthorResNum(AA.id)
-        #auth_res_num = str(AA.id[1])
-        #if (AA.id[2] != ' '):
-        #    auth_res_num += str(AA.id[2])  # insertion code
         pdbe_res_num = mappings[auth_res_num]
         for ligand in ligands:
             if (isInDistance(THRESHOLD, AA, ligand)):
@@ -139,8 +129,12 @@ def __compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
                 break;
         if (success == False):
             output.append((pdbe_res_num, 0))
-
     return output
+
+def init(args):
+    ''' store the counter for later use '''
+    global counter
+    counter = args
 
 
 dataset_file = ""
@@ -194,22 +188,23 @@ start = time.time()
 logger.info(f"Computing ligand binding sites started...")
 
 total = len(dataset)
-counter = 1
-threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
-errors = []
+#threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
 
 if (threads == 1):
     for structure in dataset:
         __get_ligand_binding_site(structure)
 else:
     from multiprocessing.dummy import Pool as ThreadPool
-    pool = ThreadPool(int(threads))
-    pool.map(__get_ligand_binding_site, dataset)
+    from multiprocessing import Pool, Value
+    counter = Value('i', 1)
+    pool = Pool(int(threads), initializer = init, initargs = (counter, ))
+    errors = pool.map(__get_ligand_binding_site, dataset)
     pool.close()
+    total_errors = [ent for sublist in errors for ent in sublist]
 
-if (len(errors) == 0):
+if (len(total_errors) == 0):
     logger.info(f"Computing ligand binding sites finished: All structures processed successfully.")
 else:
-    errors_format = '\n'.join('%s %s' % x for x in errors)
+    errors_format = '\n'.join('%s %s' % x for x in total_errors)
     logger.warning(f"Computing ligand binding sites finished: Some structures were not processed successfully: \n{errors_format}")
 logger.debug(f"Finished in {time.time() - start}")
