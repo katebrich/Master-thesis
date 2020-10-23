@@ -2,45 +2,60 @@ from Bio import SeqIO
 from Bio.PDB import PDBParser, HSExposure, Selection, is_aa
 from helper import *
 from AA_properties import *
+import os
 import random
 
 def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
     if name_of_feature == 'unp_PTM':
-        return get_unp_PTM(pdb_id, chain_id)
+        return get_uniprot_binary_type("CARBOHYD%2CMOD_RES%2CLIPID", pdb_id, chain_id) #glycosylation+lipidation+mod_res
     elif name_of_feature == 'unp_glycosylation':
-        return get_unp_glycosylation(pdb_id, chain_id)
+        return get_uniprot_binary_type("CARBOHYD", pdb_id, chain_id)
     elif name_of_feature == 'unp_lipidation':
-        return get_unp_lipidation(pdb_id, chain_id)
+        return get_uniprot_binary_type("LIPID", pdb_id, chain_id)
     elif name_of_feature == 'unp_mod_res':
-        return get_unp_mod_res(pdb_id, chain_id)
+        return get_uniprot_binary_type("MOD_RES", pdb_id, chain_id)
     elif name_of_feature == 'unp_variation':
         return get_unp_variation(pdb_id, chain_id)
     elif name_of_feature == 'unp_topology':
-        return get_unp_topology(pdb_id, chain_id)
+        return get_uniprot_binary_type("TRANSMEM%2CINTRAMEM", pdb_id, chain_id) #transmembrane + intramembrane
+    elif name_of_feature == 'unp_sec_str':
+        return get_uniprot_sec_str(pdb_id, chain_id)
+    elif name_of_feature == 'unp_non_standard':
+        return get_uniprot_binary_type("NON_STD", pdb_id, chain_id)
+    elif name_of_feature == 'unp_natural_variant':
+        return get_uniprot_binary_type("VARIANT", pdb_id, chain_id)
     elif name_of_feature == 'unp_compbias':
-        return get_unp_compbias(pdb_id, chain_id)
-    elif name_of_feature == 'pdbkb_sec_str':
+        return get_uniprot_binary_type("COMPBIAS", pdb_id, chain_id)
+    elif name_of_feature == 'pdbekb_sec_str':
         return get_pdbkb_sec_str(pdb_id, chain_id)
-    #elif name_of_feature == 'unp_variants': #todo
-    #    return get_variants(data_dir, pdb_id, chain_id)
-    elif name_of_feature == 'pdbkb_conservation':
+    elif name_of_feature == 'pdbekb_conservation':
         return get_pdbkb_conservation(pdb_id, chain_id)
+    elif name_of_feature == "conservation":
+        return get_conservation(data_dir, pdb_id, chain_id)
     elif name_of_feature == "aa":
         return get_aa(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "aa_hydropathy":
-        return get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id)
-    #elif name_of_feature == "aa_pKa_COOH":
-    #    return get_pKa_COOH(data_dir, pdb_id, chain_id)
-    #elif name_of_feature == "aa_pKa_NH3":
-    #    return get_pKa_NH3(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "aa_molecular_weight":
-        return get_molecular_weight(data_dir, pdb_id, chain_id)
-    #elif name_of_feature == "random": #todo debug
-    #    return get_random(data_dir, pdb_id, chain_id)
-    #elif name_of_feature == "AA": #todo debug
-    #    return get_AAs(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "dynamine":
+    elif name_of_feature == "aa_pairs":
+        return get_aa_pairs(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "hydropathy":
+        return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "polarity":
+        return get_AA_properties(polarity, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "polarity_binary":
+        return get_AA_properties(polarity_binary, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "charged":
+        return get_AA_properties(charged, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "aromaticity":
+        return get_AA_properties(aromaticity, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "mol_weight":
+        return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "H_bond_atoms":
+        return get_AA_properties(H_bond_atoms, data_dir, pdb_id, chain_id)
+    elif name_of_feature == "dynamine_website":
         return get_dynamine(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "dynamine_funPDBe":
+        return get_funPDBe("dynamine", "backbone", pdb_id, chain_id)
+    elif name_of_feature == "efoldmine_funPDBe":
+        return get_funPDBe("dynamine", "efoldmine", pdb_id, chain_id)
     elif name_of_feature == "mobiDB":
         return get_mobiDB_lite(pdb_id, chain_id)
     elif name_of_feature == "HSE":
@@ -49,8 +64,18 @@ def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
         return get_HSE_down(data_dir, pdb_id, chain_id)
     elif name_of_feature == "exposureCN":
         return get_exposureCN(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "b_factor":
-        return get_b_factor(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "bfactor":
+        return get_bfactor(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "bfactor_Calpha":
+        return get_bfactor_Calpha(data_dir, pdb_id, chain_id)
+    elif name_of_feature == "depth":
+        return get_funPDBe("depth", "complex_residue_depth", pdb_id, chain_id)
+    elif name_of_feature == "phi_angle":
+        return get_phi_angle(pdb_id, chain_id)
+    elif name_of_feature == "psi_angle":
+        return get_psi_angle(pdb_id, chain_id)
+    elif name_of_feature == "cis_peptide":
+        return get_cis_peptide(pdb_id, chain_id)
     else:
         raise ValueError(f"Unknown feature {name_of_feature}.") #todo
         return
@@ -64,17 +89,33 @@ types_of_features = {
     "unp_variation" : "binary",
     "unp_topology" : "binary",
     "unp_compbias" : "binary",
-    "pdbkb_sec_str" : "categorical",
-    "aa_hydropathy" : "continuous",
-    "aa_molecular_weight" : "continuous",
-    "dynamine" : "continuous",
-    "pdbkb_conservation" : "categorical",
+    "unp_non_standard" : "binary",
+    "unp_sec_str" : "categorical",
+    "unp_natural_variant" : "binary",
+    "pdbekb_sec_str" : "categorical",
+    "hydropathy" : "continuous",
+    "mol_weight" : "continuous",
+    "dynamine_website" : "continuous",
+    "dynamine_funPDBe" : "continuous",
+    "efoldmine_funPDBe" : "continuous",
+    "pdbekb_conservation" : "categorical",
     "mobiDB" : "continuous",
     "aa" : "categorical",
+    "aa_pairs" : "categorical",
     "HSE" : "continuous",
     "HSE_down" : "continuous",
     "exposureCN" : "continuous",
-    "b_factor" : "continuous"
+    "bfactor" : "continuous",
+    "bfactor_Calpha" : "continuous",
+    "polarity" : "categorical",
+    "polarity_binary" : "binary",
+    "charged" : "binary",
+    "aromaticity" : "binary",
+    "H_bond_atoms" : "categorical",
+    "depth" : "continuous",
+    "phi_angle" : "continuous",
+    "psi_angle" : "continuous",
+    "cis_peptide" : "binary"
 }
 
 default_values = {
@@ -94,26 +135,27 @@ default_values = {
 
 
 
-def get_uniprot_type(type, pdb_id, chain_id):
-    entities = get_uniprot_entity(pdb_id, chain_id)
+def get_uniprot_binary_type(type, pdb_id, chain_id):
+    segments = get_uniprot_segments(pdb_id, chain_id)
     feature_vals = []
-    for entity in entities:
-        uniprot_id = entity[0]
-        unp_start = entity[1]
-        unp_end = entity[2]
-        start_res_num = entity[3]
-        end_res_num = entity[4]
+    for seg in segments:
+        uniprot_id = seg[0]
+        segment_begin = seg[1]
+        segment_end = seg[2]
+        start_res_num = seg[3]
+        end_res_num = seg[4]
         url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?types={type}"
         response = restAPI_get_json(url)
 
-        feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs
+        feature_vector = [0] * (segment_end - segment_begin + 1)  # including both start and end AAs
         for feature in response["features"]:
             feat_begin = int(feature["begin"])
             feat_end = int(feature["end"])
-            for i in range(feat_begin, feat_end + 1):
-                res = i - unp_start  # mapping pdb residues to uniprot entry, counting from 0
-                if res >= 0 and res < unp_end - unp_start + 1:
-                    feature_vector[res] = 1
+            for i in range(max(feat_begin, segment_begin), min(feat_end, segment_end) + 1): #take only parts of features that overlap with uniprot segment
+            #for i in range(feat_begin, feat_end + 1):
+                res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0
+                #if res >= 0 and res < segment_end - segment_begin + 1:
+                feature_vector[res] = 1
 
         i = 0
         for res_num in range(start_res_num, end_res_num + 1):
@@ -122,38 +164,57 @@ def get_uniprot_type(type, pdb_id, chain_id):
 
     return feature_vals
 
-def get_unp_glycosylation(pdb_id, chain_id):
-    return get_uniprot_type("CARBOHYD", pdb_id, chain_id)
+def get_uniprot_sec_str(pdb_id, chain_id):
+    segments = get_uniprot_segments(pdb_id, chain_id)
+    feature_vals = []
+    for seg in segments:
+        uniprot_id = seg[0]
+        segment_begin = seg[1]
+        segment_end = seg[2]
+        start_res_num = seg[3]
+        end_res_num = seg[4]
+        url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?categories=STRUCTURAL"
+        response = restAPI_get_json(url)
 
-def get_unp_lipidation(pdb_id, chain_id):
-    return get_uniprot_type("LIPID", pdb_id, chain_id)
+        feature_vector = ['X'] * (segment_end - segment_begin + 1)  # including both start and end AAs
+        for feature in response["features"]:
+            feat_begin = int(feature["begin"])
+            feat_end = int(feature["end"])
+            type = feature["type"]
+            if type == "HELIX":
+                val = 'H'
+            elif type == "STRAND":
+                val = 'S'
+            elif type == "TURN":
+                val = 'T'
+            else:
+                raise ValueError(f"Unknown feature type '{type}'")
+            for i in range(max(feat_begin, segment_begin), min(feat_end,segment_end) + 1):
+                res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0
+                #if res >= 0 and res < segment_end - segment_begin + 1:
+                feature_vector[res] = val
 
-def get_unp_mod_res(pdb_id, chain_id):
-    return get_uniprot_type("MOD_RES", pdb_id, chain_id)
+        i = 0
+        for res_num in range(start_res_num, end_res_num + 1):
+            feature_vals.append((res_num, feature_vector[i]))
+            i += 1
 
-def get_unp_PTM(pdb_id, chain_id):
-    return get_uniprot_type("CARBOHYD%2CMOD_RES%2CLIPID", pdb_id, chain_id) #glycosylation+lipidation+mod_res
-
-def get_unp_topology(pdb_id, chain_id):
-    return get_uniprot_type("TRANSMEM%2CINTRAMEM", pdb_id, chain_id) #transmembrane + intramembrane
-
-def get_unp_compbias(pdb_id, chain_id):
-    return get_uniprot_type("COMPBIAS", pdb_id, chain_id)
+    return feature_vals
 
 def get_unp_variation(pdb_id, chain_id):
-    entities = get_uniprot_entity(pdb_id, chain_id)
+    segments = get_uniprot_segments(pdb_id, chain_id)
     feature_vals = []
-    for entity in entities:
-        uniprot_id = entity[0]
-        unp_start = entity[1]
-        unp_end = entity[2]
-        start_res_num = entity[3]
-        end_res_num = entity[4]
+    for seg in segments:
+        uniprot_id = seg[0]
+        segment_begin = seg[1]
+        segment_end = seg[2]
+        start_res_num = seg[3]
+        end_res_num = seg[4]
 
         url = f"https://www.ebi.ac.uk/proteins/api/variation/{uniprot_id}"
         response = restAPI_get_json(url)
 
-        feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs
+        feature_vector = [0] * (segment_end - segment_begin + 1)  # including both start and end AAs
 
         for feature in response["features"]:
             feat_begin = int(feature["begin"])
@@ -162,8 +223,8 @@ def get_unp_variation(pdb_id, chain_id):
                 raise ValueError(f"ERROR: {uniprot_id}: url = {url} - feat_begin != feat_end") #todo only for debugging
             rng = range(feat_begin, feat_end + 1)
             for i in rng:
-                res = i - unp_start  # mapping pdb residues to uniprot entry, counting from 0
-                if res >= 0 and res < unp_end - unp_start + 1:
+                res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0
+                if res >= 0 and res < segment_end - segment_begin + 1:
                     feature_vector[res] = 1
         i = 0
         for res_num in range(start_res_num, end_res_num + 1):
@@ -176,20 +237,6 @@ def get_AA_properties(scores_dict, data_dir, pdb_id, chain_id):
     fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
     seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
     return get_AA_scores(scores_dict, seq)
-
-def get_hydropathy_kyte_doolitle(data_dir, pdb_id, chain_id):
-    return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
-
-def get_molecular_weight(data_dir, pdb_id, chain_id):
-    return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
-
-def get_pKa_COOH(data_dir, pdb_id, chain_id):
-    return get_AA_properties(pKa_COOH, data_dir, pdb_id, chain_id)
-
-def get_pKa_NH3(data_dir, pdb_id, chain_id):
-    return get_AA_properties(pKa_NH3, data_dir, pdb_id, chain_id)
-
-
 
 def get_dynamine(data_dir, pdb_id, chain_id): #todo cely upravit, zkontrolovat
     import os
@@ -231,6 +278,68 @@ def get_pdbkb_conservation(pdb_id, chain_id):
 
     return feature_vals
 
+def get_phi_angle(pdb_id, chain_id):
+    entity_id = get_entity_id(pdb_id, chain_id)
+    url = f"https://www.ebi.ac.uk/pdbe/api/validation/rama_sidechain_listing/entry/{pdb_id}"
+    response = restAPI_get_json(url)
+    molecules = response[pdb_id]["molecules"]
+    count = 0
+    feature_vals = []
+    for molecule in molecules:
+        if molecule["entity_id"] == entity_id:
+            for chain in molecule["chains"]:
+                if (chain["chain_id"] == chain_id):
+                    for resi in chain["models"][0]["residues"]: #todo: muzu brat automaticky prvni model?
+                        val = resi["phi"]
+                        if (val != None):
+                            feature_vals.append((resi["residue_number"], val))
+                    count += 1
+    if count != 1: #todo smazat, jen debug
+        raise ValueError(f"Error: More or less than one molecule with entity number {entity_id} was found.")
+        return
+
+    return feature_vals
+
+def get_psi_angle(pdb_id, chain_id):
+    entity_id = get_entity_id(pdb_id, chain_id)
+    url = f"https://www.ebi.ac.uk/pdbe/api/validation/rama_sidechain_listing/entry/{pdb_id}"
+    response = restAPI_get_json(url)
+    molecules = response[pdb_id]["molecules"]
+    count = 0
+    feature_vals = []
+    for molecule in molecules:
+        if molecule["entity_id"] == entity_id:
+            for chain in molecule["chains"]:
+                if (chain["chain_id"] == chain_id):
+                    for resi in chain["models"][0]["residues"]: #todo: muzu brat automaticky prvni model?
+                        val = resi["psi"]
+                        if (val != None):
+                            feature_vals.append((resi["residue_number"], val))
+                    count += 1
+    if count != 1: #todo smazat, jen debug
+        raise ValueError(f"Error: More or less than one molecule with entity number {entity_id} was found.")
+        return
+
+    return feature_vals
+
+def get_cis_peptide(pdb_id, chain_id):
+    entity_id = get_entity_id(pdb_id, chain_id)
+    url = f"https://www.ebi.ac.uk/pdbe/api/validation/rama_sidechain_listing/entry/{pdb_id}"
+    response = restAPI_get_json(url)
+    molecules = response[pdb_id]["molecules"]
+    feature_vals = []
+    for molecule in molecules:
+        if molecule["entity_id"] == entity_id:
+            for chain in molecule["chains"]:
+                if (chain["chain_id"] == chain_id):
+                    for resi in chain["models"][0]["residues"]: #todo: muzu brat automaticky prvni model?
+                        val = resi["cis_peptide"]
+                        if (val == 'Y'):
+                            feature_vals.append((resi["residue_number"], 1))
+                        else:
+                            feature_vals.append((resi["residue_number"], 0))
+    return feature_vals
+
 def get_pdbkb_sec_str(pdb_id, chain_id):
     entity_id = get_entity_id(pdb_id, chain_id)
     url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdbe_pages/secondary_structure/{pdb_id}/{entity_id}"
@@ -243,8 +352,8 @@ def get_pdbkb_sec_str(pdb_id, chain_id):
             val = 'H'
         elif (dataType == "Strand"):
             val = 'S'
-        elif (dataType == "MobiDB"): #todo
-            val = 'M'
+        elif (dataType == "MobiDB"): #skip this type
+            continue
         else:
             raise ValueError(f"PDBe KB - secondary structure: {pdb_id} {chain_id} : unknown dataType {dataType}")
         for resi in rec["residues"]:
@@ -269,6 +378,16 @@ def get_aa(data_dir, pdb_id, chain_id):
         feature_vals.append((i, AA))
     return feature_vals
 
+def get_aa_pairs(data_dir, pdb_id, chain_id):
+    fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+    seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
+    feature_vals = []
+    for i in range(1, len(seq)):
+        aa_1 = seq[i-1]
+        aa_2 = seq[i]
+        feature_vals.append((i, aa_1 + aa_2))
+    return feature_vals
+
 '''def get_random(data_dir, pdb_id, chain_id):
     fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
     with open(fasta_file, 'r') as file:
@@ -281,7 +400,7 @@ def get_aa(data_dir, pdb_id, chain_id):
 '''
 
 def get_mobiDB_lite(pdb_id, chain_id):
-    entities = get_uniprot_entity(pdb_id, chain_id)
+    entities = get_uniprot_segments(pdb_id, chain_id)
     feature_vals = []
     for entity in entities:
         uniprot_id = entity[0]
@@ -378,9 +497,9 @@ def get_exposureCN(data_dir, pdb_id, chain_id):
 
     return feature_vals
 
-def get_b_factor(data_dir, pdb_id, chain_id):
+def get_bfactor(data_dir, pdb_id, chain_id):
     pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
-    parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+    parser = PDBParser(PERMISSIVE=0, QUIET=1)
     structure = parser.get_structure(pdb_id, pdb_file)  #todo udelat funkci get_chain?
     chain = structure[0][chain_id]
     mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
@@ -397,9 +516,76 @@ def get_b_factor(data_dir, pdb_id, chain_id):
         feature_vals.append((pdbe_res_num, b_factor))
     return feature_vals
 
+def get_bfactor_Calpha(data_dir, pdb_id, chain_id):
+    pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
+    parser = PDBParser(PERMISSIVE=0, QUIET=1)
+    structure = parser.get_structure(pdb_id, pdb_file)  #todo udelat funkci get_chain?
+    chain = structure[0][chain_id]
+    mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
+    feature_vals = []
+    for residue in chain.get_residues():
+        if not isPartOfChain(residue, mappings):
+            continue
+        bfactor = None
+        for atom in residue.child_list:
+            if atom.id == 'CA':
+                if (bfactor != None):
+                    raise ValueError(f"Error: more C alpha atoms in {pdb_id} {chain_id} residue {residue.id}") #todo only debug
+                bfactor = atom.bfactor
+                #todo zrychlit, kdyz najdu C alpha -> break
+        if bfactor == None:
+            print(f"Error: no C alpha in {pdb_id} {chain_id} residue {residue.id}") # todo only debug
+            continue
+        auth_res_num = getFullAuthorResNum(residue.id)
+        pdbe_res_num = mappings[auth_res_num]
+        feature_vals.append((pdbe_res_num, bfactor))
+    return feature_vals
 
-###DEBGUG###
-#data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_test"
-#pdb_id = "1qhi"
-#chain_id = "A"
-#print(get_b_factor(data_dir, pdb_id, chain_id))
+def get_funPDBe(resource, label, pdb_id, chain_id):
+    url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdb/funpdbe_annotation/{resource}/{pdb_id}"
+    feature_vals = {}
+    response = restAPI_get_json(url)
+    bug = False #todo odstranit, az opravi bug v pdbekb
+    for rec in response[pdb_id][0]["annotations"]:
+        if rec["label"] == label:
+            residues = rec["site_residues"]
+            for res in residues:
+                if (res["chain_id"] != chain_id):
+                    continue
+                score = res["raw_score"]
+                res_num = res["residue_number"]
+
+                if res_num in feature_vals:
+                    bug = True
+                feature_vals[res_num] = score
+
+    if bug:
+        print(f"ERROR: {pdb_id} {chain_id}: {resource}: more values for some residues.")
+
+    feature_vals_list = [(k, v) for k, v in feature_vals.items()]
+    return feature_vals_list
+
+def get_conservation(data_dir, pdb_id, chain_id):
+    filepath = os.path.join(data_dir, "conservation", pdb_id + chain_id + ".json")
+    feature_vals = []
+    fasta_file = get_fasta_path(data_dir, pdb_id, chain_id) #todo smazat
+    seq = list(SeqIO.parse(fasta_file, "fasta"))[0] #todo smazat, debug
+    with open(filepath) as json_file:
+        data = json.load(json_file)
+        scores = data["conservation"]
+        if (len(seq) != len(scores)):
+            raise ValueError(f"ERROR!!!!! {pdb_id} {chain_id} length of conservation scores not same as fasta seq") #todo smazat
+        for i in range(0, len(scores)):
+            score = scores[i]
+            if (score < 0):
+                score = 0
+            feature_vals.append((i+1, score))
+    return feature_vals
+
+
+##DEBUG###
+data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_chen11"
+pdb_id = "1al6"
+chain_id = "A"
+print(get_feature("mobiDB", data_dir, pdb_id, chain_id))
+print()

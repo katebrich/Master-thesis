@@ -43,7 +43,7 @@ def get_uniprot_entity(pdb_id, chain_id): #todo cache
 
 #returns uniprotID, entityID, start, end
 def get_uniprot_segments(pdb_id, chain_id): #todo cache
-    url = f'https://www.ebi.ac.uk/pdbe/graph-api/mappings/uniprot_segments/{pdb_id}'
+    url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{pdb_id}'
     parsedResponse = restAPI_get_json(url)
     uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
 
@@ -51,19 +51,20 @@ def get_uniprot_segments(pdb_id, chain_id): #todo cache
     pattern = re.compile("^[OPQ][0-9][A-Z0-9]{3}[0-9]$|^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$") #UniProt accession format
     segments = [] #todo dictionary?
     for id in uniprotRecords:
-        if (pattern.match(id)):
-            uniprot_ID = id
-            mappings = uniprotRecords[uniprot_ID]["mappings"]
-            for entity in mappings:
-                if entity["chain_id"] == chain_id:
-                    start_res_num = entity["start"]["residue_number"]
-                    end_res_num = entity["end"]["residue_number"]
-                    unp_start = entity["unp_start"]
-                    unp_end = entity["unp_end"]
-                    if (unp_end - unp_start != end_res_num - start_res_num):
-                        raise ValueError(
-                            f"Incorrect mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")  # todo debug
-                    segments.append((uniprot_ID, unp_start, unp_end, start_res_num, end_res_num))
+        if not (pattern.match(id)):
+            raise ValueError("pattern does not match") # todo debug, pak smazat
+        uniprot_ID = id
+        mappings = uniprotRecords[uniprot_ID]["mappings"]
+        for entity in mappings:
+            if entity["chain_id"] == chain_id:
+                start_res_num = entity["start"]["residue_number"]
+                end_res_num = entity["end"]["residue_number"]
+                unp_start = entity["unp_start"]
+                unp_end = entity["unp_end"]
+                if (unp_end - unp_start != end_res_num - start_res_num):
+                    raise ValueError(
+                        f"Incorrect mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")  # todo debug
+                segments.append((uniprot_ID, unp_start, unp_end, start_res_num, end_res_num))
 
     if len(segments) < 1:
         sys.stderr.write(f"Error: '{pdb_id}': no segments with chain id '{chain_id}' was found.\n\n") #todo log

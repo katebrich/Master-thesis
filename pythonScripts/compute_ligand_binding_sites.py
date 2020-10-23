@@ -60,32 +60,40 @@ def filter_ligands(ligands, AAs, pdb_id, chain_id):
                 small.append(ligand.resname)  # todo debug
                 continue
             #distance form the center of the mass of the ligand to the closest protein atom is not greater than 5.5A #todo tohle pravidlo moc nevychazi
-            center = getCenterOfMass(ligand.child_list)
-            threshold = 5.5
-            success = False
-            i = 0
-            for AA in AAs:
-                #if (success == True):
-                #    break
-                for atom in AA.child_list:
-                    if distance.euclidean(atom.coord, center) <= threshold:
-                        success = True
-                        i += 1
-                        break
-            if (success == False):
-                center_far.append(ligand.resname)  # todo debug
-                continue
+            #center = getCenterOfMass(ligand.child_list)
+            #threshold = 5.5
+            #success = False
+            #i = 0
+            #for AA in AAs:
+            #    #if (success == True):
+            #    #    break
+            #    for atom in AA.child_list:
+            #       if distance.euclidean(atom.coord, center) <= threshold:
+            #            success = True
+            #            i += 1
+            #            break
+            #if (success == False):
+            #    center_far.append(ligand.resname)  # todo debug
+            #    continue
             result.append(ligand)
         #print(
         #    f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {[x.resname for x in result]}\nFar: {center_far}, Small: {small}, Ignored: {skipped}\n") #todo debug only
     elif (filter_level == "MOAD"):
         relevant = MOAD.get_relevant_ligands(pdb_id, chain_id)
         if (relevant == None):
-            raise ValueError("Structure excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5") #todo hezci hlaska, vsechny duvody
+            #raise ValueError("Structure excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5") #todo hezci hlaska, vsechny duvody
+          #  print(f"Structure {pdb_id} {chain_id} excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5\n")
+            return result # todo
         for ligand in ligands:
             if ((str(ligand.resname), str(ligand.id[1])) in relevant):
                 result.append(ligand)
-        print( f"RELEVANT {pdb_id} {chain_id} : {relevant}")
+        #print( f"RELEVANT {pdb_id} {chain_id} : {relevant}")
+        if (len(result) != len(relevant)):
+            pass
+            print(f"ERROR: {pdb_id} {chain_id}:\nRESULT: {result} \nRELEVANT: {relevant}\nLIGANDS: {ligands}\n")
+        else:
+            pass
+           # print(f"OK: {pdb_id} {chain_id}\nRESULT: {result} \nRELEVANT: {relevant}\nLIGANDS: {ligands}\n")
 
     else:
         raise ValueError(f"Unknown filter level {filter_level}")
@@ -112,6 +120,8 @@ def __compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
         if (isPartOfChain(residue, mappings)):
             AAs.append(residue)
         else:
+            #trim spaces at the beginning of ligand resname; bug in PDB parser
+            residue.resname = residue.resname.lstrip()
             ligands_all.append(residue)
 
     ligands = filter_ligands(ligands_all, AAs, pdb_id, chain_id)
@@ -131,7 +141,7 @@ def __compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
             output.append((pdbe_res_num, 0))
     return output
 
-def init(args):
+def __pool_init(args):
     ''' store the counter for later use '''
     global counter
     counter = args
@@ -141,7 +151,7 @@ dataset_file = ""
 data_dir = ""
 threads = 1
 THRESHOLD = 4  # in angstroms #todo parametr
-filter_level = "p2rank"
+filter_level = "MOAD"
 
 #parse arguments:
 try:
@@ -188,19 +198,13 @@ start = time.time()
 logger.info(f"Computing ligand binding sites started...")
 
 total = len(dataset)
-#threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
 
-if (threads == 1):
-    for structure in dataset:
-        __get_ligand_binding_site(structure)
-else:
-    from multiprocessing.dummy import Pool as ThreadPool
-    from multiprocessing import Pool, Value
-    counter = Value('i', 1)
-    pool = Pool(int(threads), initializer = init, initargs = (counter, ))
-    errors = pool.map(__get_ligand_binding_site, dataset)
-    pool.close()
-    total_errors = [ent for sublist in errors for ent in sublist]
+from multiprocessing import Pool, Value
+counter = Value('i', 1)
+pool = Pool(int(threads), initializer = __pool_init, initargs = (counter, ))
+errors = pool.map(__get_ligand_binding_site, dataset)
+pool.close()
+total_errors = [ent for sublist in errors for ent in sublist] #todo delat to lip
 
 if (len(total_errors) == 0):
     logger.info(f"Computing ligand binding sites finished: All structures processed successfully.")

@@ -12,6 +12,7 @@ import logger
 import time
 
 logger = logger.get_logger(os.path.basename(__file__))
+counter = None
 
 class ChainSelect(Select):
     def __init__(self, chain):
@@ -50,7 +51,7 @@ def get_PDB(temp_file, out_dir, pdb_id, chain_ids, ligands_filter=None):
 
 
 def get_FASTA(temp_file, out_dir, pdb_id, chain_ids): #todo zapsat tam i ten header?
-    if (chain_ids == '*'): # get all chains
+    if (chain_ids == '*'): # get all chains #todo tohle tam asi nebude
         url = f"http://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}/fasta"
         response = restAPI_get(url)
         with open(temp_file, 'wb') as file:
@@ -68,17 +69,22 @@ def get_FASTA(temp_file, out_dir, pdb_id, chain_ids): #todo zapsat tam i ten hea
     else:
         chains = chain_ids.split(',')
         for chain_id in chains:
-            entity_id = get_entity_id(pdb_id, chain_id) #todo mit udelany cache
+            entity_id = get_entity_id(pdb_id, chain_id)  # todo mit udelany cache
             url = f"https://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}/fasta?entity={entity_id}"
             response = restAPI_get(url)
+            data = response.decode().split('\n')
+            header = data[0].split('|')
+            header[2] = chain_id
             out_fasta_file_path = os.path.join(out_dir, pdb_id + chain_id + ".fasta")
-            with open(out_fasta_file_path, 'wb') as file:
-                file.write(response)
+            with open(out_fasta_file_path, 'w') as file:
+                file.write(f"{header[0]}|{header[1]}|{header[2]}\n")
+                file.write(f"{data[1]}\n")
 
 def download_structure(structure):
     pdb_id = structure[0]
     chain_ids = structure[1]
     error=False
+    errors = []
     try:
         temp_file = os.path.join(output_PDB, f"temp_{uuid.uuid1()}")
         get_PDB(temp_file, output_PDB, pdb_id, chain_ids, ligands_filter)
@@ -93,15 +99,21 @@ def download_structure(structure):
     finally:
         if os.path.exists(temp_file):
             os.remove(temp_file)
-        with threadLock:
-            global counter
-            idx = counter
-            counter += 1
+        global counter
+        with counter.get_lock():
+            idx = counter.value
+            counter.value += 1
         if (error):
             errors.append(structure)
             logger.error(f"{idx}/{total}: {pdb_id} {chain_ids} NOT DOWNLOADED !")
         else:
             logger.debug(f"{idx}/{total}: {pdb_id} {chain_ids} downloaded")
+        return errors
+
+def __pool_init(args):
+    ''' store the counter for later use '''
+    global counter
+    counter = args
 
 
 dataset_file = ""
@@ -111,7 +123,7 @@ threads = 1
 
 #parse arguments:
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:l')
+    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:l:')
 except getopt.GetoptError as err:
     logger.error(err) #unknown option or missing argument
     sys.exit(1)
@@ -146,24 +158,18 @@ dataset = parse_dataset(dataset_file)  #todo co kdyz neni spravny format
 start = time.time()
 logger.info(f"Downloading structures from {dataset_file} to {output_dir} started...")
 
-total = len(dataset)     #todo otestovat jestli to multithreading zrychluje
-threadLock = threading.Lock() #todo otestovat o kolik to bude rychlejsi bez toho locku a vypisovani processed struktur
-counter = 1
-errors=[]
+total = len(dataset)
 
-if (threads == 1):
-    for structure in dataset:
-        download_structure(structure)
-else:
-    logger.debug(f"Running on {threads} threads.")
-    from multiprocessing.dummy import Pool as ThreadPool
-    pool = ThreadPool(int(threads))
-    pool.map(download_structure, dataset)
-    pool.close()
+from multiprocessing import Pool, Value
+counter = Value('i', 1)
+pool = Pool(int(threads), initializer=__pool_init, initargs=(counter,))
+errors = pool.map(download_structure, dataset)
+pool.close()
+total_errors = [ent for sublist in errors for ent in sublist]
 
-if (len(errors) == 0):
+if (len(total_errors) == 0):
     logger.info(f"Downloading structures finished: All structures downloaded successfully.")
 else:
-    errors_format = '\n'.join('%s %s' % x for x in errors)
+    errors_format = '\n'.join('%s %s' % x for x in total_errors)
     logger.warning(f"Downloading structures finished: Some structures were not downloaded successfully: \n{errors_format}")
 logger.debug(f"Finished in {time.time() - start}")

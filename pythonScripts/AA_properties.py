@@ -1,7 +1,7 @@
 
 hydropathy_kyte_doolitle = {
     'A': 1.8,   #alanine
-    'C': 2.5,   #cystein
+    'C': 2.5,   #cysteine
     'D': -3.5,  #aspartic acid
     'E': -3.5,  #glumatic acid
     'F': 2.8,   #phenylalanine
@@ -19,87 +19,157 @@ hydropathy_kyte_doolitle = {
     'T': -0.7,  #threonine
     'V': 4.2,   #valine
     'W': -0.9,  #tryptophan
-    'Y': -1.3,  #tyrosin
+    'Y': -1.3,  #tyrosine
     'X': None   #unknown AA
 }
 
 molecular_weight = {
-    'A': 89.1,   #alanine
-    'C': 121.2,   #cystein
-    'D': 133.1,  #aspartic acid
-    'E': 147.1,  #glumatic acid
-    'F': 165.2,   #phenylalanine
-    'G': 75.1,  #glycine
-    'H': 155.2,  #histidine
-    'I': 131.2,   #isoleucine
-    'K': 146.2,  #lysine
-    'L': 131.2,   #leucine
-    'M': 149.2,   #methionine
-    'N': 132.1,  #asparagine
-    'P': 115.1,  #proline
-    'Q': 146.2,  #glutamine
-    'R': 174.2,  #arginine
-    'S': 105.1,  #serine
-    'T': 119.1,  #threonine
-    'V': 117.1,   #valine
-    'W': 204.2,  #tryptophan
-    'Y': 181.2,   #tyrosin
+    'A': 71.1,   #alanine
+    'C': 103.1,   #cysteine
+    'D': 115.1,  #aspartic acid
+    'E': 129.1,  #glumatic acid
+    'F': 147.2,   #phenylalanine
+    'G': 57.0,  #glycine
+    'H': 137.1,  #histidine
+    'I': 113.2,   #isoleucine
+    'K': 128.2,  #lysine
+    'L': 113.2,   #leucine
+    'M': 131.2,   #methionine
+    'N': 114.1,  #asparagine
+    'P': 97.1,  #proline
+    'Q': 128.1,  #glutamine
+    'R': 156.2,  #arginine
+    'S': 87.1,  #serine
+    'T': 101.1,  #threonine
+    'V': 99.1,   #valine
+    'W': 186.2,  #tryptophan
+    'Y': 163.2,   #tyrosine
     'X': None #unknown AA
 }
 
-pKa_COOH = {
-    'A': 2.4,   #alanine
-    'C': 1.7,   #cystein
-    'D': 2.1,  #aspartic acid
-    'E': 2.2,  #glumatic acid
-    'F': 1.8,   #phenylalanine
-    'G': 2.3,  #glycine
-    'H': 1.8,  #histidine
-    'I': 2.4,   #isoleucine
-    'K': 2.2,  #lysine
-    'L': 2.4,   #leucine
-    'M': 2.3,   #methionine
-    'N': 2.0,  #asparagine
-    'P': 2.1,  #proline
-    'Q': 2.2,  #glutamine
-    'R': 2.2,  #arginine
-    'S': 2.2,  #serine
-    'T': 2.6,  #threonine
-    'V': 2.3,   #valine
-    'W': 2.4,  #tryptophan
-    'Y': 2.2,   #tyrosin
+polarity = {
+    'A': "nonpolar",   #alanine
+    'C': "polar_uncharged",   #cysteine
+    'D': "polar",  #aspartic acid
+    'E': "polar",  #glumatic acid
+    'F': "nonpolar",   #phenylalanine
+    'G': "nonpolar",  #glycine
+    'H': "polar",  #histidine
+    'I': "nonpolar",   #isoleucine
+    'K': "polar",  #lysine
+    'L': "nonpolar",   #leucine
+    'M': "nonpolar",   #methionine
+    'N': "polar_uncharged",  #asparagine
+    'P': "nonpolar",  #proline
+    'Q': "polar_uncharged",  #glutamine
+    'R': "polar",  #arginine
+    'S': "polar_uncharged",  #serine
+    'T': "polar_uncharged",  #threonine
+    'V': "nonpolar",   #valine
+    'W': "nonpolar",  #tryptophan
+    'Y': "polar_uncharged",   #tyrosine
     'X': None #unknown AA
 }
 
-pKa_NH3 = {
-    'A': 9.7,   #alanine
-    'C': 10.8,   #cystein
-    'D': 9.8,  #aspartic acid
-    'E': 9.7,  #glumatic acid
-    'F': 9.1,   #phenylalanine
-    'G': 9.6,  #glycine
-    'H': 9.2,  #histidine
-    'I': 9.7,   #isoleucine
-    'K': 9.0,  #lysine
-    'L': 9.6,   #leucine
-    'M': 9.2,   #methionine
-    'N': 8.8,  #asparagine
-    'P': 10.6,  #proline
-    'Q': 9.2,  #glutamine
-    'R': 9.0,  #arginine
-    'S': 9.2,  #serine
-    'T': 10.4,  #threonine
-    'V': 9.6,   #valine
-    'W': 9.4,  #tryptophan
-    'Y': 9.1,   #tyrosin
+polarity_binary = {
+    'A': 0,   #alanine
+    'C': 1,   #cysteine
+    'D': 1,  #aspartic acid
+    'E': 1,  #glumatic acid
+    'F': 0,   #phenylalanine
+    'G': 1,  #glycine
+    'H': 1,  #histidine
+    'I': 0,   #isoleucine
+    'K': 1,  #lysine
+    'L': 0,   #leucine
+    'M': 0,   #methionine
+    'N': 1,  #asparagine
+    'P': 0,  #proline
+    'Q': 1,  #glutamine
+    'R': 1,  #arginine
+    'S': 1,  #serine
+    'T': 1,  #threonine
+    'V': 0,   #valine
+    'W': 0,  #tryptophan
+    'Y': 1,   #tyrosine
     'X': None #unknown AA
 }
 
+charged = {
+    'A': 0,   #alanine
+    'C': 0,   #cysteine
+    'D': 1,  #aspartic acid
+    'E': 1,  #glumatic acid
+    'F': 0,   #phenylalanine
+    'G': 0,  #glycine
+    'H': 1,  #histidine
+    'I': 0,   #isoleucine
+    'K': 1,  #lysine
+    'L': 0,   #leucine
+    'M': 0,   #methionine
+    'N': 0,  #asparagine
+    'P': 0,  #proline
+    'Q': 0,  #glutamine
+    'R': 1,  #arginine
+    'S': 0,  #serine
+    'T': 0,  #threonine
+    'V': 0,   #valine
+    'W': 0,  #tryptophan
+    'Y': 0,   #tyrosine
+    'X': None #unknown AA
+}
 
+aromaticity = {
+    'A': 0,   #alanine
+    'C': 0,   #cysteine
+    'D': 0,  #aspartic acid
+    'E': 0,  #glumatic acid
+    'F': 1,   #phenylalanine
+    'G': 0,  #glycine
+    'H': 1,  #histidine
+    'I': 0,   #isoleucine
+    'K': 0,  #lysine
+    'L': 0,   #leucine
+    'M': 0,   #methionine
+    'N': 0,  #asparagine
+    'P': 0,  #proline
+    'Q': 0,  #glutamine
+    'R': 0,  #arginine
+    'S': 0,  #serine
+    'T': 0,  #threonine
+    'V': 0,   #valine
+    'W': 1,  #tryptophan
+    'Y': 1,   #tyrosine
+    'X': None #unknown AA
+}
+
+H_bond_atoms = {
+    'A': 0,   #alanine
+    'C': 0,   #cysteine
+    'D': 4,  #aspartic acid
+    'E': 4,  #glumatic acid
+    'F': 0,   #phenylalanine
+    'G': 0,  #glycine
+    'H': 4,  #histidine
+    'I': 0,   #isoleucine
+    'K': 3,  #lysine
+    'L': 0,   #leucine
+    'M': 0,   #methionine
+    'N': 4,  #asparagine
+    'P': 0,  #proline
+    'Q': 4,  #glutamine
+    'R': 5,  #arginine
+    'S': 3,  #serine
+    'T': 3,  #threonine
+    'V': 0,   #valine
+    'W': 1,  #tryptophan
+    'Y': 2,   #tyrosine
+    'X': None #unknown AA
+}
 
 random_prop = {
     'A': 54,   #alanine
-    'C': 73,   #cystein
+    'C': 73,   #cysteine
     'D': 84,  #aspartic acid
     'E': 72,  #glumatic acid
     'F': 71,   #phenylalanine
@@ -117,7 +187,7 @@ random_prop = {
     'T': 49,  #threonine
     'V': 53,   #valine
     'W': 22,  #tryptophan
-    'Y': 59,   #tyrosin
+    'Y': 59,   #tyrosine
     'X': None #unknown AA
 }
 

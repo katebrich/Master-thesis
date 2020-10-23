@@ -41,8 +41,6 @@ class MOAD:
                     pdb_id = ""
 
 
-
-
     def get_relevant_ligands(self, pdb_id, chain_id):
         try:
             ligands = self.moad_dict[pdb_id.upper()]

@@ -15,7 +15,7 @@ def get_logger(name):
 
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(log_formatter)
-    console_handler.setLevel(logging.DEBUG)
+    console_handler.setLevel(logging.INFO)
 
     #error_handler = logging.StreamHandler()
     #error_handler.setFormatter(log_formatter)
@@ -24,7 +24,7 @@ def get_logger(name):
     app_logger = logging.getLogger(name)
     app_logger.setLevel(logging.DEBUG)
     app_logger.addHandler(file_handler)
-    app_logger.addHandler(console_handler)
+    app_logger.addHandler(console_handler) #todo zapnout
    # app_logger.addHandler(error_handler)
 
     return app_logger
