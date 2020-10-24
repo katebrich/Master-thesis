@@ -37,36 +37,31 @@ def get_PDB(temp_file, out_dir, pdb_id, chain_ids, ligands_filter=None):
         file.write(response)
     parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
     structure = parser.get_structure(pdb_id, temp_file)
-    chains_list = []
-    if (chain_ids == '*'):
-        for chain in structure.get_chains():
-            chains_list.append(chain.id)
-    else:
-        chains_list = chain_ids.split(',')
-    for chain_id in chains_list: #todo chain_id = *
+    chains_list = chain_ids.split(',')
+    for chain_id in chains_list:
         out_pdb_file_path = os.path.join(out_dir, pdb_id + chain_id + ".pdb")
         io = PDBIO()
         io.set_structure(structure)
         io.save(out_pdb_file_path, ChainSelect(chain_id), preserve_atom_numbering=True)
 
 
-def get_FASTA(temp_file, out_dir, pdb_id, chain_ids): #todo zapsat tam i ten header?
-    if (chain_ids == '*'): # get all chains #todo tohle tam asi nebude
-        url = f"http://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}/fasta"
-        response = restAPI_get(url)
-        with open(temp_file, 'wb') as file:
-            file.write(response)
-        records = list(SeqIO.parse(temp_file, "fasta"))
-        for record in records:
-            ids = record.description.split('|')
-            chains = ids[2].split(' ')
-            for chain_id in chains:
-                sequence = record.seq
-                out_fasta_file_path = os.path.join(out_dir, pdb_id + chain_id + ".fasta")
-                with open(out_fasta_file_path, 'w') as file:
-                    # todo vypsat i header?
-                    file.write(str(sequence.upper()))
-    else:
+def get_FASTA(out_dir, pdb_id, chain_ids): #todo zapsat tam i ten header?
+    #if (chain_ids == '*'): # get all chains #todo tohle tam asi nebude
+    #    url = f"http://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}/fasta"
+    #    response = restAPI_get(url)
+    #    with open(temp_file, 'wb') as file:
+    #        file.write(response)
+    #    records = list(SeqIO.parse(temp_file, "fasta"))
+    #    for record in records:
+    #        ids = record.description.split('|')
+    #        chains = ids[2].split(' ')
+    #        for chain_id in chains:
+    #            sequence = record.seq
+    #            out_fasta_file_path = os.path.join(out_dir, pdb_id + chain_id + ".fasta")
+    #           with open(out_fasta_file_path, 'w') as file:
+    #                # todo vypsat i header?
+    #               file.write(str(sequence.upper()))
+    #else:
         chains = chain_ids.split(',')
         for chain_id in chains:
             entity_id = get_entity_id(pdb_id, chain_id)  # todo mit udelany cache
@@ -85,12 +80,12 @@ def download_structure(structure):
     chain_ids = structure[1]
     error=False
     errors = []
+    temp_file = os.path.join(output_PDB, f"temp_{uuid.uuid1()}")
     try:
-        temp_file = os.path.join(output_PDB, f"temp_{uuid.uuid1()}")
+        # temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
+        get_FASTA(output_FASTA, pdb_id, chain_ids)
+        #os.remove(temp_file)
         get_PDB(temp_file, output_PDB, pdb_id, chain_ids, ligands_filter)
-        os.remove(temp_file)
-        temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
-        get_FASTA(temp_file, output_FASTA, pdb_id, chain_ids)
     except (KeyboardInterrupt, SystemExit):
         raise
     except Exception as ex:

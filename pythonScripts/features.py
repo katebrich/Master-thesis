@@ -98,7 +98,7 @@ types_of_features = {
     "dynamine_website" : "continuous",
     "dynamine_funPDBe" : "continuous",
     "efoldmine_funPDBe" : "continuous",
-    "pdbekb_conservation" : "categorical",
+    "pdbekb_conservation" : "categorical", #todo hodnoty 0-4 ? -> zkusit continuous
     "mobiDB" : "continuous",
     "aa" : "categorical",
     "aa_pairs" : "categorical",
@@ -152,9 +152,7 @@ def get_uniprot_binary_type(type, pdb_id, chain_id):
             feat_begin = int(feature["begin"])
             feat_end = int(feature["end"])
             for i in range(max(feat_begin, segment_begin), min(feat_end, segment_end) + 1): #take only parts of features that overlap with uniprot segment
-            #for i in range(feat_begin, feat_end + 1):
                 res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0
-                #if res >= 0 and res < segment_end - segment_begin + 1:
                 feature_vector[res] = 1
 
         i = 0
@@ -191,7 +189,6 @@ def get_uniprot_sec_str(pdb_id, chain_id):
                 raise ValueError(f"Unknown feature type '{type}'")
             for i in range(max(feat_begin, segment_begin), min(feat_end,segment_end) + 1):
                 res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0
-                #if res >= 0 and res < segment_end - segment_begin + 1:
                 feature_vector[res] = val
 
         i = 0
@@ -345,7 +342,7 @@ def get_pdbkb_sec_str(pdb_id, chain_id):
     url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdbe_pages/secondary_structure/{pdb_id}/{entity_id}"
     response = restAPI_get_json(url)
 
-    feature_vector = ['N'] * int(response[pdb_id]["length"])
+    feature_vector = ['X'] * int(response[pdb_id]["length"])
     for rec in response[pdb_id]["data"]:
         dataType = rec["dataType"] #Helix, Strand, MobiDB
         if (dataType == "Helix"):
@@ -431,7 +428,7 @@ def get_HSE(data_dir, pdb_id, chain_id):
     pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
     parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
     structure = parser.get_structure(pdb_id, pdb_file)
-    model = structure[0]
+    model = structure[0] #todo muzu brat automaticky prvni model?
     HSExposure.HSExposureCB(model)
     feature_vals = []
     mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
@@ -441,13 +438,10 @@ def get_HSE(data_dir, pdb_id, chain_id):
         try:
             hse = abs(int(r.xtra["EXP_HSE_B_U"]) - int(r.xtra["EXP_HSE_B_D"]))
             auth_res_num = getFullAuthorResNum(r.id)
-            #auth_res_num = str(r.id[1])
-            #if (r.id[2] != ' '):
-            #   auth_res_num += str(r.id[2])  # insertion code
             pdbe_res_num = mappings[auth_res_num]
             feature_vals.append((pdbe_res_num, hse))
         except:
-            print(f"Error HSE: {pdb_id} {chain_id}: residue {r}") #todo
+            pass #some residues are incomplete in PDB file (i.e. CB atom is missing) and no HSE value is returned
 
     return feature_vals
 
@@ -468,8 +462,7 @@ def get_HSE_down(data_dir, pdb_id, chain_id):
             pdbe_res_num = mappings[auth_res_num]
             feature_vals.append((pdbe_res_num, hse))
         except:
-            pass
-            #print(f"Error HSE: {pdb_id} {chain_id}: residue {r}") #todo
+            pass #some residues are incomplete in PDB file (i.e. CB atom is missing) and no HSE value is returned
 
     return feature_vals
 
@@ -487,13 +480,10 @@ def get_exposureCN(data_dir, pdb_id, chain_id):
         try:
             cn = int(r.xtra["EXP_CN"])
             auth_res_num = getFullAuthorResNum(r.id)
-            #auth_res_num = str(r.id[1])
-            #if (r.id[2] != ' '):
-            #    auth_res_num += str(r.id[2])  # insertion code
             pdbe_res_num = mappings[auth_res_num]
             feature_vals.append((pdbe_res_num, cn))
         except:
-            print(f"Error CN: {pdb_id} {chain_id}: residue {r}") #todo
+            raise ValueError(f"Error CN: {pdb_id} {chain_id}: residue {r}") #todo jestli se to pro cely dataset nestane, tak asi muzu smazat try-except
 
     return feature_vals
 
@@ -510,7 +500,7 @@ def get_bfactor(data_dir, pdb_id, chain_id):
         sum = 0
         for atom in residue.child_list:
             sum += atom.bfactor
-        b_factor = sum / len(residue.child_list)
+        b_factor = round(sum / len(residue.child_list), 3)
         auth_res_num = getFullAuthorResNum(residue.id)
         pdbe_res_num = mappings[auth_res_num]
         feature_vals.append((pdbe_res_num, b_factor))
@@ -560,7 +550,7 @@ def get_funPDBe(resource, label, pdb_id, chain_id):
                 feature_vals[res_num] = score
 
     if bug:
-        print(f"ERROR: {pdb_id} {chain_id}: {resource}: more values for some residues.")
+        raise ValueError(f"ERROR: {pdb_id} {chain_id}: {resource}: more values for some residues.")
 
     feature_vals_list = [(k, v) for k, v in feature_vals.items()]
     return feature_vals_list
@@ -584,8 +574,8 @@ def get_conservation(data_dir, pdb_id, chain_id):
 
 
 ##DEBUG###
-data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_chen11"
-pdb_id = "1al6"
-chain_id = "A"
-print(get_feature("mobiDB", data_dir, pdb_id, chain_id))
-print()
+#data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_chen11"
+#pdb_id = "2hyr"
+#chain_id = "A"
+#print(get_feature("mobiDB", data_dir, pdb_id, chain_id))
+#print()

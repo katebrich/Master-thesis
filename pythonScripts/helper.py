@@ -44,7 +44,7 @@ def get_uniprot_entity(pdb_id, chain_id): #todo cache
 #returns uniprotID, entityID, start, end
 def get_uniprot_segments(pdb_id, chain_id): #todo cache
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{pdb_id}'
-    parsedResponse = restAPI_get_json(url)
+    parsedResponse = restAPI_get_json(url) #todo osetrit 404 error not found, napsat, ze nenalezen
     uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
 
     import re
@@ -122,8 +122,10 @@ def get_entity_id(pdb_id, chain_id):
     response = str(restAPI_get(url))
     import re
     matches = re.findall("entityNr=\".+?\"", response)
-    if (len(matches) != 1):
-        raise ValueError(f"get_entity_id: wrong number of matches: {pdb_id} {chain_id}: {matches}") #todo smazat, jen pro debugovani
+    if (len(matches) < 1):
+        raise ValueError(f"Structure {pdb_id} does not exist or does not have chain {chain_id}.")
+    elif (len(matches) > 1):
+        raise ValueError(f"Wrong number of matches: {matches}") #todo smazat, jen pro debugovani
     match=matches[0]
     entity_id = match.split('=')[1]
     entity_id = entity_id[1:-1] #remove ""
@@ -144,7 +146,7 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
             if molecule["entity_id"] == entity_id:
                 for residue in molecule["chains"][0]["residues"]:
                     key = str(residue["author_residue_number"]) + residue["author_insertion_code"] #author residue number
-                    val = residue["residue_number"] #pdbe residue number
+                    val = residue["residue_number"] #pdbe molecule residue number
                     mappings.append((key, val))
                 count += 1
         if count != 1:

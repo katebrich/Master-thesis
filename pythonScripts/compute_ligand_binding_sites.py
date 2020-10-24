@@ -151,7 +151,7 @@ dataset_file = ""
 data_dir = ""
 threads = 1
 THRESHOLD = 4  # in angstroms #todo parametr
-filter_level = "MOAD"
+filter_level = "p2rank" #todo parametr
 
 #parse arguments:
 try:

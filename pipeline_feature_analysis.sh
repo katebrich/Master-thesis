@@ -2,12 +2,12 @@ set -e
 python_scripts_path=./pythonScripts/
 
 #todo parsovani argumentu
-dataset_name="chen11"
+dataset_name="test"
 dataset_file="/home/katebrich/Documents/diplomka/datasets/${dataset_name}.txt" #povinny
-data_dir="/home/katebrich/Documents/diplomka/datasets/${dataset_name}_10_23"   #nepovinny. Kdyz neni zadan, vytvori se v umisteni dataset_file
+data_dir="/home/katebrich/Documents/diplomka/datasets/${dataset_name}_24_10"   #nepovinny. Kdyz neni zadan, vytvori se v umisteni dataset_file
 features_dir="${data_dir}/features"                                            #nepovinny. Default podslozka data_dir
 filter_ligands=p2rank                                                          #todo none, water, small molecules, given IDs, MOAD,...
-features_list=dynamine_website                                                 #unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine_website,dynamine_funPDBe,efoldmine_funPDBe,mobiDB,HSE,HSE_down,exposureCN,bfactor,bfactor_Calpha,depth,phi_angle,psi_angle,cis_peptide
+features_list=unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine_website,dynamine_funPDBe,efoldmine_funPDBe,mobiDB,HSE,HSE_down,exposureCN,bfactor,bfactor_Calpha,depth,phi_angle,psi_angle,cis_peptide
 threads=4
 #log_file="${data_dir}/run.log"
 #strict=true #todo
@@ -15,6 +15,7 @@ analysis_dir="${data_dir}/analysis"
 
 rm -f ./run.log
 
+#!!!!!POZOR!!!!!!!!#
 #if [ -d "$data_dir" ]; then
 #    rm -rf "$data_dir"
 #fi
