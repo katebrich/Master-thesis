@@ -28,7 +28,7 @@ if (out_path == ""):
     logger.error("Output file pathmust be specified.")
     sys.exit(1)
 
-out_dir = os.path.dirname(dataset_dir) #go one level up
+out_dir = os.path.dirname(out_path) #go one level up
 #output_path = os.path.join(out_dir, name)
 
 with open(out_path, 'w') as out_file:

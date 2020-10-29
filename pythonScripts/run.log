@@ -5301,3 +5301,4 @@ ValueError: Structure excluded from MOAD - no valid ligands or not an x-ray stru
 2020-09-01 19:20:44,982 [DEBUG] compute_ligand_binding_sites.py(line 38) 47/250: 1ja1 A processed
 2020-10-22 11:44:08,996 [ERROR] compute_ligand_binding_sites.py(line 177) Dataset must be specified.
 2020-10-22 11:44:46,979 [ERROR] download_dataset.py(line 137) Dataset must be specified.
+2020-10-28 09:33:28,560 [ERROR] create_prank_ds.py(line 25) Dataset directory must be specified.

@@ -49,4 +49,4 @@ python3 ${python_scripts_path}create_prank_ds.py -d $data_dir_eval/PDB -o $datas
 #todo vytvorit config, slozku custom_feature atd. pokud chybi
 bash ${p2rank_location}/p2rank/prank traineval -t $dataset_prank_train -e $dataset_prank_eval \
     -csv_file_feature_directories ",${p2rank_location}/custom_feature/${label}," -label $label -c ${p2rank_location}/p2rank/config/custom_feature \
-    -threads $threads -rf_trees 128 -rf_depth 6 -delete_models 0 -loop 1 -seed 42
+    -threads $threads -rf_trees 200 -rf_depth 6 -delete_models 0 -loop 1 -seed 42

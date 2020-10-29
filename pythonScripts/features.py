@@ -115,7 +115,8 @@ types_of_features = {
     "depth" : "continuous",
     "phi_angle" : "continuous",
     "psi_angle" : "continuous",
-    "cis_peptide" : "binary"
+    "cis_peptide" : "binary",
+    "conservation" : "continuous"
 }
 
 default_values = {

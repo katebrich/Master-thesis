@@ -3,7 +3,7 @@ from helper import parse_prank_dataset
 import re
 from Bio.PDB import *
 
-dataset_name = "mine_holo4k_part2"
+dataset_name = "holo4k"
 datasets_dir = f"/home/katebrich/Documents/diplomka/P2Rank_with_csv_feature/datasets_old/"
 dataset_path = f"{datasets_dir}/{dataset_name}.ds"
 
@@ -25,7 +25,7 @@ with open(output_path, 'w') as file:
             print(f"Error: unable to determine PDB ID from the file name: {line}")
             continue
         pdb_id = pdb_ids[0]
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+        parser = PDBParser(PERMISSIVE=1, QUIET=1)  # todo
         structure = parser.get_structure(pdb_id, os.path.join(datasets_dir, line))
         ids = []
         for chain in structure.get_chains():

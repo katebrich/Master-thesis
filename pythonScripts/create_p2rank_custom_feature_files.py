@@ -138,7 +138,7 @@ start = time.time()
 logger.info("Creating p2rank custom feature files started...")
 
 defaults = [default_values[f] for f in features]
-logger.debug("DEFAULTS:", defaults)
+logger.debug("DEFAULTS:", str(defaults))
 
 mappings_cache_dir = os.path.join(input_dir, "mappings")
 aa_codes = ["ALA", "ARG", "ASN", "ASP", "CYS", "GLU", "GLN", "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"] #TODO smazat az se odstrani chyba v pranku
