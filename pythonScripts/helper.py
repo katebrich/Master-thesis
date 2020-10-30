@@ -111,6 +111,9 @@ def get_pdb_path(data_dir, pdb_id, chain_id):
 def get_lbs_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/lbs/{pdb_id}{chain_id}.txt"
 
+def get_sasa_path(data_dir, pdb_id, chain_id):
+    return f"{data_dir}/sasa/{pdb_id}{chain_id}.txt"
+
 def get_mappings_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/mappings/{pdb_id}{chain_id}.txt"
 

@@ -167,12 +167,6 @@ for opt, arg in opts:
     elif opt in ("-t", "--threads"):
         threads = arg #todo check if threads >= 1, int
 
-#todo debug
-#dataset_file="/home/katebrich/Documents/diplomka/datasets/chen11.txt"
-#data_dir="/home/katebrich/Documents/diplomka/datasets/pipeline_chen11"
-#threads = 1
-#filter_level="MOAD"
-
 if (dataset_file == ""):
     logger.error("Dataset must be specified.")
     sys.exit(1)
