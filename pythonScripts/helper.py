@@ -96,9 +96,12 @@ def restAPI_get_xml(url):
 def isInDistance(threshold, residue1, residue2):
     #todo optimize
     for atom1 in residue1.child_list:
+        if atom1.element == 'H': #consider only heavy atoms
+            continue
         for atom2 in residue2.child_list:
-            if atom1 - atom2 < threshold: # - operator measures distance
-                #print(residue1.id[1])
+            if atom2.element == 'H':
+                continue
+            if atom1 - atom2 < threshold: # the - operator measures distance
                 return True
     return False
 

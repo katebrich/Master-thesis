@@ -1,13 +1,13 @@
 set -e
 python_scripts_path=./pythonScripts/
-P2Rank_path=/home/katebrich/Documents/diplomka/P2Rank_with_csv_feature
+P2Rank_path=/home/katebrich/Documents/diplomka/P2Rank
 
-tasks="f,p" #"r,d,m,l,f,a,p"
+tasks="r,d,m,l,f,a,p" #"r,d,m,l,f,a,p"
 #todo parsovani argumentu
-dataset_name="holo4k"
-label="_10_27"
+dataset_name="test"
+label="_10_31"
 
-dataset_file="/home/katebrich/Documents/diplomka/datasets/${dataset_name}.txt" #povinny
+dataset_file="/home/katebrich/Documents/diplomka/GitHub/datasets/${dataset_name}.txt" #povinny
 data_dir_name=${dataset_name}${label}
 data_dir="${P2Rank_path}/datasets/${data_dir_name}" #nepovinny. Kdyz neni zadan, vytvori se v umisteni dataset_file
 features_dir="${data_dir}/features"                 #nepovinny. Default podslozka data_dir
@@ -36,13 +36,11 @@ if [[ $tasks == *"m"* ]]; then
 fi
 
 if [[ $tasks == *"l"* ]]; then
-    python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i ${data_dir} -t $threads
+    python3 ${python_scripts_path}compute_ligand_binding_sites.py -d $dataset_file -i $data_dir -t $threads
 fi
 
-#oldIFS=$IFS #todo smazat?
-IFS=','
-
 if [[ $tasks == *"f"* ]]; then
+    IFS=','
     for feature in $features_list; do
         python3 ${python_scripts_path}compute_feature.py -f $feature -d $dataset_file -i $data_dir -o $features_dir/$feature -t $threads
     done
@@ -50,13 +48,12 @@ fi
 
 if [[ $tasks == *"a"* ]]; then
     mkdir -p $analysis_dir #todo dovnitr skriptu
+    IFS=','
     for feature in $features_list; do
         #todo check jestli ta slozka s hodnotami featury existuje
         python3 ${python_scripts_path}run_analysis.py -d $dataset_file -l $data_dir/lbs -v $features_dir/$feature -o $analysis_dir/$feature -f $feature -t $threads
     done
 fi
-
-#IFS=$oldIFS #todo je to potreba?
 
 if [ -f ./run.log ]; then
     cp ./run.log ${data_dir}/run.log #todo zkopirovat i kdyz ten skript rpedtim spadne na chybu a nedobehne to sem

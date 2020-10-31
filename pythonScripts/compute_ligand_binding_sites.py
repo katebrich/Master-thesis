@@ -104,8 +104,7 @@ def filter_ligands(ligands, AAs, pdb_id, chain_id):
 # [0] residue number corresponding to PDBe molecule
 # [1] feature value - 0=not binding residue, 1=binding residue
 def __compute_ligand_binding_sites(pdb_id, chain_id, pdb_file_path):
-    parser = PDBParser(PERMISSIVE=0, QUIET=1) #todo
-    # parser = MMCIFParser()
+    parser = PDBParser(PERMISSIVE=0, QUIET=1)
     structure = parser.get_structure(pdb_id + chain_id, pdb_file_path)
     chain = structure[0][chain_id]
 

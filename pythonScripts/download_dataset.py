@@ -14,15 +14,20 @@ import time
 logger = logger.get_logger(os.path.basename(__file__))
 counter = None
 
-class ChainSelect(Select):
+class ChainSelect(Select): #todo tohle popsat v praci
     def __init__(self, chain):
         super(Select, self).__init__()
         self.chain = chain
     def accept_residue(self, residue):
-        if residue.parent.id ==self.chain and residue.id[0] != 'W': #do not save water hetatoms
+        if residue.parent.id == self.chain and residue.id[0] != 'W': #do not save water hetatoms
             return 1
         else:
             return 0
+    def accept_atom(self, atom):
+        if atom.element == 'H': #do not save hydrogens
+            return 0
+        else:
+            return 1
     def accept_model(self, model):
         if model.id == 0:
             return 1

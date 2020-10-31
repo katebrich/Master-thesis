@@ -472,7 +472,7 @@ def get_exposureCN(data_dir, pdb_id, chain_id):
     parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
     structure = parser.get_structure(pdb_id, pdb_file)
     model = structure[0]
-    HSExposure.ExposureCN(model)
+    HSExposure.ExposureCN(model, radius=10.0) #radius as in P2Rank protrusion feature
     feature_vals = []
     mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
     for r in model.get_residues():

@@ -1,0 +1,30 @@
+./p2rank/prank traineval -t ./datasets/chen11.ds -e ./datasets/joined\(mlig\).ds -csv_file_feature_directories ',./custom_feature,' -label 'custom_feature' -c ./p2rank/config/custom_feature
+
+
+bash get_list_proteins.sh -d coach420 | head -n 10 | xargs -I% python pythonScripts/get_PTM.py -p % >> output.txt
+
+
+bash ./p2rank/prank traineval -t ./datasets/chen11.ds -e ./datasets/joined\(mlig\).ds -csv_file_feature_directories ',./PTM_data,' -label 'PTM_feature' -c ./p2rank/config/custom_feature
+
+
+bash ./p2rank/prank traineval -t /home/katebrich/Documents/diplomka/datasets/chen11_prank.ds -e /home/katebrich/Documents/diplomka/datasets/coach420_prank.ds  -threads 4 -rf_trees 128 -rf_depth 6 -delete_models 0 -loop 1 -seed 42
+
+bash ./p2rank/prank eval-predict ./datasets/coach420_small.ds -threads 4 -label our -model ./p2rank/test_output/traineval_coach420_small_coach420_small/runs/seed.42/FastRandomForest.model
+
+# training model accoring to tutorial
+bash ./p2rank/prank traineval -t ./datasets_old/chen11.ds -e ./datasets_old/joined\(mlig\).ds  -threads 4 -rf_trees 128 -rf_depth 6 -delete_models 0 -loop 1 -seed 42
+
+#training model with custom feature
+bash ./p2rank/prank traineval -t /home/katebrich/Documents/diplomka/datasets/chen11_prank.ds -e ./datasets_old/joined\(mlig\).ds  -threads 4 -rf_trees 128 -rf_depth 6 -delete_models 0 -loop 1 -seed 42 -csv_file_feature_directories ',./custom_feature,' -label 'test_dynamine_feature' -c ./p2rank/config/custom_feature
+
+
+bash ./p2rank/prank traineval -t /home/katebrich/Documents/diplomka/datasets/chen11_prank.ds -e /home/katebrich/Documents/diplomka/datasets/joined\(mlig\)_prank.ds  -threads 4 -rf_trees 128 -rf_depth 6 -delete_models 0 -loop 1 -seed 42 -csv_file_feature_directories ',./custom_feature/hydropathy,' -label 'test_hydropathy_feature' -c ./p2rank/config/custom_feature
+
+
+***DOCKER - conservation ***
+docker run     -v /home/katebrich/Documents/diplomka/data/conservation:/data/conservation     -u $(id -u ${USER}):$(id -g ${USER})     -it conservation
+cd /data/conservation
+python3 ./calculate_conservation.py --input ./2SRC.fasta --output ./2SRC.json
+
+# training model accoring to tutorial
+bash ./p2rank/prank traineval -t /home/katebrich/Documents/diplomka/datasets/TEST_1/chen11/chen11.ds -e /home/katebrich/Documents/diplomka/datasets/TEST_1/joined\(mlig\)/joined\(mlig\).ds	-threads 4 -rf_trees 200 -delete_models 0 -loop 1 -seed 42 -label 'without_custom_feature'
