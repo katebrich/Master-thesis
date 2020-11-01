@@ -1,5 +1,5 @@
 import os
-
+import config
 from Bio import SeqIO
 
 import helper
@@ -16,16 +16,9 @@ from propka.run import single
 
 #print(get_HSE(data_dir, pdb_id, chain_id))
 
-class_name="test.Testik"
-
-def my_import(name):
-    components = name.split('.')
-    mod = __import__(components[0])
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
-    return mod
-
-klass = my_import(class_name)
-some_object = klass()
-
-some_object.baf("Kacka")
+path = config.get_feature_path("unp_PTM")
+from pydoc import locate
+feature_class = locate(path)
+#feature_class = class_import(path)
+feature_class.get_values()
+      #  feat_vals = feature_class.get_values(input_dir, pdb_id, chain_id)

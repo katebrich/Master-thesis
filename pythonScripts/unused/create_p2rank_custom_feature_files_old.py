@@ -1,11 +1,9 @@
-import sys
-import getopt
 from Bio.PDB import PDBParser
 from helper import parse_prank_dataset
 import os
 import pandas as pd
 import re
-from features import get_feature
+from unused.features import get_feature
 from helper import res_mappings_author_to_pdbe
 import csv
 import shutil

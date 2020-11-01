@@ -1,0 +1,295 @@
+coach420 chyby:
+2zcp obsolete -> nahrazen 3w7f	A
+1a4k H neni v uniprotu -> vyrazen
+2vfl A neni v uniprotu -> vyrazen
+3ldk A - incorrect mapping
+
+
+
+
+chen11 chyby:
+2ou3 A neni v uniprotu -> vyrazen
+nektere struktury dvakrat - napriklad 1uxy - ale ve skutecnosti v puvodnim ds je to jedna struktura rozdelena na 2 casti. 
+
+
+
+joined:
+1ygc - odebran chain M
+1b6n - obsolete -> 1z1h A
+1oyt - M,H,I -> H
+1ida - odebran chain I
+3phv - odebran chain B
+1y8e - smazan, obsolete a neexistuje nic misto nej
+3iyt - obsolete -> 3j2t
+1xoz A - incorrect mapping
+1baf L,H - neni v unp
+1c5c L,H - neni v unp
+1dbb L - neni v unp
+1aj7 L - neni v unp
+1ibg L,H - neni v unp
+1eap A,B - neni v unp
+1mfc L,H - neni v unp
+2er0 I - neni v unp
+1a4j H - neni v unp
+1a6u H - neni v unp
+1a6w H - neni v unp
+1pso I - neni v unp
+1igj A,B - neni v unp
+2f2q A - incorrect mappings
+
+
+
+
+
+joined(mlig) puvodni prank:
+astex/2bm2 chyba v ligandech PM2 - nemaji spravne chainy. Chyba pri parsovani a prevadeni na muj dataset. Opraveno podle pdbe.
+b210/1qcf dvakrat stejny ligand PTR A -> ten druhy smazan
+b210/4hvp vice modelu dohromady, ale neoddelenych -> chyba pri parsovani -> uprava, nechan pouze prvni model
+1y8e obsolete - nenahrazen nicim, vymazan
+1oyt - M,H,I -> zmena na L,H
+1ygc - H,M -> H,L
+1ida - A,B,I -> A,B
+1a6w H neni v uniprotu -> vyrazen
+1aj7 L neni v uniprotu -> vyrazen
+1igj A,B neni v uniprotu -> vyrazen
+1pso I
+1mfc L,H
+1c5c L,H
+1eap A,B
+1xoz A - incorrect mapping
+
+
+
+holo4k chyby:
+1fpx obsolete -> nahrazen 6cig
+1jwy B,C neex.
+1jx2 B,C neex.
+1m98 obsolete. -> 5UI2
+1pmq obsolete. -> 4Z9L
+1dlv A,B,C,D - incorrect mappings
+1dm3 A,B,C,D - incorrect mappings
+1f1v - incorrect mappings
+1i00 A,B - incorrect mappings
+1i37	A - incorrect map
+1i38	A - incorrect map
+1h0b	A,B - i.m.
+1jgu	L,H - i.m.
+1g6i	A - i.m.
+1jvx	A - i.m.
+1jvy	A - i.m.
+1m7d	B - i.m.
+1mdq	A - i.m.
+1lf9	A,B - i.m.
+1lo2	Y,H - i.m.
+1lo3	Y,H - i.m.
+1lrw	A,C - i.m.
+1m1o	A,B,C,D - i.m.
+1n3i	A,B,C - i.m.
+1o6l	A - i.m.
+1m3z	A,B,C,D - i.m.
+1qfl	A,B,C,D - i.m.
+1swg	A,B,C,D - i.m.
+2pva	A,B,C,D - i.m.
+8acn	A - i.m.
++dalsi, co nejspis nebyly v uniprotu (z nasledujiciho seznamu ty, co jeste nejsou vyse:)
+1a2c J
+1a6v H
+1a6v I
+1a6v J
+1ami A
+1apv I
+1apw I
+1b6j C
+1b8d G
+1bc5 T
+1bcr C
+1bcs C
+1bhx E
+1c1e L
+1c1e H
+1c4v 3
+1cvu F
+1dlk E
+1dlk F
+1dlv A
+1dlv B
+1dlv C
+1dlv D
+1dm3 A
+1dm3 B
+1dm3 C
+1dm3 D
+1eb1 A
+1eb1 B
+1eoj B
+1eol B
+1eys C
+1eys L
+1eys M
+1eyx G
+1eyx H
+1f1v A
+1f1v B
+1f3d H
+1f3d K
+1fjm M
+1fjm N
+1flr L
+1g37 B
+1g6i A
+1gbc P
+1gbd P
+1gbh P
+1gbi P
+1gbl P
+1gbm P
+1h0b A
+1h0b B
+1h0g C
+1h0g D
+1h8s A
+1h8s B
+1i00 A
+1i00 B
+1i37 A
+1i38 A
+1iid O
+1ir3 B
+1ize B
+1jbu X
+1jcr C
+1jcs C
+1jg3 C
+1jg3 D
+1jgl H
+1jgu L
+1jgu H
+1jvx A
+1jvy A
+1jwy B
+1jwy C
+1jx2 B
+1jx2 C
+1k4c A
+1k4c B
+1kel L
+1lf9 A
+1lf9 B
+1lhc I
+1lhd I
+1lhe I
+1lhf I
+1lhg I
+1lo2 Y
+1lo2 H
+1lo3 Y
+1lo3 H
+1lrw A
+1lrw C
+1m1o A
+1m1o B
+1m1o C
+1m1o D
+1m21 C
+1m21 D
+1m3z A
+1m3z B
+1m3z C
+1m3z D
+1m43 C
+1m43 D
+1m7d B
+1m98 A
+1m98 B
+1mdq A
+1mex L
+1mex H
+1mfa L
+1mfa H
+1mfb L
+1mfb H
+1mfd L
+1mfd H
+1mfe L
+1mfe H
+1mj7 L
+1mj7 H
+1n3i A
+1n3i B
+1n3i C
+1na3 A
+1na3 B
+1ngp H
+1ngx A
+1ngx B
+1ngx L
+1ngx H
+1nvr B
+1nvs B
+1o6l A
+1oxn F
+1oyf B
+1p03 P
+1p05 P
+1p06 P
+1p10 P
+1p12 I
+1pip B
+1pmq A
+1ppg I
+1pvc 0
+1q72 L
+1q72 H
+1qbq P
+1qfl A
+1qfl B
+1qfl C
+1qfl D
+1qmz E
+1qmz F
+1qtn C
+1qur I
+1qyg L
+1qyg H
+1rmh C
+1rmh D
+1rtf A
+1sgc B
+1swg A
+1swg B
+1swg C
+1swg D
+1tps B
+1vbt C
+1vbt D
+1vpo L
+1vpo H
+1yec L
+1yee L
+1yef L
+1yeg L
+1yei H
+1yej H
+2bfv L
+2bfv H
+2cgr H
+2lpr P
+2pcp A
+2pcp B
+2pcp C
+2pcp D
+2pva A
+2pva B
+2pva C
+2pva D
+35c8 H
+3lpr P
+3sga P
+43ca A
+43ca C
+43ca E
+43ca G
+6lpr P
+8acn A
+8lpr P
+9lpr P

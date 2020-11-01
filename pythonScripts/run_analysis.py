@@ -1,14 +1,13 @@
 import getopt
 import os
 import sys
-import traceback
 import time
 
 import numpy as np
 
 from helper import parse_dataset_split_chains
 from statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
-from features import types_of_features
+from unused.features import types_of_features
 import logger
 
 logger = logger.get_logger(os.path.basename(__file__))

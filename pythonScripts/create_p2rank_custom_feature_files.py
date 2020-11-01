@@ -1,16 +1,12 @@
 import sys
 import getopt
-import threading
-import traceback
 from Bio.PDB import PDBParser
-from helper import parse_prank_dataset, eprint, parse_dataset_split_chains, get_pdb_path
+from helper import parse_dataset_split_chains, get_pdb_path
 import os
 import pandas as pd
-import re
-from features import default_values
+from unused.features import default_values
 from helper import res_mappings_author_to_pdbe
 import csv
-import shutil
 import numpy as np
 import logger
 import time

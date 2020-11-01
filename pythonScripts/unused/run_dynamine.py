@@ -1,6 +1,5 @@
 import os
-from helper import get_fasta_path
-from DynaMine.predictor import DynaMine
+from unused.DynaMine.predictor import DynaMine
 
 
 pdb_id = "2g46"

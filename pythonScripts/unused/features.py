@@ -1,83 +1,83 @@
 from Bio import SeqIO
-from Bio.PDB import PDBParser, HSExposure, Selection, is_aa
+from Bio.PDB import PDBParser, HSExposure
 from helper import *
-from AA_properties import *
+from Features.AA_properties import *
 import os
-import random
 
-def get_feature(name_of_feature, data_dir, pdb_id, chain_id):
-    if name_of_feature == 'unp_PTM':
+
+def get_feature(feature_class, data_dir, pdb_id, chain_id):
+    if feature_class == 'unp_PTM':
         return get_uniprot_binary_type("CARBOHYD%2CMOD_RES%2CLIPID", pdb_id, chain_id) #glycosylation+lipidation+mod_res
-    elif name_of_feature == 'unp_glycosylation':
+    elif feature_class == 'unp_glycosylation':
         return get_uniprot_binary_type("CARBOHYD", pdb_id, chain_id)
-    elif name_of_feature == 'unp_lipidation':
+    elif feature_class == 'unp_lipidation':
         return get_uniprot_binary_type("LIPID", pdb_id, chain_id)
-    elif name_of_feature == 'unp_mod_res':
+    elif feature_class == 'unp_mod_res':
         return get_uniprot_binary_type("MOD_RES", pdb_id, chain_id)
-    elif name_of_feature == 'unp_variation':
+    elif feature_class == 'unp_variation':
         return get_unp_variation(pdb_id, chain_id)
-    elif name_of_feature == 'unp_topology':
+    elif feature_class == 'unp_topology':
         return get_uniprot_binary_type("TRANSMEM%2CINTRAMEM", pdb_id, chain_id) #transmembrane + intramembrane
-    elif name_of_feature == 'unp_sec_str':
+    elif feature_class == 'unp_sec_str':
         return get_uniprot_sec_str(pdb_id, chain_id)
-    elif name_of_feature == 'unp_non_standard':
+    elif feature_class == 'unp_non_standard':
         return get_uniprot_binary_type("NON_STD", pdb_id, chain_id)
-    elif name_of_feature == 'unp_natural_variant':
+    elif feature_class == 'unp_natural_variant':
         return get_uniprot_binary_type("VARIANT", pdb_id, chain_id)
-    elif name_of_feature == 'unp_compbias':
+    elif feature_class == 'unp_compbias':
         return get_uniprot_binary_type("COMPBIAS", pdb_id, chain_id)
-    elif name_of_feature == 'pdbekb_sec_str':
+    elif feature_class == 'pdbekb_sec_str':
         return get_pdbkb_sec_str(pdb_id, chain_id)
-    elif name_of_feature == 'pdbekb_conservation':
+    elif feature_class == 'pdbekb_conservation':
         return get_pdbkb_conservation(pdb_id, chain_id)
-    elif name_of_feature == "conservation":
+    elif feature_class == "conservation":
         return get_conservation(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "aa":
+    elif feature_class == "aa":
         return get_aa(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "aa_pairs":
+    elif feature_class == "aa_pairs":
         return get_aa_pairs(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "hydropathy":
+    elif feature_class == "hydropathy":
         return get_AA_properties(hydropathy_kyte_doolitle, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "polarity":
+    elif feature_class == "polarity":
         return get_AA_properties(polarity, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "polarity_binary":
+    elif feature_class == "polarity_binary":
         return get_AA_properties(polarity_binary, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "charged":
+    elif feature_class == "charged":
         return get_AA_properties(charged, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "aromaticity":
+    elif feature_class == "aromaticity":
         return get_AA_properties(aromaticity, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "mol_weight":
+    elif feature_class == "mol_weight":
         return get_AA_properties(molecular_weight, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "H_bond_atoms":
+    elif feature_class == "H_bond_atoms":
         return get_AA_properties(H_bond_atoms, data_dir, pdb_id, chain_id)
-    elif name_of_feature == "dynamine_website":
+    elif feature_class == "dynamine_website":
         return get_dynamine(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "dynamine_funPDBe":
+    elif feature_class == "dynamine_funPDBe":
         return get_funPDBe("dynamine", "backbone", pdb_id, chain_id)
-    elif name_of_feature == "efoldmine_funPDBe":
+    elif feature_class == "efoldmine_funPDBe":
         return get_funPDBe("dynamine", "efoldmine", pdb_id, chain_id)
-    elif name_of_feature == "mobiDB":
+    elif feature_class == "mobiDB":
         return get_mobiDB_lite(pdb_id, chain_id)
-    elif name_of_feature == "HSE":
+    elif feature_class == "HSE":
         return get_HSE(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "HSE_down":
+    elif feature_class == "HSE_down":
         return get_HSE_down(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "exposureCN":
+    elif feature_class == "exposureCN":
         return get_exposureCN(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "bfactor":
+    elif feature_class == "bfactor":
         return get_bfactor(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "bfactor_Calpha":
+    elif feature_class == "bfactor_Calpha":
         return get_bfactor_Calpha(data_dir, pdb_id, chain_id)
-    elif name_of_feature == "depth":
+    elif feature_class == "depth":
         return get_funPDBe("depth", "complex_residue_depth", pdb_id, chain_id)
-    elif name_of_feature == "phi_angle":
+    elif feature_class == "phi_angle":
         return get_phi_angle(pdb_id, chain_id)
-    elif name_of_feature == "psi_angle":
+    elif feature_class == "psi_angle":
         return get_psi_angle(pdb_id, chain_id)
-    elif name_of_feature == "cis_peptide":
+    elif feature_class == "cis_peptide":
         return get_cis_peptide(pdb_id, chain_id)
     else:
-        raise ValueError(f"Unknown feature {name_of_feature}.") #todo
+        raise ValueError(f"Unknown feature {feature_class}.") #todo
         return
 
  #todo aby tohle nebylo potreba
@@ -238,7 +238,7 @@ def get_AA_properties(scores_dict, data_dir, pdb_id, chain_id):
 
 def get_dynamine(data_dir, pdb_id, chain_id): #todo cely upravit, zkontrolovat
     import os
-    from DynaMine.predictor import DynaMine
+    from unused.DynaMine.predictor import DynaMine
 
     result_dir = os.path.join(data_dir, "dynamine")
     fasta_path = get_fasta_path(data_dir, pdb_id, chain_id)

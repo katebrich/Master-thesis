@@ -1,9 +1,7 @@
 from compute_ligand_binding_sites import __compute_ligand_binding_sites
-from features import get_feature
+from unused.features import get_feature
 from helper import parse_dataset
 from helper import get_pdb_path
-from statistical_analysis import welchs_t_test, fischers_exact_test
-import pandas as pd
 import os
 import pickle
 

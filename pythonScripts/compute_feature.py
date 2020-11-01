@@ -4,9 +4,10 @@ import os
 import sys
 import time
 
-from helper import parse_dataset_split_chains
-from features import get_feature
+from helper import *
 import logger
+from pydoc import locate
+import config
 
 logger = logger.get_logger(os.path.basename(__file__))
 counter = None
@@ -18,7 +19,10 @@ def __compute_feature(structure):
     errors = []
     try:
         global feature_name
-        feat_vals = get_feature(feature_name, input_dir, pdb_id, chain_id)
+        feature_class_path = config.get_feature_path("unp_PTM")
+        feature_class = locate(feature_class_path)
+        feat_vals = feature_class().get_values(input_dir, pdb_id, chain_id)
+        #feat_vals = get_feature(feature_name, input_dir, pdb_id, chain_id)
         output_file = f"{output_dir}/{pdb_id}{chain_id}.txt"
         with open(output_file, 'w') as f:
             f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))

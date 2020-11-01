@@ -230,3 +230,4 @@ def isPartOfChain(residue, mappings):
             return False  # is truly a ligand
     else:
         return False
+

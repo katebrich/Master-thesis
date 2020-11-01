@@ -1,0 +1,175 @@
+{
+	"features": {
+		"unp_PTM": {
+			"import_path": "Features.UniProt.PTM",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_glycosylation": {
+			"import_path": "Features.UniProt.Glycosylation",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_lipidation": {
+			"import_path": "Features.UniProt.Lipidation",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_mod_res": {
+			"import_path": "Features.UniProt.ModRes",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_variation": {
+			"import_path": "Features.UniProt.Variation",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_topology": {
+			"import_path": "Features.UniProt.Topology",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_sec_str": {
+			"import_path": "Features.UniProt.SecondaryStructure",
+			"type": "categorical",
+			"default": "0"
+		},
+		"unp_non_standard": {
+			"import_path": "Features.UniProt.NonStandard",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_natural_variant": {
+			"import_path": "Features.UniProt.NaturalVariant",
+			"type": "binary",
+			"default": "0"
+		},
+		"unp_compbias": {
+			"import_path": "Features.UniProt.Compbias",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa": {
+			"import_path": "Features.FASTA.AA",
+			"type": "categorical",
+			"default": "0"
+		},
+		"aa_pairs": {
+			"import_path": "Features.FASTA.AA_pairs",
+			"type": "categorical",
+			"default": "0"
+		},
+		"hydropathy": {
+			"import_path": "Features.FASTA.Hydropathy",
+			"type": "continuous",
+			"default": "0"
+		},
+		"polarity": {
+			"import_path": "Features.FASTA.Polarity",
+			"type": "ordinal",
+			"default": "0"
+		},
+		"polarity_binary": {
+			"import_path": "Features.FASTA.PolarityBinary",
+			"type": "binary",
+			"default": "0"
+		},
+		"charged": {
+			"import_path": "Features.FASTA.Charged",
+			"type": "binary",
+			"default": "0"
+		},
+		"aromaticity": {
+			"import_path": "Features.FASTA.Aromaticity",
+			"type": "binary",
+			"default": "0"
+		},
+		"mol_weight": {
+			"import_path": "Features.FASTA.MolecularWeight",
+			"type": "continuous",
+			"default": "0"
+		},
+		"H_bond_atoms": {
+			"import_path": "Features.FASTA.HBondAtoms",
+			"type": "ordinal",
+			"default": "0"
+		},
+		"HSE_up": {
+			"import_path": "Features.PDB.HSE_up",
+			"type": "continuous",
+			"default": "0"
+		},
+		"HSE_down": {
+			"import_path": "Features.PDB.HSE_up",
+			"type": "continuous",
+			"default": "0"
+		},
+		"exposureCN": {
+			"import_path": "Features.PDB.ExposureCN",
+			"type": "continuous",
+			"default": "0"
+		},
+		"bfactor": {
+			"import_path": "Features.PDB.BFactor",
+			"type": "continuous",
+			"default": "0"
+		},
+		"bfactor_CA": {
+			"import_path": "Features.PDB.BFactorCA",
+			"type": "continuous",
+			"default": "0"
+		},
+		"pdbekb_sec_str": {
+			"import_path": "Features.PDBeKB.SecondaryStructure",
+			"type": "categorical",
+			"default": "0"
+		},
+		"pdbekb_conservation": {
+			"import_path": "Features.PDBeKB.Conservation",
+			"type": "ordinal", 
+			"default": "0"
+		},
+		"dynamine": {
+			"import_path": "Features.PDBeKB.Dynamine",
+			"type": "continuous",
+			"default": "0"
+		},
+		"efoldmine": {
+			"import_path": "Features.PDBeKB.Efoldmine",
+			"type": "continuous",
+			"default": "0"
+		},
+		"depth": {
+			"import_path": "Features.PDBeKB.Depth",
+			"type": "continuous",
+			"default": "0"
+		},
+		"mobiDB": {
+			"import_path": "Features.OtherResources.MobiDB",
+			"type": "continuous",
+			"default": "0"
+		},
+		"conservation": {
+			"import_path": "Features.OtherResources.Conservation",
+			"type": "continuous",
+			"default": "0"
+		},
+		"phi_angle": {
+			"import_path": "Features.OtherResources.PhiAngle",
+			"type": "continuous",
+			"default": "0"
+		},
+		"psi_angle": {
+			"import_path": "Features.OtherResources.PsiAngle",
+			"type": "continuous",
+			"default": "0"
+		},
+		"cis_peptide": {
+			"import_path": "Features.OtherResources.CisPeptide",
+			"type": "binary",
+			"default": "0"
+		}
+	}	
+
+}
