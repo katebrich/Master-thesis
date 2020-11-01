@@ -67,7 +67,6 @@
 1qje	a
 1dry	a
 2fct	a
-1i5z	a
 1c9s	a
 1sjn	b
 1o9s	a
@@ -93,7 +92,6 @@
 1i9c	b
 1ee2	a
 2g82	c
-1qmg	a
 1bw9	a
 1x7d	a
 1oja	a
@@ -112,10 +110,6 @@
 1n2b	a
 1wxi	a
 1ez1	a
-2ji7	a
-2hxf	b
-2ji7	a
-2r5n	a
 2ji7	a
 2r5n	a
 1e2f	a
@@ -137,7 +131,6 @@
 2ewb	a
 1tf8	a
 2jfg	a
-1jbw	a
 3bqm	b
 2bln	b
 2cl5	a
@@ -159,7 +152,6 @@
 1ukb	a
 1llf	a
 1yas	a
-2ajc	a
 1q0r	a
 1kic	a
 1ia2	a
@@ -227,7 +219,6 @@
 2cnq	a
 1w2c	a
 1wve	b
-1uxy	a
 1uxy	a
 1y21	a
 2gfk	a

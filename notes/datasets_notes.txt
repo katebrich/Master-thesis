@@ -6,11 +6,10 @@ coach420 chyby:
 
 
 
-
 chen11 chyby:
 2ou3 A neni v uniprotu -> vyrazen
 nektere struktury dvakrat - napriklad 1uxy - ale ve skutecnosti v puvodnim ds je to jedna struktura rozdelena na 2 casti. 
-
+DUPLICATES: ('2ji7', 'A'): 3, ('1i5z', 'A'): 2, ('1qmg', 'A'): 2, ('2ajc', 'A'): 2, ('2hxf', 'B'): 2, ('2r5n', 'A'): 2, ('1jbw', 'A'): 2, ('1uxy', 'A'): 2
 
 
 joined:
