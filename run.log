@@ -1,253 +1,71 @@
-2020-11-01 11:31:50,753 [INFO] compute_feature.py(line 93) Computing feature conservation started...
-2020-11-01 11:31:51,549 [DEBUG] compute_feature.py(line 43) 1/250: 2nw8 A processed
-2020-11-01 11:31:51,680 [DEBUG] compute_feature.py(line 43) 2/250: 2vbu A processed
-2020-11-01 11:31:52,000 [DEBUG] compute_feature.py(line 43) 3/250: 1s69 A processed
-2020-11-01 11:31:52,006 [DEBUG] compute_feature.py(line 43) 4/250: 1v7w A processed
-2020-11-01 11:31:52,276 [DEBUG] compute_feature.py(line 43) 5/250: 1d7b A processed
-2020-11-01 11:31:52,285 [DEBUG] compute_feature.py(line 43) 6/250: 2i02 A processed
-2020-11-01 11:31:52,742 [DEBUG] compute_feature.py(line 43) 7/250: 1do1 A processed
-2020-11-01 11:31:52,936 [DEBUG] compute_feature.py(line 43) 8/250: 1dl2 A processed
-2020-11-01 11:31:52,937 [DEBUG] compute_feature.py(line 43) 9/250: 1uh4 A processed
-2020-11-01 11:31:52,947 [DEBUG] compute_feature.py(line 43) 10/250: 1usf A processed
-2020-11-01 11:31:53,444 [DEBUG] compute_feature.py(line 43) 11/250: 1qgw C processed
-2020-11-01 11:31:53,541 [DEBUG] compute_feature.py(line 43) 12/250: 4eng A processed
-2020-11-01 11:31:53,569 [DEBUG] compute_feature.py(line 43) 13/250: 1ld8 B processed
-2020-11-01 11:31:53,597 [DEBUG] compute_feature.py(line 43) 14/250: 1oio A processed
-2020-11-01 11:31:54,138 [DEBUG] compute_feature.py(line 43) 15/250: 2r09 A processed
-2020-11-01 11:31:54,599 [DEBUG] compute_feature.py(line 43) 16/250: 3cx5 O processed
-2020-11-01 11:31:54,785 [DEBUG] compute_feature.py(line 43) 17/250: 1d3c A processed
-2020-11-01 11:31:55,147 [DEBUG] compute_feature.py(line 43) 18/250: 1n9y C processed
-2020-11-01 11:31:55,407 [DEBUG] compute_feature.py(line 43) 19/250: 1m6z B processed
-2020-11-01 11:31:55,412 [DEBUG] compute_feature.py(line 43) 20/250: 1uyy A processed
-2020-11-01 11:31:55,881 [DEBUG] compute_feature.py(line 43) 21/250: 1al6 A processed
-2020-11-01 11:31:55,937 [DEBUG] compute_feature.py(line 43) 22/250: 1w2t A processed
-2020-11-01 11:31:56,359 [DEBUG] compute_feature.py(line 43) 23/250: 2vxj A processed
-2020-11-01 11:31:56,360 [DEBUG] compute_feature.py(line 43) 24/250: 2np5 A processed
-2020-11-01 11:31:56,489 [DEBUG] compute_feature.py(line 43) 25/250: 1dz4 A processed
-2020-11-01 11:31:56,534 [DEBUG] compute_feature.py(line 43) 26/250: 1s1d A processed
-2020-11-01 11:31:56,894 [DEBUG] compute_feature.py(line 43) 27/250: 1urx A processed
-2020-11-01 11:31:56,949 [DEBUG] compute_feature.py(line 43) 28/250: 1i5z A processed
-2020-11-01 11:31:57,463 [DEBUG] compute_feature.py(line 43) 29/250: 1n8u A processed
-2020-11-01 11:31:57,872 [DEBUG] compute_feature.py(line 43) 30/250: 1f8b A processed
-2020-11-01 11:31:58,242 [DEBUG] compute_feature.py(line 43) 31/250: 1rx0 A processed
-2020-11-01 11:31:58,285 [DEBUG] compute_feature.py(line 43) 32/250: 6cel A processed
-2020-11-01 11:31:58,349 [DEBUG] compute_feature.py(line 43) 33/250: 1vi0 A processed
-2020-11-01 11:31:58,771 [DEBUG] compute_feature.py(line 43) 34/250: 3cr5 X processed
-2020-11-01 11:31:58,789 [DEBUG] compute_feature.py(line 43) 35/250: 1cq1 A processed
-2020-11-01 11:31:58,869 [DEBUG] compute_feature.py(line 43) 36/250: 1w3y A processed
-2020-11-01 11:31:59,284 [DEBUG] compute_feature.py(line 43) 37/250: 2amb A processed
-2020-11-01 11:31:59,326 [DEBUG] compute_feature.py(line 43) 38/250: 1rzl A processed
-2020-11-01 11:31:59,328 [DEBUG] compute_feature.py(line 43) 39/250: 1pjx A processed
-2020-11-01 11:31:59,398 [DEBUG] compute_feature.py(line 43) 40/250: 2rk1 A processed
-2020-11-01 11:32:00,363 [DEBUG] compute_feature.py(line 43) 41/250: 2rbt X processed
-2020-11-01 11:32:00,365 [DEBUG] compute_feature.py(line 43) 42/250: 1ofz A processed
-2020-11-01 11:32:00,365 [DEBUG] compute_feature.py(line 43) 43/250: 2cz6 B processed
-2020-11-01 11:32:00,614 [DEBUG] compute_feature.py(line 43) 44/250: 1n5u A processed
-2020-11-01 11:32:00,917 [DEBUG] compute_feature.py(line 43) 45/250: 1mud A processed
-2020-11-01 11:32:01,022 [DEBUG] compute_feature.py(line 43) 46/250: 1loj B processed
-2020-11-01 11:32:01,165 [DEBUG] compute_feature.py(line 43) 47/250: 2ajc A processed
-2020-11-01 11:32:01,202 [DEBUG] compute_feature.py(line 43) 48/250: 1rqj A processed
-2020-11-01 11:32:01,605 [DEBUG] compute_feature.py(line 43) 49/250: 2zqn B processed
-2020-11-01 11:32:01,740 [DEBUG] compute_feature.py(line 43) 50/250: 1tez A processed
-2020-11-01 11:32:01,741 [DEBUG] compute_feature.py(line 43) 51/250: 2hyr A processed
-2020-11-01 11:32:01,787 [DEBUG] compute_feature.py(line 43) 52/250: 2aib A processed
-2020-11-01 11:32:02,327 [DEBUG] compute_feature.py(line 43) 53/250: 1ja1 A processed
-2020-11-01 11:32:02,403 [DEBUG] compute_feature.py(line 43) 54/250: 2jf2 A processed
-2020-11-01 11:32:02,416 [DEBUG] compute_feature.py(line 43) 55/250: 19hc A processed
-2020-11-01 11:32:02,683 [DEBUG] compute_feature.py(line 43) 56/250: 1qmg A processed
-2020-11-01 11:32:03,374 [DEBUG] compute_feature.py(line 43) 57/250: 1nb9 A processed
-2020-11-01 11:32:03,485 [DEBUG] compute_feature.py(line 43) 58/250: 1qdb B processed
-2020-11-01 11:32:03,486 [DEBUG] compute_feature.py(line 43) 59/250: 3bsy A processed
-2020-11-01 11:32:03,763 [DEBUG] compute_feature.py(line 43) 60/250: 1mv8 A processed
-2020-11-01 11:32:03,980 [DEBUG] compute_feature.py(line 43) 61/250: 1nyw A processed
-2020-11-01 11:32:04,278 [DEBUG] compute_feature.py(line 43) 62/250: 1g67 A processed
-2020-11-01 11:32:04,285 [DEBUG] compute_feature.py(line 43) 63/250: 1w2y A processed
-2020-11-01 11:32:04,409 [DEBUG] compute_feature.py(line 43) 64/250: 2b4f A processed
-2020-11-01 11:32:04,759 [DEBUG] compute_feature.py(line 43) 65/250: 1lrh A processed
-2020-11-01 11:32:05,273 [DEBUG] compute_feature.py(line 43) 66/250: 1tb7 A processed
-2020-11-01 11:32:05,273 [DEBUG] compute_feature.py(line 43) 67/250: 1d3g A processed
-2020-11-01 11:32:05,278 [DEBUG] compute_feature.py(line 43) 68/250: 1bw9 A processed
-2020-11-01 11:32:05,906 [DEBUG] compute_feature.py(line 43) 69/250: 1qje A processed
-2020-11-01 11:32:06,348 [DEBUG] compute_feature.py(line 43) 70/250: 1x7d A processed
-2020-11-01 11:32:06,353 [DEBUG] compute_feature.py(line 43) 71/250: 1sx6 A processed
-2020-11-01 11:32:06,577 [DEBUG] compute_feature.py(line 43) 72/250: 2fzb A processed
-2020-11-01 11:32:07,636 [DEBUG] compute_feature.py(line 43) 73/250: 1dry A processed
-2020-11-01 11:32:08,239 [DEBUG] compute_feature.py(line 43) 74/250: 1oja A processed
-2020-11-01 11:32:08,435 [DEBUG] compute_feature.py(line 43) 75/250: 1wxi A processed
-2020-11-01 11:32:09,465 [DEBUG] compute_feature.py(line 43) 76/250: 1gvy A processed
-2020-11-01 11:32:09,682 [DEBUG] compute_feature.py(line 43) 77/250: 2fct A processed
-2020-11-01 11:32:09,884 [DEBUG] compute_feature.py(line 43) 78/250: 1c0i A processed
-2020-11-01 11:32:10,706 [DEBUG] compute_feature.py(line 43) 79/250: 1ez1 A processed
-2020-11-01 11:32:11,531 [DEBUG] compute_feature.py(line 43) 80/250: 1x38 A processed
-2020-11-01 11:32:12,084 [DEBUG] compute_feature.py(line 43) 81/250: 1i5z A processed
-2020-11-01 11:32:12,085 [DEBUG] compute_feature.py(line 43) 82/250: 1h16 A processed
-2020-11-01 11:32:12,115 [DEBUG] compute_feature.py(line 43) 83/250: 2ji7 A processed
-2020-11-01 11:32:12,368 [DEBUG] compute_feature.py(line 43) 84/250: 2j8f A processed
-2020-11-01 11:32:12,772 [DEBUG] compute_feature.py(line 43) 85/250: 2hxf B processed
-2020-11-01 11:32:12,826 [DEBUG] compute_feature.py(line 43) 86/250: 2or4 A processed
-2020-11-01 11:32:12,849 [DEBUG] compute_feature.py(line 43) 87/250: 1c9s A processed
-2020-11-01 11:32:12,978 [DEBUG] compute_feature.py(line 43) 88/250: 1p6b B processed
-2020-11-01 11:32:13,331 [DEBUG] compute_feature.py(line 43) 89/250: 2ji7 A processed
-2020-11-01 11:32:13,739 [DEBUG] compute_feature.py(line 43) 90/250: 1oiz A processed
-2020-11-01 11:32:13,740 [DEBUG] compute_feature.py(line 43) 91/250: 1j79 A processed
-2020-11-01 11:32:13,743 [DEBUG] compute_feature.py(line 43) 92/250: 1sjn B processed
-2020-11-01 11:32:14,168 [DEBUG] compute_feature.py(line 43) 93/250: 2r5n A processed
-2020-11-01 11:32:14,623 [DEBUG] compute_feature.py(line 43) 94/250: 1o9s A processed
-2020-11-01 11:32:14,912 [DEBUG] compute_feature.py(line 43) 95/250: 2ji7 A processed
-2020-11-01 11:32:14,947 [DEBUG] compute_feature.py(line 43) 96/250: 1fxq A processed
-2020-11-01 11:32:14,950 [DEBUG] compute_feature.py(line 43) 97/250: 1on3 B processed
-2020-11-01 11:32:15,187 [DEBUG] compute_feature.py(line 43) 98/250: 2g46 A processed
-2020-11-01 11:32:15,450 [DEBUG] compute_feature.py(line 43) 99/250: 2r5n A processed
-2020-11-01 11:32:15,495 [DEBUG] compute_feature.py(line 43) 100/250: 1mdl A processed
-2020-11-01 11:32:15,507 [DEBUG] compute_feature.py(line 43) 101/250: 1ag9 A processed
-2020-11-01 11:32:15,742 [DEBUG] compute_feature.py(line 43) 102/250: 1iiy A processed
-2020-11-01 11:32:16,015 [DEBUG] compute_feature.py(line 43) 103/250: 1e2f A processed
-2020-11-01 11:32:16,493 [DEBUG] compute_feature.py(line 43) 104/250: 2ag4 A processed
-2020-11-01 11:32:16,506 [DEBUG] compute_feature.py(line 43) 105/250: 1sg0 A processed
-2020-11-01 11:32:16,507 [DEBUG] compute_feature.py(line 43) 106/250: 1p7t B processed
-2020-11-01 11:32:17,003 [DEBUG] compute_feature.py(line 43) 107/250: 2iyq A processed
-2020-11-01 11:32:17,371 [DEBUG] compute_feature.py(line 43) 108/250: 1x39 A processed
-2020-11-01 11:32:17,506 [DEBUG] compute_feature.py(line 43) 109/250: 1ir1 A processed
-2020-11-01 11:32:17,828 [DEBUG] compute_feature.py(line 43) 110/250: 1y2w A processed
-2020-11-01 11:32:17,835 [DEBUG] compute_feature.py(line 43) 111/250: 1m7g A processed
-2020-11-01 11:32:17,916 [DEBUG] compute_feature.py(line 43) 112/250: 2f2t A processed
-2020-11-01 11:32:18,143 [DEBUG] compute_feature.py(line 43) 113/250: 1i9c B processed
-2020-11-01 11:32:18,403 [DEBUG] compute_feature.py(line 43) 114/250: 1uj2 A processed
-2020-11-01 11:32:18,406 [DEBUG] compute_feature.py(line 43) 115/250: 1w8h A processed
-2020-11-01 11:32:18,457 [DEBUG] compute_feature.py(line 43) 116/250: 1fnd A processed
-2020-11-01 11:32:18,720 [DEBUG] compute_feature.py(line 43) 117/250: 1ee2 A processed
-2020-11-01 11:32:19,011 [DEBUG] compute_feature.py(line 43) 118/250: 2v7x A processed
-2020-11-01 11:32:19,076 [DEBUG] compute_feature.py(line 43) 119/250: 1q0b A processed
-2020-11-01 11:32:19,077 [DEBUG] compute_feature.py(line 43) 120/250: 1ja1 B processed
-2020-11-01 11:32:19,497 [DEBUG] compute_feature.py(line 43) 121/250: 2g82 C processed
-2020-11-01 11:32:19,902 [DEBUG] compute_feature.py(line 43) 122/250: 1km0 A processed
-2020-11-01 11:32:20,160 [DEBUG] compute_feature.py(line 43) 123/250: 1pg2 A processed
-2020-11-01 11:32:20,228 [DEBUG] compute_feature.py(line 43) 124/250: 1a82 A processed
-2020-11-01 11:32:20,372 [DEBUG] compute_feature.py(line 43) 125/250: 1qmg A processed
-2020-11-01 11:32:20,680 [DEBUG] compute_feature.py(line 43) 126/250: 1t7q A processed
-2020-11-01 11:32:20,770 [DEBUG] compute_feature.py(line 43) 127/250: 1n2b A processed
-2020-11-01 11:32:21,045 [DEBUG] compute_feature.py(line 43) 128/250: 2o07 A processed
-2020-11-01 11:32:21,151 [DEBUG] compute_feature.py(line 43) 129/250: 2ck3 B processed
-2020-11-01 11:32:21,336 [DEBUG] compute_feature.py(line 43) 130/250: 1aax A processed
-2020-11-01 11:32:21,441 [DEBUG] compute_feature.py(line 43) 131/250: 1yas A processed
-2020-11-01 11:32:21,809 [DEBUG] compute_feature.py(line 43) 132/250: 1nlu A processed
-2020-11-01 11:32:21,828 [DEBUG] compute_feature.py(line 43) 133/250: 1jqe A processed
-2020-11-01 11:32:22,233 [DEBUG] compute_feature.py(line 43) 134/250: 13gs A processed
-2020-11-01 11:32:22,233 [DEBUG] compute_feature.py(line 43) 135/250: 2ajc A processed
-2020-11-01 11:32:23,061 [DEBUG] compute_feature.py(line 43) 136/250: 1jsz A processed
-2020-11-01 11:32:23,108 [DEBUG] compute_feature.py(line 43) 137/250: 2c1x A processed
-2020-11-01 11:32:23,305 [DEBUG] compute_feature.py(line 43) 138/250: 1q0r A processed
-2020-11-01 11:32:23,534 [DEBUG] compute_feature.py(line 43) 139/250: 1cza N processed
-2020-11-01 11:32:23,750 [DEBUG] compute_feature.py(line 43) 140/250: 2c7p A processed
-2020-11-01 11:32:23,852 [DEBUG] compute_feature.py(line 43) 141/250: 1hfw A processed
-2020-11-01 11:32:23,869 [DEBUG] compute_feature.py(line 43) 142/250: 1kic A processed
-2020-11-01 11:32:24,193 [DEBUG] compute_feature.py(line 43) 143/250: 3bex A processed
-2020-11-01 11:32:24,581 [DEBUG] compute_feature.py(line 43) 144/250: 2ibt A processed
-2020-11-01 11:32:24,581 [DEBUG] compute_feature.py(line 43) 145/250: 1ia2 A processed
-2020-11-01 11:32:24,958 [DEBUG] compute_feature.py(line 43) 146/250: 1a5v A processed
-2020-11-01 11:32:25,217 [DEBUG] compute_feature.py(line 43) 147/250: 1lii A processed
-2020-11-01 11:32:25,381 [DEBUG] compute_feature.py(line 43) 148/250: 1lbc A processed
-2020-11-01 11:32:25,665 [DEBUG] compute_feature.py(line 43) 149/250: 2h11 A processed
-2020-11-01 11:32:25,929 [DEBUG] compute_feature.py(line 43) 150/250: 2gui A processed
-2020-11-01 11:32:26,378 [DEBUG] compute_feature.py(line 43) 151/250: 1bq6 A processed
-2020-11-01 11:32:26,379 [DEBUG] compute_feature.py(line 43) 152/250: 3egv A processed
-2020-11-01 11:32:26,379 [DEBUG] compute_feature.py(line 43) 153/250: 3uag A processed
-2020-11-01 11:32:26,483 [DEBUG] compute_feature.py(line 43) 154/250: 2ai2 A processed
-2020-11-01 11:32:27,058 [DEBUG] compute_feature.py(line 43) 155/250: 2ewb A processed
-2020-11-01 11:32:27,173 [DEBUG] compute_feature.py(line 43) 156/250: 2fr5 A processed
-2020-11-01 11:32:27,173 [DEBUG] compute_feature.py(line 43) 157/250: 1jbw A processed
-2020-11-01 11:32:27,203 [DEBUG] compute_feature.py(line 43) 158/250: 1elu A processed
-2020-11-01 11:32:27,593 [DEBUG] compute_feature.py(line 43) 159/250: 1tf8 A processed
-2020-11-01 11:32:27,716 [DEBUG] compute_feature.py(line 43) 160/250: 1gs5 A processed
-2020-11-01 11:32:27,794 [DEBUG] compute_feature.py(line 43) 161/250: 2bhx A processed
-2020-11-01 11:32:27,814 [DEBUG] compute_feature.py(line 43) 162/250: 1g8m A processed
-2020-11-01 11:32:28,316 [DEBUG] compute_feature.py(line 43) 163/250: 2jfg A processed
-2020-11-01 11:32:28,777 [DEBUG] compute_feature.py(line 43) 164/250: 1ai2 A processed
-2020-11-01 11:32:29,042 [DEBUG] compute_feature.py(line 43) 165/250: 2haw B processed
-2020-11-01 11:32:29,128 [DEBUG] compute_feature.py(line 43) 166/250: 1yro B processed
-2020-11-01 11:32:29,226 [DEBUG] compute_feature.py(line 43) 167/250: 1jbw A processed
-2020-11-01 11:32:29,323 [DEBUG] compute_feature.py(line 43) 168/250: 1moq A processed
-2020-11-01 11:32:29,724 [DEBUG] compute_feature.py(line 43) 169/250: 3cu0 A processed
-2020-11-01 11:32:29,767 [DEBUG] compute_feature.py(line 43) 170/250: 3bqm B processed
-2020-11-01 11:32:29,863 [DEBUG] compute_feature.py(line 43) 171/250: 2vvo A processed
-2020-11-01 11:32:29,919 [DEBUG] compute_feature.py(line 43) 172/250: 1eu1 A processed
-2020-11-01 11:32:30,273 [DEBUG] compute_feature.py(line 43) 173/250: 1e5k A processed
-2020-11-01 11:32:30,336 [DEBUG] compute_feature.py(line 43) 174/250: 2bln B processed
-2020-11-01 11:32:30,438 [DEBUG] compute_feature.py(line 43) 175/250: 1kae A processed
-2020-11-01 11:32:30,557 [DEBUG] compute_feature.py(line 43) 176/250: 1ne7 A processed
-2020-11-01 11:32:30,883 [DEBUG] compute_feature.py(line 43) 177/250: 1lzi A processed
-2020-11-01 11:32:31,294 [DEBUG] compute_feature.py(line 43) 178/250: 1p5d X processed
-2020-11-01 11:32:31,294 [DEBUG] compute_feature.py(line 43) 179/250: 2cl5 A processed
-2020-11-01 11:32:31,665 [DEBUG] compute_feature.py(line 43) 180/250: 1q7t A processed
-2020-11-01 11:32:32,021 [DEBUG] compute_feature.py(line 43) 181/250: 1f0p A processed
-2020-11-01 11:32:32,032 [DEBUG] compute_feature.py(line 43) 182/250: 1hdi A processed
-2020-11-01 11:32:32,133 [DEBUG] compute_feature.py(line 43) 183/250: 1fp2 A processed
-2020-11-01 11:32:32,325 [DEBUG] compute_feature.py(line 43) 184/250: 1bvi C processed
-2020-11-01 11:32:32,597 [DEBUG] compute_feature.py(line 43) 185/250: 1ukb A processed
-2020-11-01 11:32:32,605 [DEBUG] compute_feature.py(line 43) 186/250: 1m5r B processed
-2020-11-01 11:32:32,925 [DEBUG] compute_feature.py(line 43) 187/250: 2gf3 A processed
-2020-11-01 11:32:32,934 [DEBUG] compute_feature.py(line 43) 188/250: 1lwg A processed
-2020-11-01 11:32:33,201 [DEBUG] compute_feature.py(line 43) 189/250: 1h47 B processed
-2020-11-01 11:32:33,275 [DEBUG] compute_feature.py(line 43) 190/250: 1llf A processed
-2020-11-01 11:32:33,471 [DEBUG] compute_feature.py(line 43) 191/250: 11bg A processed
-2020-11-01 11:32:33,514 [DEBUG] compute_feature.py(line 43) 192/250: 2akr C processed
-2020-11-01 11:32:33,750 [DEBUG] compute_feature.py(line 43) 193/250: 1gcz A processed
-2020-11-01 11:32:34,768 [DEBUG] compute_feature.py(line 43) 194/250: 1m0w A processed
-2020-11-01 11:32:34,769 [DEBUG] compute_feature.py(line 43) 195/250: 1h72 C processed
-2020-11-01 11:32:34,817 [DEBUG] compute_feature.py(line 43) 196/250: 1q0q A processed
-2020-11-01 11:32:34,820 [DEBUG] compute_feature.py(line 43) 197/250: 2itk A processed
-2020-11-01 11:32:35,381 [DEBUG] compute_feature.py(line 43) 198/250: 2r84 A processed
-2020-11-01 11:32:35,412 [DEBUG] compute_feature.py(line 43) 199/250: 1qip B processed
-2020-11-01 11:32:35,412 [DEBUG] compute_feature.py(line 43) 200/250: 1gpe B processed
-2020-11-01 11:32:35,729 [DEBUG] compute_feature.py(line 43) 201/250: 1yki C processed
-2020-11-01 11:32:35,948 [DEBUG] compute_feature.py(line 43) 202/250: 2cnq A processed
-2020-11-01 11:32:35,950 [DEBUG] compute_feature.py(line 43) 203/250: 1k0i A processed
-2020-11-01 11:32:35,952 [DEBUG] compute_feature.py(line 43) 204/250: 1lqp A processed
-2020-11-01 11:32:36,302 [DEBUG] compute_feature.py(line 43) 205/250: 1hs6 A processed
-2020-11-01 11:32:36,487 [DEBUG] compute_feature.py(line 43) 206/250: 1lkd A processed
-2020-11-01 11:32:36,529 [DEBUG] compute_feature.py(line 43) 207/250: 2hdu B processed
-2020-11-01 11:32:36,532 [DEBUG] compute_feature.py(line 43) 208/250: 1w2c A processed
-2020-11-01 11:32:36,834 [DEBUG] compute_feature.py(line 43) 209/250: 1o4o A processed
-2020-11-01 11:32:37,738 [DEBUG] compute_feature.py(line 43) 210/250: 1wve B processed
-2020-11-01 11:32:37,739 [DEBUG] compute_feature.py(line 43) 211/250: 2cye A processed
-2020-11-01 11:32:37,740 [DEBUG] compute_feature.py(line 43) 212/250: 1dgf A processed
-2020-11-01 11:32:37,831 [DEBUG] compute_feature.py(line 43) 213/250: 2nm2 B processed
-2020-11-01 11:32:38,421 [DEBUG] compute_feature.py(line 43) 214/250: 2pes A processed
-2020-11-01 11:32:38,425 [DEBUG] compute_feature.py(line 43) 215/250: 1n5q B processed
-2020-11-01 11:32:38,425 [DEBUG] compute_feature.py(line 43) 216/250: 2f3d A processed
-2020-11-01 11:32:38,430 [DEBUG] compute_feature.py(line 43) 217/250: 1uxy A processed
-2020-11-01 11:32:38,939 [DEBUG] compute_feature.py(line 43) 218/250: 1uxy A processed
-2020-11-01 11:32:38,973 [DEBUG] compute_feature.py(line 43) 219/250: 1m4g B processed
-2020-11-01 11:32:39,000 [DEBUG] compute_feature.py(line 43) 220/250: 1gx6 A processed
-2020-11-01 11:32:39,030 [DEBUG] compute_feature.py(line 43) 221/250: 3bbf B processed
-2020-11-01 11:32:39,574 [DEBUG] compute_feature.py(line 43) 222/250: 1y21 A processed
-2020-11-01 11:32:39,711 [DEBUG] compute_feature.py(line 43) 223/250: 1p0z G processed
-2020-11-01 11:32:39,712 [DEBUG] compute_feature.py(line 43) 224/250: 2asd A processed
-2020-11-01 11:32:40,809 [DEBUG] compute_feature.py(line 43) 225/250: 2gfk A processed
-2020-11-01 11:32:40,810 [DEBUG] compute_feature.py(line 43) 226/250: 1rya A processed
-2020-11-01 11:32:40,810 [DEBUG] compute_feature.py(line 43) 227/250: 1kt8 A processed
-2020-11-01 11:32:40,814 [DEBUG] compute_feature.py(line 43) 228/250: 1ir2 A processed
-2020-11-01 11:32:41,458 [DEBUG] compute_feature.py(line 43) 229/250: 1wc1 B processed
-2020-11-01 11:32:41,459 [DEBUG] compute_feature.py(line 43) 230/250: 1ix1 A processed
-2020-11-01 11:32:41,649 [DEBUG] compute_feature.py(line 43) 231/250: 1dqs A processed
-2020-11-01 11:32:41,657 [DEBUG] compute_feature.py(line 43) 232/250: 1kzi A processed
-2020-11-01 11:32:42,212 [DEBUG] compute_feature.py(line 43) 233/250: 1w1r A processed
-2020-11-01 11:32:42,309 [DEBUG] compute_feature.py(line 43) 234/250: 1g1s B processed
-2020-11-01 11:32:42,534 [DEBUG] compute_feature.py(line 43) 235/250: 1amu A processed
-2020-11-01 11:32:42,547 [DEBUG] compute_feature.py(line 43) 236/250: 1pvg A processed
-2020-11-01 11:32:43,678 [DEBUG] compute_feature.py(line 43) 237/250: 1ejd A processed
-2020-11-01 11:32:43,736 [DEBUG] compute_feature.py(line 43) 238/250: 1m9m A processed
-2020-11-01 11:32:43,913 [DEBUG] compute_feature.py(line 43) 239/250: 1uwk A processed
-2020-11-01 11:32:44,195 [DEBUG] compute_feature.py(line 43) 240/250: 1j1g A processed
-2020-11-01 11:32:44,419 [DEBUG] compute_feature.py(line 43) 241/250: 1sox B processed
-2020-11-01 11:32:44,432 [DEBUG] compute_feature.py(line 43) 242/250: 1oni B processed
-2020-11-01 11:32:44,585 [DEBUG] compute_feature.py(line 43) 243/250: 1z0s A processed
-2020-11-01 11:32:44,868 [DEBUG] compute_feature.py(line 43) 244/250: 1s9r A processed
-2020-11-01 11:32:45,018 [DEBUG] compute_feature.py(line 43) 245/250: 1xlr A processed
-2020-11-01 11:32:45,020 [DEBUG] compute_feature.py(line 43) 246/250: 2hxf B processed
-2020-11-01 11:32:45,418 [DEBUG] compute_feature.py(line 43) 247/250: 1bg0 A processed
-2020-11-01 11:32:45,609 [DEBUG] compute_feature.py(line 43) 248/250: 3c9u A processed
-2020-11-01 11:32:46,543 [DEBUG] compute_feature.py(line 43) 249/250: 1o26 A processed
-2020-11-01 11:32:47,199 [DEBUG] compute_feature.py(line 43) 250/250: 1zb6 A processed
-2020-11-01 11:32:47,200 [INFO] compute_feature.py(line 105) Computing feature conservation finished: All structures processed successfully.
-2020-11-01 11:32:47,201 [DEBUG] compute_feature.py(line 109) Finished in 56.44829797744751
+2020-11-02 11:24:39,228 [INFO] download_dataset.py(line 159) Downloading structures from /home/katebrich/Documents/diplomka/GitHub/datasets/chen11.txt to /home/katebrich/Documents/diplomka/P2Rank/datasets/chen11_11_02 started...
+2020-11-02 11:24:42,761 [DEBUG] download_dataset.py(line 110) 1/241: 2nw8 A downloaded
+2020-11-02 11:24:43,141 [DEBUG] download_dataset.py(line 110) 2/241: 1v7w A downloaded
+2020-11-02 11:24:44,026 [DEBUG] download_dataset.py(line 110) 3/241: 1d7b A downloaded
+2020-11-02 11:24:45,622 [DEBUG] download_dataset.py(line 110) 4/241: 2vbu A downloaded
+2020-11-02 11:24:47,111 [DEBUG] download_dataset.py(line 110) 5/241: 2i02 A downloaded
+2020-11-02 11:24:46,578 [ERROR] download_dataset.py(line 98) Error while downloading 1uh4 A: HTTP Error 502: Bad Gateway
+Traceback (most recent call last):
+  File "./pythonScripts/download_dataset.py", line 91, in download_structure
+    get_FASTA(output_FASTA, pdb_id, chain_ids)
+  File "./pythonScripts/download_dataset.py", line 72, in get_FASTA
+    entity_id = get_entity_id(pdb_id, chain_id)  # todo mit udelany cache
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 128, in get_entity_id
+    response = str(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 84, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 502: Bad Gateway
+2020-11-02 11:24:46,577 [ERROR] download_dataset.py(line 98) Error while downloading 1dl2 A: HTTP Error 502: Bad Gateway
+Traceback (most recent call last):
+  File "./pythonScripts/download_dataset.py", line 91, in download_structure
+    get_FASTA(output_FASTA, pdb_id, chain_ids)
+  File "./pythonScripts/download_dataset.py", line 72, in get_FASTA
+    entity_id = get_entity_id(pdb_id, chain_id)  # todo mit udelany cache
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 128, in get_entity_id
+    response = str(restAPI_get(url))
+  File "/home/katebrich/Documents/diplomka/GitHub/pythonScripts/helper.py", line 84, in restAPI_get
+    with urllib.request.urlopen(req) as f:
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 641, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 569, in error
+    return self._call_chain(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 503, in _call_chain
+    result = func(*args)
+  File "/home/katebrich/anaconda3/lib/python3.7/urllib/request.py", line 649, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 502: Bad Gateway
+2020-11-02 11:24:48,022 [ERROR] download_dataset.py(line 108) 6/241: 1uh4 A NOT DOWNLOADED !
+2020-11-02 11:24:48,022 [ERROR] download_dataset.py(line 108) 7/241: 1dl2 A NOT DOWNLOADED !
+2020-11-02 11:24:48,096 [DEBUG] download_dataset.py(line 110) 8/241: 1s69 A downloaded
+2020-11-02 11:24:48,650 [DEBUG] download_dataset.py(line 110) 9/241: 1usf A downloaded
+2020-11-02 11:24:49,288 [DEBUG] download_dataset.py(line 110) 10/241: 1do1 A downloaded
+2020-11-02 11:24:49,369 [DEBUG] download_dataset.py(line 110) 11/241: 1oio A downloaded
+2020-11-02 11:24:49,735 [DEBUG] download_dataset.py(line 110) 12/241: 1ld8 B downloaded
+2020-11-02 11:24:49,828 [DEBUG] download_dataset.py(line 110) 13/241: 4eng A downloaded
+2020-11-02 11:24:50,826 [DEBUG] download_dataset.py(line 110) 14/241: 1qgw C downloaded
+2020-11-02 11:24:51,811 [DEBUG] download_dataset.py(line 110) 15/241: 3cx5 O downloaded
+2020-11-02 11:24:51,811 [DEBUG] download_dataset.py(line 110) 16/241: 2r09 A downloaded
+2020-11-02 11:24:51,811 [DEBUG] download_dataset.py(line 110) 17/241: 1d3c A downloaded
+2020-11-02 11:24:51,821 [DEBUG] download_dataset.py(line 110) 18/241: 1al6 A downloaded
+2020-11-02 11:24:53,871 [DEBUG] download_dataset.py(line 110) 19/241: 1dz4 A downloaded
+2020-11-02 11:24:54,022 [DEBUG] download_dataset.py(line 110) 21/241: 1n9y C downloaded
+2020-11-02 11:24:54,022 [DEBUG] download_dataset.py(line 110) 22/241: 1uyy A downloaded
+2020-11-02 11:24:54,022 [DEBUG] download_dataset.py(line 110) 20/241: 1n8u A downloaded
+2020-11-02 11:24:54,022 [DEBUG] download_dataset.py(line 110) 23/241: 1m6z B downloaded
+2020-11-02 11:24:55,752 [DEBUG] download_dataset.py(line 110) 24/241: 2np5 A downloaded

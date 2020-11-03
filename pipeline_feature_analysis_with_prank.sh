@@ -2,17 +2,17 @@ set -e
 python_scripts_path=./pythonScripts/
 P2Rank_path=/home/katebrich/Documents/diplomka/P2Rank
 
-tasks="f" #"r,d,m,l,f,a,p"
+tasks="r,d,m,l,f,a,p" #"r,d,m,l,f,a,p"
 #todo parsovani argumentu
 dataset_name="chen11"
-label="_10_27"
+label="_11_02"
 
 dataset_file="/home/katebrich/Documents/diplomka/GitHub/datasets/${dataset_name}.txt" #povinny
 data_dir_name=${dataset_name}${label}
 data_dir="${P2Rank_path}/datasets/${data_dir_name}" #nepovinny. Kdyz neni zadan, vytvori se v umisteni dataset_file
 features_dir="${data_dir}/features"                 #nepovinny. Default podslozka data_dir
 filter_ligands=p2rank                               #todo none, water, small molecules, given IDs, MOAD,...
-features_list="conservation"                        #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine_funPDBe,efoldmine_funPDBe,mobiDB,HSE,HSE_down,exposureCN,bfactor,bfactor_Calpha,depth,phi_angle,psi_angle,cis_peptide"
+features_list="unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
 threads=4
 #log_file="${data_dir}/run.log"
 #strict=true #todo
