@@ -1,5 +1,5 @@
 import os
-import config
+import Config
 from Bio import SeqIO
 
 import helper
@@ -16,7 +16,7 @@ from propka.run import single
 
 #print(get_HSE(data_dir, pdb_id, chain_id))
 
-path = config.get_feature_path("unp_PTM")
+path = Config.get_feature_path("unp_PTM")
 from pydoc import locate
 feature_class = locate(path)
 #feature_class = class_import(path)

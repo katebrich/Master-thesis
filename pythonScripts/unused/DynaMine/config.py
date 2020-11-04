@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-config.py
+Config.py
 
 Created by Elisa Cilia on 2014-08-20.
 Copyright (c) 2014 Elisa Cilia. All rights reserved.

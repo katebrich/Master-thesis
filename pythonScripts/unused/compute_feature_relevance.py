@@ -1,4 +1,4 @@
-from compute_ligand_binding_sites import __compute_ligand_binding_sites
+from LigandBindingSitesComputer import __compute_ligand_binding_sites
 from unused.features import get_feature
 from helper import parse_dataset
 from helper import get_pdb_path

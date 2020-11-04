@@ -1,9 +1,12 @@
 from __future__ import print_function
+
+import os
 import urllib.request
 import json
 import sys
 import xmltodict
 import numpy as np
+from urllib.error import HTTPError
 
 #returns uniprotID, entityID, start, end
 from Bio.PDB import is_aa
@@ -44,15 +47,20 @@ def get_uniprot_entity(pdb_id, chain_id): #todo cache
 #returns uniprotID, entityID, start, end
 def get_uniprot_segments(pdb_id, chain_id): #todo cache
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{pdb_id}'
-    parsedResponse = restAPI_get_json(url) #todo osetrit 404 error not found, napsat, ze nenalezen
+
+    try:
+        parsedResponse = restAPI_get_json(url) #todo osetrit 404 error not found, napsat, ze nenalezen
+    except HTTPError as err:
+        if err.code == 404:
+            raise ValueError(f"HTTP Error 404 - Not Found: structure {pdb_id} {chain_id} probably does not exist in UniProt or there is a problem with connection to the server.")
+        else:
+            raise
     uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
 
     import re
     pattern = re.compile("^[OPQ][0-9][A-Z0-9]{3}[0-9]$|^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$") #UniProt accession format
-    segments = [] #todo dictionary?
+    segments = []
     for id in uniprotRecords:
-        if not (pattern.match(id)):
-            raise ValueError("pattern does not match") # todo debug, pak smazat
         uniprot_ID = id
         mappings = uniprotRecords[uniprot_ID]["mappings"]
         for entity in mappings:
@@ -67,13 +75,7 @@ def get_uniprot_segments(pdb_id, chain_id): #todo cache
                 segments.append((uniprot_ID, unp_start, unp_end, start_res_num, end_res_num))
 
     if len(segments) < 1:
-        sys.stderr.write(f"Error: '{pdb_id}': no segments with chain id '{chain_id}' was found.\n\n") #todo log
-    elif len(segments) > 1:
-        #sys.stderr.write(f"Warning: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
-        #for x in entities:
-        #        sys.stderr.write(f"{x[0]}\n")
-        #sys.stderr.write(f"\n") #todo
-        return segments
+        raise ValueError(f"Structure {pdb_id} {chain_id} does not exist in UniProt. No uniprot segments were found. ")
     else:
         return segments
 
@@ -111,14 +113,23 @@ def get_fasta_path(data_dir, pdb_id, chain_id):
 def get_pdb_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/PDB/{pdb_id}{chain_id}.pdb"
 
+def get_pdb_path2(data_dir, pdb_id, chain_id):
+    return f"{data_dir}/{pdb_id}{chain_id}.pdb"
+
 def get_lbs_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/lbs/{pdb_id}{chain_id}.txt"
+
+def get_lbs_path2(data_dir, pdb_id, chain_id):
+    return f"{data_dir}/{pdb_id}{chain_id}.txt"
 
 def get_sasa_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/sasa/{pdb_id}{chain_id}.txt"
 
 def get_mappings_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/mappings/{pdb_id}{chain_id}.txt"
+
+def get_mappings_path2(data_dir, pdb_id, chain_id):
+    return f"{data_dir}/{pdb_id}{chain_id}.txt"
 
 def get_feature_path(data_dir, feature, pdb_id, chain_id):
     return f"{data_dir}/features/{feature}/{pdb_id}{chain_id}.txt"
@@ -231,3 +242,11 @@ def isPartOfChain(residue, mappings):
     else:
         return False
 
+def getStructuresFromDirectory(dir):
+    list = []
+    for filename in os.listdir(dir):
+        pdb_id = filename[:4]
+        chain_id = filename[4:5]
+        list.append((pdb_id, chain_id))
+
+    return list
