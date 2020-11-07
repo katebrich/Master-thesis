@@ -1,12 +1,11 @@
-import getopt
 import os
 import sys
 import time
 
 import numpy as np
 
-from helper import parse_dataset_split_chains, getStructuresFromDirectory
-from statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
+from helper import getStructuresFromDirectory
+from unused.statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
 #from unused.features import types_of_features
 import logger
 

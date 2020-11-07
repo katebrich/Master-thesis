@@ -95,18 +95,6 @@ def restAPI_get_json(url):
 def restAPI_get_xml(url):
     return xmltodict.parse(restAPI_get(url)) #todo neni neco rychlejsiho? nepotrebuju ordered dictionary...
 
-def isInDistance(threshold, residue1, residue2):
-    #todo optimize
-    for atom1 in residue1.child_list:
-        if atom1.element == 'H': #consider only heavy atoms
-            continue
-        for atom2 in residue2.child_list:
-            if atom2.element == 'H':
-                continue
-            if atom1 - atom2 < threshold: # the - operator measures distance
-                return True
-    return False
-
 def get_fasta_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/FASTA/{pdb_id}{chain_id}.fasta"
 
@@ -134,7 +122,7 @@ def get_mappings_path2(data_dir, pdb_id, chain_id):
 def get_feature_path(data_dir, feature, pdb_id, chain_id):
     return f"{data_dir}/features/{feature}/{pdb_id}{chain_id}.txt"
 
-def get_entity_id(pdb_id, chain_id):
+def get_entity_id_old(pdb_id, chain_id):
     url = f"https://www.rcsb.org/pdb/rest/describeMol?structureId={pdb_id}.{chain_id}"
     response = str(restAPI_get(url))
     import re
@@ -148,8 +136,21 @@ def get_entity_id(pdb_id, chain_id):
     entity_id = entity_id[1:-1] #remove ""
     return int(entity_id)
 
+def get_entity_id(pdb_id, chain_id):
+    url = f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/molecules/{pdb_id}"
+    response = restAPI_get_json(url)
+    molecules = response[pdb_id]
+    entity_ids = []
+    for molecule in molecules:
+        if "polypeptide" in molecule["molecule_type"]:
+            if chain_id in molecule["in_chains"]:
+                entity_ids.append(molecule["entity_id"])
+    if len(entity_ids) != 1:
+        raise ValueError(f"{pdb_id} {chain_id}: Wrong number of entity IDs! {len(entity_ids)}") #todo jen debug
+    #todo kdyz neexistuje ten chain, vrati to 0 entity IDS -> nejaka hlaska
+    return int(entity_ids[0]) #todo
+
 def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
-    #todo udelat vsechny chainy najednou
     if (cache_file != ""):
         mappings = np.genfromtxt(cache_file, delimiter=' ', dtype='str')
         return list(mappings)
