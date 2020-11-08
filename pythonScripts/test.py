@@ -20,7 +20,7 @@ for filename1 in os.listdir(dir1):
             break
 
 
-print('\n'.join('%s.fasta' % x for x in changed))
+print('\n'.join('%s.fasta' % x for x in unchanged))
 
 
 

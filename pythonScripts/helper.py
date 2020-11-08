@@ -11,7 +11,7 @@ from urllib.error import HTTPError
 #returns uniprotID, entityID, start, end
 from Bio.PDB import is_aa
 
-
+'''
 def get_uniprot_entity(pdb_id, chain_id): #todo cache
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot/{pdb_id}'
     parsedResponse = restAPI_get_json(url)
@@ -43,6 +43,7 @@ def get_uniprot_entity(pdb_id, chain_id): #todo cache
         return entities
     else:
         return entities
+'''
 
 #returns uniprotID, entityID, start, end
 def get_uniprot_segments(pdb_id, chain_id): #todo cache
@@ -91,9 +92,11 @@ def restAPI_get(url):
 def restAPI_get_json(url):
     return json.loads(restAPI_get(url))
 
+'''
 #returns parsed .xml response (dictionary)
 def restAPI_get_xml(url):
     return xmltodict.parse(restAPI_get(url)) #todo neni neco rychlejsiho? nepotrebuju ordered dictionary...
+'''
 
 def get_fasta_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/FASTA/{pdb_id}{chain_id}.fasta"
@@ -122,6 +125,7 @@ def get_mappings_path2(data_dir, pdb_id, chain_id):
 def get_feature_path(data_dir, feature, pdb_id, chain_id):
     return f"{data_dir}/features/{feature}/{pdb_id}{chain_id}.txt"
 
+'''
 def get_entity_id_old(pdb_id, chain_id):
     url = f"https://www.rcsb.org/pdb/rest/describeMol?structureId={pdb_id}.{chain_id}"
     response = str(restAPI_get(url))
@@ -135,6 +139,7 @@ def get_entity_id_old(pdb_id, chain_id):
     entity_id = match.split('=')[1]
     entity_id = entity_id[1:-1] #remove ""
     return int(entity_id)
+'''
 
 def get_entity_id(pdb_id, chain_id):
     url = f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/molecules/{pdb_id}"
@@ -172,9 +177,6 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
             return
         return list(mappings)
 
-
-def eprint(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)
 
 def parse_dataset(filepath):
     list = []

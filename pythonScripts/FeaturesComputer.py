@@ -5,10 +5,10 @@ import sys
 import time
 
 from helper import *
-import logger
+import Logger
 from pydoc import locate
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
 class FeaturesComputer():

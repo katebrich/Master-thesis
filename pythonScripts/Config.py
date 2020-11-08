@@ -16,3 +16,6 @@ class Config():
 
     def get_feature_type(self, feature_name):
         return self.parsed_config["features"][feature_name]["type"]
+
+    def is_feature_defined(self, feature_name):
+        return feature_name in self.parsed_config["features"]

@@ -1,6 +1,11 @@
 import os
 import shutil
-import logger
+import Logger
+
+log_file = "run.log"
+#remove old log
+os.remove(log_file)
+logger = Logger.get_logger(os.path.basename(__file__))
 
 from DatasetDownloader import DatasetDownloader
 from LigandBindingSitesComputer import LigandBindingSitesComputer
@@ -9,13 +14,12 @@ from FeaturesComputer import FeaturesComputer
 from AnalysisComputer import AnalysisComputer
 from Config import Config
 
-
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank" #todo config
 
 config_path="config.json"
 
-dataset_name="test"
-label="_11_07"
+dataset_name="chen11"
+label="_11_06"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 data_dir_name= f"{dataset_name}{label}"
 output_dir= f"{P2Rank_path}/datasets/{data_dir_name}"
@@ -23,8 +27,9 @@ output_dir= f"{P2Rank_path}/datasets/{data_dir_name}"
 filter_ligands="p2rank"                              #todo none, water, small molecules, given IDs, MOAD,...
 
 config = Config(config_path)
-features_list = "unp_PTM"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
+features_list = "HSE_down"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
 features_list = features_list.split(',')
+#features_list = config.get_all_feature_names()
 
 threads=4
 
@@ -37,9 +42,6 @@ features_dir=f"{output_dir}/features"
 analysis_dir=f"{output_dir}/analysis"
 
 distance_threshold = 4
-SASA_threshold = 0.1
-
-remove = True
 
 #todo config parametrem, predavat rovnou tridam
 
@@ -47,19 +49,26 @@ features_computed = []
 analysis_computed = []
 processed = False
 
-tasks="L"
+tasks="F,A"
 tasks=tasks.split(',')
 
-log_file = "run.log"
-#remove old log
-os.remove(log_file)
-logger = logger.get_logger(os.path.basename(__file__))
-
 try:
+    for t in tasks:
+        if t != 'R' and t != 'D' and t != 'M' and t != 'L' and t != 'F' and t != 'A':
+            raise ValueError(f"Unrecognized task '{t}'.")
+            #todo print help
+
+    #todo log command line parametru
+
+    # features check
+    for feature in features_list:
+        if not config.is_feature_defined(feature):
+            raise ValueError(f"Feature {feature} not defined in {config_path}")
+
     while processed == False:
         processed = True
         if ('R' in tasks): #todo jen debug
-            if (remove and os.path.exists(output_dir)):
+            if (os.path.exists(output_dir)):
                 shutil.rmtree(output_dir)
             tasks.remove('R')
         if ('D' in tasks):
@@ -79,7 +88,7 @@ try:
                 tasks.append('M')
                 processed = False
                 continue
-            lc = LigandBindingSitesComputer(dataset_file, lbs_dir, mappings_dir, pdb_dir, distance_threshold, SASA_threshold)
+            lc = LigandBindingSitesComputer(dataset_file, lbs_dir, mappings_dir, pdb_dir, distance_threshold)
             lc.run(threads)
             tasks.remove('L')
         if ('F' in tasks):
@@ -103,6 +112,14 @@ try:
                 tasks.append('L')
                 processed = False
                 continue
+            for feature in features_list:
+                    feature_dir = os.path.join(features_dir, feature)
+                    if not os.path.exists(feature_dir):
+                        tasks.append('F')
+                        processed = False
+                        break
+            if processed == False:
+                continue
             ac = AnalysisComputer(analysis_dir, lbs_dir, config)
             for feature in features_list:
                 if not feature in analysis_computed:
@@ -117,11 +134,23 @@ try:
 except Exception as ex:
     logger.exception(f"{ex}", exc_info=True)
 finally:
-    #copy log to output_dir
-    #todo proc se nekopiruje?
-    shutil.copyfile(log_file, os.path.join(output_dir, log_file)) #todo co kdyz nebude zadany output_dir?
+    #copy created log to output_dir
+    log_path = os.path.join(output_dir, log_file)
+    if os.path.exists(log_path):
+        #append to existing log
+        with open(log_path, "a") as f:
+            with open(log_file, "r") as log:
+                f.write('\n')
+                f.write("------------------------------------------------------------------------------------------")
+                f.write('\n')
+                f.write('\n')
+                f.write(log.read())
+    else:
+        #create new log file in output directory
+        shutil.copyfile(log_file, log_path)  # todo co kdyz nebude zadany output_dir?
 
 
+#todo prank
 '''
 
 if [[ $tasks == *"p"* ]]; then

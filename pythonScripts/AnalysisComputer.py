@@ -4,12 +4,13 @@ import time
 
 import numpy as np
 
+import Plots
 from helper import getStructuresFromDirectory
-from unused.statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
+from statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
 #from unused.features import types_of_features
-import logger
+import Logger
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 
 class AnalysisComputer():
     output_dir = ""
@@ -31,13 +32,18 @@ class AnalysisComputer():
         self.feature_dir = feature_dir
         self.feature_name = feature_name
 
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
+        feature_output_dir = os.path.join(self.output_dir, feature_name)
+
+        #if not os.path.exists(self.output_dir):
+        #    os.makedirs(self.output_dir)
+
+        if not os.path.exists(feature_output_dir):
+            os.makedirs(feature_output_dir)
 
         dataset = getStructuresFromDirectory(self.lbs_dir)
 
         start = time.time()
-        logger.info(f"Running analysis of feature {self.feature_name} started...")
+        logger.info(f"Running analysis for feature '{self.feature_name}' started...")
 
         self.pairs = []
         self.errors = []
@@ -56,16 +62,22 @@ class AnalysisComputer():
 
         feature_type = self.config.get_feature_type(self.feature_name) #todo kdyz neznamy typ, tak aby to cele nespadlo..asi
 
-        file = os.path.join(self.output_dir, f"{feature_name}.txt")
+
+        file = os.path.join(feature_output_dir, f"results.txt")
         if (feature_type == "binary"):
             logger.info("Running Fischer's exact test")
             fischers_exact_test(self.pairs, file)
         elif (feature_type == "continuous"):
             logger.info("Running Welch's T-test")
             welchs_t_test(self.pairs, file)
-        elif (feature_type == "categorical"):
+            Plots.plot_histogram(self.pairs, 10, feature_output_dir)
+            Plots.plot_histogram(self.pairs, 20, feature_output_dir)
+            Plots.plot_histogram(self.pairs, 50, feature_output_dir)
+            Plots.plot_histogram(self.pairs, 100, feature_output_dir)
+        elif (feature_type == "categorical" or feature_type == "ordinal"):
             logger.info("Running Chi-squared test")
             chi_squared_test(self.pairs, file)
+            Plots.plot_binding_nonbinding_ratios(self.pairs, feature_output_dir)
         else:
             #todo
             logger.error(f"Unknown type of feature '{feature_type}'. Please specify the type in config.")
@@ -100,7 +112,7 @@ class AnalysisComputer():
                 else:
                     missing_vals.append(res_num)
                     continue
-                self.pairs.append((lbs_val, feature_val))
+                self.pairs.append((lbs_val, feature_val)) #todo aby to ta metoda vracela misto rovnou prirazovala
             if (len(missing_vals) > 0):
                 logger.debug(f"{pdb_id} {chain_id}: Missing feature values for residues: {missing_vals}") #todo vyresit to
         except (KeyboardInterrupt, SystemExit):

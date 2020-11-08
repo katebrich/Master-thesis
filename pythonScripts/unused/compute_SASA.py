@@ -6,13 +6,13 @@ import getopt
 import sys
 import os
 import threading
-import logger
+import Logger
 import time
 from scipy.spatial import distance
 import SASA
 from shutil import copyfile
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
 def __get_sasa(structure):

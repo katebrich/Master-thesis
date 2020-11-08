@@ -8,12 +8,12 @@ import getopt
 import sys
 import os
 import threading
-import logger
+import Logger
 import time
 from MOAD import MOAD
 import numpy
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
 class LigandBindingSitesComputer():
@@ -22,17 +22,17 @@ class LigandBindingSitesComputer():
     mappings_dir=""
     pdb_dir= ""
     distance_threshold = ""
-    SASA_threshold = ""
+    #SASA_threshold = ""
     filter_level = "p2rank"  # todo parametr
     moad=""
     total = ""
 
-    def __init__(self, dataset_file, output_dir, mappings_dir, PDB_dir, distance_threshold=4, SASA_threshold=0.5):
+    def __init__(self, dataset_file, output_dir, mappings_dir, PDB_dir, distance_threshold=4): #SASA_threshold=0.5):
         self.output_dir = output_dir
         self.mappings_dir = mappings_dir
         self.pdb_dir = PDB_dir
         self.distance_threshold = distance_threshold
-        self.SASA_threshold = SASA_threshold
+        #self.SASA_threshold = SASA_threshold
         self.dataset_file = dataset_file
 
     def run(self, threads):

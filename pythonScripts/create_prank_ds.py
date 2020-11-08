@@ -2,9 +2,9 @@ import getopt
 import sys
 from os.path import isfile
 import os
-import logger
+import Logger
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 
 dataset_dir = ""
 out_path = ""

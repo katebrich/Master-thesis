@@ -8,10 +8,10 @@ from unused.features import default_values
 from helper import res_mappings_author_to_pdbe
 import csv
 import numpy as np
-import logger
+import Logger
 import time
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
 def read_feature_vals(feature, data_dir, pdb_id, chain_id):

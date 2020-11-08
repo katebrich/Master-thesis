@@ -5,10 +5,10 @@ import threading
 import traceback
 import time
 
-from helper import eprint, parse_dataset_split_chains, res_mappings_author_to_pdbe, getStructuresFromDirectory
-import logger
+from helper import parse_dataset_split_chains, res_mappings_author_to_pdbe, getStructuresFromDirectory
+import Logger
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
 class MappingsComputer:

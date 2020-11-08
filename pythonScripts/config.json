@@ -101,7 +101,7 @@
 			"default": "0"
 		},
 		"HSE_down": {
-			"import_path": "Features.PDB.HSE_up",
+			"import_path": "Features.PDB.HSE_down",
 			"type": "continuous",
 			"default": "0"
 		},

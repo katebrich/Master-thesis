@@ -15,7 +15,7 @@ class HSE_up():
             if not (r.id[0].isspace()):  # is HETATM
                 continue
             try:
-                hse = int(r.xtra["EXP_HSE_B_U"])
+                hse = int(r.xtra["EXP_HSE_B_U"]) #todo proc vychazi stejne Up i Down?
                 auth_res_num = getFullAuthorResNum(r.id)
                 pdbe_res_num = mappings[auth_res_num]
                 feature_vals.append((pdbe_res_num, hse))

@@ -3,16 +3,16 @@ from helper import parse_dataset
 import threading
 import traceback
 import getopt
-from helper import eprint, restAPI_get, get_entity_id
+from helper import restAPI_get, get_entity_id
 import uuid
 from Bio import SeqIO
 from Bio.PDB import PDBParser, PDBIO
 from Bio.PDB.PDBIO import Select
-import logger
+import Logger
 import time
 from multiprocessing import Pool, Value
 
-logger = logger.get_logger(os.path.basename(__file__))
+logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
 
@@ -68,13 +68,15 @@ class DatasetDownloader():
 
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
-        os.makedirs(self.output_PDB)
-        os.makedirs(self.output_FASTA)  # todo co kdyz existuje?
+        if not os.path.exists(self.output_PDB):
+            os.makedirs(self.output_PDB)
+        if not os.path.exists(self.output_FASTA):
+            os.makedirs(self.output_FASTA)
 
         dataset = parse_dataset(self.dataset_file)  # todo co kdyz neni spravny format
 
         start = time.time()
-        logger.info(f"Downloading structures from {self.dataset_file} to {self.output_dir} started...")
+        logger.info(f"Downloading structures from to {self.output_dir} started...")
 
         self.total = len(dataset)
 
@@ -129,7 +131,7 @@ class DatasetDownloader():
         temp_file = os.path.join(self.output_PDB, f"temp_{uuid.uuid1()}")
         try:
             # temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
-            self.get_FASTA(self.output_FASTA, pdb_id, chain_ids)
+            #self.get_FASTA(self.output_FASTA, pdb_id, chain_ids)
             # os.remove(temp_file)
             self.get_PDB(temp_file, self.output_PDB, pdb_id, chain_ids, self.ligands_filter)
         except (KeyboardInterrupt, SystemExit):
