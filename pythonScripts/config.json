@@ -128,7 +128,7 @@
 		"pdbekb_conservation": {
 			"import_path": "Features.PDBeKB.Conservation",
 			"type": "ordinal", 
-			"default": "0"
+			"default": "1"
 		},
 		"dynamine": {
 			"import_path": "Features.PDBeKB.Dynamine",

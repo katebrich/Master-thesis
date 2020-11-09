@@ -15,42 +15,10 @@ from multiprocessing import Pool, Value
 logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
 
-
-'''
-#parse arguments:
-try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:l:')
-except getopt.GetoptError as err:
-    logger.error(err) #unknown option or missing argument
-    sys.exit(1)
-for opt, arg in opts:
-    if opt in ("-d", "--dataset"):
-        dataset_file = arg
-    elif opt in ("-o", "--output_dir"):
-        output_dir = arg
-    elif opt in ("-l", "--ligands_filter"):
-        ligands_filter = arg #todo check possible values
-    elif opt in ("-t", "--threads"): #todo check if threads >= 1, int
-        threads = arg
-
-if (dataset_file == ""):
-    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
-    sys.exit(1)
-#output_dir = os.path.join(os.path.dirname(dataset_file), f"test_{uuid.uuid1()}")  #todo jen pro debugovani
-if (output_dir == ""):
-    logger.error("Output directory must be specified.")
-    sys.exit(1)
-'''
-
-
-
-
-
 class DatasetDownloader():
     dataset_file = ""
     output_dir = ""
     ligands_filter = None
-    #threads = 1
 
     total=""
     output_PDB=""
@@ -131,7 +99,7 @@ class DatasetDownloader():
         temp_file = os.path.join(self.output_PDB, f"temp_{uuid.uuid1()}")
         try:
             # temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
-            #self.get_FASTA(self.output_FASTA, pdb_id, chain_ids)
+            self.get_FASTA(self.output_FASTA, pdb_id, chain_ids) #todo odkomentovat
             # os.remove(temp_file)
             self.get_PDB(temp_file, self.output_PDB, pdb_id, chain_ids, self.ligands_filter)
         except (KeyboardInterrupt, SystemExit):
@@ -170,7 +138,7 @@ class ChainSelect(Select): #todo tohle popsat v praci
         else:
             return 0
     def accept_atom(self, atom):
-        if atom.element == 'H': #do not save hydrogens
+        if atom.element == 'H' or atom.element == 'D': #do not save hydrogens
             return 0
         else:
             return 1

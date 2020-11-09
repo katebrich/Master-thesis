@@ -219,7 +219,6 @@
 2sns	A
 2tsc	A
 2xis	A
-2yhx	A
 3dfr	A
 3er3	E
 3fx2	A

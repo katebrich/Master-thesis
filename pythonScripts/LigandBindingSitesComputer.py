@@ -192,7 +192,10 @@ class LigandBindingSitesComputer():
             sr = SASA.ShrakeRupley()
             sr.compute(structure, level="R")
             for residue in chain.get_residues():
-                threshold = 0.05 * sasa_residues[residue.resname]
+                if residue.resname not in sasa_residues: #for example for unknown amino acids (UNK, Xaa)
+                    threshold = 5 #default threshold
+                else:
+                    threshold = 0.05 * sasa_residues[residue.resname]
                 if (isPartOfChain(residue, mappings) and residue.sasa > threshold): #leave out residues that are not on the surface
                     AAs.append(residue)
         finally:

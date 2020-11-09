@@ -35,6 +35,7 @@ joined:
 1pso I - neni v unp
 1igj A,B - neni v unp
 2f2q A - incorrect mappings
+2yhx	A - ma v sekvenci spoustu X (neznama AK)
 
 
 

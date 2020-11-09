@@ -1,10 +1,14 @@
+import getopt
 import os
 import shutil
+import sys
+
 import Logger
 
-log_file = "run.log"
+#log_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "run.log")
 #remove old log
-os.remove(log_file)
+if os.path.exists(Logger.get_log_path()):
+    os.remove(Logger.get_log_path())
 logger = Logger.get_logger(os.path.basename(__file__))
 
 from DatasetDownloader import DatasetDownloader
@@ -14,24 +18,64 @@ from FeaturesComputer import FeaturesComputer
 from AnalysisComputer import AnalysisComputer
 from Config import Config
 
-P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank" #todo config
 
-config_path="config.json"
 
-dataset_name="chen11"
-label="_11_06"
+#default values
+threads=4
+config_path=os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
+filter_ligands="p2rank"  #todo
+tasks="A"
+features_list=""
+distance_threshold = 4
+
+'''
+P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
+dataset_name="joined"
+label="_11_08"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 data_dir_name= f"{dataset_name}{label}"
 output_dir= f"{P2Rank_path}/datasets/{data_dir_name}"
+#features_list = "HSE_down"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
+#features_list = features_list.split(',')
+'''
 
-filter_ligands="p2rank"                              #todo none, water, small molecules, given IDs, MOAD,...
+dataset_file=""
+output_dir=""
+
+#parse arguments:
+try:
+    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:m:f:')
+except getopt.GetoptError as err:
+    logger.error(err) #unknown option or missing argument
+    sys.exit(1)
+for opt, arg in opts:
+    if opt in ("-d", "--dataset"):
+        dataset_file = arg
+    elif opt in ("-o", "--output_dir"):
+        output_dir = arg
+    elif opt in ("-t", "--tasks"):
+        tasks = arg #todo check possible values
+    elif opt in ("-m", "--threads"): #todo check if threads >= 1, int
+        threads = arg
+    elif opt in ("-f", "--features"):
+        features_list = arg
+
+if (dataset_file == ""):
+    logger.error("Dataset must be specified.")
+    sys.exit(1)
+    #todo print help
+if (output_dir == ""):
+    logger.error("Output directory must be specified.")
+    sys.exit(1)
+    #todo print help
 
 config = Config(config_path)
-features_list = "HSE_down"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
-features_list = features_list.split(',')
-#features_list = config.get_all_feature_names()
+if (features_list == "" or features_list == "x"):
+    features_list = config.get_all_feature_names()
+else:
+    features_list = features_list.split(',')
 
-threads=4
+tasks=tasks.split(',') #todo check spravny format
 
 downloads_dir = output_dir
 pdb_dir = f"{output_dir}/PDB"
@@ -39,19 +83,13 @@ fasta_dir = f"{output_dir}/FASTA"
 lbs_dir = f"{output_dir}/lbs"
 mappings_dir = f"{output_dir}/mappings"
 features_dir=f"{output_dir}/features"
-analysis_dir=f"{output_dir}/analysis"
-
-distance_threshold = 4
+analysis_dir=f"{output_dir}/analysis" #todo
 
 #todo config parametrem, predavat rovnou tridam
 
 features_computed = []
 analysis_computed = []
 processed = False
-
-tasks="F,A"
-tasks=tasks.split(',')
-
 try:
     for t in tasks:
         if t != 'R' and t != 'D' and t != 'M' and t != 'L' and t != 'F' and t != 'A':
@@ -134,12 +172,12 @@ try:
 except Exception as ex:
     logger.exception(f"{ex}", exc_info=True)
 finally:
-    #copy created log to output_dir
-    log_path = os.path.join(output_dir, log_file)
+    #copy log to output_dir
+    log_path = os.path.join(output_dir, "run.log")
     if os.path.exists(log_path):
         #append to existing log
         with open(log_path, "a") as f:
-            with open(log_file, "r") as log:
+            with open(Logger.get_log_path(), "r") as log:
                 f.write('\n')
                 f.write("------------------------------------------------------------------------------------------")
                 f.write('\n')
@@ -147,7 +185,7 @@ finally:
                 f.write(log.read())
     else:
         #create new log file in output directory
-        shutil.copyfile(log_file, log_path)  # todo co kdyz nebude zadany output_dir?
+        shutil.copyfile(Logger.get_log_path(), log_path)
 
 
 #todo prank

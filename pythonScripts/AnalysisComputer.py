@@ -40,7 +40,7 @@ class AnalysisComputer():
         if not os.path.exists(feature_output_dir):
             os.makedirs(feature_output_dir)
 
-        dataset = getStructuresFromDirectory(self.lbs_dir)
+        dataset = getStructuresFromDirectory(self.feature_dir) #compute only for structures that have the feature computed, ignore the rest
 
         start = time.time()
         logger.info(f"Running analysis for feature '{self.feature_name}' started...")
@@ -110,11 +110,11 @@ class AnalysisComputer():
                 if res_num in lbs_dict:
                     lbs_val = lbs_dict[res_num]
                 else:
-                    missing_vals.append(res_num)
+                #    missing_vals.append(res_num)
                     continue
                 self.pairs.append((lbs_val, feature_val)) #todo aby to ta metoda vracela misto rovnou prirazovala
-            if (len(missing_vals) > 0):
-                logger.debug(f"{pdb_id} {chain_id}: Missing feature values for residues: {missing_vals}") #todo vyresit to
+            #if (len(missing_vals) > 0):
+                #logger.debug(f"{pdb_id} {chain_id}: Missing feature values for residues: {missing_vals}")
         except (KeyboardInterrupt, SystemExit):
             raise
         except Exception as ex:

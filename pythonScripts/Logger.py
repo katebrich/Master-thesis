@@ -1,10 +1,14 @@
 import logging
+import os
 import sys
 from logging.handlers import RotatingFileHandler
 from logging import FileHandler
 
+def get_log_path():
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), "run.log")
+
 def get_logger(name):
-    file="./run.log"
+    file = get_log_path()
     log_formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(filename)s(line %(lineno)d) %(message)s')
 
     #file_handler = RotatingFileHandler(file, mode='w+', maxBytes=5*1024*1024,

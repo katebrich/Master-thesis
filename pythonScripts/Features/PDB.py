@@ -64,8 +64,7 @@ class ExposureCN():
                 pdbe_res_num = mappings[auth_res_num]
                 feature_vals.append((pdbe_res_num, cn))
             except:
-                raise ValueError(
-                    f"Error CN: {pdb_id} {chain_id}: residue {r}")  # todo jestli se to pro cely dataset nestane, tak asi muzu smazat try-except
+                pass # some residues are incomplete in PDB file (i.e. CB atom is missing) and no EXP_CN value is returned
 
         return feature_vals
 
