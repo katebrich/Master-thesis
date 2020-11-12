@@ -60,7 +60,7 @@ class MappingsComputer:
             raise
         except Exception as ex:
             error = True
-            logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}")
+            logger.debug(f"Error while processing {pdb_id} {chain_id}: {ex}")
         finally:
             global counter
             with counter.get_lock():
@@ -68,7 +68,7 @@ class MappingsComputer:
                 counter.value += 1
             if (error):
                 errors.append(structure)
-                logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED !")
+                logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
                 #todo zapsat nekam chybu
             else:
                 logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")

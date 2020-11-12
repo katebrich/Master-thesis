@@ -81,7 +81,7 @@ class Variation():
                 feat_end = int(feature["end"])
                 if (feat_begin != feat_end):
                     raise ValueError(
-                        f"ERROR: {uniprot_id}: url = {url} - feat_begin != feat_end")  # todo only for debugging
+                        f"ERROR: {uniprot_id}: url = {url} - feat_begin {feat_begin} != feat_end {feat_end}")  # todo only for debugging
                 rng = range(feat_begin, feat_end + 1)
                 for i in rng:
                     res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0

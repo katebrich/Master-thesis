@@ -21,6 +21,9 @@ def get_funPDBe(resource, label, pdb_id, chain_id):
     if bug:
         raise ValueError(f"ERROR: {pdb_id} {chain_id}: {resource}: more values for some residues.")
 
+    if (len(feature_vals) == 0): # no results for this chain
+        raise ValueError(f"FunPDBe: {resource} {label}: no values found for {pdb_id} {chain_id}!")
+
     feature_vals_list = [(k, v) for k, v in feature_vals.items()]
     return feature_vals_list
 

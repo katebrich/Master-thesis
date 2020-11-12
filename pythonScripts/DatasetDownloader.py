@@ -44,7 +44,7 @@ class DatasetDownloader():
         dataset = parse_dataset(self.dataset_file)  # todo co kdyz neni spravny format
 
         start = time.time()
-        logger.info(f"Downloading structures from to {self.output_dir} started...")
+        logger.info(f"Downloading structures to {self.output_dir} started...")
 
         self.total = len(dataset)
 
@@ -106,7 +106,7 @@ class DatasetDownloader():
             raise
         except Exception as ex:
             error = True
-            logger.exception(f"Error while downloading {pdb_id} {chain_ids}: {ex}", exc_info=True)
+            logger.debug(f"Error while downloading {pdb_id} {chain_ids}: {ex}", exc_info=True)
         finally:
             if os.path.exists(temp_file):
                 os.remove(temp_file)
@@ -116,9 +116,9 @@ class DatasetDownloader():
                 counter.value += 1
             if (error):
                 errors.append(structure)
-                logger.error(f"{idx}/{self.total}: {pdb_id} {chain_ids} NOT DOWNLOADED !")
+                logger.error(f"{idx}/{self.total}: {pdb_id} {chain_ids} NOT PROCESSED ! See log for more details.")
             else:
-                logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_ids} downloaded")
+                logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_ids} processed")
             return errors
 
     def __pool_init(self, args):

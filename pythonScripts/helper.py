@@ -4,7 +4,7 @@ import os
 import urllib.request
 import json
 import sys
-import xmltodict
+#import xmltodict
 import numpy as np
 from urllib.error import HTTPError
 

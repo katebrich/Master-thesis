@@ -44,7 +44,7 @@ class P2RankCustomFeatureCreator():
         dataset = parse_dataset_split_chains(dataset_file)
 
         start = time.time()
-        logger.info("Creating p2rank custom feature files started...") #todo log asi rovnou do konzole, kdyz se to spousti takhle samostatne
+        logger.info(f"Creating p2rank custom feature files started...Features: {self.features}") #todo log asi rovnou do konzole, kdyz se to spousti takhle samostatne
 
         self.total = len(dataset)
 
@@ -64,7 +64,7 @@ class P2RankCustomFeatureCreator():
 
     def read_feature_vals(self, feature, data_dir, pdb_id, chain_id):
         path = os.path.join(data_dir, "features", feature, f"{pdb_id}{chain_id}.txt")  # todo
-        feature_vals = np.genfromtxt(path, delimiter=' ')
+        feature_vals = np.genfromtxt(path, delimiter=' ', dtype='str')
         return dict(feature_vals)
 
     def create_file(self, structure):

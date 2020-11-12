@@ -1,5 +1,10 @@
 {
 	"features": {
+		"lbs": {
+			"import_path": "Features.X.X",
+			"type": "binary",
+			"default": "0"
+		},
 		"unp_PTM": {
 			"import_path": "Features.UniProt.PTM",
 			"type": "binary",

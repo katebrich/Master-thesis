@@ -119,50 +119,12 @@ class AnalysisComputer():
             raise
         except Exception as ex:
             error = True
-            logger.exception(f"Error while processing {pdb_id} {chain_id}: {ex}")
+            logger.debug(f"Error while processing {pdb_id} {chain_id}: {ex}")
         finally:
             self.counter  += 1
             if (error):
                 self.errors.append(structure)
-                logger.error(f"{self.counter}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED !")
+                logger.error(f"{self.counter}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
             else:
                 logger.debug(f"{self.counter}/{self.total}: {pdb_id} {chain_id} processed")
 
-
-'''
-#parse arguments:
-try:
-    opts, args = getopt.getopt(sys.argv[1:], 'f:v:d:o:l:t:')
-except getopt.GetoptError as err:
-    logger.error(err) #unknown option or missing argument
-    sys.exit(1)
-for opt, arg in opts:
-    if opt in ("-d", "--dataset"):
-        dataset_file = arg
-    elif opt in ("-o", "--output_dir"):
-        output_dir = arg
-    elif opt in ("-l", "--lbs_dir"):
-        lbs_dir = arg
-    elif opt in ("-t", "--threads"):
-        threads = arg #todo check if threads >= 1, int
-    elif opt in ("-v", "--feature_values_dir"):
-        feature_dir = arg
-    elif opt in ("-f", "--feature_name"):
-        feature_name = arg
-
-if (dataset_file == ""):
-    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
-    sys.exit(1)
-if (dataset_file == ""):
-    logger.error("Dataset must be specified.") #todo psat z jakeho skriptu je chyba
-    sys.exit(1)
-if (feature_name == ""):
-    logger.error("Feature name must be specified.")
-    sys.exit(1)
-if (lbs_dir == ""):
-    logger.error("Directory with ligand binding sites data must be specified.")
-    sys.exit(1)
-if (feature_dir == ""):
-    logger.error("Directory with feature values must be specified.")
-    sys.exit(1)
-'''

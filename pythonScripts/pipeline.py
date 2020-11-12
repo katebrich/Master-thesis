@@ -27,20 +27,19 @@ filter_ligands="p2rank"  #todo
 tasks="A"
 features_list=""
 distance_threshold = 4
+dataset_file=""
+output_dir=""
 
-'''
+
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="joined"
-label="_11_08"
+dataset_name="debug"
+label="_11_09_test"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 data_dir_name= f"{dataset_name}{label}"
 output_dir= f"{P2Rank_path}/datasets/{data_dir_name}"
-#features_list = "HSE_down"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
+features_list = "lbs"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
 #features_list = features_list.split(',')
-'''
 
-dataset_file=""
-output_dir=""
 
 #parse arguments:
 try:
