@@ -23,8 +23,7 @@ from Config import Config
 #default values
 threads=4
 config_path=os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
-filter_ligands="p2rank"  #todo
-tasks="A"
+tasks="D"
 features_list=""
 distance_threshold = 4
 dataset_file=""
@@ -32,8 +31,8 @@ output_dir=""
 
 
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="debug"
-label="_11_09_test"
+dataset_name="chen11"
+label="_11_12_test"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 data_dir_name= f"{dataset_name}{label}"
 output_dir= f"{P2Rank_path}/datasets/{data_dir_name}"
@@ -95,7 +94,7 @@ try:
             raise ValueError(f"Unrecognized task '{t}'.")
             #todo print help
 
-    #todo log command line parametru
+    #todo log command line parameters
 
     # features check
     for feature in features_list:
@@ -109,7 +108,7 @@ try:
                 shutil.rmtree(output_dir)
             tasks.remove('R')
         if ('D' in tasks):
-            dd = DatasetDownloader(dataset_file, downloads_dir) #todo filter ligands?
+            dd = DatasetDownloader(dataset_file, downloads_dir)
             dd.run(threads)
             tasks.remove('D')
         if ('M' in tasks):

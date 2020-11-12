@@ -19,9 +19,9 @@ class MOAD:
 
     def __download_MOAD_file(self):
         url = "http://bindingmoad.org/files/csv/every.csv"
-        #response = restAPI_get(url)
-        #with open(self.MOAD_file_path, 'wb') as file:
-        #    file.write(response)
+        response = restAPI_get(url)
+        with open(self.MOAD_file_path, 'wb') as file:
+            file.write(response)
         with open(self.MOAD_file_path, 'r') as file:
             csv_reader = csv.reader(file, delimiter=',')
             pdb_id = ""

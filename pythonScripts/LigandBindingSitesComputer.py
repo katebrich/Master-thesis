@@ -22,11 +22,11 @@ class LigandBindingSitesComputer():
     mappings_dir=""
     pdb_dir= ""
     distance_threshold = ""
+    filter=False
     #SASA_threshold = ""
-    filter_level = "p2rank"  # todo parametr
+    #filter_level = "p2rank"
     moad=""
     total = ""
-
     def __init__(self, dataset_file, output_dir, mappings_dir, PDB_dir, distance_threshold=4): #SASA_threshold=0.5):
         self.output_dir = output_dir
         self.mappings_dir = mappings_dir
@@ -35,18 +35,15 @@ class LigandBindingSitesComputer():
         #self.SASA_threshold = SASA_threshold
         self.dataset_file = dataset_file
 
-    def run(self, threads):
+    def run(self, threads, filter=False):
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-        dataset = parse_dataset_split_chains(self.dataset_file)
-
-        if (self.filter_level == "MOAD"):
-            start = time.time()
-            logger.info(f"Downloading MOAD data file (~18 MB)...")
-            self.moad = MOAD()
-            logger.info(f"MOAD data file downloaded.")
-            logger.debug(f"Finished in {time.time() - start}")
+        self.filter = filter
+        if (filter):
+            dataset = parse_dataset_ligands(self.dataset_file)
+        else:
+            dataset = parse_dataset_split_chains(self.dataset_file)
 
         start = time.time()
         logger.info(f"Computing ligand binding sites started...")
@@ -75,7 +72,7 @@ class LigandBindingSitesComputer():
         error=False
         pdb_path = get_pdb_path2(self.pdb_dir, pdb_id, chain_id)
         try:
-            lbs = self.compute_ligand_binding_sites(pdb_id, chain_id, pdb_path)
+            lbs = self.compute_ligand_binding_sites(structure, pdb_path)
             output_file = get_lbs_path2(self.output_dir, pdb_id, chain_id)
             with open(output_file, 'w') as f:
                 f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in lbs))
@@ -97,87 +94,32 @@ class LigandBindingSitesComputer():
                 logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
             return errors
 
-    def filter_ligands(self, ligands, pdb_id, chain_id):
-        result = []
-        skipped = []
-        small = []
-        center_far = []
-        if (self.filter_level == "none"):
-            result = ligands
-        elif (self.filter_level == "p2rank"):
-            for ligand in ligands:
-                #name of the PDB group is not on the list of ignored groups:
-                ignored = ["HOH", "DOD", "WAT", "NAG", "MAN", "UNK", "GLC", "ABA", "MPD", "GOL", "SO4", "PO4"]
-                if (ligand.resname in ignored):
-                    skipped.append(ligand.resname) #todo debug
-                    continue
-                #number of ligand atoms is greater or equal than 5:
-                if (len(ligand.child_list) < 5):
-                    small.append(ligand.resname)  # todo debug
-                    continue
-                #distance form the center of the mass of the ligand to the closest protein atom is not greater than 5.5A #todo tohle pravidlo moc nevychazi
-                #center = getCenterOfMass(ligand.child_list)
-                #threshold = 5.5
-                #success = False
-                #i = 0
-                #for AA in AAs:
-                #    #if (success == True):
-                #    #    break
-                #    for atom in AA.child_list:
-                #       if distance.euclidean(atom.coord, center) <= threshold:
-                #            success = True
-                #            i += 1
-                #            break
-                #if (success == False):
-                #    center_far.append(ligand.resname)  # todo debug
-                #    continue
-                result.append(ligand)
-            #print(
-            #    f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {[x.resname for x in result]}\nFar: {center_far}, Small: {small}, Ignored: {skipped}\n") #todo debug only
-        elif (self.filter_level == "MOAD"):
-            relevant = self.moad.get_relevant_ligands(pdb_id, chain_id)
-            if (relevant == None):
-                #raise ValueError("Structure excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5") #todo hezci hlaska, vsechny duvody
-              #  print(f"Structure {pdb_id} {chain_id} excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5\n")
-                return result # todo
-            for ligand in ligands:
-                if ((str(ligand.resname), str(ligand.id[1])) in relevant):
-                    result.append(ligand)
-            #print( f"RELEVANT {pdb_id} {chain_id} : {relevant}")
-            if (len(result) != len(relevant)):
-                pass
-                print(f"ERROR: {pdb_id} {chain_id}:\nRESULT: {result} \nRELEVANT: {relevant}\nLIGANDS: {ligands}\n")
-            else:
-                pass
-               # print(f"OK: {pdb_id} {chain_id}\nRESULT: {result} \nRELEVANT: {relevant}\nLIGANDS: {ligands}\n")
-
-        else:
-            raise ValueError(f"Unknown filter level {self.filter_level}")
-
-        return result
-
     # returns list of tuples:
     # [0] residue number corresponding to PDBe molecule
     # [1] feature value - 0=not binding residue, 1=binding residue
-    def compute_ligand_binding_sites(self, pdb_id, chain_id, pdb_file_path):
+    def compute_ligand_binding_sites(self, structure, pdb_file_path):
+        pdb_id = structure[0]
+        chain_id = structure[1]
+
         mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path2(self.mappings_dir, pdb_id, chain_id)))
 
         AAs = []
-        ligands_all = []
+        ligands = []
 
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)
-        structure = parser.get_structure(pdb_id + chain_id, pdb_file_path)
-        chain = structure[0][chain_id]
-        #get ligands
-        for residue in chain.get_residues():
-            if not isPartOfChain(residue, mappings):
-                #trim spaces at the beginning of ligand resname; bug in PDB parser
-                residue.resname = residue.resname.lstrip() #todo tohle je potreba na MOAD, prehodit jinam, tady smazat?
-                ligands_all.append(residue)
+        # get ligands #todo debug
+        if (self.filter): #ligands read directly from dataset file
+            ligands = structure[2]
+        else: #get all ligands from PDB file
+            parser = PDBParser(PERMISSIVE=0, QUIET=1)
+            structure = parser.get_structure(pdb_id + chain_id, pdb_file_path)
+            chain = structure[0][chain_id]
+            for residue in chain.get_residues():
+                if not isPartOfChain(residue, mappings):
+                    #trim spaces at the beginning of ligand resname; bug in PDB parser
+                    residue.resname = residue.resname.lstrip()
+                    ligands.append(residue)
 
-        ligands = self.filter_ligands(ligands_all, pdb_id, chain_id) #todo tohle tu asi nebude
-        #ligands = ligands_all
-
+        # get AAs
         # create temporary .pdb file without HETATM lines to compute Solvent Accessible Surface atoms
         temp_file_path = os.path.join(self.output_dir, f"temp_{uuid.uuid1()}")
         try:
@@ -223,7 +165,6 @@ class LigandBindingSitesComputer():
 
     #True if there exists a heavy (non-hydrogen) atom on SAS of AA residue which is at maximum distance "threshold" from at least one ligand residue heavy atom
     def isInDistance(self, AA_res, ligand_res):
-        # todo optimize, KD tree?
         for atom1 in AA_res.child_list:
             if atom1.element == 'H' or atom1.sasa == 0:  # consider only heavy atoms on Solvent Accessible Surface (SAS)
                 continue
@@ -231,7 +172,7 @@ class LigandBindingSitesComputer():
                 if atom2.element == 'H':
                     continue
                 dist = numpy.linalg.norm(atom1.coord - atom2.coord)
-                if dist < self.distance_threshold:  # the '-' operator measures distance
+                if dist < self.distance_threshold:
                     return True
         return False
 

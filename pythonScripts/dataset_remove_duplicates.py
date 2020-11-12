@@ -1,7 +1,7 @@
 import os
 from collections import Counter
 
-from helper import parse_dataset, parse_dataset_split_chains
+from helper import parse_dataset_not_split_chains, parse_dataset_split_chains
 import re
 from Bio.PDB import *
 

@@ -1,5 +1,7 @@
 import os, sys
-from helper import parse_dataset
+
+from MOAD import MOAD
+from helper import parse_dataset_not_split_chains
 import threading
 import traceback
 import getopt
@@ -18,12 +20,12 @@ counter = None
 class DatasetDownloader():
     dataset_file = ""
     output_dir = ""
-    ligands_filter = None
 
     total=""
     output_PDB=""
     output_FASTA=""
 
+    #ligands_filter:
     def __init__(self, dataset_file, output_dir):
         self.dataset_file = dataset_file
         self.output_dir = output_dir
@@ -41,7 +43,7 @@ class DatasetDownloader():
         if not os.path.exists(self.output_FASTA):
             os.makedirs(self.output_FASTA)
 
-        dataset = parse_dataset(self.dataset_file)  # todo co kdyz neni spravny format
+        dataset = parse_dataset_not_split_chains(self.dataset_file)  # todo co kdyz neni spravny format
 
         start = time.time()
         logger.info(f"Downloading structures to {self.output_dir} started...")
@@ -55,15 +57,14 @@ class DatasetDownloader():
         total_errors = [ent for sublist in errors for ent in sublist]
 
         if (len(total_errors) == 0):
-            logger.info(f"Downloading structures finished: All structures downloaded successfully.")
+            logger.info(f"Downloading structures finished: All structures downloaded successfully.")  #todo cas rovnou sem
         else:
             errors_format = '\n'.join('%s %s' % x for x in total_errors)
             logger.warning(
                 f"Downloading structures finished: Some structures were not downloaded successfully: \n{errors_format}")
         logger.debug(f"Finished in {time.time() - start}")
 
-    def get_PDB(self, temp_file, out_dir, pdb_id, chain_ids, ligands_filter=None):
-        # in_pdb_file_path = os.path.join(in_dir, pdb_id + ".pdb") #todo windows?
+    def get_PDB(self, temp_file, out_dir, pdb_id, chain_ids):
         url = f'https://www.ebi.ac.uk/pdbe/entry-files/pdb{pdb_id}.ent'
         response = restAPI_get(url)
         with open(temp_file, 'wb') as file:
@@ -75,12 +76,12 @@ class DatasetDownloader():
             out_pdb_file_path = os.path.join(out_dir, pdb_id + chain_id + ".pdb")
             io = PDBIO()
             io.set_structure(structure)
-            io.save(out_pdb_file_path, ChainSelect(chain_id), preserve_atom_numbering=True)
+            io.save(out_pdb_file_path, PDBSelector(chain_id), preserve_atom_numbering=True)
 
     def get_FASTA(self, out_dir, pdb_id, chain_ids):  # todo zapsat tam i ten header?
         chains = chain_ids.split(',')
         for chain_id in chains:
-            entity_id = get_entity_id(pdb_id, chain_id)  # todo mit udelany cache
+            entity_id = get_entity_id(pdb_id, chain_id)
             url = f"https://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}/fasta?entity={entity_id}"
             response = restAPI_get(url)
             data = response.decode().split('\n')
@@ -99,9 +100,9 @@ class DatasetDownloader():
         temp_file = os.path.join(self.output_PDB, f"temp_{uuid.uuid1()}")
         try:
             # temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
-            self.get_FASTA(self.output_FASTA, pdb_id, chain_ids) #todo odkomentovat
+            self.get_FASTA(self.output_FASTA, pdb_id, chain_ids)
             # os.remove(temp_file)
-            self.get_PDB(temp_file, self.output_PDB, pdb_id, chain_ids, self.ligands_filter)
+            self.get_PDB(temp_file, self.output_PDB, pdb_id, chain_ids)
         except (KeyboardInterrupt, SystemExit):
             raise
         except Exception as ex:
@@ -128,7 +129,8 @@ class DatasetDownloader():
 
 
 
-class ChainSelect(Select): #todo tohle popsat v praci
+class PDBSelector(Select): #todo tohle popsat v praci
+    chain = ""
     def __init__(self, chain):
         super(Select, self).__init__()
         self.chain = chain
@@ -138,7 +140,7 @@ class ChainSelect(Select): #todo tohle popsat v praci
         else:
             return 0
     def accept_atom(self, atom):
-        if atom.element == 'H' or atom.element == 'D': #do not save hydrogens
+        if atom.element == 'H' or atom.element == 'D': #do not save hydrogens (or deuterium)
             return 0
         else:
             return 1
@@ -147,5 +149,3 @@ class ChainSelect(Select): #todo tohle popsat v praci
             return 1
         else:
             return 0
-
-

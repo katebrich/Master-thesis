@@ -178,7 +178,7 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
         return list(mappings)
 
 
-def parse_dataset(filepath):
+def parse_dataset_not_split_chains(filepath):
     list = []
     with open(filepath) as f:
         for line in f:
@@ -201,6 +201,21 @@ def parse_dataset_split_chains(filepath):
                 list.append((pdb_id, chain))
     return list
 
+def parse_dataset_ligands(filepath): #todo debug
+    list = []
+    with open(filepath) as f:
+        for line in f:
+            line = line.split()
+            pdb_id = line[0]
+            chain_ids = line[1]  # todo check
+            ligands = []
+            if (len(line) == 3): #ligands are specified in dataset file
+                ligands = line[2].split(',')
+            chain_ids = chain_ids.upper()
+            for chain in chain_ids.split(','):
+                list.append((pdb_id, chain, ligands))
+    return list
+
 def parse_prank_dataset(filepath):
     pdb_files = []
     with open(filepath) as f:
@@ -212,19 +227,6 @@ def parse_prank_dataset(filepath):
                     pdb_files.append(words[0])
 
     return pdb_files
-
-def getCenterOfMass(atoms):
-    totalMass = 0.0
-    x = 0
-    y = 0
-    z = 0
-    for a in atoms:
-        m = a.mass
-        totalMass += m
-        x += a.coord[0] * m
-        y += a.coord[1] * m
-        z += a.coord[2] * m
-    return (x / totalMass, y / totalMass, z / totalMass)
 
 def getFullAuthorResNum(residue_id):
     auth_res_num = str(residue_id[1])
