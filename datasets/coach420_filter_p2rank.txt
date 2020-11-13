@@ -1,39 +1,33 @@
-148l	E	
 1a26	A	CNA
 1a2k	C	GDP
-1a7x	A	
 1a8t	A	061
 1afk	A	PAP
 1arc	A	TCK
 1atl	A	0QI
-1b8u	A	OAA,NAD
+1b8u	A	NAD,OAA
 1blc	A	CEM,TEM
 1bnw	A	TPD
 1bq3	A	IHP
 1bqo	B	N25
 1br6	A	PT1
-1bs1	A	ADP,DAA
+1bs1	A	DAA,ADP
 1bsv	A	NDP
 1bxq	A	PP8
 1bzy	A	IMU,POP
 1c1h	A	MMP
 1c3j	A	UDP
-1c5i	A	
-1cen	A	
 1cet	A	CLQ
-1ch8	A	GPX,HDA,IMP
+1ch8	A	IMP,GPX,HDA
 1cim	A	PTS
-1cqf	B	
 1d3p	B	BT3
 1d4p	B	BPP
 1dcp	A	HBI
 1ddt	A	APU
 1e3v	A	DXC
 1e4g	T	ATP
-1e5q	A	NDP,SHR
+1e5q	A	SHR,NDP
 1efy	A	BZC
 1ein	A	PLC
-1esw	A	
 1etr	H	MIT
 1ett	H	4QQ
 1eve	A	E20
@@ -42,26 +36,23 @@
 1eyr	A	CDP
 1ezq	A	RPR
 1f0t	A	PR1
-1f4e	A	TPR,TPR
+1f4e	A	TPR
 1f4f	A	TP3
 1f4g	A	TP4
 1f7b	A	NAU
 1f8g	A	NAD
-1fcv	A	
 1ffq	A	AMI
 1fjs	A	Z34
 1fk6	A	LNL
 1fkg	A	SB3
 1foa	A	UD1
-1fqo	A	F6R,F6R
-1fth	A	
+1fqo	A	F6R
 1g4o	A	BSB
-1g6c	A	IFP,POP,TZP
+1g6c	A	TZP,POP,IFP
 1g97	A	UD1
-1goq	A	XYP,XYP
+1goq	A	XYP
 1goy	A	3GP
-1gsa	A	ADP,GSH
-1gwm	A	
+1gsa	A	GSH,ADP
 1gwx	A	433
 1h0s	A	FA6
 1h1p	A	CMG
@@ -69,7 +60,6 @@
 1h9u	A	LG2
 1hdq	A	INF
 1hnj	A	MLC
-1hpv	A	
 1htf	A	G26
 1i1h	A	COJ
 1i7l	A	ATP
@@ -77,8 +67,7 @@
 1i8z	A	INL
 1if7	A	SBR
 1ixn	A	DXP,G3P
-1j8r	A	
-1j9k	A	WO4,EPE
+1j9k	A	EPE,WO4
 1jcg	A	ANP
 1jcl	B	HPD
 1jie	A	BLM
@@ -107,8 +96,6 @@
 1lqd	B	CMI
 1lsp	A	BUL
 1ltz	A	HBI
-1lxm	A	
-1lzs	A	
 1m48	A	FRG
 1mbz	A	POP,IOT
 1mka	A	DAC
@@ -118,7 +105,7 @@
 1mq6	A	XLD
 1mu0	A	PHK
 1mxi	A	SAH
-1n07	A	ADP,FMN
+1n07	A	FMN,ADP
 1ndi	A	COA
 1nhu	A	153
 1nhv	A	154
@@ -128,52 +115,43 @@
 1of8	B	PEP,G3P
 1og1	A	TAD
 1ogk	B	DUD
-1ogo	X	
 1ohr	A	1UN
 1ojz	A	NAD
 1onh	A	WY4
 1ow3	B	GDP
 1oxm	A	TC4
 1oxv	A	ANP
-1p4n	A	
 1p5r	A	COA
 1p77	A	ATR
-1pfk	A	FBP,ADP,ADP
-1pkk	B	
-1pnf	A	
+1pfk	A	FBP,ADP
 1ppc	E	MID
 1pph	E	0ZG
 1pw1	A	HEL
 1q51	A	CAA
-1q8j	A	HCS,C2F
-1qbu	A	
+1q8j	A	C2F,HCS
 1qhi	A	BPG
 1qji	A	PKF
 1ql9	A	ZEN
 1qti	A	GNT
 1r09	1	JEN
-1r15	A	N,NCA,NCA
-1ri1	A	SAH,GTG
+1r15	A	NCA,N
+1ri1	A	GTG,SAH
 1rn8	A	DUP
 1rsd	A	PSB
 1rzu	A	ADP
 1s3f	A	SNI
 1s7l	A	COA
 1sby	A	NAD,ETF
-1sgc	A	
 1sqf	A	SAM
 1sth	A	THP
 1svw	A	GTP
 1swk	A	BTN
-1sz3	A	GNP,GNP
+1sz3	A	GNP
 1szj	G	NAD
-1tei	A	
 1the	A	0E6
 1tjw	A	AS1
 1tky	A	A3S
-1tvp	B	
-1txc	A	2AN,2AN
-1tyw	A	
+1txc	A	2AN
 1u72	A	NDP,MTX
 1u7z	A	PMT
 1uam	A	SAH
@@ -183,24 +161,20 @@
 1uvt	H	I48
 1v0y	A	HI5
 1v3s	A	ATP
-1vcu	A	DAN,EPE,EPE
+1vcu	A	DAN,EPE
 1vh3	A	CMK
-1vps	B	
 1wnz	A	2VA
-1wop	A	FFO,FFO
-1wq1	G	
+1wop	A	FFO
 1x2b	A	STX
 1x55	A	NSS
 1x6u	A	DO8
 1x7p	A	SAM
-1xdh	A	
-1xny	A	1VU,BTN
+1xny	A	BTN,1VU
 1xpy	C	NLQ
-1xqp	A	8HG,8HG
+1xqp	A	8HG
 1xtb	A	S6P
 1xvt	A	COA
-1xwq	A	
-1xz8	A	5GP,3GP
+1xz8	A	3GP,5GP
 1y2v	A	SER
 1y30	A	FMN
 1y3i	A	NAD
@@ -208,21 +182,18 @@
 1yds	E	IQS
 1ydt	E	IQB
 1yfr	A	ATP
-1ytj	A	
 1ytm	A	ATP,OXD
 1zaj	A	M2P
 1zdf	A	UPG
 1znz	A	GDP
 1zt9	A	TRP
-1zu0	A	
 2ahw	A	COA
-2art	A	LPA,AMP
+2art	A	AMP,LPA
 2ate	A	NIA
 2b3d	A	FAD
-2b99	A	RDL,RDL
-2baw	A	B7G,B7G,VCA
+2b99	A	RDL
+2baw	A	B7G,VCA
 2bbw	A	GP5
-2bog	X	
 2c6z	A	CIR,CIT
 2c96	A	ATP
 2cht	F	TSA
@@ -234,7 +205,6 @@
 2dkc	A	16G
 2dpt	A	TAR,PUY
 2dtt	B	H4B
-2dve	A	
 2dya	B	ADP
 2dzb	A	HH2
 2e0n	B	SAH
@@ -244,17 +214,16 @@
 2e6u	X	COA
 2e9z	A	UTP,PPV
 2ed4	A	FAD
-2f9w	A	PAU,PAU
+2f9w	A	PAU
 2fa0	A	HMG
-2fhj	A	MFN,MFN,H4Z,PE4
+2fhj	A	PE4,H4Z,MFN
 2fk8	A	SAM
 2fsg	A	ATP
-2fv0	A	
 2fzs	B	CMQ,PGE
 2g25	A	TDK
 2g97	A	DGB
 2gfx	A	PMN
-2gga	A	S3P,GPJ
+2gga	A	GPJ,S3P
 2gj5	A	VD3
 2gte	A	VA
 2gwh	A	A3P,PCI
@@ -263,7 +232,6 @@
 2hix	A	ATP
 2hk1	A	FUD
 2hl0	A	A3S
-2hob	A	
 2hxm	A	302
 2hzq	A	STR
 2i4n	B	5CA
@@ -273,13 +241,12 @@
 2irx	A	GTP
 2ixl	A	TRH
 2j4e	B	ITT
-2j72	B	
 2j8y	A	PNM
 2jbt	A	FMN,4HP
 2jgv	D	ADP
 2nty	C	GDP
 2oal	B	FAD
-2oec	B	ANU,1PE,1PE
+2oec	B	ANU,1PE
 2ovd	A	DAO
 2pkn	A	ACP
 2q6v	A	UDP
@@ -291,26 +258,22 @@
 2qwi	A	G20
 2qyq	A	PTR
 2qzz	A	NAP,EMF
-2r68	A	
 2r7a	A	HEM
 2rfh	A	23N
-2rjc	A	MES,MES
-2rk2	A	MRD,MRD,MRD
-2rkm	A	LYS,LYS
+2rjc	A	MES
+2rk2	A	MRD
+2rkm	A	LYS
 2roy	A	P28
 2uyq	A	SAM
-2v8l	A	
 2vaq	A	VAW
-2var	A	KDG,KDF,ANP,AMP
+2var	A	KDG,KDF,AMP,ANP
 2vcj	A	2EQ
 2vfc	A	COA
 2vkm	A	BSD
-2vu9	A	
 2w1a	C	TSA
 2wn7	A	NAD
 2wva	A	TPU
 2wzm	A	NA7
-2x4o	A	
 2x60	A	GTP
 2yw2	A	ATP
 2yw9	D	NAP
@@ -318,14 +281,12 @@
 2yyu	B	C5P
 2z09	A	ACP
 2z0x	A	5CA
-2z1s	A	
 2za1	A	OMP
 2zas	A	1OH
-3w7f	A	FPS,FPS
-2zdq	A	DAL,DAL,ATP
-2zgm	B	
+3w7f	A	FPS
+2zdq	A	DAL,ATP
 2zgz	A	GNP
-2zhz	B	ATP,ATP
+2zhz	B	ATP
 2zja	A	ACP
 2zu3	A	ZU3
 3a0t	A	ADP
@@ -338,13 +299,11 @@
 3b6a	A	ZCT
 3baz	A	NAP
 3bts	B	NAD
-3byn	A	
 3c2f	A	PRP
-3cag	A	ARG,ARG
+3cag	A	ARG
 3cgy	A	RDC
 3cpa	A	TYR
 3crr	A	DPO,TRS
-3ct5	A	
 3cwk	A	REA
 3cxi	A	VIT
 3d1g	A	322
@@ -352,12 +311,11 @@
 3dsr	A	ADP
 3du4	A	PLP,KAP
 3duw	A	SAH
-3dwr	A	0PA,0PA,0PA
-3dzl	B	3OC,3OC
-3e3s	A	I3C,I3C,I3C,I3C,I3C,TLA
+3dwr	A	0PA
+3dzl	B	3OC
+3e3s	A	TLA,I3C
 3efv	A	NAD
-3ej0	A	11X,11X
-3ek5	A	
+3ej0	A	11X
 3erg	A	GTS
 3erk	A	SB4
 3exs	A	5RP
@@ -366,29 +324,27 @@
 3ftf	A	SAH
 3fwr	A	ADP
 3g1x	A	U
-3gd9	A	
 3gdl	A	UP6
 3gh6	A	GSH
 3gid	A	S1A
 3gpl	A	ANP
 3gpo	A	APR
 3gqk	A	ATP
-3h18	A	PMS,PMS
-3h2k	A	BOG,BOG
+3h18	A	PMS
+3h2k	A	BOG
 3h39	A	ATP
 3h72	A	SIA
 3hit	A	DYN
 3hiy	A	UTP
 3hp8	A	DTT
-3hpi	A	
 3hvl	A	SRL
 3hvo	A	VGI
 3i0d	A	UDP
-3i6c	A	GIA,GIA
+3i6c	A	GIA
 3i8x	A	GDP
 3ido	A	EPE
 3ies	A	M24
-3iiq	A	JZA,TRT
+3iiq	A	TRT,JZA
 3in1	A	ADP
 3jyn	A	NDP
 3kak	A	3GC
@@ -397,21 +353,17 @@
 3kjg	A	ADP
 3kp5	A	KAN
 3ku1	A	SAM
-3kv8	A	FAH,FAH,FAH,FAH
-3lbz	A	Z88,Z89,Z89
-3ll3	A	ATP,DXP,XUL
+3kv8	A	FAH
+3lbz	A	Z89,Z88
+3ll3	A	XUL,DXP,ATP
 3lzz	A	GDP
-3m4e	A	
-3man	A	
 3maq	A	DGT
 3nk7	A	SAM
 3std	A	MQ0
-4f10	A	
 4std	A	BFS
-5gal	B	
 5std	A	UNN
 5tln	A	BAN
 7dfr	A	FOL,NAP
-7est	E	0Z2,DMF,DMF,DMF,DMF,DMF
+7est	E	0Z2,DMF
 830c	A	RS1
 966c	A	RS2

@@ -11,4 +11,4 @@ threads=4 #todo
 
 
 df = DatasetLigandsFilter(filter)
-df.run(dataset_file, output_file, pdb_dir, threads)
+df.run(dataset_file, output_file, pdb_dir, threads, remove_empty_lines=True)

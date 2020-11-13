@@ -8,8 +8,7 @@ import Logger
 import os
 
 from MOAD import MOAD
-from helper import parse_dataset_split_chains, get_pdb_path2, res_mappings_author_to_pdbe, isPartOfChain, \
-    getFullAuthorResNum
+from helper import parse_dataset, get_pdb_path2, res_mappings_author_to_pdbe, isPartOfChain
 from multiprocessing import Pool, Value
 
 logger = Logger.get_logger(os.path.basename(__file__))
@@ -22,12 +21,15 @@ class DatasetLigandsFilter:
     def __init__(self, filter):
         self.filter = filter #todo check
 
-    def run(self, orig_dataset_path, filtered_dataset_path, pdb_dir, threads=1):
+    def run(self, orig_dataset_path, filtered_dataset_path, pdb_dir, threads=1, remove_empty_lines=False):
         self.pdb_dir = pdb_dir # todo check if exists
         start = time.time()
-        logger.info(f"Filtering ligands in dataset {orig_dataset_path} with filter '{filter}' started...")
+        logger.info(f"Filtering ligands in dataset {orig_dataset_path} with filter '{self.filter}' started...")
 
-        dataset = parse_dataset_split_chains(orig_dataset_path)
+        if (self.filter == "MOAD"):
+            self.moad = MOAD()
+
+        dataset = parse_dataset(orig_dataset_path)
 
         self.total = len(dataset)
 
@@ -35,10 +37,19 @@ class DatasetLigandsFilter:
         pool = Pool(int(threads), initializer=self.__pool_init, initargs=(counter,))
         results = pool.map(self.filter_ligands, dataset)
         pool.close()
-        total_results = [ent for sublist in results for ent in sublist]
+        #total_results = [ent for sublist in results for ent in sublist]
+
+        results_filtered = []
+        if (remove_empty_lines): #remove structures with no valid ligands
+            for res in results:
+                if len(res[2]) > 0:
+                    results_filtered.append(res)
+        else:
+            results_filtered = results
+
 
         with open(filtered_dataset_path, 'w') as f:
-            f.write('\n'.join('{}\t{}\t{}'.format(x[0], x[1], ','.join(x[2])) for x in results))
+            f.write('\n'.join('{}\t{}\t{}'.format(x[0], x[1], ','.join(x[2])) for x in results_filtered))
 
 
         logger.debug(f"Finished in {time.time() - start}")
@@ -65,13 +76,17 @@ class DatasetLigandsFilter:
             else:
                 AAs.append(residue)
 
+        valid_ligands = self.get_valid_ligands(ligands_all, AAs, pdb_id, chain_id)
+
         global counter
         with counter.get_lock():
             idx = counter.value
             counter.value += 1
         print(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
 
-        return (pdb_id, chain_id, self.get_valid_ligands(ligands_all, AAs, pdb_id, chain_id))
+        return (pdb_id, chain_id, valid_ligands)
+
+
 
 
 
@@ -123,30 +138,22 @@ class DatasetLigandsFilter:
             print(
                 f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {result}...Center far: {center_far}, Small: {small}, Ignored: {skipped}, Far: {far}") #todo debug only
         elif (self.filter == "MOAD"):
-            logger.info(f"Downloading MOAD data file (~18 MB). This may take a while..")
-            self.moad = MOAD()
-            logger.info(f"MOAD data file downloaded.")
-
-
             relevant = self.moad.get_relevant_ligands(pdb_id, chain_id)
             if (relevant == None):
                 #raise ValueError("Structure excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5") #todo hezci hlaska, vsechny duvody
-              #  print(f"Structure {pdb_id} {chain_id} excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5\n")
-                return result # todo
+                print(f"{pdb_id} {chain_id} excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5")
+                return result #empty list
+            filtered = []
             for ligand in ligands:
-                if ((str(ligand.resname), str(ligand.id[1])) in relevant):
+                if (str(ligand.resname) in relevant): # match only by resname, not id, because of the bug in MOAD (data not updated, old codes remain)
                     result.append(ligand.resname)
-            #print( f"RELEVANT {pdb_id} {chain_id} : {relevant}")
-            if (len(result) != len(relevant)):
-                pass
-                print(f"ERROR: {pdb_id} {chain_id}:\nRESULT: {result} \nRELEVANT: {relevant}\nLIGANDS: {ligands}\n")
-            else:
-                pass
-               # print(f"OK: {pdb_id} {chain_id}\nRESULT: {result} \nRELEVANT: {relevant}\nLIGANDS: {ligands}\n")
-
+                else:
+                    filtered.append(ligand.resname)
+            print( f"{pdb_id} {chain_id} RELEVANT : {relevant} ---- FILTERED : {filtered}")
         else:
             raise ValueError(f"Unknown filter level {self.filter}")
 
+        result = list(set(result))  # distinct
         return result
 
     def __pool_init(self, args):

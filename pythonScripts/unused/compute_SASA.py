@@ -114,7 +114,7 @@ sasa_dir = os.path.join(data_dir, "sasa") #todo helper?
 if not os.path.exists(sasa_dir):
     os.makedirs(sasa_dir)
 
-dataset = parse_dataset_split_chains(dataset_file) #todo co kdyz neni spravny format
+dataset = parse_dataset(dataset_file) #todo co kdyz neni spravny format
 
 
 start = time.time()

@@ -1,7 +1,7 @@
 import json
 import os
 
-class Config():
+class Config(): #todo osetrit vyjimky ve funkcich, kdyz feature neexistuje
     parsed_config = ""
 
     def __init__(self, config_path):

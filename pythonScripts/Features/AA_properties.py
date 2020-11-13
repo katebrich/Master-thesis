@@ -19,8 +19,7 @@ hydropathy_kyte_doolitle = {
     'T': -0.7,  #threonine
     'V': 4.2,   #valine
     'W': -0.9,  #tryptophan
-    'Y': -1.3,  #tyrosine
-    'X': None   #unknown AA
+    'Y': -1.3  #tyrosine
 }
 
 molecular_weight = {
@@ -43,8 +42,7 @@ molecular_weight = {
     'T': 101.1,  #threonine
     'V': 99.1,   #valine
     'W': 186.2,  #tryptophan
-    'Y': 163.2,   #tyrosine
-    'X': None #unknown AA
+    'Y': 163.2   #tyrosine
 }
 
 polarity = {
@@ -67,8 +65,7 @@ polarity = {
     'T': "polar_uncharged",  #threonine
     'V': "nonpolar",   #valine
     'W': "nonpolar",  #tryptophan
-    'Y': "polar_uncharged",   #tyrosine
-    'X': None #unknown AA
+    'Y': "polar_uncharged"   #tyrosine
 }
 
 polarity_binary = {
@@ -91,8 +88,7 @@ polarity_binary = {
     'T': 1,  #threonine
     'V': 0,   #valine
     'W': 0,  #tryptophan
-    'Y': 1,   #tyrosine
-    'X': None #unknown AA
+    'Y': 1   #tyrosine
 }
 
 charged = {
@@ -115,8 +111,7 @@ charged = {
     'T': 0,  #threonine
     'V': 0,   #valine
     'W': 0,  #tryptophan
-    'Y': 0,   #tyrosine
-    'X': None #unknown AA
+    'Y': 0   #tyrosine
 }
 
 aromaticity = {
@@ -139,8 +134,7 @@ aromaticity = {
     'T': 0,  #threonine
     'V': 0,   #valine
     'W': 1,  #tryptophan
-    'Y': 1,   #tyrosine
-    'X': None #unknown AA
+    'Y': 1   #tyrosine
 }
 
 H_bond_atoms = {
@@ -163,8 +157,7 @@ H_bond_atoms = {
     'T': 3,  #threonine
     'V': 0,   #valine
     'W': 1,  #tryptophan
-    'Y': 2,   #tyrosine
-    'X': None #unknown AA
+    'Y': 2   #tyrosine
 }
 
 random_prop = {
@@ -187,15 +180,15 @@ random_prop = {
     'T': 49,  #threonine
     'V': 53,   #valine
     'W': 22,  #tryptophan
-    'Y': 59,   #tyrosine
-    'X': None #unknown AA
+    'Y': 59   #tyrosine
 }
 
 def get_AA_scores(scores_dict, fasta):
     result = []
     for i in range(1, len(fasta) + 1):
-        AA_score = scores_dict[fasta[i-1]]
-        if (AA_score is None):
+        try:
+            AA_score = scores_dict[fasta[i-1]] #unknown AA
+        except:
             continue
         result.append((i, AA_score))
     return result

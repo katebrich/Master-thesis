@@ -1,7 +1,7 @@
 {
 	"features": {
 		"lbs": {
-			"import_path": "Features.X.X",
+			"import_path": "Features.Debug.LBS",
 			"type": "binary",
 			"default": "0"
 		},

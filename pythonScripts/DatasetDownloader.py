@@ -1,3 +1,4 @@
+import math
 import os, sys
 
 from MOAD import MOAD
@@ -57,12 +58,11 @@ class DatasetDownloader():
         total_errors = [ent for sublist in errors for ent in sublist]
 
         if (len(total_errors) == 0):
-            logger.info(f"Downloading structures finished: All structures downloaded successfully.")  #todo cas rovnou sem
+            logger.info(f"Downloading structures finished in {math.ceil(time.time() - start)}s. All structures downloaded successfully.")  #todo cas rovnou sem
         else:
             errors_format = '\n'.join('%s %s' % x for x in total_errors)
             logger.warning(
-                f"Downloading structures finished: Some structures were not downloaded successfully: \n{errors_format}")
-        logger.debug(f"Finished in {time.time() - start}")
+                f"Downloading structures finished in {math.ceil(time.time() - start)}s. {len(total_errors)}/{self.total} structures were not downloaded successfully: \n{errors_format}")
 
     def get_PDB(self, temp_file, out_dir, pdb_id, chain_ids):
         url = f'https://www.ebi.ac.uk/pdbe/entry-files/pdb{pdb_id}.ent'
@@ -118,8 +118,8 @@ class DatasetDownloader():
             if (error):
                 errors.append(structure)
                 logger.error(f"{idx}/{self.total}: {pdb_id} {chain_ids} NOT PROCESSED ! See log for more details.")
-            else:
-                logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_ids} processed")
+            #else:
+            #    logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_ids} processed")
             return errors
 
     def __pool_init(self, args):

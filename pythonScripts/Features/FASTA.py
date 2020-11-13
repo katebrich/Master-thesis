@@ -14,6 +14,8 @@ class AA():
         feature_vals = []
         for i in range(1, len(seq) + 1):
             AA = seq[i - 1]
+            if AA in ['B','J','O','U','X','Z']:
+                continue
             feature_vals.append((i, AA))
         return feature_vals
 

@@ -189,19 +189,22 @@ def parse_dataset_not_split_chains(filepath):
             list.append((pdb_id, chain_ids))
     return list
 
-def parse_dataset_split_chains(filepath):
+def parse_dataset(filepath):
     list = []
     with open(filepath) as f:
         for line in f:
             line = line.split()
             pdb_id = line[0]
             chain_ids = line[1]  # todo check
+            ligands = []
+            if len(line) == 3 and not line[2].startswith('#'):  # ligands are specified in dataset file
+                ligands = line[2].split(',')
             chain_ids = chain_ids.upper()
             for chain in chain_ids.split(','):
-                list.append((pdb_id, chain))
+                list.append((pdb_id, chain, ligands))
     return list
 
-def parse_dataset_ligands(filepath): #todo debug
+'''def parse_dataset_ligands(filepath): #todo debug
     list = []
     with open(filepath) as f:
         for line in f:
@@ -214,7 +217,7 @@ def parse_dataset_ligands(filepath): #todo debug
             chain_ids = chain_ids.upper()
             for chain in chain_ids.split(','):
                 list.append((pdb_id, chain, ligands))
-    return list
+    return list'''
 
 def parse_prank_dataset(filepath):
     pdb_files = []

@@ -3,7 +3,7 @@ import getopt
 from Bio.PDB import PDBParser
 
 from Config import Config
-from helper import parse_dataset_split_chains, get_pdb_path
+from helper import parse_dataset, get_pdb_path
 import os
 import pandas as pd
 from helper import res_mappings_author_to_pdbe
@@ -41,7 +41,7 @@ class P2RankCustomFeatureCreator():
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-        dataset = parse_dataset_split_chains(dataset_file)
+        dataset = parse_dataset(dataset_file)
 
         start = time.time()
         logger.info(f"Creating p2rank custom feature files started...Features: {self.features}") #todo log asi rovnou do konzole, kdyz se to spousti takhle samostatne

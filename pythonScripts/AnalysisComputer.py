@@ -1,3 +1,4 @@
+import math
 import os
 import sys
 import time
@@ -54,15 +55,14 @@ class AnalysisComputer():
         for structure in dataset:
             self.compute_pairs(structure)
 
-        if (len(self.errors) == 0):
-            logger.info(f"All structures processed successfully.")
-        else:
-            errors_format = '\n'.join('%s %s' % x for x in self.errors)
-            logger.warning(f"Some structures were not processed successfully: skipping them in the analysis...\n{errors_format}")
+        feature_type = self.config.get_feature_type(self.feature_name)
 
-        feature_type = self.config.get_feature_type(self.feature_name) #todo kdyz neznamy typ, tak aby to cele nespadlo..asi
+        #save pairs
+        file = os.path.join(feature_output_dir, f"pairs.txt")
+        with open(file, 'w') as f:
+            f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in self.pairs))
 
-
+        #run analysis and save results
         file = os.path.join(feature_output_dir, f"results.txt")
         if (feature_type == "binary"):
             logger.info("Running Fischer's exact test")
@@ -83,9 +83,12 @@ class AnalysisComputer():
             logger.error(f"Unknown type of feature '{feature_type}'. Please specify the type in config.")
             sys.exit(1)
 
-        logger.info(f"Running analysis finished. Results saved to {file}")
+        if (len(self.errors) == 0):
+            logger.info(f"Running analysis finished in {math.ceil(time.time() - start)}s. Results saved to {file}. All structures processed successfully.")
+        else:
+            errors_format = '\n'.join('%s %s' % x for x in self.errors)
+            logger.warning(f"Running analysis finished in {math.ceil(time.time() - start)}s. Results saved to {file}. {len(self.errors)}/{self.total} structures were not processed successfully - they were skipped in the analysis! \n{errors_format}")
 
-        logger.debug(f"Finished in {time.time() - start}")
 
     def compute_pairs(self, structure):
         pdb_id = structure[0]
@@ -123,8 +126,8 @@ class AnalysisComputer():
         finally:
             self.counter  += 1
             if (error):
-                self.errors.append(structure)
+                self.errors.append((structure[0], structure[1]))
                 logger.error(f"{self.counter}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
-            else:
-                logger.debug(f"{self.counter}/{self.total}: {pdb_id} {chain_id} processed")
+            #else:
+            #    logger.debug(f"{self.counter}/{self.total}: {pdb_id} {chain_id} processed")
 

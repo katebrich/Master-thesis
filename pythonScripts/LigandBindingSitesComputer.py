@@ -1,3 +1,4 @@
+import math
 import uuid
 
 from Bio.PDB import *
@@ -22,7 +23,7 @@ class LigandBindingSitesComputer():
     mappings_dir=""
     pdb_dir= ""
     distance_threshold = ""
-    filter=False
+    filter=""
     #SASA_threshold = ""
     #filter_level = "p2rank"
     moad=""
@@ -35,15 +36,19 @@ class LigandBindingSitesComputer():
         #self.SASA_threshold = SASA_threshold
         self.dataset_file = dataset_file
 
-    def run(self, threads, filter=False):
+    def run(self, threads):
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-        self.filter = filter
-        if (filter):
-            dataset = parse_dataset_ligands(self.dataset_file)
-        else:
-            dataset = parse_dataset_split_chains(self.dataset_file)
+
+        dataset = parse_dataset(self.dataset_file)
+
+        #find out if there is ligand filter
+        self.filter = False
+        for str in dataset:
+            if len(str[2]) != 0:
+                self.filter = True
+                break
 
         start = time.time()
         logger.info(f"Computing ligand binding sites started...")
@@ -58,12 +63,11 @@ class LigandBindingSitesComputer():
         total_errors = [ent for sublist in errors for ent in sublist]  # todo delat to lip
 
         if (len(total_errors) == 0):
-            logger.info(f"Computing ligand binding sites finished: All structures processed successfully.")
+            logger.info(f"Computing ligand binding sites finished in {math.ceil(time.time() - start)}s. All structures processed successfully.")
         else:
             errors_format = '\n'.join('%s %s' % x for x in total_errors)
             logger.warning(
-                f"Computing ligand binding sites finished: Some structures were not processed successfully: \n{errors_format}")
-        logger.debug(f"Finished in {time.time() - start}")
+                f"Computing ligand binding sites finished in {math.ceil(time.time() - start)}s. {len(total_errors)}/{self.total} structures were not processed successfully: \n{errors_format}")
 
     def get_ligand_binding_site(self, structure):
         pdb_id = structure[0]
@@ -87,11 +91,11 @@ class LigandBindingSitesComputer():
                 idx = counter.value
                 counter.value += 1
             if (error):
-                errors.append(structure)
+                errors.append((structure[0], structure[1]))
                 logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
-            else:
+            #else:
                 #pass #todo
-                logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
+            #    logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
             return errors
 
     # returns list of tuples:
@@ -105,18 +109,22 @@ class LigandBindingSitesComputer():
 
         AAs = []
         ligands = []
-
+        ligands_valid = None
         # get ligands #todo debug
-        if (self.filter): #ligands read directly from dataset file
-            ligands = structure[2]
-        else: #get all ligands from PDB file
-            parser = PDBParser(PERMISSIVE=0, QUIET=1)
-            structure = parser.get_structure(pdb_id + chain_id, pdb_file_path)
-            chain = structure[0][chain_id]
-            for residue in chain.get_residues():
-                if not isPartOfChain(residue, mappings):
-                    #trim spaces at the beginning of ligand resname; bug in PDB parser
-                    residue.resname = residue.resname.lstrip()
+        if (self.filter): #valid ligands read directly from dataset file
+            ligands_valid = structure[2]
+        #get all ligands from PDB file
+        parser = PDBParser(PERMISSIVE=0, QUIET=1)
+        structure = parser.get_structure(pdb_id + chain_id, pdb_file_path)
+        chain = structure[0][chain_id]
+        for residue in chain.get_residues():
+            if not isPartOfChain(residue, mappings):
+                #trim spaces at the beginning of ligand resname; bug in PDB parser
+                residue.resname = residue.resname.lstrip()
+                if (self.filter):
+                    if residue.resname in ligands_valid:
+                        ligands.append(residue)
+                else:
                     ligands.append(residue)
 
         # get AAs

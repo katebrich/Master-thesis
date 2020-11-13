@@ -1,5 +1,6 @@
 import getopt
 import itertools
+import math
 import os
 import sys
 import time
@@ -31,7 +32,7 @@ class FeaturesComputer():
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-        dataset = parse_dataset_split_chains(self.dataset_file)  # todo co kdyz neni spravny format
+        dataset = parse_dataset(self.dataset_file)  # todo co kdyz neni spravny format
 
         start = time.time()
         logger.info(f"Computing feature {feature_name} started...")
@@ -43,15 +44,14 @@ class FeaturesComputer():
         pool = Pool(int(threads), initializer=self.__pool_init, initargs=(counter,))
         errors = pool.map(self.compute_feature, dataset)
         pool.close()
-        total_errors = [ent for sublist in errors for ent in sublist]  # todo delat to lip
+        total_errors = [ent for sublist in errors for ent in sublist]
 
         if (len(total_errors) == 0):
-            logger.info(f"Computing feature {feature_name} finished: All structures processed successfully.")
+            logger.info(f"Computing feature {feature_name} finished in {math.ceil(time.time() - start)}s. All structures processed successfully.")
         else:
             errors_format = '\n'.join('%s %s' % x for x in total_errors)
             logger.warning(
-                f"Computing feature {feature_name} finished: Some structures were not processed successfully: \n{errors_format}")
-        logger.debug(f"Finished in {time.time() - start}")
+                f"Computing feature {feature_name} finished in {math.ceil(time.time() - start)}s. {len(total_errors)}/{self.total} structures were not processed successfully: \n{errors_format}")
 
     def compute_feature(self, structure):
         pdb_id = structure[0]
@@ -77,10 +77,10 @@ class FeaturesComputer():
                 idx = counter.value
                 counter.value += 1
             if (error):
-                errors.append(structure)
+                errors.append((structure[0], structure[1]))
                 logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
-            else:
-                logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
+            #else:
+             #   logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
             return errors
 
     def __pool_init(self, c):

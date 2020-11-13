@@ -23,24 +23,23 @@ from Config import Config
 #default values
 threads=4
 config_path=os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
-tasks="D"
-features_list=""
+tasks="R,L"
+features_list="lbs"
 distance_threshold = 4
 dataset_file=""
 output_dir=""
 
 
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="chen11"
-label="_11_12_test"
+dataset_name="test"
+experiment_name="11_13"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
-data_dir_name= f"{dataset_name}{label}"
-output_dir= f"{P2Rank_path}/datasets/{data_dir_name}"
-features_list = "lbs"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
+output_dir= f"{P2Rank_path}/datasets/{experiment_name}/{dataset_name}"
+#features_list = "x"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
 #features_list = features_list.split(',')
 
 
-#parse arguments:
+#parse arguments: #todo check
 try:
     opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:m:f:')
 except getopt.GetoptError as err:
@@ -68,7 +67,7 @@ if (output_dir == ""):
     #todo print help
 
 config = Config(config_path)
-if (features_list == "" or features_list == "x"):
+if (features_list == "" or features_list == "x"): #todo
     features_list = config.get_all_feature_names()
 else:
     features_list = features_list.split(',')

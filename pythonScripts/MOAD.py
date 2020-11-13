@@ -11,17 +11,16 @@ class MOAD:
 
     def __init__(self):
         self.__download_MOAD_file() #todo
-
-    def __del__(self):
-        pass
-        #if os.path.exists(self.MOAD_file_path):
-        #    os.remove(self.MOAD_file_path)
+        self.__parse_MOAD_file()
 
     def __download_MOAD_file(self):
-        url = "http://bindingmoad.org/files/csv/every.csv"
-        response = restAPI_get(url)
-        with open(self.MOAD_file_path, 'wb') as file:
-            file.write(response)
+        if not os.path.exists(self.MOAD_file_path):
+            print(f"Downloading MOAD data file (~18 MB). This may take a while..")
+            url = "http://bindingmoad.org/files/csv/every.csv"
+            response = restAPI_get(url)
+            with open(self.MOAD_file_path, 'wb') as file:
+                file.write(response)
+    def __parse_MOAD_file(self):
         with open(self.MOAD_file_path, 'r') as file:
             csv_reader = csv.reader(file, delimiter=',')
             pdb_id = ""
@@ -49,8 +48,10 @@ class MOAD:
         result = []
         for l in ligands:
             validity = l[1]
-            if (validity == "valid"):
-                res_code, chain, res_num = l[0].split(':')
+            if (validity == "valid"): #todo
+                res_codes, chain, res_num = l[0].split(':')
                 if (chain == chain_id):
-                    result.append((res_code, res_num))
+                   for code in res_codes.split(' '):  # sometimes there is not only one code, but more codes which represent multiple parts of ligand, for example sugar chain. We need to split it, in PDB these are listed individually
+                       result.append(code)
+            #todo check conflicts
         return result
