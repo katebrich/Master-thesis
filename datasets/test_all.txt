@@ -12,3 +12,4 @@ XXXX	X	#nonexisting protein
 1kae	X	#nonexisting chain
 1a4k	H	#not in UniProt; strange numbering (82,1082,2082,3082,83)
 1igy	B	#the same structure twice in dataset
+1fvu	B	#disulfid

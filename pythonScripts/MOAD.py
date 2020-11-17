@@ -1,8 +1,6 @@
 import csv
 import os
-import uuid
 
-import pandas as pd
 from helper import restAPI_get
 
 class MOAD:

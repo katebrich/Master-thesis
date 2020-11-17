@@ -94,6 +94,8 @@ def plot_binding_nonbinding_ratios(pairs, output_path):
     #print("Non-binding AA frequencies:")
     #print(nonBinding_AAs_frequencies_sorted)
 
+    #print(ratios.items())
+
     #plot the results
     barWidth = 0.45
 

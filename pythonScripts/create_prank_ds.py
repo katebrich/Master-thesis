@@ -25,7 +25,7 @@ if (dataset_dir == ""):
     logger.error("Dataset directory must be specified.") #todo psat z jakeho skriptu je chyba
     sys.exit(1)
 if (out_path == ""):
-    logger.error("Output file pathmust be specified.")
+    logger.error("Output file path must be specified.")
     sys.exit(1)
 
 out_dir = os.path.dirname(out_path) #go one level up

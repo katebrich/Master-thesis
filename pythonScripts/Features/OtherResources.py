@@ -88,7 +88,7 @@ class PsiAngle():
             if molecule["entity_id"] == entity_id:
                 for chain in molecule["chains"]:
                     if (chain["chain_id"] == chain_id):
-                        for resi in chain["models"][0]["residues"]:  # todo: muzu brat automaticky prvni model?
+                        for resi in chain["models"][0]["residues"]:
                             val = resi["psi"]
                             if (val != None):
                                 feature_vals.append((resi["residue_number"], val))

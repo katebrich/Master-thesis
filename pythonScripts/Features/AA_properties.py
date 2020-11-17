@@ -183,6 +183,29 @@ random_prop = {
     'Y': 59   #tyrosine
 }
 
+aa_ratio = {
+    'A': 0.0676,   #alanine
+    'C': 0.2606,   #cysteine
+    'D': 0.0673,  #aspartic acid
+    'E': 0.0500,  #glumatic acid
+    'F': 0.1398,   #phenylalanine
+    'G': 0.1295,  #glycine
+    'H': 0.1573,  #histidine
+    'I': 0.0987,   #isoleucine
+    'K': 0.0529,  #lysine
+    'L': 0.0813,   #leucine
+    'M': 0.1140,   #methionine
+    'N': 0.0801,  #asparagine
+    'P': 0.0413,  #proline
+    'Q': 0.0511,  #glutamine
+    'R': 0.1029,  #arginine
+    'S': 0.0951,  #serine
+    'T': 0.0813,  #threonine
+    'V': 0.0873,   #valine
+    'W': 0.1933,  #tryptophan
+    'Y': 0.1386   #tyrosine
+}
+
 def get_AA_scores(scores_dict, fasta):
     result = []
     for i in range(1, len(fasta) + 1):

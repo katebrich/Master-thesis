@@ -1,12 +1,13 @@
 from DatasetLigandsFilter import DatasetLigandsFilter
 
-filter="p2rank"
-dataset_name="coach420"
-label="11_09_test"
+filter="MOAD"
+dataset_name="holo4k_1"
+label="final"
 datasets_path="/home/katebrich/Documents/diplomka/GitHub/datasets"
 dataset_file=f"{datasets_path}/{dataset_name}.txt"
 output_file= f"{datasets_path}/{dataset_name}_filter_{filter}.txt"
-pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/{label}/{dataset_name}/PDB"
+#pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/{label}/{dataset_name}/PDB" #todo
+pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/holo4k_11_13_final/PDB"
 threads=4 #todo
 
 

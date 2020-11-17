@@ -42,6 +42,8 @@ class DatasetLigandsFilter:
         results_filtered = []
         if (remove_empty_lines): #remove structures with no valid ligands
             for res in results:
+                if res is None: #todo smazat
+                    continue
                 if len(res[2]) > 0:
                     results_filtered.append(res)
         else:
@@ -55,36 +57,40 @@ class DatasetLigandsFilter:
         logger.debug(f"Finished in {time.time() - start}")
 
     def filter_ligands(self, structure):
-        pdb_id = structure[0]
-        chain_id = structure[1]
-        pdb_file = get_pdb_path2(self.pdb_dir, pdb_id, chain_id)
-        mappings = dict(
-            res_mappings_author_to_pdbe(pdb_id, chain_id))
+        try:
+            pdb_id = structure[0]
+            chain_id = structure[1]
+            pdb_file = get_pdb_path2(self.pdb_dir, pdb_id, chain_id)
+            mappings = dict(
+                res_mappings_author_to_pdbe(pdb_id, chain_id))
 
-        ligands_all = []
-        AAs = []
+            ligands_all = []
+            AAs = []
 
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)
-        structure = parser.get_structure(pdb_id + chain_id, pdb_file)
-        chain = structure[0][chain_id]
-        # get ligands
-        for residue in chain.get_residues():
-            if not isPartOfChain(residue, mappings):
-                # trim spaces at the beginning of ligand resname; bug in PDB parser
-                residue.resname = residue.resname.lstrip()
-                ligands_all.append(residue)
-            else:
-                AAs.append(residue)
+            parser = PDBParser(PERMISSIVE=0, QUIET=1)
+            structure = parser.get_structure(pdb_id + chain_id, pdb_file)
+            chain = structure[0][chain_id]
+            # get ligands
+            for residue in chain.get_residues():
+                if not isPartOfChain(residue, mappings):
+                    # trim spaces at the beginning of ligand resname; bug in PDB parser
+                    residue.resname = residue.resname.lstrip()
+                    ligands_all.append(residue)
+                else:
+                    AAs.append(residue)
 
-        valid_ligands = self.get_valid_ligands(ligands_all, AAs, pdb_id, chain_id)
+            valid_ligands = self.get_valid_ligands(ligands_all, AAs, pdb_id, chain_id)
 
-        global counter
-        with counter.get_lock():
-            idx = counter.value
-            counter.value += 1
-        print(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
+            global counter
+            with counter.get_lock():
+                idx = counter.value
+                counter.value += 1
+            #print(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
 
-        return (pdb_id, chain_id, valid_ligands)
+            return (pdb_id, chain_id, valid_ligands)
+        except:#todo
+            print(f"error {structure[0]} {structure[1]}")
+            pass
 
 
 
@@ -135,8 +141,8 @@ class DatasetLigandsFilter:
                     continue
 
                 result.append(ligand.resname)
-            print(
-                f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {result}...Center far: {center_far}, Small: {small}, Ignored: {skipped}, Far: {far}") #todo debug only
+            #print(
+             #   f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {result}...Center far: {center_far}, Small: {small}, Ignored: {skipped}, Far: {far}") #todo debug only
         elif (self.filter == "MOAD"):
             relevant = self.moad.get_relevant_ligands(pdb_id, chain_id)
             if (relevant == None):
@@ -149,7 +155,7 @@ class DatasetLigandsFilter:
                     result.append(ligand.resname)
                 else:
                     filtered.append(ligand.resname)
-            print( f"{pdb_id} {chain_id} RELEVANT : {relevant} ---- FILTERED : {filtered}")
+            #print( f"{pdb_id} {chain_id} RELEVANT : {relevant} ---- FILTERED : {filtered}")
         else:
             raise ValueError(f"Unknown filter level {self.filter}")
 

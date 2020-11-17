@@ -85,8 +85,9 @@ class P2RankCustomFeatureCreator():
             for feature in features:
                 feature_vals.append(self.read_feature_vals(feature, input_dir, pdb_id, chain_id))  # todo
 
-            mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, os.path.join(self.mappings_cache_dir,
-                                                                                       f"{pdb_id}{chain_id}.txt")))  # todo helper
+            mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, os.path.join(self.mappings_cache_dir, f"{pdb_id}{chain_id}.txt")))  # todo helper
+
+            missing_vals = [] #todo smazat
             for residue in struct.get_residues():
                 if (residue.id[0][2:] in aa_codes):  # todo smazat fix pro prank
                     if (residue.id[2].isspace()):
@@ -94,12 +95,10 @@ class P2RankCustomFeatureCreator():
                     else:
                         ins_code = residue.id[2]
                     seq_code = residue.id[1]
-                    # res_num = str(seq_code) + str(ins_code)
                     feat_tuple = tuple(self.defaults)
                     df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
                                                                                       seq_code) + feat_tuple
-                elif (residue.id[0].isspace() or residue.id[
-                    0] == "H_MSE"):  # skip hetero-residues #todo selenomethionine??? #todo nonstandard residues...jako pri pocitani LBS
+                elif (residue.id[0].isspace() or residue.id[0] == "H_MSE"):  # skip hetero-residues #todo selenomethionine??? #todo nonstandard residues...jako pri pocitani LBS
                     if (residue.id[2].isspace()):  # biopython returns a space instead of empty string
                         ins_code = ""
                     else:
@@ -111,6 +110,8 @@ class P2RankCustomFeatureCreator():
                     # todo missing feature vals for res_num
                     for j in range(0, len(features)):
                         val = feature_vals[j].get(pdbe_res_num, self.defaults[j])
+                        if pdbe_res_num not in feature_vals[j]: #todo smazat
+                            missing_vals.append(pdbe_res_num)
                         feat_list.append(val)
                     feat_tuple = tuple(feat_list)
                     df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
@@ -118,6 +119,7 @@ class P2RankCustomFeatureCreator():
             output_path = os.path.join(output_dir, os.path.basename(pdb_path) + ".csv")
             with open(output_path, 'w') as file:
                 file.write(df.to_csv(index=False, quoting=csv.QUOTE_ALL))
+            #print(f"{pdb_id} {chain_id}: missing {len(missing_vals)}: {missing_vals}") #todo smazat
         except (KeyboardInterrupt, SystemExit):
             raise
         except Exception as ex:
@@ -129,7 +131,7 @@ class P2RankCustomFeatureCreator():
                 idx = counter.value
                 counter.value += 1
             if (error):
-                errors.append(structure)
+                errors.append((structure[0], structure[1]))
                 logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED !")
             else:
                 logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")

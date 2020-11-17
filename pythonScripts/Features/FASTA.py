@@ -57,3 +57,7 @@ class MolecularWeight():
 class HBondAtoms():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_AA_properties(H_bond_atoms, data_dir, pdb_id, chain_id)
+
+class AARatio():
+    def get_values(self, data_dir, pdb_id, chain_id):
+        return get_AA_properties(aa_ratio, data_dir, pdb_id, chain_id)

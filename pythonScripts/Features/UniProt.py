@@ -60,6 +60,35 @@ class Compbias():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_uniprot_binary_type("COMPBIAS", pdb_id, chain_id)
 
+class Disulfid(): #todo debugovat
+    def get_values(self, data_dir, pdb_id, chain_id):
+        segments = get_uniprot_segments(pdb_id, chain_id)
+        feature_vals = []
+        for seg in segments:
+            uniprot_id = seg[0]
+            segment_begin = seg[1]
+            segment_end = seg[2]
+            start_res_num = seg[3]
+            end_res_num = seg[4]
+            url = f"https://www.ebi.ac.uk/proteins/api/features/{uniprot_id}?types=DISULFID"
+            response = restAPI_get_json(url)
+
+            feature_vector = [0] * (segment_end - segment_begin + 1)  # including both start and end AAs
+            for feature in response["features"]:
+                feat_begin = int(feature["begin"])
+                feat_end = int(feature["end"])
+                for i in (feat_begin, feat_end):  # take only parts of features that overlap with uniprot segment
+                    res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0
+                    if res >= 0 and res < segment_end - segment_begin + 1:
+                        feature_vector[res] = 1
+
+            i = 0
+            for res_num in range(start_res_num, end_res_num + 1):
+                feature_vals.append((res_num, feature_vector[i]))
+                i += 1
+
+        return feature_vals
+
 class Variation():
     def get_values(self, data_dir, pdb_id, chain_id):
         segments = get_uniprot_segments(pdb_id, chain_id)

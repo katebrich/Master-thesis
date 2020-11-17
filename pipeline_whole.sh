@@ -6,7 +6,7 @@ python_scripts_path=./pythonScripts/
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
 main_folder="/home/katebrich/Documents/diplomka/GitHub"
 
-experiment_name="11_09_test"
+experiment_name="final"
 threads=4
 
 dataset_train_name="chen11"
@@ -26,7 +26,7 @@ data_eval_dir="${P2Rank_path}/datasets/${experiment_name}/${dataset_eval_name}"
 ##########################################
 
 tasks="A"
-#features_list="unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,conservation,phi_angle,psi_angle,cis_peptide"
+#features_list="unp_disulfid,unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,conservation,phi_angle,psi_angle,cis_peptide"
 features_list="depth"
 
 echo "Running experiment $experiment_name..." #todo more details
@@ -60,15 +60,15 @@ echo "P2Rank dataset file created for $dataset_eval_name"
 
 IFS=','
 
-##create input files for P2Rank Custom feature
-#for feature in $features_list; do
-#	python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_train_file -i $data_train_dir -o $data_train_dir/P2Rank/$feature -t $threads -f $feature
-#	echo "Feature $feature: P2Rank custom feature files created for $dataset_train_name"
-#	python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_test_file -i $data_test_dir -o $data_test_dir/P2Rank/$feature -t $threads -f $feature
-#	echo "Feature $feature: P2Rank custom feature files created for $dataset_test_name"
-#	python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_eval_file -i $data_eval_dir -o $data_eval_dir/P2Rank/$feature -t $threads -f $feature
-#	echo "Feature $feature: P2Rank custom feature files created for $dataset_eval_name"
-#done
+#create input files for P2Rank Custom feature
+for feature in $features_list; do
+	python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_train_file -i $data_train_dir -o $data_train_dir/P2Rank/$feature -t $threads -f $feature
+	echo "Feature $feature: P2Rank custom feature files created for $dataset_train_name"
+	python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_test_file -i $data_test_dir -o $data_test_dir/P2Rank/$feature -t $threads -f $feature
+	echo "Feature $feature: P2Rank custom feature files created for $dataset_test_name"
+	python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_eval_file -i $data_eval_dir -o $data_eval_dir/P2Rank/$feature -t $threads -f $feature
+	echo "Feature $feature: P2Rank custom feature files created for $dataset_eval_name"
+done
 
 #############################################
 #   P2Rank MODEL TRAINING AND EVALUATION    #
