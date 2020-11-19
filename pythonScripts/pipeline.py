@@ -23,7 +23,7 @@ from Config import Config
 #default values
 threads=4
 config_path=os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
-tasks="A"
+tasks="F"
 features_list="x"
 distance_threshold = 4
 dataset_file=""
@@ -31,12 +31,12 @@ output_dir=""
 
 
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="test"
-experiment_name="debug"
+dataset_name="missing"
+experiment_name="missing"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 output_dir= f"{P2Rank_path}/datasets/{experiment_name}/{dataset_name}"
 #features_list = "unp_disulfid"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
-features_list = "unp_disulfid" #"aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
+features_list = "x" #"aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
 
 
 #parse arguments: #todo check
@@ -178,15 +178,3 @@ finally:
     else:
         #create new log file in output directory
         shutil.copyfile(Logger.get_log_path(), log_path)
-
-
-#todo prank
-'''
-
-if [[ $tasks == *"p"* ]]; then
-    python3 ${python_scripts_path}create_prank_ds.py -d ${data_dir}/PDB -o ${P2Rank_path}/datasets/${dataset_name}.ds
-
-    python3 ${python_scripts_path}create_p2rank_custom_feature_files.py -d $dataset_file -i $data_dir -o $data_dir/p2rank -t $threads -f $features_list
-fi
-
-'''
