@@ -68,29 +68,6 @@ polarity = {
     'Y': "polar_uncharged"   #tyrosine
 }
 
-polarity_binary = {
-    'A': 0,   #alanine
-    'C': 1,   #cysteine
-    'D': 1,  #aspartic acid
-    'E': 1,  #glumatic acid
-    'F': 0,   #phenylalanine
-    'G': 1,  #glycine
-    'H': 1,  #histidine
-    'I': 0,   #isoleucine
-    'K': 1,  #lysine
-    'L': 0,   #leucine
-    'M': 0,   #methionine
-    'N': 1,  #asparagine
-    'P': 0,  #proline
-    'Q': 1,  #glutamine
-    'R': 1,  #arginine
-    'S': 1,  #serine
-    'T': 1,  #threonine
-    'V': 0,   #valine
-    'W': 0,  #tryptophan
-    'Y': 1   #tyrosine
-}
-
 charged = {
     'A': 0,   #alanine
     'C': 0,   #cysteine

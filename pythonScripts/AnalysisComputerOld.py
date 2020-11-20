@@ -64,22 +64,25 @@ class AnalysisComputer():
         with open(file, 'w') as f:
             f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in self.pairs))
 
+        binding_data = [x[1] for x in self.pairs if x[0] == 1]
+        nonBinding_data = [x[1] for x in self.pairs if x[0] == 0]
+
         #run analysis and save results
         file = os.path.join(feature_output_dir, f"results.txt")
-        if (feature_type == "binary"):
-            #logger.info("Running Fischer's exact test")
-            self.summary.append(self.fischers_exact_test(self.pairs, file, feature_name))
-            Plots.plot_binding_nonbinding_ratios(self.pairs, feature_output_dir)
-        elif (feature_type == "continuous"):
+        #if (feature_type == "binary"):
+        #    #logger.info("Running Fischer's exact test")
+        #    self.summary.append(self.fischers_exact_test(self.pairs, file, feature_name))
+        #    Plots.plot_binding_nonbinding_ratios(self.pairs, feature_output_dir)
+        if (feature_type == "continuous"):
             #logger.info("Running Welch's T-test")
             self.summary.append(self.welchs_t_test(self.pairs, file, feature_name))
-            Plots.plot_histogram(self.pairs, 50, feature_output_dir)
-            Plots.plot_histogram(self.pairs, 75, feature_output_dir)
-            Plots.plot_histogram(self.pairs, 100, feature_output_dir)
-        elif (feature_type == "categorical" or feature_type == "ordinal"):
+            Plots.plot_histogram(binding_data, nonBinding_data, 50, os.path.join(feature_output_dir, f"{feature_name}_bins_40"))
+            Plots.plot_histogram(binding_data, nonBinding_data, 75, os.path.join(feature_output_dir, f"{feature_name}_bins_75"))
+            Plots.plot_histogram(binding_data, nonBinding_data, 100, os.path.join(feature_output_dir, f"{feature_name}_bins_100"))
+        elif (feature_type == "categorical" or feature_type == "ordinal" or feature_type == "binary"):
             #logger.info("Running Chi-squared test")
             self.summary.append(self.chi_squared_test(self.pairs, file, feature_name))
-            Plots.plot_binding_nonbinding_ratios(self.pairs, feature_output_dir)
+            Plots.plot_binding_nonbinding_ratios(binding_data, nonBinding_data, os.path.join(feature_output_dir, f"{feature_name}_ratios"))
         else:
             #todo
             logger.error(f"Unknown type of feature '{feature_type}'. Please specify the type in config.")
@@ -133,7 +136,7 @@ class AnalysisComputer():
             #    logger.debug(f"{self.counter}/{self.total}: {pdb_id} {chain_id} processed")
 
     def write_summary(self):
-        self.summary.sort(key=lambda x: x[1])  # sort by P-value
+        self.summary.sort(key=lambda x: x[0])  # sort by name
         with open(os.path.join(self.output_dir, f"summary.csv"), 'w') as f:
             f.write("\"feature\", \"P-value\", \"# binding sites\", \"# nonbinding sites\", \"test\"\n") #header
             for line in self.summary:

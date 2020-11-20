@@ -38,10 +38,6 @@ class Polarity():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_AA_properties(polarity, data_dir, pdb_id, chain_id)
 
-class PolarityBinary():
-    def get_values(self, data_dir, pdb_id, chain_id):
-        return get_AA_properties(polarity_binary, data_dir, pdb_id, chain_id)
-
 class Charged():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_AA_properties(charged, data_dir, pdb_id, chain_id)

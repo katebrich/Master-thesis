@@ -1,7 +1,4 @@
 1g9v	A	RQ3,HEM
-1g9v	B	HEM
-1g9v	C	RQ3,HEM
-1g9v	D	HEM
 1gkc	A	NFH
 1gm8	B	SOX
 1gpk	A	HUP
@@ -16,11 +13,9 @@
 1jje	A	BYS
 1jla	A	TNK
 1k3u	A	IAD
-1k3u	B	PLP
 1ke5	A	LS1
 1kzk	A	JE2
 1l2s	A	STC
-1l2s	B	STC
 1l7f	A	BCZ
 1lpz	B	CMB
 1meh	A	MOA,IMP
@@ -78,9 +73,6 @@
 1ywr	A	LI9
 1z95	A	198
 2bm2	A	PM2
-2bm2	B	PM2
-2bm2	C	PM2
-2bm2	D	PM2
 2br1	A	PFP
 2bsm	A	BSM
 1a0q	H	HEP
@@ -260,7 +252,6 @@
 1rob	A	C2P
 1snc	A	THP
 1srf	A	MTB
-1srf	B	MTB
 1stp	A	BTN
 1ulb	A	GUN
 2ctc	A	HFA

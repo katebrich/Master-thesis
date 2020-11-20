@@ -30,11 +30,6 @@
 			"type": "binary",
 			"default": "0"
 		},
-		"unp_topology": {
-			"import_path": "Features.UniProt.Topology",
-			"type": "binary",
-			"default": "0"
-		},
 		"unp_sec_str": {
 			"import_path": "Features.UniProt.SecondaryStructure",
 			"type": "categorical",
@@ -85,11 +80,6 @@
 			"type": "ordinal",
 			"default": "nonpolar"
 		},
-		"polarity_binary": {
-			"import_path": "Features.FASTA.PolarityBinary",
-			"type": "binary",
-			"default": "0"
-		},
 		"charged": {
 			"import_path": "Features.FASTA.Charged",
 			"type": "binary",
@@ -129,11 +119,6 @@
 			"import_path": "Features.PDB.BFactor",
 			"type": "continuous",
 			"default": "14.78"
-		},
-		"bfactor_CA": {
-			"import_path": "Features.PDB.BFactorCA",
-			"type": "continuous",
-			"default": "13.83"
 		},
 		"pdbekb_sec_str": {
 			"import_path": "Features.PDBeKB.SecondaryStructure",

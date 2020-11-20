@@ -1,6 +1,7 @@
 import math
 import operator
 import os
+import random
 import shutil
 import sys
 import time
@@ -10,11 +11,13 @@ from scipy import stats
 from collections import Counter
 import Plots
 from helper import getStructuresFromDirectory
-#from unused.statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
+import matplotlib.pyplot as plt
 
 import Logger
 
 logger = Logger.get_logger(os.path.basename(__file__))
+
+SAMPLE_SIZE = 500
 
 class AnalysisComputer():
     output_dir = ""
@@ -64,27 +67,55 @@ class AnalysisComputer():
         with open(file, 'w') as f:
             f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in self.pairs))
 
-        #run analysis and save results
-        file = os.path.join(feature_output_dir, f"results.txt")
-        if (feature_type == "binary"):
-            #logger.info("Running Fischer's exact test")
-            self.summary.append(self.fischers_exact_test(self.pairs, file, feature_name))
-            Plots.plot_binding_nonbinding_ratios(self.pairs, feature_output_dir)
-        elif (feature_type == "continuous"):
-            #logger.info("Running Welch's T-test")
-            self.summary.append(self.welchs_t_test(self.pairs, file, feature_name))
-            Plots.plot_histogram(self.pairs, 50, feature_output_dir)
-            Plots.plot_histogram(self.pairs, 75, feature_output_dir)
-            Plots.plot_histogram(self.pairs, 100, feature_output_dir)
-        elif (feature_type == "categorical" or feature_type == "ordinal"):
-            #logger.info("Running Chi-squared test")
-            self.summary.append(self.chi_squared_test(self.pairs, file, feature_name))
-            Plots.plot_binding_nonbinding_ratios(self.pairs, feature_output_dir)
-        else:
-            #todo
-            logger.error(f"Unknown type of feature '{feature_type}'. Please specify the type in config.")
-            sys.exit(1)
+        binding_data = [x[1] for x in self.pairs if x[0] == 1]
+        nonBinding_data = [x[1] for x in self.pairs if x[0] == 0]
 
+        statistics = []
+        p_values = []
+        random.seed = 42 #todo for debug
+
+        with open(os.path.join(feature_output_dir, f"results.txt"), 'w') as f:
+            for i in range(1, 11):
+                f.write(f"********************************\n")
+                f.write(f"**        ITERATION {i}       **\n")
+                f.write(f"********************************\n")
+                sample_binding = random.sample(binding_data, SAMPLE_SIZE) #simple sampling without replacement
+                sample_nonbinding = random.sample(nonBinding_data, SAMPLE_SIZE)
+
+                #run analysis and save results
+                if (feature_type == "continuous"):
+                    res = self.welchs_t_test(sample_binding, sample_nonbinding, f)
+                    statistics.append(res[0])
+                    p_values.append(res[1])
+                    Plots.plot_histogram(sample_binding, sample_nonbinding, 40, os.path.join(feature_output_dir, f"it_{i}_bins_40"))
+                    Plots.plot_histogram(sample_binding, sample_nonbinding, 100, os.path.join(feature_output_dir, f"it_{i}_bins_100"))
+                elif (feature_type == "categorical" or feature_type == "ordinal" or feature_type == "binary"):
+                    res = self.chi_squared_test(sample_binding, sample_nonbinding, f)
+                    statistics.append(res[0])
+                    p_values.append(res[1])
+                    Plots.plot_binding_nonbinding_ratios(sample_binding, sample_nonbinding, os.path.join(feature_output_dir, f"it_{i}"))
+                else:
+                    #todo
+                    logger.error(f"Unknown type of feature '{feature_type}'. Please specify the type in config.")
+                    sys.exit(1)
+
+        #plot p-values and statistics
+        plt.clf()
+        plt.scatter(range(1,11), statistics)
+        plt.xlabel('iteration')
+        if (feature_type == "continuous"):
+            plt.ylabel('T-statistic')
+        else:
+            plt.ylabel('Chi-squared')
+        plt.savefig(os.path.join(feature_output_dir,'statistic.png'))
+
+        plt.clf()
+        plt.scatter(range(1, 11), p_values)
+        plt.xlabel('iteration')
+        plt.ylabel('P-value')
+        plt.savefig(os.path.join(feature_output_dir, 'p_values.png'))
+
+        #todo
         if (len(self.errors) == 0):
             logger.info(f"Running analysis finished in {math.ceil(time.time() - start)}s. Results saved to {file}. All structures processed successfully.")
         else:
@@ -133,6 +164,7 @@ class AnalysisComputer():
             #    logger.debug(f"{self.counter}/{self.total}: {pdb_id} {chain_id} processed")
 
     def write_summary(self):
+        return
         self.summary.sort(key=lambda x: x[1])  # sort by P-value
         with open(os.path.join(self.output_dir, f"summary.csv"), 'w') as f:
             f.write("\"feature\", \"P-value\", \"# binding sites\", \"# nonbinding sites\", \"test\"\n") #header
@@ -140,31 +172,20 @@ class AnalysisComputer():
                 f.write(f"{str(line[0])}, {format(line[1], '.4g')}, {str(line[2])}, {str(line[3])}, {str(line[4])}\n")
                 #f.write(', '.join(str(v) for v in line) + '\n')
 
-    def welchs_t_test(self, data, results_file, feature):
-        with open(results_file, 'w') as f:
-            equal_var = False  # todo examine if variance is expected to be the same
-            # alpha = 0.05  # todo as script parameter
+    def welchs_t_test(self, sample_binding, sample_nonbinding, f):
+        out = stats.ttest_ind(sample_binding, sample_nonbinding, axis=0, equal_var=False, nan_policy='raise') #equal_var is False to run Welch's test instead of T-test
+        t_statistic = out[0]
+        p_value = float(out[1])
 
-            binding_data = [x[1] for x in data if x[0] == 1]
-            nonBinding_data = [x[1] for x in data if x[0] == 0]
+        f.write(f"t-statistic: {t_statistic}\n")
+        f.write(f"p-value: {p_value}\n")
+        f.write(f"Binding sites -> mean: {np.mean(sample_binding)}; variance: {np.var(sample_binding)}\n")
+        f.write(f"Non-binding sites -> mean: {np.mean(sample_nonbinding)}; variance: {np.var(sample_nonbinding)}\n")
+        f.write(f"Total -> mean: {np.mean(sample_binding + sample_nonbinding)}; variance: {np.var(sample_binding + sample_nonbinding)}\n")
 
-            out = stats.ttest_ind(binding_data, nonBinding_data, axis=0, equal_var=equal_var, nan_policy='raise')
-            t_statistic = out[0]
-            p_value = out[1]
+        return (t_statistic, p_value)
 
-            p_value = float(p_value)
-
-            f.write(f"Binding residues count: {len(binding_data)}\n")
-            f.write(f"Non-binding residues count: {len(nonBinding_data)}\n")
-            f.write(f"t-statistic: {t_statistic}\n")
-            f.write(f"p-value: {p_value}\n")
-            f.write(f"Binding sites -> mean: {np.mean(binding_data)}; variance: {np.var(binding_data)}\n")
-            f.write(f"Non-binding sites -> mean: {np.mean(nonBinding_data)}; variance: {np.var(nonBinding_data)}\n")
-            f.write(f"Total -> mean: {np.mean(data)}; variance: {np.var(data)}\n")
-
-        return (feature, p_value, len(binding_data), len(nonBinding_data), "Welch's")
-
-    def fischers_exact_test(self, data, results_file, feature):
+    '''def fischers_exact_test(self, data, results_file, feature):
         with open(results_file, 'w') as f:
             counts = Counter(data)
 
@@ -189,55 +210,43 @@ class AnalysisComputer():
             f.write(
                 f"Non-binding sites -> positives ratio: {non_binding_positive / (non_binding_positive + non_binding_negative)}\n")
 
-        return (feature, p_value, binding_positive + binding_negative, non_binding_positive + non_binding_negative, "Fisher's exact")
+        return (feature, p_value, binding_positive + binding_negative, non_binding_positive + non_binding_negative, "Fisher's exact")'''
 
-    def chi_squared_test(self, data, results_file, feature):
-        with open(results_file, 'w') as f:
-            from itertools import groupby
-            from operator import itemgetter
+    def chi_squared_test(self, sample_binding, sample_nonbinding, f):
+        #from itertools import groupby
+        #from operator import itemgetter
 
-            binding_data = [x[1] for x in data if x[0] == 1]
-            nonBinding_data = [x[1] for x in data if x[0] == 0]
+        #sorter = sorted(data, key=itemgetter(0))
+        #grouper = groupby(sorter, key=itemgetter(0))
 
-            sorter = sorted(data, key=itemgetter(0))
-            grouper = groupby(sorter, key=itemgetter(0))
+        #res = {k: list(map(itemgetter(1), v)) for k, v in grouper}
 
-            res = {k: list(map(itemgetter(1), v)) for k, v in grouper}
+        #binding = res[1]
+        #non_binding = res[0]
 
-            binding = res[1]
-            non_binding = res[0]
+        # binding_counts = Counter(binding)
+        binding_counts = Counter(sample_binding)
+        non_binding_counts = Counter(sample_nonbinding)
 
-            # binding_counts = Counter(binding)
-            binding_counts = Counter(binding)
-            non_binding_counts = Counter(non_binding)
+        keys1 = binding_counts.keys()
+        keys2 = non_binding_counts.keys()
+        categories = list(set().union(keys1, keys2))
 
-            keys1 = binding_counts.keys()
-            keys2 = non_binding_counts.keys()
-            categories = list(set().union(keys1, keys2))
+        binding = []
+        non_binding = []
+        for cat in categories:
+            binding.append(binding_counts[cat])
+            non_binding.append(non_binding_counts[cat])
 
-            binding = []
-            non_binding = []
-            for cat in categories:
-                binding.append(binding_counts[cat])
-                non_binding.append(non_binding_counts[cat])
+        obs = np.array([np.array(binding), np.array(non_binding)])
+        chi2, p_value, dof, expected = stats.chi2_contingency(obs)
 
-            obs = np.array([np.array(binding), np.array(non_binding)])
-            chi2, p_value, dof, expected = stats.chi2_contingency(obs)
+        p_value = float(p_value)
 
-            p_value = float(p_value)
+        f.write(f"Binding counts: {binding_counts}\n")
+        f.write(f"Non-binding counts: {non_binding_counts}\n")
+        f.write(f"Chi squared: {chi2}\n")
+        f.write(f"p-value: {p_value}\n")
+        f.write(f"Expected values: {expected}\n")
 
-            f.write(f"Binding counts: {binding_counts}\n")
-            f.write(f"Non-binding counts: {non_binding_counts}\n")
-
-            f.write(f"Chi squared: {chi2}\n")
-            f.write(f"p-value: {p_value}\n")
-            f.write(f"Degrees of freedom: {dof}\n")
-            f.write(f"Expected values: {expected}\n")
-            #try:
-            #    f.write(f"Median binding: {np.median(binding_data)}") #todo smazat
-            #    f.write(f"Median nonbinding: {np.median(nonBinding_data)}")
-            #    f.write(f"Median: {np.median(data)}")
-            #except:
-            #    print("error " + feature)
-
-        return (feature, p_value, len(binding_data), len(nonBinding_data), "Chi-squared")
+        return (chi2, p_value)

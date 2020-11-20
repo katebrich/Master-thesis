@@ -1,0 +1,5 @@
+
+Po analyze na kazdem datasetu zvlast, kdyz se braly vsechny pairs bez samplovani:
+- unp_compbias, unp_lipidation a unp_non_standard odstraneny, malo positives ?? kolik
+- unp_topology odstranena, nedava smysl
+
