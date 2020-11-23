@@ -2,6 +2,7 @@ import getopt
 import itertools
 import math
 import os
+import shutil
 import sys
 import time
 
@@ -29,6 +30,8 @@ class FeaturesComputer():
         self.feature_name = feature_name
         self.output_dir = output_dir
 
+        if os.path.exists(self.output_dir):
+            shutil.rmtree(self.output_dir)
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
