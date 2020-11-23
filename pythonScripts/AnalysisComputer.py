@@ -7,7 +7,7 @@ import sys
 import time
 
 import numpy as np
-from matplotlib import pyplot
+from matplotlib import pyplot, transforms
 from scipy import stats
 from collections import Counter
 import Plots
@@ -20,7 +20,6 @@ logger = Logger.get_logger(os.path.basename(__file__))
 
 #SAMPLE_SIZE = 500
 X = random.randint(0,100) #todo for debug
-ALPHA = 0.05
 
 class AnalysisComputer():
     output_dir = ""
@@ -41,7 +40,7 @@ class AnalysisComputer():
         self.features_list = features_list
         self.features_dir = features_dir
 
-    def run(self, sample_size, iterations, balance_binding_ratio, draw_plots):
+    def run(self, sample_size, iterations, balance_binding_ratio, draw_plots, alpha):
         start = time.time()
         logger.info(f"Running analysis started...")
 
@@ -50,7 +49,7 @@ class AnalysisComputer():
             if os.path.exists(feature_output_dir):
                 shutil.rmtree(feature_output_dir)
             os.makedirs(feature_output_dir)
-            self.process_feature(feature, sample_size, iterations, balance_binding_ratio, draw_plots)
+            self.process_feature(feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha)
             logger.info(f"Feature {feature}: done")
 
         logger.info(f"Running analysis finished in {math.ceil(time.time() - start)}s.")
@@ -63,7 +62,7 @@ class AnalysisComputer():
         r2 = [x + barWidth/2 for x in r1]
         pyplot.bar(r2, bars, color='g', width=barWidth, edgecolor='white')'''
 
-    def process_feature(self, feature, sample_size, iterations, balance_binding_ratio, draw_plots):
+    def process_feature(self, feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha):
         feature_dir = os.path.join(self.features_dir, feature)
         dataset = getStructuresFromDirectory(
             feature_dir)  # compute only for structures that have the feature computed, ignore the rest
@@ -141,11 +140,12 @@ class AnalysisComputer():
         #calculate percentage of iterations for which p-value was under significance level alpha
         under_alpha = 0
         for p in p_values:
-            if p <= ALPHA:
+            if p <= alpha:
                 under_alpha = under_alpha + 1
         perc = (under_alpha / iterations) * 100
         self.p_val_perc.append((feature, round(perc,2)))
 
+        '''
         #plot statistics
         plt.clf()
         plt.scatter(range(1,iterations + 1), statistics)
@@ -155,14 +155,11 @@ class AnalysisComputer():
         else:
             plt.ylabel('Chi-squared')
         plt.savefig(os.path.join(feature_output_dir,f"{feature}_statistic.png"))
+        '''
         #plot p-values
-        plt.clf()
-        plt.scatter(range(1, iterations + 1), p_values)
-        axes = plt.gca()
-        axes.set_ylim([0, 1])
-        plt.xlabel('iteration')
-        plt.ylabel('P-value')
-        plt.savefig(os.path.join(feature_output_dir, f"{feature}_p_values.png"))
+        Plots.plot_pvalues_scatter(p_values, alpha, os.path.join(feature_output_dir, f"{feature}_pValues_scatter.png"))
+        Plots.plot_pvalues_histogram(p_values, alpha,
+                                   os.path.join(feature_output_dir, f"{feature}_pValues_histogram.png"))
 
         #save p-values to file
         with open(os.path.join(feature_output_dir, f"p_values.txt"), 'w') as f:
@@ -206,18 +203,24 @@ class AnalysisComputer():
                 logger.error(f"{feature_name}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
 
     def draw_plots(self, feature_type, data_binding, data_nonbinding, feature_output_dir, feature_name):
-        if (feature_type == "binary" or feature_type == "categorical"):
+        if feature_type == "categorical":
             Plots.plot_binding_nonbinding_ratios(data_binding, data_nonbinding,
-                                                 os.path.join(feature_output_dir, f"{feature_name}_ratios"))
+                                                 os.path.join(feature_output_dir, f"{feature_name}_ratios"), 1)
+            Plots.plot_frequencies(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_frequencies"))
         elif feature_type == "continuous":
             Plots.plot_histogram(data_binding, data_nonbinding, 40,
                                os.path.join(feature_output_dir, f"{feature_name}_hist_bins_40"))
+            Plots.plot_histogram(data_binding, data_nonbinding, 100,
+                                 os.path.join(feature_output_dir, f"{feature_name}_hist_bins_100"))
+
         elif feature_type == "ordinal":
             Plots.plot_binding_nonbinding_ratios(data_binding, data_nonbinding,
-                                                 os.path.join(feature_output_dir, f"{feature_name}_ratios"))
-            Plots.plot_histogram(data_binding, data_nonbinding, 40,
-                                 os.path.join(feature_output_dir, f"{feature_name}_hist_bins_40"))
-            Plots.plot_histogram(data_binding, data_nonbinding, 100, os.path.join(feature_output_dir, f"{feature_name}_hist_bins_100"))
+                                                 os.path.join(feature_output_dir, f"{feature_name}_ratios"), 0)
+            Plots.plot_frequencies(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_frequencies"))
+        elif feature_type == "binary":
+            Plots.plot_binding_nonbinding_ratios(data_binding, data_nonbinding,
+                                                 os.path.join(feature_output_dir, f"{feature_name}_ratios"), 0)
+            Plots.plot_positives_ratio(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_positivesRatio"))
 
     def write_summary(self):
         self.p_values.sort(key=lambda x: x[0])  # sort by name

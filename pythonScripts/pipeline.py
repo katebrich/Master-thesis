@@ -32,6 +32,7 @@ sample_size = 0 #do not sample
 iterations = 1
 balance_binding_ratio = False
 draw_plots = True
+alpha = 0.05
 
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
 dataset_name="chen11"
@@ -46,7 +47,7 @@ balance_binding_ratio = True
 
 #parse arguments: #todo check
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:m:f:s:i:')
+    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:m:f:s:i:a:p:b:')
 except getopt.GetoptError as err:
     logger.error(err) #unknown option or missing argument
     sys.exit(1)
@@ -65,6 +66,12 @@ for opt, arg in opts:
         sample_size = arg
     elif opt in ("-i", "--iterations"):
         iterations = arg
+    elif opt in ("-b", "--balance_binding_ratio"):
+        balance_binding_ratio = arg
+    elif opt in ("-p", "--draw_plots"):
+        draw_plots = arg
+    elif opt in ("-a", "--alpha"):
+        alpha = arg
 
 if (dataset_file == ""):
     logger.error("Dataset must be specified.")
@@ -163,7 +170,7 @@ try:
             if processed == False:
                 continue
             ac = AnalysisComputer(analysis_dir, lbs_dir, features_dir, features_list, config)
-            ac.run(sample_size, iterations, balance_binding_ratio, draw_plots)
+            ac.run(sample_size, iterations, balance_binding_ratio, draw_plots, alpha)
             ac.write_summary()
             tasks.remove('A')
 except Exception as ex:
