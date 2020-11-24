@@ -18,7 +18,6 @@ import Logger
 
 logger = Logger.get_logger(os.path.basename(__file__))
 
-#SAMPLE_SIZE = 500
 X = random.randint(0,100) #todo for debug
 
 class AnalysisComputer():
@@ -53,14 +52,6 @@ class AnalysisComputer():
             logger.info(f"Feature {feature}: done")
 
         logger.info(f"Running analysis finished in {math.ceil(time.time() - start)}s.")
-
-        ''' #todo for debug
-        #plot the results
-        barWidth = 0.45
-        bars = [x[1] for x in self.p_values]
-        r1 = np.arange(len(bars))
-        r2 = [x + barWidth/2 for x in r1]
-        pyplot.bar(r2, bars, color='g', width=barWidth, edgecolor='white')'''
 
     def process_feature(self, feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha):
         feature_dir = os.path.join(self.features_dir, feature)
