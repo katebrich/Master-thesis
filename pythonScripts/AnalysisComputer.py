@@ -5,7 +5,7 @@ import random
 import shutil
 import sys
 import time
-
+from multiprocessing import Pool, Value
 import numpy as np
 from matplotlib import pyplot, transforms
 from scipy import stats
@@ -31,6 +31,9 @@ class AnalysisComputer():
     means = []
     errors = []
     features_list = []
+    feature_dir = ""
+    feature = ""
+    lbs_dicts = {}
 
     def __init__(self, output_dir, lbs_dir, features_dir, features_list, config):
         self.output_dir = output_dir
@@ -39,34 +42,49 @@ class AnalysisComputer():
         self.features_list = features_list
         self.features_dir = features_dir
 
-    def run(self, sample_size, iterations, balance_binding_ratio, draw_plots, alpha):
+    def run(self, sample_size, iterations, balance_binding_ratio, draw_plots, alpha, threads):
         start = time.time()
         logger.info(f"Running analysis started...")
+
+        #todo co kdyz data pro 1 featuru chybi...aby to nespadlo cele
+        self.prepare_lbs_dicts()
 
         for feature in self.features_list:
             feature_output_dir = os.path.join(self.output_dir, feature)
             if os.path.exists(feature_output_dir):
                 shutil.rmtree(feature_output_dir)
             os.makedirs(feature_output_dir)
-            self.process_feature(feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha)
+            try:
+                self.process_feature(feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha, threads)
+            except Exception as ex:
+                logger.error(f"Feature {feature}: ERROR: {ex}", exc_info=True)
+                self.errors.append(feature)
+                continue
             logger.info(f"Feature {feature}: done")
 
         logger.info(f"Running analysis finished in {math.ceil(time.time() - start)}s.")
 
-    def process_feature(self, feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha):
+    def process_feature(self, feature, sample_size, iterations, balance_binding_ratio, draw_plots, alpha, threads):
         feature_dir = os.path.join(self.features_dir, feature)
         dataset = getStructuresFromDirectory(
             feature_dir)  # compute only for structures that have the feature computed, ignore the rest
         feature_output_dir = os.path.join(self.output_dir, feature)
         feature_type = self.config.get_feature_type(feature) # binary/continuous/categorical/ordinal
-        pairs = []
+        #pairs = []
         statistics = []
         p_values = []
         b_ratios = []
 
+        self.feature_dir = feature_dir
+        self.feature = feature
+        pool = Pool(int(threads))
+        pairs_part = pool.map(self.compute_pairs, dataset)
+        pool.close()
+        pairs = [ent for sublist in pairs_part for ent in sublist]
+
         #pair feature values with ligand binding sites
-        for structure in dataset:
-            pairs = pairs + self.compute_pairs(structure, self.lbs_dir, feature_dir, feature)
+        #for structure in dataset:
+        #    pairs = pairs + self.compute_pairs(structure, self.lbs_dir, feature_dir, feature)
 
         #save pairs
         file = os.path.join(feature_output_dir, f"pairs.txt")
@@ -156,8 +174,18 @@ class AnalysisComputer():
         with open(os.path.join(feature_output_dir, f"p_values.txt"), 'w') as f:
             f.write('\n'.join(f"{x}" for x in p_values))
 
-    #todo zkontrolovat logovani
-    def compute_pairs(self, structure, lbs_dir, feature_dir, feature_name):
+    def prepare_lbs_dicts(self):
+        # get ligand binding sites values
+        dataset = getStructuresFromDirectory(self.lbs_dir)
+        for structure in dataset:
+            pdb_id = structure[0]
+            chain_id = structure[1]
+            file = os.path.join(self.lbs_dir, f"{pdb_id}{chain_id}.txt")
+            lbs = np.genfromtxt(file, delimiter=' ', dtype=None)
+            lbs_dict = dict(lbs)
+            self.lbs_dicts[f"{pdb_id}{chain_id}"] = lbs_dict
+
+    def compute_pairs(self, structure):
         pdb_id = structure[0]
         chain_id = structure[1]
         error = False
@@ -165,12 +193,13 @@ class AnalysisComputer():
 
         try:
             # get ligand binding sites values
-            file = os.path.join(lbs_dir, f"{pdb_id}{chain_id}.txt")
-            lbs = np.genfromtxt(file, delimiter=' ', dtype=None)
-            lbs_dict = dict(lbs)
+            #file = os.path.join(self.lbs_dir, f"{pdb_id}{chain_id}.txt")
+            #lbs = np.genfromtxt(file, delimiter=' ', dtype=None)
+            #lbs_dict = dict(lbs)
+            lbs_dict = self.lbs_dicts[f"{pdb_id}{chain_id}"]
 
             # get feature values
-            file = os.path.join(feature_dir, f"{pdb_id}{chain_id}.txt")
+            file = os.path.join(self.feature_dir, f"{pdb_id}{chain_id}.txt")
             feature = np.genfromtxt(file, delimiter=' ', dtype=None, encoding=None)
             feature_vals = list(feature)
 
@@ -188,10 +217,10 @@ class AnalysisComputer():
             raise
         except Exception as ex:
             error = True
-            logger.debug(f"{feature_name}: Error while processing {pdb_id} {chain_id}: {ex}")
+            logger.debug(f"{self.feature}: Error while processing {pdb_id} {chain_id}: {ex}")
         finally:
             if (error):
-                logger.error(f"{feature_name}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
+                logger.error(f"{self.feature}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
 
     def draw_plots(self, feature_type, data_binding, data_nonbinding, feature_output_dir, feature_name):
         if feature_type == "categorical":
@@ -310,6 +339,7 @@ class AnalysisComputer():
         f.write(f"p-value: {p_value}\n")
 
         return (chi2, p_value)
+
 
     '''def fischers_exact_test(self, data, results_file, feature):
             with open(results_file, 'w') as f:

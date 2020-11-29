@@ -34,16 +34,18 @@ balance_binding_ratio = False
 draw_plots = True
 alpha = 0.05
 
+'''
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="mix"
+dataset_name="holo4k"
 tasks="A"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 output_dir= f"{P2Rank_path}/datasets/{dataset_name}"
 #features_list = "unp_disulfid"  #config.get_all_feature_names()       #"unp_PTM,unp_glycosylation,unp_lipidation,unp_mod_res,unp_variation,unp_topology,unp_sec_str,unp_non_standard,unp_natural_variant,unp_compbias,pdbekb_conservation,pdbekb_sec_str,aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,dynamine,efoldmine,mobiDB,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,depth,phi_angle,psi_angle,cis_peptide"
-features_list = "aa" #"aa,aa_pairs,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
-sample_size = 500
-iterations = 1000
+features_list = "conservation,aa" #"aa,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
+sample_size = 444
+iterations = 2
 balance_binding_ratio = True
+'''
 
 #parse arguments: #todo check
 try:
@@ -59,19 +61,29 @@ for opt, arg in opts:
     elif opt in ("-t", "--tasks"):
         tasks = arg #todo check possible values
     elif opt in ("-m", "--threads"): #todo check if threads >= 1, int
-        threads = arg
+        threads = int(arg)
     elif opt in ("-f", "--features"):
         features_list = arg
     elif opt in ("-s", "--sample_size"):
-        sample_size = arg
+        sample_size = int(arg)
     elif opt in ("-i", "--iterations"):
-        iterations = arg
-    elif opt in ("-b", "--balance_binding_ratio"):
-        balance_binding_ratio = arg
+        iterations = int(arg)
+    elif opt in ("-b", "--balance_binding_ratio"): #todo bez argumentu
+        if arg == '0':
+            balance_binding_ratio = False
+        elif arg == '1':
+            balance_binding_ratio = True
+        else:
+            raise ValueError() #todo
     elif opt in ("-p", "--draw_plots"):
-        draw_plots = arg
+        if arg == '0':
+            draw_plots = False
+        elif arg == '1':
+            draw_plots = True
+        else:
+            raise ValueError()  # todo
     elif opt in ("-a", "--alpha"):
-        alpha = arg
+        alpha = int(arg)
 
 if (dataset_file == ""):
     logger.error("Dataset must be specified.")
@@ -87,7 +99,6 @@ if (features_list == "" or features_list == "x"): #todo
     features_list = config.get_all_feature_names()
 else:
     features_list = features_list.split(',')
-
 tasks=tasks.split(',') #todo check spravny format
 
 downloads_dir = output_dir
@@ -170,7 +181,7 @@ try:
             if processed == False:
                 continue
             ac = AnalysisComputer(analysis_dir, lbs_dir, features_dir, features_list, config)
-            ac.run(sample_size, iterations, balance_binding_ratio, draw_plots, alpha)
+            ac.run(sample_size, iterations, balance_binding_ratio, draw_plots, alpha, threads)
             ac.write_summary()
             tasks.remove('A')
 except Exception as ex:

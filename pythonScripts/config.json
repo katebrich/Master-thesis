@@ -32,8 +32,7 @@
 		},
 		"sec_str": {
 			"import_path": "Features.UniProt.SecondaryStructure",
-			"type": "categorical",
-			"default": "X"
+			"type": "categorical"
 		},
 		"helix": {
 			"import_path": "Features.UniProt.Helix",
@@ -72,8 +71,7 @@
 		},
 		"aa": {
 			"import_path": "Features.AA.AA",
-			"type": "categorical",
-			"default": "V"
+			"type": "categorical"
 		},
 		"aa_ALA": {
 			"import_path": "Features.AA.AA_ALA",
@@ -182,8 +180,7 @@
 		},
 		"polarity": {
 			"import_path": "Features.FASTA.Polarity",
-			"type": "categorical",
-			"default": "nonpolar"
+			"type": "categorical"
 		},
 		"charged": {
 			"import_path": "Features.FASTA.Charged",
@@ -227,7 +224,7 @@
 		},
 		"pdbekb_conservation": {
 			"import_path": "Features.PDBeKB.Conservation",
-			"type": "categorical", 
+			"type": "ordinal", 
 			"default": "1"
 		},
 		"dynamine": {

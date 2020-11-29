@@ -8,6 +8,7 @@ import time
 
 from helper import parse_dataset, res_mappings_author_to_pdbe, getStructuresFromDirectory
 import Logger
+from multiprocessing import Pool, Value
 
 logger = Logger.get_logger(os.path.basename(__file__))
 counter = None
@@ -32,7 +33,6 @@ class MappingsComputer:
 
         self.total = len(dataset)
 
-        from multiprocessing import Pool, Value
         counter = Value('i', 1)
         pool = Pool(int(threads), initializer=self.__pool_init, initargs=(counter,))
         errors = pool.map(self.create_mappings_cache, dataset)

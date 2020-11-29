@@ -87,7 +87,6 @@ class P2RankCustomFeatureCreator():
 
             mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, os.path.join(self.mappings_cache_dir, f"{pdb_id}{chain_id}.txt")))  # todo helper
 
-            missing_vals = [] #todo smazat
             for residue in struct.get_residues():
                 if (residue.id[0][2:] in aa_codes):  # todo smazat fix pro prank
                     if (residue.id[2].isspace()):
@@ -98,7 +97,7 @@ class P2RankCustomFeatureCreator():
                     feat_tuple = tuple(self.defaults)
                     df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
                                                                                       seq_code) + feat_tuple
-                elif (residue.id[0].isspace() or residue.id[0] == "H_MSE"):  # skip hetero-residues #todo selenomethionine??? #todo nonstandard residues...jako pri pocitani LBS
+                elif (residue.id[0].isspace() or residue.id[0] == "H_MSE"):  # skip hetero-residues  #todo nonstandard residues...jako pri pocitani LBS
                     if (residue.id[2].isspace()):  # biopython returns a space instead of empty string
                         ins_code = ""
                     else:
@@ -107,11 +106,8 @@ class P2RankCustomFeatureCreator():
                     auth_res_num = str(seq_code) + str(ins_code)
                     pdbe_res_num = mappings[auth_res_num]
                     feat_list = []
-                    # todo missing feature vals for res_num
                     for j in range(0, len(features)):
                         val = feature_vals[j].get(pdbe_res_num, self.defaults[j])
-                        if pdbe_res_num not in feature_vals[j]: #todo smazat
-                            missing_vals.append(pdbe_res_num)
                         feat_list.append(val)
                     feat_tuple = tuple(feat_list)
                     df.loc[0 if pd.isnull(df.index.max()) else df.index.max() + 1] = (chain_id, ins_code,
@@ -137,15 +133,10 @@ class P2RankCustomFeatureCreator():
                 logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
             return errors
 
-    # todo zrychlit to!!!
-
     def __pool_init(self, args):
         ''' store the counter for later use '''
         global counter
         counter = args
-
-
-
 
 
 dataset_file = ""
