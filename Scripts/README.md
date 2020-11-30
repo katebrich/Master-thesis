@@ -7,7 +7,8 @@ The only needed input is a dataset file with proteins.
 
 In this tutorial, it is described how to:
  - [download data from database and run statistical analysis](#one)
- - 
+ - [run analysis on custom data obtained from a different source](#two)
+ - [train a P2Rank model with new features](#three)
 
 
 ### Prerequisities:
@@ -24,9 +25,23 @@ In this tutorial, it is described how to:
 ### Directory structure
 
 ### Examples
-
+xxxxxxxxxxxxxxxxxxxxx
+x
+x
+x
+x
+x
+x
+x
+x
+x
+x
+x
+x
+x
+x
 <a name="two"></a>
-## 2. Running analysis on data from other source
+## 2. Running analysis on custom data
 
 
 <a name="three"></a>
