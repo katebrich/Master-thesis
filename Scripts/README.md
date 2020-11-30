@@ -115,7 +115,7 @@ output_path
 
 ```
 Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... 
-t o
+
 Mandatory arguments to long options are mandatory for short options too.
   -d, --dataset                Mandatory; file with listed structures to process.
   -o, --output_dir             Mandatory; root folder. Created if not exists.
