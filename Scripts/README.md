@@ -23,32 +23,21 @@ Below, you can learn how to:
 
 <a name="one"></a>
 ## 1. Downloading data and running analysis
+This can be done using python script `analysis_pipeline.py`.
+
+### Input - Dataset file
+Structures that should be downloaded must be provided to the pipeline in a dataset file. It is a plain-text file where every row contains one 
 
 ### Options and Arguments
 
-### Dataset file
-
-### Directory structure
-
 ### Examples
-xxxxxxxxxxxxxxxxxxxxx
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
-x
+
+
+
 <a name="two"></a>
 ## 2. Running analysis on custom data
 
+### Directory structure
 
 <a name="three"></a>
 ## 3. Training a P2Rank model
