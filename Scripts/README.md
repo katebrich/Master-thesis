@@ -6,25 +6,24 @@ Users can define a feature of their own by implementing a method for its computa
 The only needed input is a dataset file with proteins.
 
 In this tutorial, it is described how to:
- - [download data from database and run statistical analysis](one)
+ - [download data from database and run statistical analysis](#one)
  - 
+
+
+### Prerequisities:
+- xxx
+- zzz
 
 <a name="one"></a>
 ## 1. Downloading data and running analysis
 
-# Prerequisities:
-- xxx
-- zzz
+### Options and Arguments
 
-# 
+### Dataset file
 
-# Options and Arguments
+### Directory structure
 
-# Dataset file
-
-# Directory structure
-
-# Examples
+### Examples
 
 <a name="two"></a>
 ## 2. Running analysis on data from other source
