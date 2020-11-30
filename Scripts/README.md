@@ -115,15 +115,18 @@ output_path
 
 ```
 Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... 
-
+t o
 Mandatory arguments to long options are mandatory for short options too.
-  -d, --dataset                Mandatory; file with listed structures to process
-  -o, --output_dir             Mandatory; root folder. Created if not exists
+  -d, --dataset                Mandatory; file with listed structures to process.
+  -o, --output_dir             Mandatory; root folder. Created if not exists.
   -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis
-  -f, --force                  if an existing destination file cannot be
-
-
-
+  -m, --threads                Default: 1. Number of threads.
+  -f, --features               Comma-separated list of features. If not provided, all features from config are processed.
+  -c, --config_path            Default: file config.json located in the same directory as this script
+  -s, --sample_size            Default: 0. Size of random sample for hypothesis tests. If 0, all rows are taken.
+  -i, --iterations             Default: 1. Number of iterations of hypothesis tests. Summary files contain averaged results from all the iterations.
+  -b, --balance_binding_ratio  Default: False. If false, sample of given size is taken from the whole dataset and binding/nonbinding ratio is not balanced. If true, the same number of binding rows and nonbinding rows (equal to given sample size) is taken. 
+  -p, --draw_plots             Default: True. 
 
 
 ```
