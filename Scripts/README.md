@@ -5,15 +5,21 @@ Users can define a feature of their own by implementing a method for its computa
 
 The only needed input is a dataset file with proteins.
 
-In this tutorial, it is described how to:
+Below, you can learn how to:
  - [download data from database and run statistical analysis](#one)
  - [run analysis on custom data obtained from a different source](#two)
  - [train a P2Rank model with new features](#three)
 
 
 ### Prerequisities:
-- xxx
-- zzz
+- Python 3.x
+- Installed Python packages:
+ - BioPython 1.76
+ - NumPy
+ - Matplotlib
+ - Scipy
+ - some modules from the Python Standard Library (e.g. logging, random, multiprocessing, collections etc.)
+- P2Rank 2.2 or later (only for part 3 of the tutorial)
 
 <a name="one"></a>
 ## 1. Downloading data and running analysis
