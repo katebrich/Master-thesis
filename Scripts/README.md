@@ -6,9 +6,10 @@ Users can define a feature of their own by implementing a method for its computa
 The only needed input is a dataset file with proteins.
 
 Below, you can learn how to:
- - [download data from database and run statistical analysis](#one)
- - [run analysis on custom data obtained from a different source](#two)
- - [train a P2Rank model with new features](#three)
+ - [download data from database and run statistical analysis with predefined features](#one)
+ - [add a custom feature](#two)
+ - [run analysis on custom data obtained from a different source](#three)
+ - [train a P2Rank model with new features](#four)
 
 
 ### Prerequisities:
@@ -46,7 +47,7 @@ Example:
 Several dataset can be found [here](../datasets)
 
 ### Output
-All output files are located in an output root folder which was specified by argument `-o` or `--output_path`. 
+All output files are located in an output root folder which was specified by argument `-o` or `--output_dir`. 
 
 The root folder structure is as follows:
 
@@ -107,19 +108,37 @@ output_path
 - Folder `mappings` contains cached residue mappings; author residue number (plus insertion code, if any) from the PDB file is in the first column. In the second column, there is PDB molecule number for the residue.
 - Folder `lbs` contains labeling of binding sites. For each structure, there is a file with one line per residue, where the first number is PDB molecule residue number and the second is label 0/1.
 - The subfolders of `features` contain computed feature values. Again, the first number is PDB molecule residue number and the second number is the feature value for the residue.
-- `analysis` directory contains several summary files. File `errors.txt` lists features where the analysis ended with error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test. Detailed information about the errors can be found in log.
-- Furthermore, there are more statistics and graphs in separate folders for every feature.
+- `analysis` folder contains several summary files. File `errors.txt` lists features where the analysis ended with error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test). Detailed information about the errors can be found in log.
+- Furthermore, there are more statistics and graphs in separate folders for every feature. `pairs.txt` file contains paired ligand binding sites labels with feature values for all the structures in the dataset. It could be useful for more analysis or e.g. for training and testing a classifier.
 
 ### Options and Arguments
+
+```
+Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... 
+
+Mandatory arguments to long options are mandatory for short options too.
+  -d, --dataset                Mandatory; file with listed structures to process
+  -o, --output_dir             Mandatory; root folder. Created if not exists
+  -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis
+  -f, --force                  if an existing destination file cannot be
+
+
+
+
+
+```
 
 ### Examples
 
 
-
 <a name="two"></a>
-## 2. Running analysis on custom data
-
-### Directory structure
+## 2. Defining new features
 
 <a name="three"></a>
+## 2. Running analysis on custom data
+
+pozor na pojmenovani filu...
+### Directory structure
+
+<a name="four"></a>
 ## 3. Training a P2Rank model
