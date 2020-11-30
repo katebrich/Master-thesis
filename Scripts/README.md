@@ -51,22 +51,46 @@ All output files are located in an output root folder which was specified by arg
 The root folder structure is as follows:
 
 ```
-project
-│   README.md
-│   file001.txt    
+output_path
+│   run.log  
 │
-└───folder1
-│   │   file011.txt
-│   │   file012.txt
-│   │
-│   └───subfolder1
-│       │   file111.txt
-│       │   file112.txt
-│       │   ...
-│   
-└───folder2
-    │   file021.txt
-    │   file022.txt
+└───PDB
+│       1s69A.pdb
+│       1do1A.pdb
+|       ...  
+└───FASTA
+|       1s69A.fasta
+|       1do1A.fasta
+|        ...  
+└───mappings    
+|       1s69A.txt
+|       1do1A.txt
+|        ...
+└───lbs    
+|       1s69A.txt
+|       1do1A.txt
+|        ...
+└───features    
+|   |
+│   └───feature1
+│   |       1s69A.txt
+|   |       1do1A.txt
+│   |       ...
+│   └───feature2
+│           1s69A.txt
+|           1do1A.txt
+│           ...
+└───analysis    
+    |
+    └───feature1
+    |       1s69A.txt
+    |       1do1A.txt
+    |       ...
+    └───feature2
+            1s69A.txt
+            1do1A.txt
+            ...
+
 ```
 
 ### Options and Arguments
