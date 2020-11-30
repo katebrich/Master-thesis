@@ -27,6 +27,7 @@ class AnalysisComputer():
     config = ""
     p_values = []
     b_ratios = []
+    p_values_means = []
     p_val_perc = []
     means = []
     errors = []
@@ -136,6 +137,7 @@ class AnalysisComputer():
         #save values for summary
         self.p_values.append((feature, p_values))
         self.b_ratios.append((feature, b_ratios))
+        self.p_values_means.append((feature, np.mean(p_values)))
 
         #save difference of means and variance for summary
         if (feature_type == "continuous"):
@@ -248,6 +250,13 @@ class AnalysisComputer():
             for line in self.p_values:
                 f.write(f"{str(line[0])}, ")
                 f.write(', '.join('{0:.4g}'.format(x) for x in line[1]))
+                f.write('\n')
+
+        self.p_values_means.sort(key=lambda x: x[0])  # sort by name
+        with open(os.path.join(self.output_dir, f"p_values_means.csv"), 'w') as f:
+            for line in self.p_values_means:
+                f.write(f"{str(line[0])}, ")
+                f.write('{0:.4g}'.format(line[1]))
                 f.write('\n')
 
         self.b_ratios.sort(key=lambda x: x[0])  # sort by name

@@ -1,18 +1,10 @@
 import time
-
 import numpy
 from Bio.PDB import PDBParser
 from scipy.spatial import distance
-
-import Logger
-import os
-
 from MOAD import MOAD
 from helper import parse_dataset, get_pdb_path2, res_mappings_author_to_pdbe, isPartOfChain
 from multiprocessing import Pool, Value
-
-logger = Logger.get_logger(os.path.basename(__file__))
-counter = None
 
 class DatasetLigandsFilter:
     filter = ""
@@ -24,7 +16,7 @@ class DatasetLigandsFilter:
     def run(self, orig_dataset_path, filtered_dataset_path, pdb_dir, threads=1, remove_empty_lines=False):
         self.pdb_dir = pdb_dir # todo check if exists
         start = time.time()
-        logger.info(f"Filtering ligands in dataset {orig_dataset_path} with filter '{self.filter}' started...")
+        print(f"Filtering ligands in dataset {orig_dataset_path} with filter '{self.filter}' started...")
 
         if (self.filter == "MOAD"):
             self.moad = MOAD()
@@ -54,7 +46,7 @@ class DatasetLigandsFilter:
             f.write('\n'.join('{}\t{}\t{}'.format(x[0], x[1], ','.join(x[2])) for x in results_filtered))
 
 
-        logger.debug(f"Finished in {time.time() - start}")
+        print(f"Finished in {time.time() - start}")
 
     def filter_ligands(self, structure):
         try:
@@ -91,8 +83,6 @@ class DatasetLigandsFilter:
         except:#todo
             print(f"error {structure[0]} {structure[1]}")
             pass
-
-
 
 
 
@@ -191,3 +181,20 @@ class DatasetLigandsFilter:
                 if dist < threshold:
                     return True
         return False
+
+
+#######################################################################
+
+filter="MOAD"
+dataset_name="holo4k_1"
+label="final"
+datasets_path="/home/katebrich/Documents/diplomka/GitHub/datasets"
+dataset_file=f"{datasets_path}/{dataset_name}.txt"
+output_file= f"{datasets_path}/{dataset_name}_filter_{filter}.txt"
+#pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/{label}/{dataset_name}/PDB" #todo
+pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/holo4k_11_13_final/PDB"
+threads=4 #todo
+
+
+df = DatasetLigandsFilter(filter)
+df.run(dataset_file, output_file, pdb_dir, threads, remove_empty_lines=True)
