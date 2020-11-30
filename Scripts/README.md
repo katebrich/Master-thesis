@@ -31,14 +31,18 @@ We need to specify the list of structures in the dataset file. It is a plain-tex
 Example:
 - Dataset containing 3 structures:
 
-    ```1s69	A
+    ```
+    1s69	A
     1do1	A
-    1qgw	C```
+    1qgw	C
+    ```
     
 - Dataset with 2 structures where only ligands with specified codes will be considered:
 
-    ```1loj	B	URI
-    1ja1	A	FAD,NAP,FMN```
+    ```
+    1loj	B	URI
+    1ja1	A	FAD,NAP,FMN
+    ```
 
 ### Options and Arguments
 
