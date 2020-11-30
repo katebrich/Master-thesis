@@ -12,14 +12,14 @@ Below, you can learn how to:
 
 
 ### Prerequisities:
-- Python 3.x
-- Installed Python packages:
- ..* BioPython 1.76
- ..* NumPy
- - Matplotlib
- - Scipy
- - some modules from the Python Standard Library (e.g. logging, random, multiprocessing, collections etc.)
-- P2Rank 2.2 or later (only for part 3 of the tutorial)
+* Python 3.x
+* Installed Python packages:
+ * BioPython 1.76
+ * NumPy
+ * Matplotlib
+ * Scipy
+ * some modules from the Python Standard Library (e.g. logging, random, multiprocessing, collections etc.)
+* P2Rank 2.2 or later (only for part 3 of the tutorial)
 
 <a name="one"></a>
 ## 1. Downloading data and running analysis
