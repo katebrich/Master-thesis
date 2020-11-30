@@ -3,15 +3,11 @@ import uuid
 
 from Bio.PDB import *
 
-import SASA
+from AnalysisPipeline import SASA
 from helper import *
-import getopt
-import sys
 import os
-import threading
 import Logger
 import time
-from MOAD import MOAD
 import numpy
 
 logger = Logger.get_logger(os.path.basename(__file__))

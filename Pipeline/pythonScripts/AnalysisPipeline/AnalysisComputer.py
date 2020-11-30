@@ -1,18 +1,14 @@
 import math
-import operator
 import os
 import random
 import shutil
-import sys
 import time
-from multiprocessing import Pool, Value
+from multiprocessing import Pool
 import numpy as np
-from matplotlib import pyplot, transforms
 from scipy import stats
 from collections import Counter
-import Plots
+from AnalysisPipeline import Plots
 from helper import getStructuresFromDirectory
-import matplotlib.pyplot as plt
 
 import Logger
 
@@ -170,7 +166,7 @@ class AnalysisComputer():
         #plot p-values
         Plots.plot_pvalues_scatter(p_values, alpha, os.path.join(feature_output_dir, f"{feature}_pValues_scatter.png"))
         Plots.plot_pvalues_histogram(p_values, alpha,
-                                   os.path.join(feature_output_dir, f"{feature}_pValues_histogram.png"))
+                                     os.path.join(feature_output_dir, f"{feature}_pValues_histogram.png"))
 
         #save p-values to file
         with open(os.path.join(feature_output_dir, f"p_values.txt"), 'w') as f:
@@ -231,7 +227,7 @@ class AnalysisComputer():
             Plots.plot_frequencies(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_frequencies"))
         elif feature_type == "continuous":
             Plots.plot_histogram(data_binding, data_nonbinding, 40,
-                               os.path.join(feature_output_dir, f"{feature_name}_hist_bins_40"))
+                                 os.path.join(feature_output_dir, f"{feature_name}_hist_bins_40"))
             Plots.plot_histogram(data_binding, data_nonbinding, 100,
                                  os.path.join(feature_output_dir, f"{feature_name}_hist_bins_100"))
 

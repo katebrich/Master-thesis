@@ -1,5 +1,4 @@
 import math
-import operator
 import os
 import shutil
 import sys
@@ -8,7 +7,7 @@ import time
 import numpy as np
 from scipy import stats
 from collections import Counter
-import Plots
+from AnalysisPipeline import Plots
 from helper import getStructuresFromDirectory
 #from unused.statistical_analysis import welchs_t_test, fischers_exact_test, chi_squared_test
 

@@ -43,7 +43,7 @@ for opt, arg in opts:
         out_path = arg
     elif opt in ("-d", "--dataset_path"):
         dataset_path = arg
-    elif opt in ("-l", "--list_ligands"): #todo bez parametru
+    elif opt in ("-l", "--list_ligands"):
         list_ligands = True
 
 #todo

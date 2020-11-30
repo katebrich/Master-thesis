@@ -1,7 +1,5 @@
 import math
 import os, sys
-
-from MOAD import MOAD
 from helper import parse_dataset_not_split_chains
 import threading
 import traceback

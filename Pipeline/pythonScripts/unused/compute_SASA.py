@@ -5,12 +5,9 @@ from helper import *
 import getopt
 import sys
 import os
-import threading
 import Logger
 import time
-from scipy.spatial import distance
-import SASA
-from shutil import copyfile
+from AnalysisPipeline import SASA
 
 logger = Logger.get_logger(os.path.basename(__file__))
 counter = None

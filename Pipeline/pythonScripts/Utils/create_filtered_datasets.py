@@ -2,7 +2,7 @@ import time
 import numpy
 from Bio.PDB import PDBParser
 from scipy.spatial import distance
-from MOAD import MOAD
+from Utils.MOAD import MOAD
 from helper import parse_dataset, get_pdb_path2, res_mappings_author_to_pdbe, isPartOfChain
 from multiprocessing import Pool, Value
 

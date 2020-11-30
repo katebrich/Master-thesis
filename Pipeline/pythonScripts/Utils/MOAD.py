@@ -4,7 +4,7 @@ import os
 from helper import restAPI_get
 
 class MOAD:
-    MOAD_file_path = "moad.csv" #todo f"temp_moad_{uuid.uuid1()}"
+    MOAD_file_path = "../moad.csv"  #todo f"temp_moad_{uuid.uuid1()}"
     moad_dict = {}
 
     def __init__(self):
