@@ -81,17 +81,34 @@ output_path
 |           1do1A.txt
 │           ...
 └───analysis    
+    |   binding_ratios.csv
+    |   errors.txt
+    |   means_difference.csv
+    |   p_vals_perc.csv
+    |   p_values.csv
+    |   p_values_means.csv
     |
     └───feature1
-    |       1s69A.txt
-    |       1do1A.txt
+    |       iterations.txt
+    |       pairs.txt
+    |       p_values.txt
+    |       plots, histograms
     |       ...
     └───feature2
-            1s69A.txt
-            1do1A.txt
+            iterations.txt
+            pairs.txt
+            p_values.txt
+            plots, histograms
             ...
 
 ```
+
+- File `run.log` is copied to the output directory when the program terminates. This is the detailed log; the brief log is printed to the console as the program runs.
+- Folder `mappings` contains cached residue mappings; author residue number (plus insertion code, if any) from the PDB file is in the first column. In the second column, there is PDB molecule number for the residue.
+- Folder `lbs` contains labeling of binding sites. For each structure, there is a file with one line per residue, where the first number is PDB molecule residue number and the second is label 0/1.
+- The subfolders of `features` contain computed feature values. Again, the first number is PDB molecule residue number and the second number is the feature value for the residue.
+- `analysis` directory contains several summary files. File `errors.txt` lists features where the analysis ended with error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test. Detailed information about the errors can be found in log.
+- Furthermore, there are more statistics and graphs in separate folders for every feature.
 
 ### Options and Arguments
 
