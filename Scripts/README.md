@@ -167,7 +167,10 @@ python3 analysis_pipeline.py -d dataset_file -o output_dir -f hydropathy,aromati
 User can define a custom feature and implement a method for getting the values.
 Two steps need to be made:
 - add feature to the [config file](python/config.json)
-- implement a method ...... [here](python/Features/Custom.py)
+  - import_path: path to the implementation. The class is loaded dynamically according to the feature name.
+  - type: binary, categorical, ordinal or continuous. Hypothesis test is chosen according to the type (Welch's test for continuous and Chi-squared test for the rest). Plots can also differ according to the type.
+  - default: optional. It is needed when creating feature files for P2Rank (described in section [four](#four). It specifies the default value for rows where the value is missing.
+- implement class with method `get_values(self, data_dir, pdb_id, chain_id)`. It can be placed anywhere (the path to the class is provided in the config); however, there is a prepared script [`Custom.py`](python/Features/Custom.py) for this purpose, with an example implementation.
 
 
 <a name="three"></a>
