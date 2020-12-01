@@ -35,18 +35,20 @@ alpha = 0.05
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
 dataset_name="debug"
 tasks="A"
-tasks = tasks.split(',')
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 output_dir= f"{P2Rank_path}/datasets/{dataset_name}"
-features_list = "." #"aa,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
-sample_size = 500
-iterations = 1000
+features_list = "lbs" #"aa,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
+sample_size = 100
+iterations = 1
 balance_binding_ratio = True
 '''
 
+def usage():
+    pass #todo
+
 #parse arguments:
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:m:f:s:i:a:p:b:c:l:')
+    opts, args = getopt.getopt(sys.argv[1:], 'hd:o:t:m:f:s:i:a:p:b:c:l:', ['help', 'dataset=', 'output_dir=', 'tasks=', 'threads=', 'features=']) #todo dodelat, otestovat
 except getopt.GetoptError as err:
     #todo print help
     logger.error(err) #unknown option or missing argument
@@ -54,22 +56,25 @@ except getopt.GetoptError as err:
 
 try:
     for opt, arg in opts:
-        if opt in ("-d", "--dataset"):
+        if opt in ("-h", "--help"):
+            usage()
+            sys.exit(2)
+        elif opt in ("-d", "--dataset"):
             dataset_file = arg
         elif opt in ("-o", "--output_dir"):
             output_dir = arg
         elif opt in ("-t", "--tasks"):
-            tasks = arg.upper().split(',')
+            tasks = arg
         elif opt in ("-m", "--threads"):
             threads = int(arg)
         elif opt in ("-f", "--features"):
             features_list = arg
+        elif opt in ("-c", "--config_path"):
+            config_path = arg
         elif opt in ("-s", "--sample_size"):
             sample_size = int(arg)
         elif opt in ("-i", "--iterations"):
             iterations = int(arg)
-        elif opt in ("-c", "--config_path"): #todo check if it works
-            config_path = arg
         elif opt in ("-l", "--lbs_distance_threshold"):
             lbs_distance_threshold = float(arg) #todo check if decimal works
         elif opt in ("-b", "--balance_binding_ratio"):
@@ -95,6 +100,7 @@ try:
     if (output_dir == ""):
         raise ValueError("Argument '-o' ('--output_dir') is compulsory.")
 
+    tasks = tasks.upper().split(',')
     #check valid tasks values
     for t in tasks:
         if t != 'D' and t != 'M' and t != 'L' and t != 'F' and t != 'A':
@@ -120,7 +126,7 @@ try:
     lbs_dir = f"{output_dir}/lbs"
     mappings_dir = f"{output_dir}/mappings"
     features_dir=f"{output_dir}/features"
-    analysis_dir=f"{output_dir}/analysis_{sample_size}"
+    analysis_dir=f"{output_dir}/analysis_{sample_size}" #todo smazat sample_size?
 
     features_computed = []
     analysis_computed = []
@@ -195,4 +201,5 @@ finally:
                 f.write(log.read())
     else:
         #create new log file in output directory
-        shutil.copyfile(Logger.get_log_path(), log_path)
+        if os.path.exists(Logger.get_log_path()):
+            shutil.copyfile(Logger.get_log_path(), log_path)

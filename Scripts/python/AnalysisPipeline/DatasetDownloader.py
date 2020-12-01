@@ -1,12 +1,8 @@
 import math
-import os, sys
+import os
 from helper import parse_dataset_not_split_chains
-import threading
-import traceback
-import getopt
 from helper import restAPI_get, get_entity_id
 import uuid
-from Bio import SeqIO
 from Bio.PDB import PDBParser, PDBIO
 from Bio.PDB.PDBIO import Select
 import Logger

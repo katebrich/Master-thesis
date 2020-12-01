@@ -1,9 +1,5 @@
-import getopt
 import math
 import os
-import sys
-import threading
-import traceback
 import time
 
 from helper import parse_dataset, res_mappings_author_to_pdbe, getStructuresFromDirectory

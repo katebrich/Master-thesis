@@ -93,6 +93,10 @@ class AnalysisComputer():
 
         #compute hypothesis test for all iterations
         #random.seed(42 + X)  # todo for debug
+
+        if sample_size == 0:
+            iterations = 1
+
         with open(os.path.join(feature_output_dir, f"iterations.txt"), 'w') as f:
             for i in range(1, iterations + 1):
                 f.write(f"********************************\n")
