@@ -51,6 +51,7 @@ All output files are located in an output root folder which was specified by arg
 
 The root folder structure is as follows:
 
+<a name="folders"></a>
 ```
 output_path
 │   run.log  
@@ -122,7 +123,8 @@ Mandatory arguments to long options are mandatory for short options too.
   -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis
   -m, --threads                Default: 1. Number of threads.
   -f, --features               Comma-separated list of features. If not provided, all features from config are processed.
-  -c, --config_path            Default: file config.json located in the same directory as this script
+  -c, --config_path            Default: file config.json located in the same directory as this script.
+  -l, --lbs_distance_threshold Default: 4. Binding residues are defined as residues with at least one non-hydrogen atom in distance at most lbs_binding_threshold from any ligand.
   -s, --sample_size            Default: 0. Size of random sample for hypothesis tests. If 0, all rows are taken. Arguments -i and -b are not considered, as this only makes sense for 1 iteration and no balancing.
   -i, --iterations             Default: 1. Number of iterations of hypothesis tests. Summary files contain averaged results from all the iterations.
   -b, --balance_binding_ratio  Default: False. If false, sample of given size is taken from the whole dataset and binding/nonbinding ratio is not balanced. If true, the same number of binding rows and nonbinding rows (equal to given sample size) is taken. 
@@ -135,7 +137,7 @@ Mandatory arguments to long options are mandatory for short options too.
 ```
 python3 analysis_pipeline.py -d dataset_file -o output_dir
 ```
-This is the basic usage. It downloads all the structures, computes binding sites and analysis. By default, the analysis is computed for all the data rows. The random sampling can be done by specifying the sample size and number of iterations:
+This is the basic usage. It downloads all the structures, computes binding sites, all features defined in config, and analysis of those features. By default, the analysis is computed for all the data rows. The random sampling can be done by specifying the sample size and number of iterations:
 
 ```
 python3 analysis_pipeline.py -d dataset_file -o output_dir -s 500 -i 10
@@ -148,6 +150,10 @@ python3 analysis_pipeline.py -d dataset_file -o output_dir -s 500 -i 10 -b true
 In all the examples above, the analysis was computed for all the features in the config file. It is possible to specify a subset of features:
 ```
 python3 analysis_pipeline.py -d dataset_file -o output_dir -f hydropathy,aromaticity
+```
+We could need to compute only some parts of the pipeline, for example ligand bingind sites. This can be done by specifying particular task. The pipeline computes only data needed for this task. The following command downloads data, computes mappings and ligand binding sites, but does not compute any feature values or analysis, because these computations are not needed for the main task ('L' - ligand binding sites):
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir -t L
 ```
 
 ### Notes
@@ -169,15 +175,37 @@ Two steps need to be made:
 - add feature to the [config file](python/config.json)
   - import_path: path to the implementation. The class is loaded dynamically according to the feature name.
   - type: binary, categorical, ordinal or continuous. Hypothesis test is chosen according to the type (Welch's test for continuous and Chi-squared test for the rest). Plots can also differ according to the type.
-  - default: optional. It is needed when creating feature files for P2Rank (described in section [four](#four). It specifies the default value for rows where the value is missing.
-- implement class with method `get_values(self, data_dir, pdb_id, chain_id)`. It can be placed anywhere (the path to the class is provided in the config); however, there is a prepared script [`Custom.py`](python/Features/Custom.py) for this purpose, with an example implementation.
+  - default: optional. It is needed when creating feature files for P2Rank (described in section [four](#four)). It specifies the default value for rows where the value is missing.
+- implement class with method `get_values(self, data_dir, pdb_id, chain_id)`. It can be located anywhere (the path to the class is provided in the config); however, there is a prepared script [`Custom.py`](python/Features/Custom.py) for this purpose, with an example implementation.
 
+If you don't want to add the custom feature to the existing ones, you can create a new config file and pass it as argument:
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir -c new_config_path
+```
 
 <a name="three"></a>
 ## 2. Running analysis on custom data
+By specifying a task, we tell the program what is the desired output. The program automatically decides what else is needed to compute for this task. For example, if the task is 'L' (ligand binding sites computation), the program checks the existence of folders 'PDB' and 'mappings' (see the [folder structure](#folders) above). If they don't exist, the tasks 'D' (download) and 'M' (mappings) are automatically processed before binding sites computation.
 
-pozor na pojmenovani filu...
-### Directory structure
+Thus, if you already have some data already donwloaded/computed, you can run the pipeline with them by putting them into the correct folders.
+Note that the folders hierarchy and naming, as well as naming of the files (pbdID+chainID.txt/.pdb/.fasta) and correct formatting of the files must be the same as if obtained from the pipeline!
+
+The dependencies of the tasks are following:
+- D: no dependencies
+- M: no dependencies
+- L: D,M
+- F: D,M
+- A: F,L
+
+### Example
+Let's say we have values for a feature named 'XXX' and we also have ligand binding sites already computed. We want to compute the statistical analysis.
+We need to create a directory 'features' with subdirectory 'XXX' and put the files with feature values there, one file per structure. The file for structure 1cbs, chain A will be named '1cbsA.txt'. The file will contain the feature values, one line per residue, where the first column will be the residue number (in fact in can be any numbering, the values of ligand binding sites will be paired with the values of the feature according to this numbering) and the second column will be the feature value for the residue. 
+We do the same thing for ligand binding sites values - create a directory 'lbs' and put there files for all the structure.
+Then, we run this command:
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir -t A
+```
+where output_dir is the directory which contains subdirectories 'features' and 'lbs'. The program should recognize that these folders already exist and it should compute the analysis only. 
 
 <a name="four"></a>
 ## 3. Training a P2Rank model
