@@ -6,10 +6,10 @@ Users can define a feature of their own by implementing a method for its computa
 The only needed input is a dataset file with proteins.
 
 Below, you can learn how to:
- - [download data from database and run statistical analysis with predefined features](#one)
+ - [get data and run analysis with predefined features](#one)
  - [add a custom feature](#two)
  - [run analysis on custom data obtained from a different source](#three)
- - [train a P2Rank model with new features](#four)
+ - [get data and train a P2Rank model with new features](#four)
 
 
 ### Prerequisities:
@@ -18,7 +18,7 @@ Below, you can learn how to:
   * BioPython 1.76
   * NumPy
   * Matplotlib
-  * Scipy
+  * SciPy
   * some modules from the Python Standard Library (e.g. logging, random, multiprocessing, collections etc.)
 * P2Rank 2.2 or later (only for part 3 of the tutorial)
 
@@ -44,7 +44,7 @@ Example:
     1loj	B	URI
     1ja1	A	FAD,NAP,FMN
     ```
-Several dataset can be found [here](../datasets)
+Several datasets can be found [here](../datasets)
 
 ### Output
 All output files are located in an output root folder which was specified by argument `-o` or `--output_dir`. 
@@ -104,12 +104,12 @@ output_path
 
 ```
 
-- File `run.log` is copied to the output directory when the program terminates. This is the detailed log; the brief log is printed to the console as the program runs.
 - Folder `mappings` contains cached residue mappings; author residue number (plus insertion code, if any) from the PDB file is in the first column. In the second column, there is PDB molecule number for the residue.
 - Folder `lbs` contains labeling of binding sites. For each structure, there is a file with one line per residue, where the first number is PDB molecule residue number and the second is label 0/1.
 - The subfolders of `features` contain computed feature values. Again, the first number is PDB molecule residue number and the second number is the feature value for the residue.
 - `analysis` folder contains several summary files. File `errors.txt` lists features where the analysis ended with error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test). Detailed information about the errors can be found in log.
 - Furthermore, there are more statistics and graphs in separate folders for every feature. `pairs.txt` file contains paired ligand binding sites labels with feature values for all the structures in the dataset. It could be useful for more analysis or e.g. for training and testing a classifier.
+- File `run.log` is copied to the output directory when the program terminates. This is the detailed log; the brief log is printed to the console as the program runs.
 
 ### Options and Arguments
 
@@ -132,7 +132,35 @@ Mandatory arguments to long options are mandatory for short options too.
 ```
 
 ### Examples
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir
+```
+This is the basic usage. It downloads all the structures, computes binding sites and analysis. By default, the analysis is computed for all the data rows. The random sampling can be done by specifying the sample size and number of iterations:
 
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir -s 500 -i 10
+```
+In the example above, in each iteration, 500 rows will be randomly sampled from the whole dataset. If we want to take the same number of binding and nonbinding rows, we need to set the balance_binding_ratio to true. In the following example, the analysis will be computed with 500 binding rows AND 500 nonbinding rows.
+
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir -s 500 -i 10 -b true
+```
+In all the examples above, the analysis was computed for all the features in the config file. It is possible to specify a subset of features:
+```
+python3 analysis_pipeline.py -d dataset_file -o output_dir -f hydropathy,aromaticity
+```
+
+### Notes
+
+- Most data is downloaded from databases (PDBe, UniProt, PDBe-KB). Sometimes, it can happen that the database is overloaded or temporarily unavailable. Also, some feature values are not available for all the structures (e.g. the protein is not in UniProt and the feature values are downloaded from there). You will get an error message for these faulty structures and the program skips them and continues. At the end of each task, there is a warning message listing all the faulty structures:
+```
+2020-12-01 10:42:48,162 [ERROR] DatasetDownloader.py(line 114) 1/14: 1cbs A NOT PROCESSED ! See log for more details.
+2020-12-01 10:42:48,379 [ERROR] DatasetDownloader.py(line 114) 2/14: 1kae X NOT PROCESSED ! See log for more details.
+2020-12-01 10:43:07,107 [WARNING] DatasetDownloader.py(line 59) Downloading structures finished in 20s. 2/14 structures were not downloaded successfully: 
+1cbs A
+1kae X
+
+```
 
 <a name="two"></a>
 ## 2. Defining new features
