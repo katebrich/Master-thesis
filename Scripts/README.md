@@ -24,7 +24,7 @@ Below, you can learn how to:
 
 <a name="one"></a>
 ## 1. Downloading data and running analysis
-This can be done using python script `analysis_pipeline.py`.
+This can be done using python script [`analysis_pipeline.py`](python/analysis_pipeline.py).
 
 ### Input - Dataset file
 We need to specify the list of structures in the dataset file. It is a plain-text file where one row equals one structure. The columns are separated by whitespace. The first two columns are mandatory and they contain PDB ID and chain ID (pipeline can only work with single-chain structures). The third column is optional and it can define a list of specific ligands which will be used for ligand binding sites computation.
@@ -123,7 +123,7 @@ Mandatory arguments to long options are mandatory for short options too.
   -m, --threads                Default: 1. Number of threads.
   -f, --features               Comma-separated list of features. If not provided, all features from config are processed.
   -c, --config_path            Default: file config.json located in the same directory as this script
-  -s, --sample_size            Default: 0. Size of random sample for hypothesis tests. If 0, all rows are taken.
+  -s, --sample_size            Default: 0. Size of random sample for hypothesis tests. If 0, all rows are taken. Arguments -i and -b are not considered, as this only makes sense for 1 iteration and no balancing.
   -i, --iterations             Default: 1. Number of iterations of hypothesis tests. Summary files contain averaged results from all the iterations.
   -b, --balance_binding_ratio  Default: False. If false, sample of given size is taken from the whole dataset and binding/nonbinding ratio is not balanced. If true, the same number of binding rows and nonbinding rows (equal to given sample size) is taken. 
   -p, --draw_plots             Default: True. 
@@ -164,6 +164,11 @@ python3 analysis_pipeline.py -d dataset_file -o output_dir -f hydropathy,aromati
 
 <a name="two"></a>
 ## 2. Defining new features
+User can define a custom feature and implement a method for getting the values.
+Two steps need to be made:
+- add feature to the [config file](python/config.json)
+- implement a method ...... [here](python/Features/Custom.py)
+
 
 <a name="three"></a>
 ## 2. Running analysis on custom data
