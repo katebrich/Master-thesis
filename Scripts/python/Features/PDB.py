@@ -4,18 +4,18 @@ from helper import *
 
 class HSE_up():
     def get_values(self, data_dir, pdb_id, chain_id):
-        pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+        pdb_file = get_pdb_path_long(data_dir, pdb_id, chain_id)
+        parser = PDBParser(PERMISSIVE=0, QUIET=1)
         structure = parser.get_structure(pdb_id, pdb_file)
         model = structure[0]
         HSExposure.HSExposureCB(model)
         feature_vals = []
-        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
+        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path_long(data_dir, pdb_id, chain_id)))
         for r in model.get_residues():
             if not (r.id[0].isspace()):  # is HETATM
                 continue
             try:
-                hse = int(r.xtra["EXP_HSE_B_U"]) #todo proc vychazi stejne Up i Down?
+                hse = int(r.xtra["EXP_HSE_B_U"])
                 auth_res_num = getFullAuthorResNum(r.id)
                 pdbe_res_num = mappings[auth_res_num]
                 feature_vals.append((pdbe_res_num, hse))
@@ -26,13 +26,13 @@ class HSE_up():
 
 class HSE_down():
     def get_values(self, data_dir, pdb_id, chain_id):
-        pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+        pdb_file = get_pdb_path_long(data_dir, pdb_id, chain_id)
+        parser = PDBParser(PERMISSIVE=0, QUIET=1)
         structure = parser.get_structure(pdb_id, pdb_file)
         model = structure[0]
         HSExposure.HSExposureCB(model)
         feature_vals = []
-        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
+        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path_long(data_dir, pdb_id, chain_id)))
         for r in model.get_residues():
             if not (r.id[0].isspace()):  # is HETATM
                 continue
@@ -48,13 +48,13 @@ class HSE_down():
 
 class ExposureCN():
     def get_values(self, data_dir, pdb_id, chain_id):
-        pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+        pdb_file = get_pdb_path_long(data_dir, pdb_id, chain_id)
+        parser = PDBParser(PERMISSIVE=0, QUIET=1)
         structure = parser.get_structure(pdb_id, pdb_file)
         model = structure[0]
         HSExposure.ExposureCN(model, radius=10.0)  # radius as in P2Rank protrusion feature
         feature_vals = []
-        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
+        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path_long(data_dir, pdb_id, chain_id)))
         for r in model.get_residues():
             if not (r.id[0].isspace()):  # is HETATM
                 continue
@@ -70,11 +70,11 @@ class ExposureCN():
 
 class BFactor():
     def get_values(self, data_dir, pdb_id, chain_id):
-        pdb_file = get_pdb_path(data_dir, pdb_id, chain_id)
+        pdb_file = get_pdb_path_long(data_dir, pdb_id, chain_id)
         parser = PDBParser(PERMISSIVE=0, QUIET=1)
-        structure = parser.get_structure(pdb_id, pdb_file)  # todo udelat funkci get_chain?
+        structure = parser.get_structure(pdb_id, pdb_file)
         chain = structure[0][chain_id]
-        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(data_dir, pdb_id, chain_id)))
+        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path_long(data_dir, pdb_id, chain_id)))
         feature_vals = []
         for residue in chain.get_residues():
             if not isPartOfChain(residue, mappings):

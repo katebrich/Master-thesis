@@ -1,9 +1,8 @@
 
-dataset_name="mix_filter_p2rank"
-new_name="mix_p2rank_noDupl"
-datasets_path="/home/katebrich/Documents/diplomka/GitHub/datasets"
-dataset_file=f"{datasets_path}/{dataset_name}.txt"
-output_file= f"{datasets_path}/{new_name}.txt"
+dataset_name="" #todo
+new_name="" #todo
+dataset_file="" #todo
+output_file= "" #todo
 
 structures = {}
 with open(dataset_file, 'r') as input:

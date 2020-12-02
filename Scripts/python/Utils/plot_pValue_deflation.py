@@ -8,8 +8,8 @@ from scipy import stats
 
 iterations = 100
 
-feature = "exposure_CN"
-data_path = "/home/katebrich/Documents/diplomka/P2Rank/datasets/mix_filter_p2rank/analysis_0"
+feature = "" #todo
+data_path = "" #todo
 pairs_path = os.path.join(data_path, feature, "pairs.txt")
 pairs = np.genfromtxt(pairs_path, delimiter=' ', dtype=None, encoding=None)
 pairs = list(pairs)

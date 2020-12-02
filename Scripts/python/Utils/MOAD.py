@@ -4,11 +4,11 @@ import os
 from helper import restAPI_get
 
 class MOAD:
-    MOAD_file_path = "../moad.csv"  #todo f"temp_moad_{uuid.uuid1()}"
+    MOAD_file_path = "../moad.csv"
     moad_dict = {}
 
     def __init__(self):
-        self.__download_MOAD_file() #todo
+        self.__download_MOAD_file()
         self.__parse_MOAD_file()
 
     def __download_MOAD_file(self):
@@ -46,10 +46,9 @@ class MOAD:
         result = []
         for l in ligands:
             validity = l[1]
-            if (validity == "valid"): #todo
+            if (validity == "valid"):
                 res_codes, chain, res_num = l[0].split(':')
                 if (chain == chain_id):
                    for code in res_codes.split(' '):  # sometimes there is not only one code, but more codes which represent multiple parts of ligand, for example sugar chain. We need to split it, in PDB these are listed individually
                        result.append(code)
-            #todo check conflicts
         return result

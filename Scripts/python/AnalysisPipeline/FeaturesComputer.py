@@ -1,7 +1,6 @@
 import math
 import shutil
 import time
-
 from helper import *
 import Logger
 from pydoc import locate
@@ -31,7 +30,7 @@ class FeaturesComputer():
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
 
-        dataset = parse_dataset(self.dataset_file)  # todo co kdyz neni spravny format
+        dataset = parse_dataset(self.dataset_file)
 
         start = time.time()
         logger.info(f"Computing feature {feature_name} started...")
@@ -61,7 +60,6 @@ class FeaturesComputer():
             feature_class_path = self.config.get_feature_function(self.feature_name)
             feature_class = locate(feature_class_path)
             feat_vals = feature_class().get_values(self.input_dir, pdb_id, chain_id)
-            #feat_vals = get_feature(feature_name, input_dir, pdb_id, chain_id)
             output_file = f"{self.output_dir}/{pdb_id}{chain_id}.txt"
             with open(output_file, 'w') as f:
                 f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in feat_vals))
@@ -86,35 +84,3 @@ class FeaturesComputer():
         ''' store the counter for later use '''
         global counter
         counter = c
-
-
-
-'''
-#parse arguments:
-try:
-    opts, args = getopt.getopt(sys.argv[1:], 'f:d:o:i:t:')
-except getopt.GetoptError as err:
-    logger.error(err) #unknown option or missing argument
-    sys.exit(1)
-for opt, arg in opts:
-    if opt in ("-d", "--dataset"):
-        dataset_file = arg
-    elif opt in ("-o", "--output_dir"):
-        output_dir = arg
-    elif opt in ("-i", "--input_dir"): #folder with PDB files
-        input_dir = arg
-    elif opt in ("-t", "--threads"):
-        threads = arg #todo check if threads >= 1, int
-    elif opt in ("-f", "--feature"):
-        feature_name = arg
-
-if (dataset_file == ""):
-    logger.error("Dataset must be specified.")
-    sys.exit(1)
-if (output_dir == ""):
-    logger.error("Output directory must be specified.")
-    sys.exit(1)
-if (input_dir == ""):
-    logger.error("Input directory must be specified.")
-    sys.exit(1)
-'''

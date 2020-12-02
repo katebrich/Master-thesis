@@ -3,7 +3,7 @@ import numpy
 from Bio.PDB import PDBParser
 from scipy.spatial import distance
 from Utils.MOAD import MOAD
-from helper import parse_dataset, get_pdb_path2, res_mappings_author_to_pdbe, isPartOfChain
+from helper import parse_dataset, get_pdb_path, res_mappings_author_to_pdbe, isPartOfChain
 from multiprocessing import Pool, Value
 
 class DatasetLigandsFilter:
@@ -11,10 +11,10 @@ class DatasetLigandsFilter:
     pdb_dir = ""
 
     def __init__(self, filter):
-        self.filter = filter #todo check
+        self.filter = filter
 
     def run(self, orig_dataset_path, filtered_dataset_path, pdb_dir, threads=1, remove_empty_lines=False):
-        self.pdb_dir = pdb_dir # todo check if exists
+        self.pdb_dir = pdb_dir
         start = time.time()
         print(f"Filtering ligands in dataset {orig_dataset_path} with filter '{self.filter}' started...")
 
@@ -34,7 +34,7 @@ class DatasetLigandsFilter:
         results_filtered = []
         if (remove_empty_lines): #remove structures with no valid ligands
             for res in results:
-                if res is None: #todo smazat
+                if res is None:
                     continue
                 if len(res[2]) > 0:
                     results_filtered.append(res)
@@ -52,7 +52,7 @@ class DatasetLigandsFilter:
         try:
             pdb_id = structure[0]
             chain_id = structure[1]
-            pdb_file = get_pdb_path2(self.pdb_dir, pdb_id, chain_id)
+            pdb_file = get_pdb_path(self.pdb_dir, pdb_id, chain_id)
             mappings = dict(
                 res_mappings_author_to_pdbe(pdb_id, chain_id))
 
@@ -80,7 +80,7 @@ class DatasetLigandsFilter:
             #print(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
 
             return (pdb_id, chain_id, valid_ligands)
-        except:#todo
+        except:
             print(f"error {structure[0]} {structure[1]}")
             pass
 
@@ -100,13 +100,13 @@ class DatasetLigandsFilter:
                 #name of the PDB group is not on the list of ignored groups:
                 ignored = ["HOH", "DOD", "WAT", "NAG", "MAN", "UNK", "GLC", "ABA", "MPD", "GOL", "SO4", "PO4"]
                 if (ligand.resname in ignored):
-                    skipped.append(ligand.resname) #todo debug
+                    skipped.append(ligand.resname)
                     continue
                 #number of ligand atoms is greater than or equal to 5:
                 if (len(ligand.child_list) < 5):
-                    small.append(ligand.resname)  # todo debug
+                    small.append(ligand.resname)
                     continue
-                #distance form the center of the mass of the ligand to the closest protein atom is not greater than 5.5 A #todo tohle pravidlo moc nevychazi
+                #distance form the center of the mass of the ligand to the closest protein atom is not greater than 5.5 A
                 center = self.__getCenterOfMass(ligand.child_list)
                 threshold = 5.5
                 success = False
@@ -118,7 +118,7 @@ class DatasetLigandsFilter:
                             i += 1
                             break
                 if (success == False):
-                    center_far.append(ligand.resname)  # todo debug
+                    center_far.append(ligand.resname)
                     continue
                 #distance from any atom of the ligand to the closest protein atom is at least 4 A
                 success = False
@@ -127,16 +127,15 @@ class DatasetLigandsFilter:
                         success = True
                         break
                 if (success == False): #no atom in distance 4A was found
-                    far.append(ligand.resname)  # todo debug
+                    far.append(ligand.resname)
                     continue
 
                 result.append(ligand.resname)
             #print(
-             #   f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {result}...Center far: {center_far}, Small: {small}, Ignored: {skipped}, Far: {far}") #todo debug only
+             #   f"{pdb_id} {chain_id}: Remaining {len(result)}/{len(ligands)} - {result}...Center far: {center_far}, Small: {small}, Ignored: {skipped}, Far: {far}")
         elif (self.filter == "MOAD"):
             relevant = self.moad.get_relevant_ligands(pdb_id, chain_id)
             if (relevant == None):
-                #raise ValueError("Structure excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5") #todo hezci hlaska, vsechny duvody
                 print(f"{pdb_id} {chain_id} excluded from MOAD - no valid ligands or not an x-ray structure or has resolution higher than 2.5")
                 return result #empty list
             filtered = []
@@ -185,15 +184,11 @@ class DatasetLigandsFilter:
 
 #######################################################################
 
-filter="MOAD"
-dataset_name="holo4k_1"
-label="final"
-datasets_path="/home/katebrich/Documents/diplomka/GitHub/datasets"
-dataset_file=f"{datasets_path}/{dataset_name}.txt"
-output_file= f"{datasets_path}/{dataset_name}_filter_{filter}.txt"
-#pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/{label}/{dataset_name}/PDB" #todo
-pdb_dir=f"/home/katebrich/Documents/diplomka/P2Rank/datasets/holo4k_11_13_final/PDB"
-threads=4 #todo
+filter="MOAD" #p2rank
+dataset_file=f"" #todo
+output_file= f"" #todo
+pdb_dir=f"" #todo
+threads=4
 
 
 df = DatasetLigandsFilter(filter)

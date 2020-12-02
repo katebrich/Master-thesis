@@ -1,56 +1,18 @@
-from __future__ import print_function
-
+#from __future__ import print_function
 import os
 import urllib.request
 import json
-import sys
-#import xmltodict
 import numpy as np
 from urllib.error import HTTPError
-
-#returns uniprotID, entityID, start, end
 from Bio.PDB import is_aa
 
-'''
-def get_uniprot_entity(pdb_id, chain_id): #todo cache
-    url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot/{pdb_id}'
-    parsedResponse = restAPI_get_json(url)
-    uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
-
-    #find entity with given chain_id
-    entities = [] #todo dictionary?
-    for record in uniprotRecords:
-        uniprot_ID = record
-        mappings = uniprotRecords[record]["mappings"]
-        for entity in mappings:
-            if entity["chain_id"] == chain_id:
-                start_res_num = entity["start"]["residue_number"]
-                end_res_num = entity["end"]["residue_number"]
-                unp_start =  entity["unp_start"]
-                unp_end =  entity["unp_end"]
-                if (unp_end - unp_start != end_res_num - start_res_num):
-                    raise ValueError(
-                        f"Incorrect mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")  # todo debug
-                entities.append((uniprot_ID,unp_start, unp_end, start_res_num, end_res_num))
-
-    if len(entities) < 1:
-        sys.stderr.write(f"Error: '{pdb_id}': no entity with chain id '{chain_id}' was found.\n\n") #todo log
-    elif len(entities) > 1:
-        #sys.stderr.write(f"Warning: '{pdb_id}': more than one entities with chain id '{chain_id}' were found:\n")
-        #for x in entities:
-        #        sys.stderr.write(f"{x[0]}\n")
-        #sys.stderr.write(f"\n") #todo
-        return entities
-    else:
-        return entities
-'''
 
 #returns uniprotID, entityID, start, end
-def get_uniprot_segments(pdb_id, chain_id): #todo cache
+def get_uniprot_segments(pdb_id, chain_id):
     url = f'https://www.ebi.ac.uk/pdbe/api/mappings/uniprot_segments/{pdb_id}'
 
     try:
-        parsedResponse = restAPI_get_json(url) #todo osetrit 404 error not found, napsat, ze nenalezen
+        parsedResponse = restAPI_get_json(url)
     except HTTPError as err:
         if err.code == 404:
             raise ValueError(f"HTTP Error 404 - Not Found: structure {pdb_id} {chain_id} probably does not exist in UniProt or there is a problem with connection to the server.")
@@ -58,8 +20,6 @@ def get_uniprot_segments(pdb_id, chain_id): #todo cache
             raise
     uniprotRecords = parsedResponse[f"{pdb_id}"]["UniProt"]
 
-    import re
-    pattern = re.compile("^[OPQ][0-9][A-Z0-9]{3}[0-9]$|^[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$") #UniProt accession format
     segments = []
     for id in uniprotRecords:
         uniprot_ID = id
@@ -72,7 +32,7 @@ def get_uniprot_segments(pdb_id, chain_id): #todo cache
                 unp_end = entity["unp_end"]
                 if (unp_end - unp_start != end_res_num - start_res_num):
                     raise ValueError(
-                        f"Incorrect mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")  # todo debug
+                        f"PDBe bug: Incorrect segments mapping: {pdb_id} {chain_id}, {uniprot_ID}: unp {unp_start}-{unp_end}, pdbe {start_res_num}-{end_res_num}")
                 segments.append((uniprot_ID, unp_start, unp_end, start_res_num, end_res_num))
 
     if len(segments) < 1:
@@ -82,7 +42,6 @@ def get_uniprot_segments(pdb_id, chain_id): #todo cache
 
 #returns parsed .json response (dictionary)
 def restAPI_get(url):
-    #todo check status?
     req = urllib.request.Request(url)
     with urllib.request.urlopen(req) as f:
         responseBody = f.read()
@@ -92,54 +51,31 @@ def restAPI_get(url):
 def restAPI_get_json(url):
     return json.loads(restAPI_get(url))
 
-'''
-#returns parsed .xml response (dictionary)
-def restAPI_get_xml(url):
-    return xmltodict.parse(restAPI_get(url)) #todo neni neco rychlejsiho? nepotrebuju ordered dictionary...
-'''
 
-def get_fasta_path(data_dir, pdb_id, chain_id):
+def get_fasta_path_long(data_dir, pdb_id, chain_id):
     return f"{data_dir}/FASTA/{pdb_id}{chain_id}.fasta"
 
-def get_pdb_path(data_dir, pdb_id, chain_id):
+def get_pdb_path_long(data_dir, pdb_id, chain_id):
     return f"{data_dir}/PDB/{pdb_id}{chain_id}.pdb"
 
-def get_pdb_path2(data_dir, pdb_id, chain_id):
+def get_pdb_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/{pdb_id}{chain_id}.pdb"
 
 def get_lbs_path(data_dir, pdb_id, chain_id):
-    return f"{data_dir}/lbs/{pdb_id}{chain_id}.txt"
-
-def get_lbs_path2(data_dir, pdb_id, chain_id):
     return f"{data_dir}/{pdb_id}{chain_id}.txt"
 
-def get_sasa_path(data_dir, pdb_id, chain_id):
+def get_sasa_path_long(data_dir, pdb_id, chain_id):
     return f"{data_dir}/sasa/{pdb_id}{chain_id}.txt"
 
-def get_mappings_path(data_dir, pdb_id, chain_id):
+def get_mappings_path_long(data_dir, pdb_id, chain_id):
     return f"{data_dir}/mappings/{pdb_id}{chain_id}.txt"
 
-def get_mappings_path2(data_dir, pdb_id, chain_id):
+def get_mappings_path(data_dir, pdb_id, chain_id):
     return f"{data_dir}/{pdb_id}{chain_id}.txt"
 
-def get_feature_path(data_dir, feature, pdb_id, chain_id):
+def get_feature_path_long(data_dir, feature, pdb_id, chain_id):
     return f"{data_dir}/features/{feature}/{pdb_id}{chain_id}.txt"
 
-'''
-def get_entity_id_old(pdb_id, chain_id):
-    url = f"https://www.rcsb.org/pdb/rest/describeMol?structureId={pdb_id}.{chain_id}"
-    response = str(restAPI_get(url))
-    import re
-    matches = re.findall("entityNr=\".+?\"", response)
-    if (len(matches) < 1):
-        raise ValueError(f"Structure {pdb_id} does not exist or does not have chain {chain_id}.")
-    elif (len(matches) > 1):
-        raise ValueError(f"Wrong number of matches: {matches}") #todo smazat, jen pro debugovani
-    match=matches[0]
-    entity_id = match.split('=')[1]
-    entity_id = entity_id[1:-1] #remove ""
-    return int(entity_id)
-'''
 
 def get_entity_id(pdb_id, chain_id):
     url = f"https://www.ebi.ac.uk/pdbe/api/pdb/entry/molecules/{pdb_id}"
@@ -151,9 +87,8 @@ def get_entity_id(pdb_id, chain_id):
             if chain_id in molecule["in_chains"]:
                 entity_ids.append(molecule["entity_id"])
     if len(entity_ids) != 1:
-        raise ValueError(f"{pdb_id} {chain_id}: Wrong number of entity IDs! {len(entity_ids)}") #todo jen debug
-    #todo kdyz neexistuje ten chain, vrati to 0 entity IDS -> nejaka hlaska
-    return int(entity_ids[0]) #todo
+        raise ValueError(f"{pdb_id} {chain_id}: Wrong number of entity IDs! {len(entity_ids)}")
+    return int(entity_ids[0])
 
 def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
     if (cache_file != ""):
@@ -174,7 +109,6 @@ def res_mappings_author_to_pdbe(pdb_id, chain_id, cache_file=""):
                 count += 1
         if count != 1:
             raise ValueError(f"Error: More or less than one molecule with entity number {entity_id} was found.")
-            return
         return list(mappings)
 
 
@@ -184,7 +118,7 @@ def parse_dataset_not_split_chains(filepath):
         for line in f:
             line = line.split()
             pdb_id = line[0]
-            chain_ids = line[1] #todo check
+            chain_ids = line[1]
             chain_ids = chain_ids.upper()
             list.append((pdb_id, chain_ids))
     return list
@@ -195,7 +129,7 @@ def parse_dataset(filepath):
         for line in f:
             line = line.split()
             pdb_id = line[0]
-            chain_ids = line[1]  # todo check
+            chain_ids = line[1]
             ligands = []
             if len(line) == 3 and not line[2].startswith('#'):  # ligands are specified in dataset file
                 ligands = line[2].split(',')
@@ -204,31 +138,14 @@ def parse_dataset(filepath):
                 list.append((pdb_id, chain, ligands))
     return list
 
-'''def parse_dataset_ligands(filepath): #todo debug
-    list = []
-    with open(filepath) as f:
-        for line in f:
-            line = line.split()
-            pdb_id = line[0]
-            chain_ids = line[1]  # todo check
-            ligands = []
-            if (len(line) == 3): #ligands are specified in dataset file
-                ligands = line[2].split(',')
-            chain_ids = chain_ids.upper()
-            for chain in chain_ids.split(','):
-                list.append((pdb_id, chain, ligands))
-    return list'''
-
 def parse_prank_dataset(filepath):
     pdb_files = []
     with open(filepath) as f:
         for line in f:
-            #todo jaka je presna struktura .ds souboru v pranku? nechybi mi neco?
             if (line[0] != '#'): #skip comments
                 words = line.split()
                 if (len(words) > 0 and words[0] != 'HEADER:'): # skip empty lines and header
                     pdb_files.append(words[0])
-
     return pdb_files
 
 def getFullAuthorResNum(residue_id):
@@ -256,5 +173,4 @@ def getStructuresFromDirectory(dir):
         pdb_id = filename[:4]
         chain_id = filename[4:5]
         list.append((pdb_id, chain_id))
-
     return list

@@ -1,7 +1,6 @@
 import math
 import os
 import time
-
 from helper import parse_dataset, res_mappings_author_to_pdbe, getStructuresFromDirectory
 import Logger
 from multiprocessing import Pool, Value
@@ -23,7 +22,6 @@ class MappingsComputer:
             os.makedirs(self.output_dir)
 
         dataset = parse_dataset(self.dataset_file)
-
         start = time.time()
         logger.info(f"Creating mapping cache started...")
 
@@ -65,7 +63,6 @@ class MappingsComputer:
             if (error):
                 errors.append((structure[0], structure[1]))
                 logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
-                #todo zapsat nekam chybu
             #else:
             #    logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
             return errors
@@ -75,30 +72,4 @@ class MappingsComputer:
         global counter
         counter = args
 
-
-'''
-#parse arguments:
-try:
-    opts, args = getopt.getopt(sys.argv[1:], 'd:o:t:')
-except getopt.GetoptError as err:
-    logger.error(err) #unknown option or missing argument
-    sys.exit(1)
-for opt, arg in opts:
-    if opt in ("-d", "--dataset"):
-        dataset_file = arg
-    elif opt in ("-o", "--output_dir"):
-        output_dir = arg
-    elif opt in ("-t", "--threads"): #todo check if threads >= 1, int
-        threads = arg
-
-if (dataset_file == ""):
-    logger.error("Dataset must be specified.")
-    sys.exit(1)
-if (output_dir == ""):
-    logger.error("Output directory must be specified.")
-    sys.exit(1)
-
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-'''
 

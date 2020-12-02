@@ -3,7 +3,7 @@ from helper import *
 from Features.AA_properties import *
 
 def get_AA_properties(scores_dict, data_dir, pdb_id, chain_id):
-    fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+    fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
     seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
     return get_AA_scores(scores_dict, seq)
 

@@ -1,11 +1,9 @@
 from Bio import SeqIO
-
-from helper import get_fasta_path
-
+from helper import get_fasta_path_long
 
 class AA():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -17,7 +15,7 @@ class AA():
 
 class AA_ALA():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -30,7 +28,7 @@ class AA_ALA():
 
 class AA_CYS():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -43,7 +41,7 @@ class AA_CYS():
 
 class AA_ASP():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -56,7 +54,7 @@ class AA_ASP():
 
 class AA_GLU():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -69,7 +67,7 @@ class AA_GLU():
 
 class AA_PHE():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -82,7 +80,7 @@ class AA_PHE():
 
 class AA_GLY():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -95,7 +93,7 @@ class AA_GLY():
 
 class AA_HIS():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -108,7 +106,7 @@ class AA_HIS():
 
 class AA_ILE():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -121,7 +119,7 @@ class AA_ILE():
 
 class AA_LYS():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -134,7 +132,7 @@ class AA_LYS():
 
 class AA_LEU():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -147,7 +145,7 @@ class AA_LEU():
 
 class AA_MET():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -160,7 +158,7 @@ class AA_MET():
 
 class AA_ASN():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -173,7 +171,7 @@ class AA_ASN():
 
 class AA_PRO():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -186,7 +184,7 @@ class AA_PRO():
 
 class AA_GLN():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -199,7 +197,7 @@ class AA_GLN():
 
 class AA_ARG():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -212,7 +210,7 @@ class AA_ARG():
 
 class AA_SER():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -225,7 +223,7 @@ class AA_SER():
 
 class AA_THR():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -238,7 +236,7 @@ class AA_THR():
 
 class AA_VAL():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -251,7 +249,7 @@ class AA_VAL():
 
 class AA_TRP():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):
@@ -264,7 +262,7 @@ class AA_TRP():
 
 class AA_TYR():
     def get_values(self, data_dir, pdb_id, chain_id):
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)
+        fasta_file = get_fasta_path_long(data_dir, pdb_id, chain_id)
         seq = list(SeqIO.parse(fasta_file, "fasta"))[0]
         feature_vals = []
         for i in range(1, len(seq) + 1):

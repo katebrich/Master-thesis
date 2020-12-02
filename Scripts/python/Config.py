@@ -1,7 +1,7 @@
 import json
 import os
 
-class Config(): #todo osetrit vyjimky ve funkcich, kdyz feature neexistuje
+class Config():
     parsed_config = ""
 
     def __init__(self, config_path):
@@ -12,7 +12,7 @@ class Config(): #todo osetrit vyjimky ve funkcich, kdyz feature neexistuje
         return self.parsed_config["features"][feature_name]["import_path"]
 
     def get_all_feature_names(self):
-        return list((self.parsed_config["features"]).keys()) #todo
+        return list((self.parsed_config["features"]).keys())
 
     def get_feature_type(self, feature_name):
         return self.parsed_config["features"][feature_name]["type"]

@@ -60,7 +60,7 @@ class Compbias():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_uniprot_binary_type("COMPBIAS", pdb_id, chain_id)
 
-class Disulfid(): #todo debugovat
+class Disulfid():
     def get_values(self, data_dir, pdb_id, chain_id):
         segments = get_uniprot_segments(pdb_id, chain_id)
         feature_vals = []
@@ -108,9 +108,6 @@ class Variation():
             for feature in response["features"]:
                 feat_begin = int(feature["begin"])
                 feat_end = int(feature["end"])
-                if (feat_begin != feat_end):
-                    raise ValueError(
-                        f"ERROR: {uniprot_id}: url = {url} - feat_begin {feat_begin} != feat_end {feat_end}")  # todo only for debugging
                 rng = range(feat_begin, feat_end + 1)
                 for i in rng:
                     res = i - segment_begin  # mapping pdb residues to uniprot entry, counting from 0

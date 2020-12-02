@@ -1,9 +1,4 @@
-import os
-
-from Bio import SeqIO
-
 from helper import *
-
 
 class MobiDB():
     def get_values(self, data_dir, pdb_id, chain_id):
@@ -18,8 +13,6 @@ class MobiDB():
 
             url = f"https://mobidb.bio.unipd.it/ws/{uniprot_id}/consensus"
             response = restAPI_get_json(url)
-
-            # feature_vector = [0] * (unp_end - unp_start + 1)  # including both start and end AAs #todo default value misto 0
 
             pred = response["mobidb_consensus"]["disorder"]["predictors"]
             for p in pred:
@@ -38,14 +31,9 @@ class Conservation():
     def get_values(self, data_dir, pdb_id, chain_id):
         filepath = os.path.join(data_dir, "conservation", pdb_id + chain_id + ".json")
         feature_vals = []
-        fasta_file = get_fasta_path(data_dir, pdb_id, chain_id)  # todo smazat
-        seq = list(SeqIO.parse(fasta_file, "fasta"))[0]  # todo smazat, debug
         with open(filepath) as json_file:
             data = json.load(json_file)
             scores = data["conservation"]
-            if (len(seq) != len(scores)):
-                raise ValueError(
-                    f"ERROR!!!!! {pdb_id} {chain_id} length of conservation scores not same as fasta seq")  # todo smazat
             for i in range(0, len(scores)):
                 score = scores[i]
                 if (score < 0):
@@ -65,14 +53,13 @@ class PhiAngle():
             if molecule["entity_id"] == entity_id:
                 for chain in molecule["chains"]:
                     if (chain["chain_id"] == chain_id):
-                        for resi in chain["models"][0]["residues"]:  # todo: muzu brat automaticky prvni model?
+                        for resi in chain["models"][0]["residues"]:
                             val = resi["phi"]
                             if (val != None):
                                 feature_vals.append((resi["residue_number"], val))
                         count += 1
-        if count != 1:  # todo smazat, jen debug
+        if count != 1:
             raise ValueError(f"Error: More or less than one molecule with entity number {entity_id} was found.")
-            return
 
         return feature_vals
 
@@ -93,9 +80,8 @@ class PsiAngle():
                             if (val != None):
                                 feature_vals.append((resi["residue_number"], val))
                         count += 1
-        if count != 1:  # todo smazat, jen debug
+        if count != 1:
             raise ValueError(f"Error: More or less than one molecule with entity number {entity_id} was found.")
-            return
 
         return feature_vals
 
@@ -110,7 +96,7 @@ class CisPeptide():
             if molecule["entity_id"] == entity_id:
                 for chain in molecule["chains"]:
                     if (chain["chain_id"] == chain_id):
-                        for resi in chain["models"][0]["residues"]:  # todo: muzu brat automaticky prvni model?
+                        for resi in chain["models"][0]["residues"]:
                             val = resi["cis_peptide"]
                             if (val == 'Y'):
                                 feature_vals.append((resi["residue_number"], 1))

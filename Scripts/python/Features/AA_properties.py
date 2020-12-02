@@ -1,4 +1,3 @@
-
 hydropathy_kyte_doolitle = {
     'A': 1.8,   #alanine
     'C': 2.5,   #cysteine

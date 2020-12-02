@@ -73,7 +73,6 @@ def plot_binding_nonbinding_ratios(binding_data, nonbinding_data, output_file, s
 
     #Draw total binding/nonbinding ratio for comparison
     ratio = len(binding_data) / len(nonbinding_data)
-    #pyplot.hlines(ratio, xmin=0 , xmax=len(bars) - 1 + barWidth, colors='r', linestyles='dashed', label='total ratio') #todo xmin, xmax
     ax.axhline(y=ratio, color="red", linestyle='--' )
 
     trans = transforms.blended_transform_factory(

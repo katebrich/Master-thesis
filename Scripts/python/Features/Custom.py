@@ -11,6 +11,8 @@ Example:
             *** computation here ***
             return  computed_values
 
+Returned feature values must be tuples where first item is residue number (PDB molecule numbering) and the second item is feature value for the residue.
+
 Edit of config.json is needed to load the class! Add new feature to "features" node.
 
 Example:

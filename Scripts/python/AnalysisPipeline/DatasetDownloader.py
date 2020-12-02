@@ -27,7 +27,6 @@ class DatasetDownloader():
 
 
     def run(self, threads=1):
-        #self.threads = threads
         self.output_PDB = os.path.join(self.output_dir, "PDB")
         self.output_FASTA = os.path.join(self.output_dir, "FASTA")
 
@@ -72,7 +71,7 @@ class DatasetDownloader():
             io.set_structure(structure)
             io.save(out_pdb_file_path, PDBSelector(chain_id), preserve_atom_numbering=True)
 
-    def get_FASTA(self, out_dir, pdb_id, chain_ids):  # todo zapsat tam i ten header?
+    def get_FASTA(self, out_dir, pdb_id, chain_ids):
         chains = chain_ids.split(',')
         for chain_id in chains:
             entity_id = get_entity_id(pdb_id, chain_id)
@@ -93,9 +92,7 @@ class DatasetDownloader():
         errors = []
         temp_file = os.path.join(self.output_PDB, f"temp_{uuid.uuid1()}")
         try:
-            # temp_file = os.path.join(output_FASTA, f"temp_{uuid.uuid1()}")
             self.get_FASTA(self.output_FASTA, pdb_id, chain_ids)
-            # os.remove(temp_file)
             self.get_PDB(temp_file, self.output_PDB, pdb_id, chain_ids)
         except (KeyboardInterrupt, SystemExit):
             raise
@@ -123,7 +120,7 @@ class DatasetDownloader():
 
 
 
-class PDBSelector(Select): #todo tohle popsat v praci
+class PDBSelector(Select):
     chain = ""
     def __init__(self, chain):
         super(Select, self).__init__()

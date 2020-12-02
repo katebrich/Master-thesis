@@ -1,7 +1,5 @@
 import os
-
 import numpy as np
-
 
 class LBS():
     def get_values(self, data_dir, pdb_id, chain_id):

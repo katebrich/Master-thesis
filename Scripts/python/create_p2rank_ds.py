@@ -3,28 +3,6 @@ import sys
 from os.path import isfile
 import os
 
-from Bio.PDB import PDBParser
-
-import Logger
-from helper import isPartOfChain
-
-'''
-def get_ligands_codes(path):
-    # get all ligands from PDB file
-    ligands=[]
-    parser = PDBParser(PERMISSIVE=0, QUIET=1)
-    structure = parser.get_structure("structure", path)
-    for chain in structure[0]:
-        for residue in chain.get_residues():
-            if not residue.id[0].isspace(): #todo or residue.id[0] == "H_MSE"): #hetatm
-                # trim spaces at the beginning of ligand resname; bug in PDB parser
-                residue.resname = residue.resname.lstrip()
-                ligands.append(residue)
-    return ligands
-'''
-
-logger = Logger.get_logger(os.path.basename(__file__))
-
 pdb_dir = ""
 out_path = ""
 list_ligands=False
@@ -32,30 +10,31 @@ dataset_path=""
 
 #parse arguments:
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'p:o:d:l')
+    opts, args = getopt.getopt(sys.argv[1:], 'p:o:d:l', ['pdb_dir=', 'output_path=', 'dataset_file=', 'list_ligands'] )
 except getopt.GetoptError as err:
-    logger.error(err) #unknown option or missing argument
+    print(err) #unknown option or missing argument
     sys.exit(1)
 for opt, arg in opts:
     if opt in ("-p", "--pdb_dir"):
         pdb_dir = arg
-    elif opt in ("-o", "--out_path"):
+    elif opt in ("-o", "--output_path"):
         out_path = arg
-    elif opt in ("-d", "--dataset_path"):
+    elif opt in ("-d", "--dataset_file"):
         dataset_path = arg
     elif opt in ("-l", "--list_ligands"):
         list_ligands = True
 
-#todo
 if (pdb_dir == ""):
-    logger.error("Dataset directory must be specified.")
+    print("Argument '-p' ('--pdb_dir') is compulsory.\n")
     sys.exit(1)
 if (out_path == ""):
-    logger.error("Output file path must be specified.")
+    print("Argument '-o' ('--output_path') is compulsory.\n")
+    sys.exit(1)
+if (list_ligands and dataset_path == ""):
+    print("Argument '-d' ('--dataset_file') is compulsory with option '-l' (--list_ligands).\n")
     sys.exit(1)
 
 out_dir = os.path.dirname(out_path) #go one level up
-#output_path = os.path.join(out_dir, name)
 
 ligands_dict={}
 if list_ligands:

@@ -128,7 +128,8 @@ Mandatory arguments to long options are mandatory for short options too.
   -s, --sample_size            Default: 0. Size of random sample for hypothesis tests. If 0, all rows are taken. Arguments -i and -b are not considered, as this only makes sense for 1 iteration and no balancing.
   -i, --iterations             Default: 1. Number of iterations of hypothesis tests. Summary files contain averaged results from all the iterations.
   -b, --balance_binding_ratio  Default: False. If false, sample of given size is taken from the whole dataset and binding/nonbinding ratio is not balanced. If true, the same number of binding rows and nonbinding rows (equal to given sample size) is taken. 
-  -p, --draw_plots             Default: True. 
+  -p, --draw_plots             Default: True.
+  -a, --alpha                  Default: 0.05. Statistical significance level. 
 
 
 ```

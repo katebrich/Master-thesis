@@ -44,16 +44,28 @@ balance_binding_ratio = True
 '''
 
 def usage():
-    pass #todo
+    print("Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... \n")
+    print("Options: \n")
+    print("  -d, --dataset                Mandatory; file with listed structures to process. \n")
+    print("  -o, --output_dir             Mandatory; root folder. Created if not exists. \n")
+    print("  -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis\n")
+    print("  -m, --threads                Default: 1. Number of threads.\n")
+    print("  -f, --features               Comma-separated list of features. If not provided, all features from config are processed.\n")
+    print("  -c, --config_path            Default: file config.json located in the same directory as this script.\n")
+    print("  -l, --lbs_distance_threshold Default: 4. Binding residues are defined as residues with at least one non-hydrogen atom in distance at most lbs_binding_threshold from any ligand.\n")
+    print("  -s, --sample_size            Default: 0. Size of random sample for hypothesis tests. If 0, all rows are taken. Arguments -i and -b are not considered, as this only makes sense for 1 iteration and no balancing.\n")
+    print("  -i, --iterations             Default: 1. Number of iterations of hypothesis tests. Summary files contain averaged results from all the iterations.\n")
+    print("  -b, --balance_binding_ratio  Default: False. If false, sample of given size is taken from the whole dataset and binding/nonbinding ratio is not balanced. If true, the same number of binding rows and nonbinding rows (equal to given sample size) is taken. \n")
+    print("  -p, --draw_plots             Default: True. \n")
+    print("  -a, --alpha                  Default: 0.05. Statistical significance level. \n")
 
 #parse arguments:
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'hd:o:t:m:f:s:i:a:p:b:c:l:', ['help', 'dataset=', 'output_dir=', 'tasks=', 'threads=', 'features=']) #todo dodelat, otestovat
+    opts, args = getopt.getopt(sys.argv[1:], 'hd:o:t:m:f:c:s:i:l:b:p:a:', ['help', 'dataset=', 'output_dir=', 'tasks=', 'threads=', 'features=', 'config_path=', 'sample_size=', 'iterations=', 'lbs_distance_threshold=', 'balance_binding_ratio=', 'draw_plots=', 'alpha='])
 except getopt.GetoptError as err:
-    #todo print help
-    logger.error(err) #unknown option or missing argument
+    print(err)
+    usage()
     sys.exit(1)
-
 try:
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -67,54 +79,88 @@ try:
             tasks = arg
         elif opt in ("-m", "--threads"):
             threads = int(arg)
+            if (threads <= 0):
+                print(f"Number of threads must be a positive integer.")
+                usage()
+                sys.exit(1)
         elif opt in ("-f", "--features"):
             features_list = arg
         elif opt in ("-c", "--config_path"):
             config_path = arg
+            if not os.path.exists(config_path):
+                print(f"Given config path {config_path} does not exist.")
+                usage()
+                sys.exit(1)
         elif opt in ("-s", "--sample_size"):
             sample_size = int(arg)
+            if (sample_size <= 0):
+                print(f"Sample size must be a positive integer.")
+                usage()
+                sys.exit(1)
         elif opt in ("-i", "--iterations"):
             iterations = int(arg)
+            if (iterations <= 0):
+                print(f"Number of iterations must be a positive integer.")
+                usage()
+                sys.exit(1)
         elif opt in ("-l", "--lbs_distance_threshold"):
-            lbs_distance_threshold = float(arg) #todo check if decimal works
+            lbs_distance_threshold = float(arg)
+            if (lbs_distance_threshold <= 0):
+                print(f"Lbs distance threshold must be positive.")
+                usage()
+                sys.exit(1)
         elif opt in ("-b", "--balance_binding_ratio"):
             if arg == '0' or arg == "false" or arg == "False":
                 balance_binding_ratio = False
             elif arg == '1' or arg == "true" or arg == "True":
                 balance_binding_ratio = True
             else:
-                raise ValueError(f"Option '-b' ('--balance_binding_ratio') has invalid argument: '{arg}'. Possible values: 0, 1, true, false, True, False.")
+                print(f"Option '-b' ('--balance_binding_ratio') has invalid argument: '{arg}'. Possible values: 0, 1, true, false, True, False.\n\n")
+                usage()
+                sys.exit(1)
         elif opt in ("-p", "--draw_plots"):
             if arg == '0' or arg == "false" or arg == "False":
                 draw_plots = False
             elif arg == '1' or arg == "true" or arg == "True":
                 draw_plots = True
             else:
-                raise ValueError(
-                    f"Option '-p' ('--draw_plots') has invalid argument: '{arg}'. Possible values: 0, 1, true, false, True, False.")
+                print(f"Option '-p' ('--draw_plots') has invalid argument: '{arg}'. Possible values: 0, 1, true, false, True, False.\n\n")
+                usage()
+                sys.exit(1)
         elif opt in ("-a", "--alpha"):
-            alpha = int(arg)
+            alpha = float(arg)
+            if (alpha < 0 or alpha > 1):
+                print(f"Alpha must be a number between 0 and 1.")
+                usage()
+                sys.exit(1)
 
     if (dataset_file == ""):
-        raise ValueError("Argument '-d' ('--dataset') is compulsory.")
+        print("Argument '-d' ('--dataset') is compulsory.\n\n")
+        usage()
+        sys.exit(1)
+
     if (output_dir == ""):
-        raise ValueError("Argument '-o' ('--output_dir') is compulsory.")
+        print("Argument '-o' ('--output_dir') is compulsory.\n\n")
+        usage()
+        sys.exit(1)
 
     tasks = tasks.upper().split(',')
     #check valid tasks values
     for t in tasks:
         if t != 'D' and t != 'M' and t != 'L' and t != 'F' and t != 'A':
-            raise ValueError(f"Unrecognized task '{t}'.")
+            print(f"Unrecognized task '{t}'.\n\n")
+            usage()
+            sys.exit(1)
 
     #init config
     config = Config(config_path)
 
     #parse features
     if (features_list == "" or features_list == "."):
-        features_list = config.get_all_feature_names() #if no specific features, take all from the config
+        features_list = config.get_all_feature_names() #if no features specified, take all from the config
     else:
         features_list = features_list.split(',')
-        # features check
+        # check features
         for feature in features_list:
             if not config.is_feature_defined(feature):
                 raise ValueError(f"Feature {feature} not defined in {config_path}")
@@ -126,7 +172,7 @@ try:
     lbs_dir = f"{output_dir}/lbs"
     mappings_dir = f"{output_dir}/mappings"
     features_dir=f"{output_dir}/features"
-    analysis_dir=f"{output_dir}/analysis_{sample_size}" #todo smazat sample_size?
+    analysis_dir=f"{output_dir}/analysis_{sample_size}"
 
     features_computed = []
     analysis_computed = []

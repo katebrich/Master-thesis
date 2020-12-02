@@ -20,22 +20,18 @@ class LigandBindingSitesComputer():
     pdb_dir= ""
     distance_threshold = ""
     filter=""
-    #SASA_threshold = ""
-    #filter_level = "p2rank"
     moad=""
     total = ""
-    def __init__(self, dataset_file, output_dir, mappings_dir, PDB_dir, distance_threshold=4): #SASA_threshold=0.5):
+    def __init__(self, dataset_file, output_dir, mappings_dir, PDB_dir, distance_threshold=4):
         self.output_dir = output_dir
         self.mappings_dir = mappings_dir
         self.pdb_dir = PDB_dir
         self.distance_threshold = distance_threshold
-        #self.SASA_threshold = SASA_threshold
         self.dataset_file = dataset_file
 
     def run(self, threads):
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
-
 
         dataset = parse_dataset(self.dataset_file)
 
@@ -56,7 +52,7 @@ class LigandBindingSitesComputer():
         pool = Pool(int(threads), initializer=self.__pool_init, initargs=(counter,))
         errors = pool.map(self.get_ligand_binding_site, dataset)
         pool.close()
-        total_errors = [ent for sublist in errors for ent in sublist]  # todo delat to lip
+        total_errors = [ent for sublist in errors for ent in sublist]
 
         if (len(total_errors) == 0):
             logger.info(f"Computing ligand binding sites finished in {math.ceil(time.time() - start)}s. All structures processed successfully.")
@@ -70,10 +66,10 @@ class LigandBindingSitesComputer():
         chain_id = structure[1]
         errors = []
         error=False
-        pdb_path = get_pdb_path2(self.pdb_dir, pdb_id, chain_id)
+        pdb_path = get_pdb_path(self.pdb_dir, pdb_id, chain_id)
         try:
             lbs = self.compute_ligand_binding_sites(structure, pdb_path)
-            output_file = get_lbs_path2(self.output_dir, pdb_id, chain_id)
+            output_file = get_lbs_path(self.output_dir, pdb_id, chain_id)
             with open(output_file, 'w') as f:
                 f.write('\n'.join('{} {}'.format(x[0], x[1]) for x in lbs))
         except (KeyboardInterrupt, SystemExit):
@@ -90,7 +86,7 @@ class LigandBindingSitesComputer():
                 errors.append((structure[0], structure[1]))
                 logger.error(f"{idx}/{self.total}: {pdb_id} {chain_id} NOT PROCESSED ! See log for more details.")
             #else:
-                #pass #todo
+                #pass
             #    logger.debug(f"{idx}/{self.total}: {pdb_id} {chain_id} processed")
             return errors
 
@@ -101,12 +97,11 @@ class LigandBindingSitesComputer():
         pdb_id = structure[0]
         chain_id = structure[1]
 
-        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path2(self.mappings_dir, pdb_id, chain_id)))
+        mappings = dict(res_mappings_author_to_pdbe(pdb_id, chain_id, get_mappings_path(self.mappings_dir, pdb_id, chain_id)))
 
         AAs = []
         ligands = []
         ligands_valid = None
-        # get ligands #todo debug
         if (self.filter): #valid ligands read directly from dataset file
             ligands_valid = structure[2]
         #get all ligands from PDB file

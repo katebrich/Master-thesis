@@ -4,7 +4,7 @@ def get_funPDBe(resource, label, pdb_id, chain_id):
     url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdb/funpdbe_annotation/{resource}/{pdb_id}"
     feature_vals = {}
     response = restAPI_get_json(url)
-    bug = False #todo odstranit, az opravi bug v pdbekb
+    bug = False #todo remove when bug in PDBe-KB is corrected
     for rec in response[pdb_id][0]["annotations"]:
         if rec["label"] == label:
             residues = rec["site_residues"]
@@ -32,13 +32,9 @@ class Conservation():
         entity_id = get_entity_id(pdb_id, chain_id)
         url = f"https://www.ebi.ac.uk/pdbe/graph-api/pdb/sequence_conservation/{pdb_id}/{entity_id}"
         response = restAPI_get_json(url)
-
         feature_vals = []
         for resi in response[pdb_id]["data"]:
             feat_begin = int(resi["start"])
-            feat_end = int(resi["end"])
-            if (feat_begin != feat_end):
-                raise ValueError("Pdb KB conservation: start is not same as end!!")  # todo only for debug
             cons_score = int(resi["conservation_score"])
             if (cons_score >= 4):
                 cons_score = "4+"
@@ -55,9 +51,6 @@ class ConservationAllVals():
         feature_vals = []
         for resi in response[pdb_id]["data"]:
             feat_begin = int(resi["start"])
-            feat_end = int(resi["end"])
-            if (feat_begin != feat_end):
-                raise ValueError("Pdb KB conservation: start is not same as end!!")  # todo only for debug
             cons_score = int(resi["conservation_score"])
             feature_vals.append((feat_begin, cons_score))
 

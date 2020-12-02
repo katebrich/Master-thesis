@@ -14,8 +14,6 @@ import Logger
 
 logger = Logger.get_logger(os.path.basename(__file__))
 
-X = random.randint(0,100) #todo for debug
-
 class AnalysisComputer():
     output_dir = ""
     lbs_dir = ""
@@ -43,7 +41,6 @@ class AnalysisComputer():
         start = time.time()
         logger.info(f"Running analysis started...")
 
-        #todo co kdyz data pro 1 featuru chybi...aby to nespadlo cele
         self.prepare_lbs_dicts()
 
         for feature in self.features_list:
@@ -67,7 +64,6 @@ class AnalysisComputer():
             feature_dir)  # compute only for structures that have the feature computed, ignore the rest
         feature_output_dir = os.path.join(self.output_dir, feature)
         feature_type = self.config.get_feature_type(feature) # binary/continuous/categorical/ordinal
-        #pairs = []
         statistics = []
         p_values = []
         b_ratios = []
@@ -79,10 +75,6 @@ class AnalysisComputer():
         pool.close()
         pairs = [ent for sublist in pairs_part for ent in sublist]
 
-        #pair feature values with ligand binding sites
-        #for structure in dataset:
-        #    pairs = pairs + self.compute_pairs(structure, self.lbs_dir, feature_dir, feature)
-
         #save pairs
         file = os.path.join(feature_output_dir, f"pairs.txt")
         with open(file, 'w') as f:
@@ -90,9 +82,6 @@ class AnalysisComputer():
 
         data_binding = [x[1] for x in pairs if x[0] == 1]
         data_nonbinding = [x[1] for x in pairs if x[0] == 0]
-
-        #compute hypothesis test for all iterations
-        #random.seed(42 + X)  # todo for debug
 
         if sample_size == 0:
             iterations = 1
@@ -156,17 +145,6 @@ class AnalysisComputer():
         perc = (under_alpha / iterations) * 100
         self.p_val_perc.append((feature, round(perc,2)))
 
-        '''
-        #plot statistics
-        plt.clf()
-        plt.scatter(range(1,iterations + 1), statistics)
-        plt.xlabel('iteration')
-        if (feature_type == "continuous"):
-            plt.ylabel('T-statistic')
-        else:
-            plt.ylabel('Chi-squared')
-        plt.savefig(os.path.join(feature_output_dir,f"{feature}_statistic.png"))
-        '''
         #plot p-values
         Plots.plot_pvalues_scatter(p_values, alpha, os.path.join(feature_output_dir, f"{feature}_pValues_scatter.png"))
         Plots.plot_pvalues_histogram(p_values, alpha,
@@ -194,12 +172,7 @@ class AnalysisComputer():
         pairs = []
 
         try:
-            # get ligand binding sites values
-            #file = os.path.join(self.lbs_dir, f"{pdb_id}{chain_id}.txt")
-            #lbs = np.genfromtxt(file, delimiter=' ', dtype=None)
-            #lbs_dict = dict(lbs)
             lbs_dict = self.lbs_dicts[f"{pdb_id}{chain_id}"]
-
             # get feature values
             file = os.path.join(self.feature_dir, f"{pdb_id}{chain_id}.txt")
             feature = np.genfromtxt(file, delimiter=' ', dtype=None, encoding=None)
