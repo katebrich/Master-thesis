@@ -117,7 +117,7 @@ output_path
 ```
 Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... 
 
-Mandatory arguments to long options are mandatory for short options too.
+Options:
   -d, --dataset                Mandatory; file with listed structures to process.
   -o, --output_dir             Mandatory; root folder. Created if not exists.
   -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis
