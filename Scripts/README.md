@@ -47,7 +47,7 @@ Example:
 Several datasets can be found [here](../datasets)
 
 ### Output
-All output files are located in an output root folder which was specified by argument `-o` or `--output_dir`. 
+All output files are located in an **output root folder** which was specified by argument `-o` or `--output_dir`. 
 
 The root folder structure is as follows:
 
@@ -217,7 +217,7 @@ In this folder, you will find **two scripts that further extend the analysis pip
 
 It is possible either to train one model with **all given features at once** (`pipeline_P2Rank_allFeatures`) or to train **one model per feature** (`pipeline_P2Rank_oneFeature.sh`). We will show the latter in the example; however, the usage is exactly the same for the both scripts.
 
-**NOTE! Before usage, you need to change the `P2RANK_PATH` variable in the scripts to your P2Rank installation directory!**
+**NOTE! Before usage, you need to change the `P2RANK_PATH` variable in the scripts according to your P2Rank installation directory!**
 
 
 ```
