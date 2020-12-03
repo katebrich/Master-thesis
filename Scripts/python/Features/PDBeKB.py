@@ -37,7 +37,7 @@ class Conservation():
             feat_begin = int(resi["start"])
             cons_score = int(resi["conservation_score"])
             if (cons_score >= 4):
-                cons_score = "4+"
+                cons_score = "4"
             feature_vals.append((feat_begin, cons_score))
 
         return feature_vals

@@ -93,8 +93,8 @@ try:
                 sys.exit(1)
         elif opt in ("-s", "--sample_size"):
             sample_size = int(arg)
-            if (sample_size <= 0):
-                print(f"Sample size must be a positive integer.")
+            if (sample_size < 0):
+                print(f"Sample size must be positive.")
                 usage()
                 sys.exit(1)
         elif opt in ("-i", "--iterations"):
