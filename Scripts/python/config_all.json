@@ -1,5 +1,10 @@
 {
 	"features": {
+		"lbs": {
+			"import_path": "Features.Debug.LBS",
+			"type": "binary",
+			"default": "0"
+		},
 		"PTM": {
 			"import_path": "Features.UniProt.PTM",
 			"type": "binary",
@@ -17,6 +22,11 @@
 		},
 		"mod_res": {
 			"import_path": "Features.UniProt.ModRes",
+			"type": "binary",
+			"default": "0"
+		},
+		"variation": {
+			"import_path": "Features.UniProt.Variation",
 			"type": "binary",
 			"default": "0"
 		},
@@ -62,6 +72,106 @@
 		"aa": {
 			"import_path": "Features.AA.AA",
 			"type": "categorical"
+		},
+		"aa_ALA": {
+			"import_path": "Features.AA.AA_ALA",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_CYS": {
+			"import_path": "Features.AA.AA_CYS",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_ASP": {
+			"import_path": "Features.AA.AA_ASP",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_GLU": {
+			"import_path": "Features.AA.AA_GLU",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_PHE": {
+			"import_path": "Features.AA.AA_PHE",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_GLY": {
+			"import_path": "Features.AA.AA_GLY",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_HIS": {
+			"import_path": "Features.AA.AA_HIS",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_ILE": {
+			"import_path": "Features.AA.AA_ILE",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_LYS": {
+			"import_path": "Features.AA.AA_LYS",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_LEU": {
+			"import_path": "Features.AA.AA_LEU",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_MET": {
+			"import_path": "Features.AA.AA_MET",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_ASN": {
+			"import_path": "Features.AA.AA_ASN",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_PRO": {
+			"import_path": "Features.AA.AA_PRO",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_GLN": {
+			"import_path": "Features.AA.AA_GLN",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_ARG": {
+			"import_path": "Features.AA.AA_ARG",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_SER": {
+			"import_path": "Features.AA.AA_SER",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_THR": {
+			"import_path": "Features.AA.AA_THR",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_VAL": {
+			"import_path": "Features.AA.AA_VAL",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_TRP": {
+			"import_path": "Features.AA.AA_TRP",
+			"type": "binary",
+			"default": "0"
+		},
+		"aa_TYR": {
+			"import_path": "Features.AA.AA_TYR",
+			"type": "binary",
+			"default": "0"
 		},
 		"hydropathy": {
 			"import_path": "Features.FASTA.Hydropathy",
@@ -151,6 +261,11 @@
 			"import_path": "Features.OtherResources.CisPeptide",
 			"type": "binary",
 			"default": "0"
+		},
+		"conservation": {
+			"import_path": "Features.OtherResources.Conservation",
+			"type": "continuous",
+			"default": "0.65"
 		}
 	}	
 
