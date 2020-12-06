@@ -48,10 +48,6 @@ class NonStandard():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_uniprot_binary_type("NON_STD", pdb_id, chain_id)
 
-class Topology():
-    def get_values(self, data_dir, pdb_id, chain_id):
-        return get_uniprot_binary_type("TRANSMEM%2CINTRAMEM", pdb_id, chain_id)  # transmembrane + intramembrane
-
 class NaturalVariant():
     def get_values(self, data_dir, pdb_id, chain_id):
         return get_uniprot_binary_type("VARIANT", pdb_id, chain_id)

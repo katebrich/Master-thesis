@@ -1,49 +1,48 @@
-1) Uvod, motivace 2
+0) Abstrakt + veci okolo (keywords, seznam priloh,...) 1/1
+
+1) Uvod, motivace 2/1
 - co jsou ligand binding sites
 - proc je spravne urceni binding sites dulezite
 - anotace primarni struktury
 - jak vyuzit anotace primarni struktury ke zlepseni predikce
 
-2) Predikce ligand binding sites 2
+2) Predikce ligand binding sites 3/1
 - co existuje za programy
 - jakou maji uspesnost + jakym zpusobem se uspesnost vyhodnocuje
 - co maji za problemy
-- P2RANK -metoda, uspesnost, metriky uspesnosti, custom features a jak se zadavaji
+- P2RANK - metoda, uspesnost, metriky uspesnosti, custom features a jak se zadavaji
 	- random forests
 - problemy s datasety - ze maji hodne false negatives, malo experimentalnich dat
 
-3) Metody 15
+3) Metody 15/4
 - pouzite verze programu a databazi
 - pipeline + diagram
 	- stahovani z DB
-	- mapovani vlastnosti - zminit chybu s mapovanim segmentu, insertion codes, proc nesly SIFTS
-	- vypocet LBS
+	- mapovani vlastnosti - zminit chybu s mapovanim segmentu, insertion codes, proc nesly SIFTS; co je REST API, JSON format
+	- vypocet LBS - problemy s HETATM
 	- SASA, vyber cutoff
 	- přidání nových vlastností uživatelem
 	- propojení s P2Rank
 	+ dalsi veci z readme
+	+ BioPython
 - statisticka analyza
 	- welchs test
 	- chi-squared test
 	+ python balíčky, které k tomu využívám
 	+ oduvodnit vybery tech testu, proc ne t-test a fischers test
-- metacentrum
-- REST API
-- JSON, FASTA, atd.
-- PDB format - problemy s HETATM
-- BioPython
 
-4) Datasety 3
+4) Datasety 3/2
 - popis tech puvodnich, popis zmen a proteinu, ktere jsem vyradila. Odstraneni duplikatu. Zminit, ze jsou vsechny singlechain
 - filtrovani - MOAD, P2Rank
 - analyza datasetu, pocty ligandu atd., pomer binding/nonbinding,...
 
-5) Features 10
+5) Features 7/2
 - popisy jednotlivych vlastnosti, odkud je ziskavam, jestli jsou manualne urcene nebo predikovane atd.
 - typy vlastností (binární, spojité,...)
 - UniProt, PDBe-KB, PDBe
 
-6) Vysledky a diskuze 10
+6) Vysledky a diskuze 15/8
+- co vsechno se pocitalo a jak (zminit metacentrum, na kterych datasetech co, parametry p2ranku,...)
 - tabulka P values pro vsechny datasety s vyuzitim celeho vzorku
 - histogramy a grafy pro vybrane featury
 - problemy s velkymi vzorky a zmensujici se p value + obrazky, graf p value deflation
@@ -58,7 +57,7 @@
 	- zamysleni se, proc feature lbs nema uspesnost 100%
 - analyza slozeni aminokyselin v binding sites
 
-7) zaver 1
+7) zaver 1/1
 - jake featury vysly dobre
 - ze konzervovanost hodne dobra, ale v pdbekb chybi data pro nejake struktury
 - vysledkem je pipelina, ktera toho spoustu umi

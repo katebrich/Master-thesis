@@ -3,8 +3,11 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: title.aux
 A level-1 auxiliary file: introduction.aux
-A level-1 auxiliary file: method.aux
+A level-1 auxiliary file: lbs_predictors.aux
+A level-1 auxiliary file: methods.aux
+A level-1 auxiliary file: datasets.aux
 A level-1 auxiliary file: features.aux
+A level-1 auxiliary file: results.aux
 A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
@@ -13,6 +16,36 @@ Warning--I didn't find a database entry for "mann"
 Warning--I didn't find a database entry for "bartlett"
 Warning--I didn't find a database entry for "brown"
 Warning--I didn't find a database entry for "cochran"
+Warning--I didn't find a database entry for "p2rank1"
+Warning--I didn't find a database entry for "benchmark"
+Warning--I didn't find a database entry for "scop"
+Warning--I didn't find a database entry for "cofactor"
+Warning--I didn't find a database entry for "coach"
+Warning--I didn't find a database entry for "dt"
+Warning--I didn't find a database entry for "astex"
+Warning--I didn't find a database entry for "ligsite"
+Warning--I didn't find a database entry for "holo4k"
+Warning--I didn't find a database entry for "uniprot"
+Warning--I didn't find a database entry for "proteins_api"
+Warning--I didn't find a database entry for "TODO"
+Warning--I didn't find a database entry for "mod_res"
+Warning--I didn't find a database entry for "disulfid"
+Warning--I didn't find a database entry for "non_std"
+Warning--I didn't find a database entry for "dssp"
+Warning--I didn't find a database entry for "sec_str"
+Warning--I didn't find a database entry for "natural_variant"
+Warning--I didn't find a database entry for "1000genomes"
+Warning--I didn't find a database entry for "cosmic"
+Warning--I didn't find a database entry for "clinvar"
+Warning--I didn't find a database entry for "exac"
+Warning--I didn't find a database entry for "https://www.uniprot.org/help/compbias"
+Warning--I didn't find a database entry for "pdbekb"
+Warning--I didn't find a database entry for "3dpatch"
+Warning--I didn't find a database entry for "bio2byte"
+Warning--I didn't find a database entry for "bmrb"
+Warning--I didn't find a database entry for "dynamine"
+Warning--I didn't find a database entry for "efoldmine"
+Warning--I didn't find a database entry for "depth"
 Warning--to sort, need author, editor, or key in 
 Warning--empty author and editor in 
 Warning--empty title in 
@@ -26,7 +59,7 @@ Warning--can't use both volume and number fields in neynman_pearson
 Warning--empty publisher in neynman_pearson
 You've used 16 entries,
             2773 wiz_defined-function locations,
-            723 strings with 7999 characters,
+            757 strings with 8281 characters,
 and the built_in function-call counts, 6657 in all, are:
 = -- 614
 > -- 260
@@ -65,4 +98,4 @@ warning$ -- 11
 while$ -- 67
 width$ -- 0
 write$ -- 232
-(There were 15 warnings)
+(There were 45 warnings)

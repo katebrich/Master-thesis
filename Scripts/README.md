@@ -121,7 +121,7 @@ Options:
   -d, --dataset                Mandatory; file with listed structures to process.
   -o, --output_dir             Mandatory; root folder. Created if not exists.
   -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis
-  -m, --threads                Default: 1. Number of threads.
+  -m, --threads                Default: 4. Number of threads.
   -f, --features               Comma-separated list of features. If not provided, all features from config are processed.
   -c, --config_path            Default: file config.json located in the same directory as this script.
   -l, --lbs_distance_threshold Default: 4. Binding residues are defined as residues with at least one non-hydrogen atom in distance at most lbs_binding_threshold from any ligand.

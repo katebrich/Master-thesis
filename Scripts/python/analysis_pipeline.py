@@ -17,7 +17,7 @@ if os.path.exists(Logger.get_log_path()):
 logger = Logger.get_logger(os.path.basename(__file__))
 
 #default values
-threads=1
+threads=4
 config_path=os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.json")
 tasks="A"
 features_list="."
@@ -49,7 +49,7 @@ def usage():
     print("  -d, --dataset                Mandatory; file with listed structures to process. \n")
     print("  -o, --output_dir             Mandatory; root folder. Created if not exists. \n")
     print("  -t, --tasks                  Default: 'A'. Comma-separated list of tasks to process. If data are missing in root folder for some task, they are computed even if their task is not in the list. Possible values: 'D' - download; 'L' - compute ligand binding sites; 'F' - compute features; 'A' - compute analysis\n")
-    print("  -m, --threads                Default: 1. Number of threads.\n")
+    print("  -m, --threads                Default: 4. Number of threads.\n")
     print("  -f, --features               Comma-separated list of features. If not provided, all features from config are processed.\n")
     print("  -c, --config_path            Default: file config.json located in the same directory as this script.\n")
     print("  -l, --lbs_distance_threshold Default: 4. Binding residues are defined as residues with at least one non-hydrogen atom in distance at most lbs_binding_threshold from any ligand.\n")
