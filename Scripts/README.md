@@ -213,7 +213,7 @@ where output_dir is the directory which contains subdirectories 'features' and '
 
 **P2Rank** (TODO - more info about the software) has an interface for **adding custom features** and training new models with these features. The way to do that is described in the [tutorial](https://github.com/cusbg/p2rank-framework/wiki/P2Rank-Custom-Feature).
 
-In this folder, you will find **two scripts that further extend the analysis pipeline** and allow you to automatically train P2Ran models with obtained data. The scripts first run the pipeline - download the data, compute ligand binding sites, features and analysis, as in previous sections. In addition, dataset files are converted to the format accepted by P2Rank, the .csv files with custom features are created using previously computed feature values, and **P2Rank model is trained and evaluated on given datasets with custom features**.
+In this folder, you will find **two scripts that further extend the analysis pipeline** and allow you to automatically train P2Rank models with obtained data. The scripts first run the pipeline - download the data, compute ligand binding sites, features and analysis, as in previous sections. In addition, dataset files are converted to the format accepted by P2Rank, the .csv files with custom features are created using previously computed feature values, and **P2Rank model is trained and evaluated on given datasets with custom features**.
 
 It is possible either to train one model with **all given features at once** (`pipeline_P2Rank_allFeatures`) or to train **one model per feature** (`pipeline_P2Rank_oneFeature.sh`). We will show the latter in the example; however, the usage is exactly the same for the both scripts.
 
