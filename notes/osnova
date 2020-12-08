@@ -6,7 +6,7 @@
 - anotace primarni struktury
 - jak vyuzit anotace primarni struktury ke zlepseni predikce
 
-2) Predikce ligand binding sites 3/1
+2) Predikce ligand binding sites 3/2
 - co existuje za programy
 - jakou maji uspesnost + jakym zpusobem se uspesnost vyhodnocuje
 - co maji za problemy
@@ -14,7 +14,7 @@
 	- random forests
 - problemy s datasety - ze maji hodne false negatives, malo experimentalnich dat
 
-3) Metody 15/4
+3) Metody 15/3
 - pouzite verze programu a databazi
 - pipeline + diagram
 	- stahovani z DB
@@ -31,7 +31,7 @@
 	+ python balíčky, které k tomu využívám
 	+ oduvodnit vybery tech testu, proc ne t-test a fischers test
 
-4) Datasety 3/2
+4) Datasety 3/1
 - popis tech puvodnich, popis zmen a proteinu, ktere jsem vyradila. Odstraneni duplikatu. Zminit, ze jsou vsechny singlechain
 - filtrovani - MOAD, P2Rank
 - analyza datasetu, pocty ligandu atd., pomer binding/nonbinding,...
@@ -42,6 +42,7 @@
 - UniProt, PDBe-KB, PDBe
 
 6) Vysledky a diskuze 15/8
+- pridani debugovacich featur
 - co vsechno se pocitalo a jak (zminit metacentrum, na kterych datasetech co, parametry p2ranku,...)
 - tabulka P values pro vsechny datasety s vyuzitim celeho vzorku
 - histogramy a grafy pro vybrane featury

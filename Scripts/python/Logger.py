@@ -6,17 +6,17 @@ from logging import FileHandler
 def get_log_path():
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), "run.log")
 
-def get_logger(name, file_handler_level=logging.DEBUG, console_handler_level=logging.INFO):
+def get_logger(name):
     file = get_log_path()
     log_formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(filename)s(line %(lineno)d) %(message)s')
 
     file_handler = FileHandler(file, mode='a', encoding=None)
     file_handler.setFormatter(log_formatter)
-    file_handler.setLevel(file_handler_level)
+    file_handler.setLevel(logging.DEBUG)
 
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(log_formatter)
-    console_handler.setLevel(console_handler_level)
+    console_handler.setLevel(logging.INFO)
 
     app_logger = logging.getLogger(name)
     app_logger.setLevel(logging.DEBUG)

@@ -1,14 +1,151 @@
 
-\chapter{Methods}
+\chapter{Methodology}
+
+One of the main aims of the thesis was to develop a pipeline for statistical analysis of available protein structure annotations (hereinafter referred to as features), and to prepare this pipeline for adding user-defined custom features.
+
+The pipeline is able to do all steps needed for the task, from downloading the structures from PDB, to computing the statistical significance of individual features. Moreover, there are two scripts that further extend the analysis pipeline and can be used to train and evaluate P2Rank models with new features. The only needed input is a dataset file with listed proteins.
+
+The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or Matplotlib \cite{maplotlib}. BioPython is an open-source collection of Python tools for computational biology and it was very useful for this work. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{ https://github.com/katebrich/Master-thesis/tree/dev/Scripts} TODO for more details about options, requirements, input, output and examples of usage.
+
+The structure of the pipeline is depicted in Diagram~\ref{fig:diagram}. The details about individual parts are described in this chapter.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=120mm]{../img/pipelineDiagram.pdf}
+\caption{Diagram of the pipeline structure.}
+\label{fig:diagram}
+\end{figure}
+
 
 TODO verze programu a databazi? Kam to dat?
+TODO options, parameters - tasks, threads, output\_dir, dataset
 
+\section{Dataset file}
+TODO co je REST API
+
+\section{Data download}
+
+\section{Residue mappings}
+- zminit chybu s mapovanim segmentu, insertion codes, proc nesly SIFTS
+
+\section{Ligand binding sites labelling}
+- options - lbs\_distance\_threshold
+- problemy s HETATM
+- SASA + cutoff
+
+\section{Features}
+
+....TODO
+- options - features, config\_path
+
+\subsection{UniProtKB}
+
+The UniProt Knowledgebase (UniProtKB) is a large database of well-annotated protein sequence data. It tries to achieve the minimal redundancy and it provides detailed, accurate and consistent annotations of the sequences \cite{uniprot}.
+
+Sequence annotations (called `features') are available for every UniProtKB entry. They describe interesting sites and regions on the protein sequence and every feature has an associated description with more information, such as available evidence, source or related publications. The features are arranged in a well-organized manner on the website, in so called `Features viewer' with many overlapping tracks for different features. Nonetheless, for the purpose of this work, the best way to obtain the features was via the Proteins REST API \cite{proteins_api}. It provides the interface to  access the sequence annotation data as well as mapped variation data programmatically. The API is available at (\url{http://www.ebi.ac.uk/proteins/api/doc}) \cite{TODO}.
+
+Features are classified into eight categories which are further subdivided into types. For example, the category `STRUCTURAL' comprises the types `HELIX', `TURN' and `STRAND'.
+
+The types and categories that were chosen as potentially relevant for ligand binding sites prediction are described below.
+
+
+\subsubsection{PTM}
+Post-translational modifications are covalent chemical modifications of polypeptide chains after translation, usually modifying the functional group of the standard amino acids, or introducing a new group. They extend the set of the 20 standard amino acids and they can be important for the function of many proteins,as they can alter the interactions with other proteins, localization, activity, signal transduction, cell-cell interactions and other properties. Their enrichment in binding sites is very interesting to examine.
+
+Three UniProtKB feature types were analysed: lipidation, glycosylation and type `MOD\_RES' which comprises phosphorylation, methylation, acetylation, amidation, formation of pyrrolidone carboxylic acid, isomerization, hydroxylation, sulfation, flavin-binding, cysteine oxidation and nitrosylation. Only experimentally determined modification sites are annotated, and they are further propagated to related orthologs when specific criteria are met \cite{mod_res}.
+
+Since lipidaton and glycosylation data were very sparse (e.g. there were only 15 lipidation sites in the whole holo4k dataset composed of 3973 proteins), the fourth feature called `PTM' including all three types was added to the analysis.
+
+\subsubsection{Disulfide bonds}
+Another type of post-translational modifications are disulfide bonds formed between two cysteine residues. Both intrachain and interchain bonds are annotated by \mbox{UniProtKB}. The disulfide bonds may be either experimentally determined or predicted \cite{disulfid}.
+
+\subsubsection{Non-standard residues}
+Describes the occurence of non-standard amino acids (selenocysteine and pyrrolysine). There must be experimental evidence for this occurence; however, it can be propagated to close homologs \cite{non_std}.
+
+\subsubsection{Secondary structure}
+This feature category annotates three types of secondary structures: helices, beta sheets and hydrogen-bonded turns. Residues not belonging to any of the classes are in a random-coil structure. The `helix' class comprises alpha-helices, pi-helices and 3\textsubscript{10} helices.
+
+The secondary structure assignment is made by DSSP algorithm \cite{dssp} based on the coordinate data sets extracted from the Protein Data Bank (PDB). They are neither predicted computationally, nor propagated to related species \cite{sec_str}.
+
+\subsubsection{Natural variant}
+This feature includes naturally occuring polymorphisms, variations between strains or RNA editing events \cite{natural_variant}.
+
+\subsubsection{Variation}
+\textit{Variation service} is a utility that can retrieve variation data from UniProtKB. The variants are either extracted from the scientific literature and manually reviewed, or mapped from large scale studies, such as 1000 Genomes \cite{1000genomes}, COSMIC \cite{cosmic}, ClinVar \cite{clinvar} or ExAC \cite{exac}. The Proteins REST API provides various options for variants retrieval, such as to filter by the consequence type, associated disease name, cross reference database type (e.g. ClinVar) or by the source type \cite{proteins_api}.
+
+
+\subsubsection{Compositional bias}
+The regions of compositional bias are parts of the polypeptide chain where some of the amino acids are over-represented, not following the standard frequencies. The regions can be enriched in one or more different amino acids \cite{https://www.uniprot.org/help/compbias}.
+
+
+
+\subsection{PDBe-KB}
+PDBe-KB (Protein Data Bank in Europe - Knowledge Base) is managed by the PDBe team at the European Bioinformatics Institute. It is a collaborative resource that aims to bring together the annotations from various sources and to show the macromolecular structures in broader biological context. 
+
+One drawback of PDB is that every page represents only one entry that is based on a single experiment. There may be several PDB entries for the full-length protein, each covering only a segment of it. Nevertheless, the entries for the same protein are not interconnected. PDBe-KB has developed the \textit{aggregated views of proteins}, displaying an overview of all the data related to the full-length protein defined by the UniProtKB accession.
+
+The structures from the PDB are extensively used by scientific software and other resources. There exist many valuable annotations, such as ligand binding sites, post-translational modification sites, molecular channels or effects of mutations, that are created outside of the PDB. The problem is that the data is fragmented and therefore it would require immense effort of a researcher to collect and make use of all available data for a structure of interest.
+
+The aggregated views of proteins integrates the annotations from \textit{PDBe-KB partners}, collaborating scientific software developers. It facilitates the retrieval of these annotations with a uniform data access mechanism (via FTP or REST API). The project is called `FunPDBe'. A common data exchange scheme was defined to facilitate the transfer of data. \cite{pdbekb}
+
+The use of PDBe-KB was difficult because of the lack of documentation and a few bugs that were encountered during this work (some of them corrected by now after pointing them out). However, it is understandable since it was launched only two years ago and the constant improvements are done since then.
+
+\subsubsection{Conservation}
+PDBe-KB provides pre-calculated residue-level conservation scores, obtained by a pipeline using HMMER and Skylign web servers that was described by Jakubec et al. \cite{3dpatch}.
+
+The values of the score are integers ranging from 0 to 9, with 9 being the most conserved. Since scores higher than 4 were very sparse and the feature would not meet the assumptions of the Chi-squared test, the scores 4 and higher were merged into one category (4). This does not deteriorate the prediction nor the hypothesis test, as vast majority (over 95\%) of non-binding residues were scored 1 and lower.
+
+\subsubsection{DynaMine}
+DynaMine was developed by the Bio2Byte group \cite{bio2byte} and it is one of the PDBe-KB partner resources. It provides the annotations of the backbone dynamics predicted only from the FASTA sequence. DynaMine predicts backbone flexibility at the residue-level, using a linear regression model trained on a large dataset of curated NMR chemical shifts extracted from the Biological Magnetic Resonance Data Bank \cite{bmrb}. The predictor estimates the value of the `order parameter' (S\textsuperscript{2}) which is related to the rotational freedom of the N-H bond vector of the backbone. The values range from 0 (highly dynamic) to 1 (complete order) \cite{dynamine}.
+
+\subsubsection{EFoldMine}
+EFoldMine tool comes from the same group as DynaMine. It is a predictor of the early folding regions of proteins. It makes predictions at the residue-level derived only from the FASTA sequence. Internally it uses dynamics predictions and secondary structure propensities as features and the linear regression model is trained on data from NMR pulsed labelling experiments. Unfortunatelly, the early stages of protein folding are not understood very well so far and experimental data is very difficult to obtain. The predictor was trained on the dataset of only 30 proteins and its performance is quite poor \cite{efoldmine}.
+
+\subsubsection{Depth}
+Depth is a webserver that can measure residue burial within the protein. It is able to find small cavities in proteins and could be used as a ligand-binding sites predictor as such. The residue depth values are computed from the input PDB file.
+
+The algorithm places input 3D structure in the box of model water, each residue with at least two hydration shells around itself. The water molecules in cavities are removed: the algorithm removes the water molecule if there are less than a given number of water molecules in its spherical volume of given size. The minimum number of neighbouring molecules and the spherical volume can be defined by the user. The removal is iterated until there are no more cavity waters. Residue depth is then computed as the distance to the closest water molecule \cite{depth}.
+
+
+\subsection{PDB}
+
+\subsubsection{B factor}
+
+\subsubsection{Half sphere exposure}
+
+\subsubsection{Exposure CN}
+
+\subsubsection{Phi and psi angles}
+
+\subsubsection{Cis peptide}
+
+
+
+
+\subsection{FASTA}
+
+
+
+\subsection{Other resources}
+
+\subsubsection{MobiDB}
+
+\subsubsection{Conservation}
+
+
+\subsection{Custom features}
+
+
+
+
+\section{Statistical analysis}
+
+TODO implementace testu v Pythonu
 
 To find properties mapped on the protein primary structure which are possibly important for prediction of protein-ligand binding sites, statistical analysis will have the crucial role. It is a great way to explore the big amounts of accessible data and it can potentially help to discover underlying patterns and draw inferences from the data.
 
 This chapter describes the method that was used to analyse the \textit{statistical significance} of the properties and to distinguish the ones that stand out in the known protein-ligand binding sites.
 
-\section{Statistical analysis}
+
 
 Hypothesis testing is a method of statistical inference. Its goal is to infer properties of a \textit{statistical population}, i.e. a set of similar items or events. In this work, two populations will be compared: we take values of a property for all the amino acids across all the proteins in the dataset and then compare the ones in binding sites and outside of binding sites.
 
@@ -66,7 +203,7 @@ Welch's test should be used whenever the researcher is not sure that the varianc
 
 For all the reasons stated above, Welch's test seems to be the best choice for the purpose of this study. It has the best combination of performance and ease of use, the calculation is straightforward and it is available in commonly used statistics packages.
 
-\subsection{Fisher's exact test and Chi-squared test of independence}
+\subsection{Chi-squared test of independence}
 
 A different kind of tests will be needed for the analysis of categorical features. An example of a categorical feature is XXX. Moreover, quantitative features can be grouped into categories and analysed in the same way as categorical features. In this section, two widely-used tests of such kind will be presented and discussed.
 
@@ -106,11 +243,8 @@ These recommendations are presented in several textbooks and articles as a rule 
 
 TODO: for small, sparse, or unbalanced data, the exact and asymptotic p-values can be quite different and may lead to opposite conclusions concerning the hypothesis of interest. (wikipedia)
 
-\subsection{Implementation in Python}
 
-
-\section{Pipeline description}
-
+\section{P2Rank models training and evaluation}
 
 
 

@@ -4,17 +4,17 @@ import shutil
 import sys
 import Logger
 
+#remove old log
+if os.path.exists(Logger.get_log_path()):
+    os.remove(Logger.get_log_path())
+logger = Logger.get_logger(os.path.basename(__file__))
+
 from AnalysisPipeline.DatasetDownloader import DatasetDownloader
 from AnalysisPipeline.LigandBindingSitesComputer import LigandBindingSitesComputer
 from AnalysisPipeline.MappingsComputer import MappingsComputer
 from AnalysisPipeline.FeaturesComputer import FeaturesComputer
 from AnalysisPipeline.AnalysisComputer import AnalysisComputer
 from Config import Config
-
-#remove old log
-if os.path.exists(Logger.get_log_path()):
-    os.remove(Logger.get_log_path())
-logger = Logger.get_logger(os.path.basename(__file__))
 
 #default values
 threads=4
@@ -31,17 +31,18 @@ draw_plots = True
 alpha = 0.05
 
 #todo smazat
-'''
+
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="debug"
-tasks="A"
+dataset_name="chen11"
+tasks="F"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
 output_dir= f"{P2Rank_path}/datasets/{dataset_name}"
-features_list = "lbs" #"aa,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
-sample_size = 100
+features_list = "random_binary,random_cont" #"aa,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
+config_path = "config_all.json"
+sample_size = 0
 iterations = 1
-balance_binding_ratio = True
-'''
+#balance_binding_ratio = True
+
 
 def usage():
     print("Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... \n")

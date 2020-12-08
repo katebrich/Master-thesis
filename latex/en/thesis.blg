@@ -4,27 +4,15 @@ The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: title.aux
 A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: lbs_predictors.aux
-A level-1 auxiliary file: methods.aux
-A level-1 auxiliary file: datasets.aux
-A level-1 auxiliary file: features.aux
+A level-1 auxiliary file: methodology.aux
 A level-1 auxiliary file: results.aux
 A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "mann"
-Warning--I didn't find a database entry for "bartlett"
-Warning--I didn't find a database entry for "brown"
-Warning--I didn't find a database entry for "cochran"
-Warning--I didn't find a database entry for "p2rank1"
-Warning--I didn't find a database entry for "benchmark"
-Warning--I didn't find a database entry for "scop"
-Warning--I didn't find a database entry for "cofactor"
-Warning--I didn't find a database entry for "coach"
-Warning--I didn't find a database entry for "dt"
-Warning--I didn't find a database entry for "astex"
-Warning--I didn't find a database entry for "ligsite"
-Warning--I didn't find a database entry for "holo4k"
+Warning--I didn't find a database entry for "biopython"
+Warning--I didn't find a database entry for "numpy"
+Warning--I didn't find a database entry for "maplotlib"
 Warning--I didn't find a database entry for "uniprot"
 Warning--I didn't find a database entry for "proteins_api"
 Warning--I didn't find a database entry for "TODO"
@@ -46,6 +34,19 @@ Warning--I didn't find a database entry for "bmrb"
 Warning--I didn't find a database entry for "dynamine"
 Warning--I didn't find a database entry for "efoldmine"
 Warning--I didn't find a database entry for "depth"
+Warning--I didn't find a database entry for "mann"
+Warning--I didn't find a database entry for "bartlett"
+Warning--I didn't find a database entry for "brown"
+Warning--I didn't find a database entry for "cochran"
+Warning--I didn't find a database entry for "p2rank1"
+Warning--I didn't find a database entry for "benchmark"
+Warning--I didn't find a database entry for "scop"
+Warning--I didn't find a database entry for "cofactor"
+Warning--I didn't find a database entry for "coach"
+Warning--I didn't find a database entry for "dt"
+Warning--I didn't find a database entry for "astex"
+Warning--I didn't find a database entry for "ligsite"
+Warning--I didn't find a database entry for "holo4k"
 Warning--to sort, need author, editor, or key in 
 Warning--empty author and editor in 
 Warning--empty title in 
@@ -59,7 +60,7 @@ Warning--can't use both volume and number fields in neynman_pearson
 Warning--empty publisher in neynman_pearson
 You've used 16 entries,
             2773 wiz_defined-function locations,
-            757 strings with 8281 characters,
+            758 strings with 8284 characters,
 and the built_in function-call counts, 6657 in all, are:
 = -- 614
 > -- 260
@@ -98,4 +99,4 @@ warning$ -- 11
 while$ -- 67
 width$ -- 0
 write$ -- 232
-(There were 45 warnings)
+(There were 48 warnings)

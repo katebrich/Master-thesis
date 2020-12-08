@@ -15,7 +15,6 @@ counter = None
 class DatasetDownloader():
     dataset_file = ""
     output_dir = ""
-
     total=""
     output_PDB=""
     output_FASTA=""

@@ -87,13 +87,10 @@
 % consultant, a person who lent the software, etc.)
 \def\DedicationAJ{%
 
-Ondrovi :P
-
 }
 
 \def\DedicationCJ{%
 
-Ondrovi :P
 
 }
 
@@ -124,11 +121,15 @@ abstract
 % Definitions of macros (see description inside)
 \include{macros}
 
+% Set level of sections appearing in the contents table
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{4}
+
 % Title page and various mandatory informational pages
 \begin{document}
 \include{title}
 
-%%% A page with automatically generated table of contents of the bachelor thesis
+%%% A page with automatically generated table of contents of the thesis
 
 \tableofcontents
 
@@ -141,9 +142,7 @@ abstract
 
 \include{introduction}
 \include{lbs_predictors}
-\include{methods}
-\include{datasets}
-\include{features}
+\include{methodology}
 \include{results}
 \include{epilog}
 
