@@ -31,18 +31,18 @@ draw_plots = True
 alpha = 0.05
 
 #todo smazat
-
+'''
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
-dataset_name="chen11"
-tasks="F"
+dataset_name="mix_filter_MOAD"
+tasks="A"
 dataset_file=f"/home/katebrich/Documents/diplomka/GitHub/datasets/{dataset_name}.txt"
-output_dir= f"{P2Rank_path}/datasets/{dataset_name}"
-features_list = "random_binary,random_cont" #"aa,hydropathy,polarity,polarity_binary,charged,aromaticity,mol_weight,H_bond_atoms,HSE_up,HSE_down,exposureCN,bfactor,bfactor_CA,pdbekb_sec_str,pdbekb_conservation,dynamine,efoldmine,depth,mobiDB,phi_angle,psi_angle,cis_peptide,lbs,aa_ratio,conservation,unp_variation"
+output_dir= f"{P2Rank_path}/datasets_final/{dataset_name}"
+#features_list = "variation"
 config_path = "config_all.json"
-sample_size = 0
-iterations = 1
-#balance_binding_ratio = True
-
+sample_size = 1000
+iterations = 1000
+balance_binding_ratio = True
+'''
 
 def usage():
     print("Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... \n")

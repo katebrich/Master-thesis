@@ -147,7 +147,7 @@ class AnalysisComputer():
 
         #plot p-values
         Plots.plot_pvalues_scatter(p_values, alpha, os.path.join(feature_output_dir, f"{feature}_pValues_scatter.png"))
-        Plots.plot_pvalues_histogram(p_values, alpha,
+        Plots.plot_pvalues_histogram(p_values, iterations,
                                      os.path.join(feature_output_dir, f"{feature}_pValues_histogram.png"))
 
         #save p-values to file

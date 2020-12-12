@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  7 DEC 2020 16:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  12 DEC 2020 10:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -507,61 +507,88 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
-Package hyperref Info: Option `unicode' set `true' on input line 118.
-Package hyperref Info: Option `breaklinks' set `true' on input line 119.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen170
+\captionmargin@=\dimen171
+\captionwidth=\dimen172
+\caption@tempdima=\dimen173
+\caption@indent=\dimen174
+\caption@parindent=\dimen175
+\caption@hangindent=\dimen176
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count284
+\c@continuedfloat=\count285
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+)
+\c@subfigure=\count286
+\c@subtable=\count287
+)
+Package hyperref Info: Option `unicode' set `true' on input line 119.
+Package hyperref Info: Option `breaklinks' set `true' on input line 120.
 
 \@input{macros.aux}
 \openout2 = `macros.aux'.
 
 (./macros.tex
-\c@thm=\count284
-\c@defn=\count285
+\c@thm=\count288
+\c@defn=\count289
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count286
+\l__kernel_color_stack_int=\count290
 \l__pdf_internal_box=\box52
 )
 (./thesis.aux (./title.aux) (./introduction.aux) (./lbs_predictors.aux)
 (./methodology.aux) (./results.aux) (./epilog.aux) (./bibliography.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 129.
-LaTeX Font Info:    ... okay on input line 129.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-29.
+30.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count287
-\scratchdimen=\dimen170
+\scratchcounter=\count291
+\scratchdimen=\dimen177
 \scratchbox=\box53
-\nofMPsegments=\count288
-\nofMParguments=\count289
+\nofMPsegments=\count292
+\nofMParguments=\count293
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count290
-\MPscratchDim=\dimen171
-\MPnumerator=\count291
-\makeMPintoPDFobject=\count292
+\MPscratchCnt=\count294
+\MPscratchDim=\dimen178
+\MPnumerator=\count295
+\makeMPintoPDFobject=\count296
 \everyMPtoPDFconversion=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -574,7 +601,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring OFF on input line 129.
+Package hyperref Info: Link coloring OFF on input line 130.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -585,17 +612,19 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count293
+\c@section@level=\count297
 )
-LaTeX Info: Redefining \ref on input line 129.
-LaTeX Info: Redefining \pageref on input line 129.
-LaTeX Info: Redefining \nameref on input line 129.
+LaTeX Info: Redefining \ref on input line 130.
+LaTeX Info: Redefining \pageref on input line 130.
+LaTeX Info: Redefining \nameref on input line 130.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
 
-\c@lstlisting=\count294
+\c@lstlisting=\count298
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 \openout2 = `title.aux'.
 
  (./title.tex
@@ -636,7 +665,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<../img/logo2.pdf, id=127, 212.795pt x 213.39726pt>
+<../img/logo2.pdf, id=135, 212.795pt x 213.39726pt>
 File: ../img/logo2.pdf Graphic file (type pdf)
 <use ../img/logo2.pdf>
 Package pdftex.def Info: ../img/logo2.pdf  used on input line 25.
@@ -702,7 +731,7 @@ LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line
 (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<../img/pipelineDiagram.pdf, id=212, 782.60612pt x 736.82486pt>
+<../img/pipelineDiagram.pdf, id=222, 782.60612pt x 736.82486pt>
 File: ../img/pipelineDiagram.pdf Graphic file (type pdf)
 <use ../img/pipelineDiagram.pdf>
 Package pdftex.def Info: ../img/pipelineDiagram.pdf  used on input line 13.
@@ -713,115 +742,115 @@ Package pdftex.def Info: ../img/pipelineDiagram.pdf  used on input line 13.
 
  <../img/pipelineDiagram.pdf>]
 
-Package natbib Warning: Citation `uniprot' on page 5 undefined on input line 48
+Package natbib Warning: Citation `uniprot' on page 5 undefined on input line 43
 .
 
 
 Package natbib Warning: Citation `proteins_api' on page 5 undefined on input li
-ne 50.
+ne 45.
 
 
-Package natbib Warning: Citation `TODO' on page 5 undefined on input line 50.
+Package natbib Warning: Citation `TODO' on page 5 undefined on input line 45.
 
 [5]
 
-Package natbib Warning: Citation `mod_res' on page 6 undefined on input line 60
+Package natbib Warning: Citation `mod_res' on page 6 undefined on input line 55
 .
 
 
 Package natbib Warning: Citation `disulfid' on page 6 undefined on input line 6
-5.
+0.
 
 
-Package natbib Warning: Citation `non_std' on page 6 undefined on input line 68
+Package natbib Warning: Citation `non_std' on page 6 undefined on input line 63
 .
 
 
-Package natbib Warning: Citation `dssp' on page 6 undefined on input line 73.
+Package natbib Warning: Citation `dssp' on page 6 undefined on input line 68.
 
 
-Package natbib Warning: Citation `sec_str' on page 6 undefined on input line 73
+Package natbib Warning: Citation `sec_str' on page 6 undefined on input line 68
 .
 
 
 Package natbib Warning: Citation `natural_variant' on page 6 undefined on input
- line 76.
+ line 71.
 
 
-Overfull \hbox (4.95274pt too wide) in paragraph at lines 76--77
+Overfull \hbox (4.95274pt too wide) in paragraph at lines 71--72
 \OT1/lmr/m/n/12 This fea-ture in-cludes nat-u-rally oc-cur-ing poly-mor-phisms,
  vari-a-tions be-tween strains|
  []
 
 
 Package natbib Warning: Citation `1000genomes' on page 6 undefined on input lin
-e 79.
+e 74.
 
 
-Package natbib Warning: Citation `cosmic' on page 6 undefined on input line 79.
+Package natbib Warning: Citation `cosmic' on page 6 undefined on input line 74.
 
 
 
-Package natbib Warning: Citation `clinvar' on page 6 undefined on input line 79
+Package natbib Warning: Citation `clinvar' on page 6 undefined on input line 74
 .
 
 
-Package natbib Warning: Citation `exac' on page 6 undefined on input line 79.
+Package natbib Warning: Citation `exac' on page 6 undefined on input line 74.
 
 
 Package natbib Warning: Citation `proteins_api' on page 6 undefined on input li
-ne 79.
+ne 74.
 
 
 Package natbib Warning: Citation `https://www.uniprot.org/help/compbias' on pag
-e 6 undefined on input line 83.
+e 6 undefined on input line 78.
 
 [6]
 
-Package natbib Warning: Citation `pdbekb' on page 7 undefined on input line 94.
+Package natbib Warning: Citation `pdbekb' on page 7 undefined on input line 89.
 
 
 
-Package natbib Warning: Citation `3dpatch' on page 7 undefined on input line 99
+Package natbib Warning: Citation `3dpatch' on page 7 undefined on input line 94
 .
 
 
-Package natbib Warning: Citation `bio2byte' on page 7 undefined on input line 1
-04.
+Package natbib Warning: Citation `bio2byte' on page 7 undefined on input line 9
+9.
 
 
-Package natbib Warning: Citation `bmrb' on page 7 undefined on input line 104.
+Package natbib Warning: Citation `bmrb' on page 7 undefined on input line 99.
 
 
-Package natbib Warning: Citation `dynamine' on page 7 undefined on input line 1
-04.
+Package natbib Warning: Citation `dynamine' on page 7 undefined on input line 9
+9.
 
 [7]
 
 Package natbib Warning: Citation `efoldmine' on page 8 undefined on input line 
-107.
+102.
 
 
-Package natbib Warning: Citation `depth' on page 8 undefined on input line 112.
+Package natbib Warning: Citation `depth' on page 8 undefined on input line 107.
 
 
 [8] [9] [10]
 
-Package natbib Warning: Citation `mann' on page 11 undefined on input line 199.
+Package natbib Warning: Citation `mann' on page 11 undefined on input line 197.
 
 
 
 Package natbib Warning: Citation `bartlett' on page 11 undefined on input line 
-206.
+204.
 
 
-Package natbib Warning: Citation `brown' on page 11 undefined on input line 206
+Package natbib Warning: Citation `brown' on page 11 undefined on input line 204
 .
 
 [11] [12]
 
 Package natbib Warning: Citation `cochran' on page 13 undefined on input line 2
-44.
+42.
 
 ) [13]
 \openout2 = `results.aux'.
@@ -875,18 +904,87 @@ Package natbib Warning: Citation `ligsite' on page 14 undefined on input line 2
 Package natbib Warning: Citation `holo4k' on page 14 undefined on input line 25
 .
 
-) [14
+[14
 
 
 
 ]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 58.
+
+<../img/dynamine_hist.png, id=369, 462.528pt x 346.896pt>
+File: ../img/dynamine_hist.png Graphic file (type png)
+<use ../img/dynamine_hist.png>
+Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 101.
+(pdftex.def)             Requested size: 341.43306pt x 256.08499pt.
+
+Package natbib Warning: Citation `pvalueproblem' on page 15 undefined on input 
+line 106.
+
+[15] [16]
+
+Package natbib Warning: Citation `pvalueproblem' on page 17 undefined on input 
+line 108.
+
+<../img/pValue_deflation_dynamine.pdf, id=383, 462.52798pt x 346.89601pt>
+File: ../img/pValue_deflation_dynamine.pdf Graphic file (type pdf)
+<use ../img/pValue_deflation_dynamine.pdf>
+Package pdftex.def Info: ../img/pValue_deflation_dynamine.pdf  used on input li
+ne 117.
+(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+File: ../img/dynamine_hist.png Graphic file (type png)
+<use ../img/dynamine_hist.png>
+Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 119.
+(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+<../img/pValue_deflation_phi_angle.pdf, id=384, 462.52798pt x 346.89601pt>
+File: ../img/pValue_deflation_phi_angle.pdf Graphic file (type pdf)
+<use ../img/pValue_deflation_phi_angle.pdf>
+Package pdftex.def Info: ../img/pValue_deflation_phi_angle.pdf  used on input l
+ine 125.
+(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+<../img/phi_angle_hist.png, id=385, 462.528pt x 346.896pt>
+File: ../img/phi_angle_hist.png Graphic file (type png)
+<use ../img/phi_angle_hist.png>
+Package pdftex.def Info: ../img/phi_angle_hist.png  used on input line 127.
+(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+<../img/pValue_deflation_exposure_CN.pdf, id=386, 462.52798pt x 346.89601pt>
+File: ../img/pValue_deflation_exposure_CN.pdf Graphic file (type pdf)
+<use ../img/pValue_deflation_exposure_CN.pdf>
+Package pdftex.def Info: ../img/pValue_deflation_exposure_CN.pdf  used on input
+ line 133.
+(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+<../img/exposure_CN_hist.png, id=387, 462.528pt x 346.896pt>
+File: ../img/exposure_CN_hist.png Graphic file (type png)
+<use ../img/exposure_CN_hist.png>
+Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 135.
+(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+[17 <../img/dynamine_hist.png>] [18 <../img/pValue_deflation_dynamine.pdf> <../
+img/pValue_deflation_phi_angle.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ../img/pValue_deflation_phi_angle.pdf):
+ PDF inclusion: multiple pdfs with page group included in a single page
+> <../img/phi_angle_hist.png> <../img/pValue_deflation_exposure_CN.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ../img/pValue_deflation_exposure_CN.pdf
+): PDF inclusion: multiple pdfs with page group included in a single page
+> <../img/exposure_CN_hist.png>]
+
+LaTeX Warning: Reference `tab:pValues500' on page 19 undefined on input line 14
+7.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 154.
+
+) [19] [20]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [15
+ (./epilog.tex) [21
 
 
 
-] [16
+] [22
 
 
 ]
@@ -910,49 +1008,54 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--36
 ch _ l _ lehmann _
  []
 
-[17
+[23
 
 
-])) [18]
+])) [24]
 Appendix A.
-[19
+[25
 
 
 ]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 195.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 195.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
 (./thesis.aux (./title.aux) (./introduction.aux) (./lbs_predictors.aux)
 (./methodology.aux) (./results.aux) (./epilog.aux) (./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 195.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 195.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 64B8AB3ED434E4D83E04AC626013D3BA;4031.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 195.
+(rerunfilecheck)             Checksum: B85D8E477A033880E5CED41E543CEB10;4314.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
  ) 
 Here is how much of TeX's memory you used:
- 16247 strings out of 483140
- 227859 string characters out of 5965151
- 467434 words of memory out of 5000000
- 30840 multiletter control sequences out of 15000+600000
- 584222 words of font info for 61 fonts, out of 8000000 for 9000
+ 17442 strings out of 483140
+ 250087 string characters out of 5965151
+ 498699 words of memory out of 5000000
+ 32005 multiletter control sequences out of 15000+600000
+ 587476 words of font info for 63 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 44i,13n,39p,1313b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/d
-vips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/
-share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/l
-m-rmtt.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf
-/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12
-.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/
-type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/p
-ublic/lm/lmtt12.pfb>
-Output written on thesis.pdf (24 pages, 306327 bytes).
+ 48i,13n,46p,1313b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
+dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/
+texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
+mathit.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf
+/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10
+.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/
+type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmtt12.pfb>
+Output written on thesis.pdf (30 pages, 505838 bytes).
 PDF statistics:
- 445 PDF objects out of 1000 (max. 8388607)
- 384 compressed objects within 4 object streams
- 92 named destinations out of 1000 (max. 500000)
- 263 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 536 PDF objects out of 1000 (max. 8388607)
+ 449 compressed objects within 5 object streams
+ 104 named destinations out of 1000 (max. 500000)
+ 309 words of extra memory for PDF output out of 10000 (max. 10000000)
 

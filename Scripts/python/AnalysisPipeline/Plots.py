@@ -22,14 +22,14 @@ def plot_pvalues_scatter(p_values, alpha, output_file):
     pyplot.clf()
     pyplot.close('all')
 
-def plot_pvalues_histogram(p_values, alpha, output_file):
+def plot_pvalues_histogram(p_values, iterations, output_file):
     pyplot.clf()
-    bins = math.ceil((1 / alpha) * 2)
-    pyplot.hist(p_values, bins=bins, color=('cornflowerblue'), alpha=0.5)
+    bins = math.ceil(math.sqrt(iterations))
+    pyplot.hist(p_values, bins=bins, color=('cornflowerblue'), alpha=1)
     pyplot.xlabel('P-value')
-    pyplot.ylabel('Density')
+    pyplot.ylabel('Frequency')
     axes = pyplot.gca()
-    axes.set_xlim([0, 1])
+    #axes.set_xlim([0, 1])
     pyplot.savefig(output_file)
     pyplot.clf()
     pyplot.close('all')

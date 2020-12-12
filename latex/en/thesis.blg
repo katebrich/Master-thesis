@@ -47,6 +47,7 @@ Warning--I didn't find a database entry for "dt"
 Warning--I didn't find a database entry for "astex"
 Warning--I didn't find a database entry for "ligsite"
 Warning--I didn't find a database entry for "holo4k"
+Warning--I didn't find a database entry for "pvalueproblem"
 Warning--to sort, need author, editor, or key in 
 Warning--empty author and editor in 
 Warning--empty title in 
@@ -60,7 +61,7 @@ Warning--can't use both volume and number fields in neynman_pearson
 Warning--empty publisher in neynman_pearson
 You've used 16 entries,
             2773 wiz_defined-function locations,
-            758 strings with 8284 characters,
+            759 strings with 8297 characters,
 and the built_in function-call counts, 6657 in all, are:
 = -- 614
 > -- 260
@@ -99,4 +100,4 @@ warning$ -- 11
 while$ -- 67
 width$ -- 0
 write$ -- 232
-(There were 48 warnings)
+(There were 49 warnings)

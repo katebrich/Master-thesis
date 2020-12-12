@@ -30,3 +30,180 @@ The resulting datasets were named identically with the original datasets:
 TODO single chain
 
 \subsection{Ligands filtering}
+
+\section{Statistical analysis}
+
+The statistical analysis of ligand binding sites properties was computed using the analysis pipeline described in TODO section 3 with default parameters. The results were collected for all the datasets, including the versions with filtered ligands. Let's set the significance level, denoted by $\alpha$, to 0.05.
+
+Some features had to be excluded from the analysis, since the data were very sparse and the assumptions of the hypothesis tests would not be met. For example, there were only 15 lipidation sites in the whole holo4k dataset containing  857,635 residues. The excluded features are: \texttt{lipidation}, \texttt{glycosylation}, \texttt{non\_standard} and \texttt{compbias}
+
+The \texttt{conservation} feature was computed only for the three smaller datasets and was omitted for holo4k. The computational time would be very high, as it takes 15-30 minutes on average per structure, and the dataset contains almost four thousand proteins. Nevertheless, the comparison on the other three datasets seems sufficient.
+
+The problem with feature \texttt{variation} was that the data were missing for many structures (around 3/4) and downloading via REST API resulted in 404 Not Found error. Data are not available on the UniProt website either. This might be caused by lack of variation data from large-scale studies for some organisms. UniProt helpdesk was contacted to help to explain the issue, but unfortunately, the question was left without an answer. Nevertheless, the feature was analysed on the subset of structures where the data is available.
+
+For some features downloaded from databases, such as \texttt{depth} or \texttt{dynamine}, there were missing data for a few structures as well. These cases were not very frequent and they most likely could not affect the analysis, so they were omitted.
+
+Three artificial features were added for comparison and to check the validity of the tool:
+\begin{itemize}
+  \item \texttt{lbs} - Ligand binding sites labels (0/1). Should have the best performance of all the features, the P-value should be zero.
+  \item \texttt{random\_binary} - Random binary numbers. Should not be significant.
+  \item \texttt{random\_cont} - Random continuous feature with values from uniform distribution from 0 to 10.
+\end{itemize}
+
+The results for datasets without ligands filter are shown in Table~\ref{tab:pvaluesAll}. As we can see, most features appear to be statistically significant, having the P-value below the significance level $\alpha$. The results for the test features \texttt{lbs}, \texttt{random\_binary} and \texttt{random\_cont} seem to be okay. However, when looking at the histograms and plots, some results are not as expected. Let's take a look at the histogram depicted in Figure~\ref{fig:dynamine}: the distribution of \texttt{dynamine} values does not seem significantly different in binding and non-binding sites. Note that for better comparison of binding and non-binding sites (since their ratio is very unbalanced), the density is computed with respect to the number of binding or non-binding sites; the value in the histogram bin can be understood as conditional probability of getting that value when having a binding/non-binding residue.
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\begin{tabular}{lllll}
+\hline
+\textbf{}                     & \textbf{Chen11}                & \textbf{Coach420}               & \textbf{Joined}                & \textbf{Holo4k}                 \\ \hline
+\textbf{lbs}                  & 0                              & 0                               & 0                              & 0                               \\
+\textbf{conservation}         & 0                              & 0                               & 0                              & ---                             \\
+\textbf{pdbekb\_conservation} & 0                              & 0                               & 0                              & 0                               \\
+\textbf{HSE\_up}              & 1.48E-266                      & 0                               & 0                              & 0                               \\
+\textbf{exposure\_CN}         & 2.08E-240                      & 0                               & 0                              & 0                               \\
+\textbf{depth}                & 1.63E-225                      & 3.37E-244                       & 0                              & 0                               \\
+\textbf{bfactor}              & 6.57E-176                      & 1.02E-172                       & 9.03E-280                      & 0                               \\
+\textbf{aa}                   & 2.43E-141                      & 4.01E-118                       & 2.09E-224                      & 0                               \\
+\textbf{mol\_weight}          & 2.54E-141                      & 1.77E-117                       & 2.71E-225                      & 0                               \\
+\textbf{HSE\_down}            & 4.23E-139                      & 6.18E-225                       & 0                              & 0                               \\
+\textbf{hydropathy}           & 9.39E-136                      & 1.83E-118                       & 9.79E-222                      & 0                               \\
+\textbf{aromaticity}          & 5.53E-79                       & 3.97E-56                        & 1.79E-102                      & 0                               \\
+\textbf{H\_bond\_atoms}       & 3.59E-44                       & 2.89E-36                        & 4.50E-72                       & 0                               \\
+\textbf{strand}               & 2.11E-17                       & 7.37E-32                        & 7.58E-36                       & 2.02E-252                       \\
+\textbf{sec\_str}             & 2.88E-16                       & 1.57E-45                        & 4.91E-42                       & 0                               \\
+\textbf{helix}                & 5.59E-06                       & 3.28E-29                        & 1.19E-26                       & 5.83E-279                       \\
+\textbf{phi\_angle}           & 9.89E-06                       & 4.29E-05                        & 1.07E-07                       & 1.36E-42                        \\
+\textbf{mobiDB}               & 0.0006394                      & 0.007984                        & 4.54E-06                       & 5.98E-51                        \\
+\textbf{PTM}                  & 0.007131                       & 5.29E-05                        & 1.77E-15                       & 1.15E-104                       \\
+\textbf{psi\_angle}           & 0.009603                       & 7.71E-16                        & 0.0009644                      & 1.30E-27                        \\
+\textbf{charged}              & 0.009871                       & 4.38E-13                        & 2.99E-05                       & 2.53E-159                       \\
+\textbf{dynamine}             & 0.0143                         & 0.02082                         & \cellcolor[HTML]{F54D4D}0.1595 & 1.70E-05                        \\
+\textbf{efoldmine}            & 0.01699                        & 0.002727                        & 1.06E-09                       & 5.02E-07                        \\
+\textbf{polarity}             & 0.02564                        & 9.01E-13                        & 3.11E-06                       & 4.18E-159                       \\
+\textbf{variation*}            & \cellcolor[HTML]{F54D4D}0.1513 & \cellcolor[HTML]{F54D4D}0.07348 & \cellcolor[HTML]{F54D4D}0.698  & \cellcolor[HTML]{F54D4D}0.05166 \\
+\textbf{cis\_peptide}         & \cellcolor[HTML]{F54D4D}0.2373 & 0.0001902                       & 4.44E-06                       & 3.46E-45                        \\
+\textbf{disulfid}             & \cellcolor[HTML]{F54D4D}0.2753 & 1.82E-06                        & \cellcolor[HTML]{F54D4D}0.5603 & 1.71E-33                        \\
+\textbf{natural\_variant}     & \cellcolor[HTML]{F54D4D}0.2793 & 0.02171                         & 2.14E-07                       & 3.39E-24                        \\
+\textbf{mod\_res}             & \cellcolor[HTML]{F54D4D}0.3116 & 0.002696                        & 9.69E-05                       & 2.72E-49                        \\
+\textbf{random\_cont}         & \cellcolor[HTML]{F54D4D}0.4707 & \cellcolor[HTML]{F54D4D}0.706   & \cellcolor[HTML]{F54D4D}0.99   & \cellcolor[HTML]{F54D4D}0.1021  \\
+\textbf{random\_binary}       & \cellcolor[HTML]{F54D4D}0.5429 & \cellcolor[HTML]{F54D4D}0.922   & \cellcolor[HTML]{F54D4D}0.3561 & \cellcolor[HTML]{F54D4D}0.9322  \\
+\textbf{turn}                 & \cellcolor[HTML]{F54D4D}0.8949 & 0.003081                        & \cellcolor[HTML]{F54D4D}0.7883 & 0.006317                        \\ \hline
+\end{tabular}
+\caption{P-values returned by hypothesis tests for individual features for all four datasets (without ligands filtering). Features are sorted according to the P-value in the first column. Values highlighted with red colour are higher that the chosen significance level $\alpha = 0.05$.\\\hspace{\textwidth}
+*\texttt{variation} is computed only on the subsets of proteins for which the data were available in databases.}
+\label{tab:pvaluesAll}
+\end{table}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=120mm]{../img/dynamine_hist.png}
+\caption{Histogram of feature \texttt{dynamine} computed on holo4k dataset. Density on the y-axis is computed with respect to the number of binding or non-binding sites. Difference in means: 0.0014; difference in variances: 0.0015.}
+\label{fig:dynamine}
+\end{figure}
+
+One conspicuous thing about the Table~\ref{tab:pvaluesAll} is that, in general, the P-values are getting smaller as the dataset size grows (the datasets in the table are sorted from the smallest on the left to the largest on the right). This is referred to as the \textit{P-value problem}. For very large samples, the statistical power of hypothesis tests is higher, and causes P-value going to zero. When dealing with large samples, even the miniscule effects can become statistically significant. The test can detect subtler and more complex effects, which can be advantageous in some cases, but also misleading. It all depends on the purpose of the statistical testing. The question we should ask is not whether the results are statistically significant (which there almost always will be for large samples), but whether they are interesting for our research \cite{pvalueproblem}.
+
+The P-value itself does not have an objective meaning and is not an unambiguous measure of evidence. The sample size hugely influences the significance, and relying only on the P-value can lead to acceptance of the hypothesis of no practical significance. Despite that, this appears to be a common practice. Lin et al. \cite{pvalueproblem} reviewed articles in two leading Information System (IS) journals and reported that 50\% of recent papers with sample sizes over 10,000 were relying on low P-values.
+
+Let's see the P-value problem demonstated on our data. Figure~\ref{fig:pvalueDeflation} shows different speeds of P-value deflation for chosen features. At the first glance, the distributions of feature \texttt{exposure\_CN} in binding and non-binding sites differ, and sample size 25 is sufficient to get the P-value below significance level 0.05. On the other hand, \texttt{dynamine} does not seem to be relevant for the binding sites recognition, and yet, if the sample size is large enough, we get the significant result.
+
+
+\begin{figure}[!htbp]
+\centering
+\begin{subfigure}[b]{\textwidth}
+  \centering
+  \includegraphics[width=0.475\linewidth]{../img/pValue_deflation_dynamine.pdf}%
+  \hfill
+  \includegraphics[width=0.475\linewidth]{../img/dynamine_hist.png}
+  \caption{\texttt{dynamine}}
+\end{subfigure}
+\vskip\baselineskip
+\begin{subfigure}[b]{\textwidth}
+  \centering
+  \includegraphics[width=0.475\linewidth]{../img/pValue_deflation_phi_angle.pdf}%
+  \hfill
+  \includegraphics[width=0.475\linewidth]{../img/phi_angle_hist.png}
+  \caption{\texttt{phi\_angle}}
+\end{subfigure}
+\vskip\baselineskip
+\begin{subfigure}[b]{\textwidth}
+  \centering
+  \includegraphics[width=0.475\linewidth]{../img/pValue_deflation_exposure_CN.pdf}%
+  \hfill
+  \includegraphics[width=0.475\linewidth]{../img/exposure_CN_hist.png}
+  \caption{\texttt{exposure\_CN}}
+\end{subfigure}
+\caption{P-value deflation demonstrated on chosen features. The P-value decreases with increasing sample size. The speed of deflation is different for individual features. The y-axis shows mean P-values obtained from 100 iterations of random sampling with given sample size. The red line represents chosen significance level $\alpha=0.05$. }
+\label{fig:pvalueDeflation}
+\end{figure}
+
+
+Therefore, the low P-values reported in Table~\ref{tab:pvaluesAll} are most likely mere artifacts of the large-sample sizes. Neverthleless, although P-value is not an objective measure of practical significance, it can be still used to compare the features relative to each other.
+
+Another noticeable thing about Table~\ref{tab:pvaluesAll} is that the results for some features vary across datasets. Let's take a look at feature \texttt{turn}, for example. The P-value is very high for datasets Chen11 and Joined - even higher than P-values for the random features; contrarily, it is low for Coach420 and Holo4k. It is not true that the P-value would decrease with the increasing sample size. This leads to a question of how the datasets are composed, and whether they are representative samples from the whole population of proteins. Taken into consideration the way how the datasets were assembled, it is likely that some bias was introduced. The question is whether taking the whole PDB database would help to solve this issue. There probably would be the problem with redundancy of data, as close homologs and overlapping PDB entries would be included. Furthermore, the database itself is most likely a biased sample of the real world of proteins, as the tertiary structure is yet to be discovered for many of them. And most importantly, this approach would be computationally very demanding.
+
+For the mentioned reasons, a different approach was implemented. Dataset `mix' was created by merging all four datasets together, removing a few duplicates. Random sampling without replacement was applied on this dataset, in each iteration taking a sample of 500 binding and 500 non-binding sites. 1000 iterations were computed and mean P-values were reported. The results are shown in Table~\ref{tab:pValues500}. 
+
+The sample size of 500 was chosen for two reasons: firstly,  validity of the Central Limit Theorem needs to be assured, as described in section TODO. Lumley \textit{et al.} \cite{lumley} demonstrated that 500 is a sufficiently large sample even for extremely non-normal data. And secondly, the minimum sample size assuring the Central Limit Theorem validity should be chosen, to avoid the P-value problem. Smaller sample size would probably be sufficient for the Central Limit Theorem, as 500 is a very safe estimation. Nevertheless, the sample size could not be much smaller anyhow, since the data for some categorial features would be very sparse. Even with the sample size of 500, some features needed to be excluded from the analysis, as there was not sufficient number of positives in this smaller sample. TODO vyjmenovat je
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\begin{tabular}{llll}
+\hline
+                              & \textbf{no filter}              & \textbf{P2Rank filter}          & \textbf{MOAD filter}            \\ \hline
+\textbf{lbs}                  & 1.33E-218                       & 1.33E-218                       & 1.33E-218                       \\
+\textbf{pdbekb\_conservation} & 3.55E-27                        & 1.35E-30                        & 4.43E-36                        \\
+\textbf{conservation}         & 1.11E-17                        & 1.05E-27                        & 7.86E-33                        \\
+\textbf{exposure\_CN}         & 4.72E-17                        & 1.95E-21                        & 1.30E-22                        \\
+\textbf{HSE\_up}              & 1.15E-14                        & 2.15E-18                        & 1.38E-18                        \\
+\textbf{depth}                & 8.00E-14                        & 9.13E-16                        & 2.83E-16                        \\
+\textbf{HSE\_down}            & 1.48E-09                        & 1.59E-11                        & 2.28E-11                        \\
+\textbf{bfactor}              & 2.56E-06                        & 3.03E-08                        & 3.97E-08                        \\
+\textbf{aa}                   & 0.006394                        & 0.001172                        & ---                             \\
+\textbf{mol\_weight}          & ---                             & 0.00129                         & 0.002037                        \\
+\textbf{hydropathy}           & 0.00539                         & 0.001376                        & 0.001953                        \\
+\textbf{aromaticity}          & 0.02027                         & 0.01516                         & 0.02523                         \\
+\textbf{H\_bond\_atoms}       & \cellcolor[HTML]{F54D4D}0.08081 & 0.02502                         & 0.03019                         \\
+\textbf{charged}              & \cellcolor[HTML]{F54D4D}0.2683  & \cellcolor[HTML]{F54D4D}0.06663 & \cellcolor[HTML]{F54D4D}0.08965 \\
+\textbf{polarity}             & \cellcolor[HTML]{F54D4D}0.2755  & \cellcolor[HTML]{F54D4D}0.07131 & \cellcolor[HTML]{F54D4D}0.1009  \\
+\textbf{sec\_str}             & \cellcolor[HTML]{F54D4D}0.133   & \cellcolor[HTML]{F54D4D}0.0873  & 0.02696                         \\
+\textbf{strand}               & \cellcolor[HTML]{F54D4D}0.1491  & \cellcolor[HTML]{F54D4D}0.1112  & 0.04838                         \\
+\textbf{helix}                & \cellcolor[HTML]{F54D4D}0.1361  & \cellcolor[HTML]{F54D4D}0.1154  & 0.02435                         \\
+\textbf{mobiDB}               & \cellcolor[HTML]{F54D4D}0.3971  & \cellcolor[HTML]{F54D4D}0.3844  & \cellcolor[HTML]{F54D4D}0.3653  \\
+\textbf{phi\_angle}           & \cellcolor[HTML]{F54D4D}0.3973  & \cellcolor[HTML]{F54D4D}0.399   & \cellcolor[HTML]{F54D4D}0.3864  \\
+\textbf{psi\_angle}           & \cellcolor[HTML]{F54D4D}0.4213  & \cellcolor[HTML]{F54D4D}0.4317  & \cellcolor[HTML]{F54D4D}0.2875  \\
+\textbf{efoldmine}            & \cellcolor[HTML]{F54D4D}0.4769  & \cellcolor[HTML]{F54D4D}0.4373  & \cellcolor[HTML]{F54D4D}0.4839  \\
+\textbf{dynamine}             & \cellcolor[HTML]{F54D4D}0.4937  & \cellcolor[HTML]{F54D4D}0.484   & \cellcolor[HTML]{F54D4D}0.4208  \\
+\textbf{random\_cont}         & \cellcolor[HTML]{F54D4D}0.5029  & \cellcolor[HTML]{F54D4D}0.5021  & \cellcolor[HTML]{F54D4D}0.4887  \\
+\textbf{variation}            & \cellcolor[HTML]{F54D4D}0.5387  & \cellcolor[HTML]{F54D4D}0.5283  & \cellcolor[HTML]{F54D4D}0.5395  \\
+\textbf{random\_binary}       & \cellcolor[HTML]{F54D4D}0.5374  & \cellcolor[HTML]{F54D4D}0.5309  & \cellcolor[HTML]{F54D4D}0.5223  \\
+\textbf{turn}                 & \cellcolor[HTML]{F54D4D}0.5785  & \cellcolor[HTML]{F54D4D}0.5982  & \cellcolor[HTML]{F54D4D}0.598   \\ \hline
+\end{tabular}
+\caption{P-values returned by hypothesis tests for individual features for all four datasets (without ligands filtering). Features are sorted according to the P-value in the first column. Values highlighted with red colour are higher that the chosen significance level $\alpha = 0.05$.\\\hspace{\textwidth}
+*\texttt{variation} is computed only on the subsets of proteins for which the data were available in databases.}
+\label{tab:pvalues500}
+\end{table}
+
+
+
+
+TODO When the effect size for a studied phenomenon is zero, every p-value is equally likely to be observed.
+
+
+
+\section{P2Rank models}
+
+
+
+
+
+
+
+
+
+
+

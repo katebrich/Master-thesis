@@ -40,9 +40,11 @@
 \contentsline {chapter}{\numberline {4}Evaluation and results}{14}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Datasets}{14}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Ligands filtering}{14}{subsection.4.1.1}%
-\contentsline {chapter}{Conclusion}{15}{chapter*.2}%
-\contentsline {chapter}{List of Abbreviations}{16}{chapter*.3}%
-\contentsline {chapter}{Bibliography}{17}{chapter*.4}%
-\contentsline {chapter}{\numberline {A}Attachments}{19}{appendix.A}%
-\contentsline {section}{\numberline {A.1}attachment1}{19}{section.A.1}%
-\contentsline {section}{\numberline {A.2}attachment2}{19}{section.A.2}%
+\contentsline {section}{\numberline {4.2}Statistical analysis}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}P2Rank models}{19}{section.4.3}%
+\contentsline {chapter}{Conclusion}{21}{chapter*.9}%
+\contentsline {chapter}{List of Abbreviations}{22}{chapter*.10}%
+\contentsline {chapter}{Bibliography}{23}{chapter*.11}%
+\contentsline {chapter}{\numberline {A}Attachments}{25}{appendix.A}%
+\contentsline {section}{\numberline {A.1}attachment1}{25}{section.A.1}%
+\contentsline {section}{\numberline {A.2}attachment2}{25}{section.A.2}%

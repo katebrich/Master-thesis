@@ -8,8 +8,8 @@ from scipy import stats
 
 iterations = 100
 
-feature = "" #todo
-data_path = "" #todo
+feature = "bfactor" #todo
+data_path = "/home/katebrich/Documents/diplomka/P2Rank/datasets_final/mix_filter_p2rank/analysis_0" #todo
 pairs_path = os.path.join(data_path, feature, "pairs.txt")
 pairs = np.genfromtxt(pairs_path, delimiter=' ', dtype=None, encoding=None)
 pairs = list(pairs)
@@ -20,9 +20,9 @@ data_nonbinding = [x[1] for x in pairs if x[0] == 0]
 res_sizes = []
 res_p_vals = []
 
-sample_size = 20
-step = 5
-while sample_size < 200:
+sample_size = 10
+step = 10
+while sample_size < 1000:#2/3 * len(data_binding):
     p_values = []
     for i in range(1, iterations + 1):
         sample_binding = random.sample(data_binding, sample_size)
@@ -35,8 +35,6 @@ while sample_size < 200:
     res_p_vals.append(mean_p_value)
     print(f"Sample {sample_size} done")
     sample_size = sample_size + step
-    if (sample_size > 6000):
-        step = 300
 
 alpha = 0.05
 pyplot.clf()

@@ -47,6 +47,7 @@
 - tabulka P values pro vsechny datasety s vyuzitim celeho vzorku
 - histogramy a grafy pro vybrane featury
 - problemy s velkymi vzorky a zmensujici se p value + obrazky, graf p value deflation
+- vytvoreni datasetu mix
 - oduvodneni zvoleneho vzorku 500
 - analyza pro vzorek 500 a dataset mix_filter_p2rank
 - prumerna p value pro mix (vsechny filtry)
