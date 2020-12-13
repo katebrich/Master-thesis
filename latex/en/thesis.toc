@@ -22,8 +22,8 @@
 \contentsline {subsubsection}{\numberline {3.5.2.2}DynaMine}{7}{subsubsection.3.5.2.2}%
 \contentsline {subsubsection}{\numberline {3.5.2.3}EFoldMine}{8}{subsubsection.3.5.2.3}%
 \contentsline {subsubsection}{\numberline {3.5.2.4}Depth}{8}{subsubsection.3.5.2.4}%
-\contentsline {subsection}{\numberline {3.5.3}PDB}{9}{subsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.3.1}B factor}{9}{subsubsection.3.5.3.1}%
+\contentsline {subsection}{\numberline {3.5.3}PDB}{8}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}B factor}{8}{subsubsection.3.5.3.1}%
 \contentsline {subsubsection}{\numberline {3.5.3.2}Half sphere exposure}{9}{subsubsection.3.5.3.2}%
 \contentsline {subsubsection}{\numberline {3.5.3.3}Exposure CN}{9}{subsubsection.3.5.3.3}%
 \contentsline {subsubsection}{\numberline {3.5.3.4}Phi and psi angles}{9}{subsubsection.3.5.3.4}%
@@ -41,10 +41,10 @@
 \contentsline {section}{\numberline {4.1}Datasets}{14}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Ligands filtering}{14}{subsection.4.1.1}%
 \contentsline {section}{\numberline {4.2}Statistical analysis}{14}{section.4.2}%
-\contentsline {section}{\numberline {4.3}P2Rank models}{19}{section.4.3}%
-\contentsline {chapter}{Conclusion}{21}{chapter*.9}%
-\contentsline {chapter}{List of Abbreviations}{22}{chapter*.10}%
-\contentsline {chapter}{Bibliography}{23}{chapter*.11}%
-\contentsline {chapter}{\numberline {A}Attachments}{25}{appendix.A}%
-\contentsline {section}{\numberline {A.1}attachment1}{25}{section.A.1}%
-\contentsline {section}{\numberline {A.2}attachment2}{25}{section.A.2}%
+\contentsline {section}{\numberline {4.3}P2Rank models}{22}{section.4.3}%
+\contentsline {chapter}{Conclusion}{27}{chapter*.16}%
+\contentsline {chapter}{List of Abbreviations}{28}{chapter*.17}%
+\contentsline {chapter}{Bibliography}{29}{chapter*.18}%
+\contentsline {chapter}{\numberline {A}Attachments}{31}{appendix.A}%
+\contentsline {section}{\numberline {A.1}attachment1}{31}{section.A.1}%
+\contentsline {section}{\numberline {A.2}attachment2}{31}{section.A.2}%

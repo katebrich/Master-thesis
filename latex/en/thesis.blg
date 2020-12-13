@@ -34,6 +34,7 @@ Warning--I didn't find a database entry for "bmrb"
 Warning--I didn't find a database entry for "dynamine"
 Warning--I didn't find a database entry for "efoldmine"
 Warning--I didn't find a database entry for "depth"
+Warning--I didn't find a database entry for "bfactor"
 Warning--I didn't find a database entry for "mann"
 Warning--I didn't find a database entry for "bartlett"
 Warning--I didn't find a database entry for "brown"
@@ -48,6 +49,11 @@ Warning--I didn't find a database entry for "astex"
 Warning--I didn't find a database entry for "ligsite"
 Warning--I didn't find a database entry for "holo4k"
 Warning--I didn't find a database entry for "pvalueproblem"
+Warning--I didn't find a database entry for "cons"
+Warning--I didn't find a database entry for "casp"
+Warning--I didn't find a database entry for "prankweb"
+Warning--I didn't find a database entry for "pocketpicker"
+Warning--I didn't find a database entry for "lbscomposition"
 Warning--to sort, need author, editor, or key in 
 Warning--empty author and editor in 
 Warning--empty title in 
@@ -61,7 +67,7 @@ Warning--can't use both volume and number fields in neynman_pearson
 Warning--empty publisher in neynman_pearson
 You've used 16 entries,
             2773 wiz_defined-function locations,
-            759 strings with 8297 characters,
+            765 strings with 8346 characters,
 and the built_in function-call counts, 6657 in all, are:
 = -- 614
 > -- 260
@@ -100,4 +106,4 @@ warning$ -- 11
 while$ -- 67
 width$ -- 0
 write$ -- 232
-(There were 49 warnings)
+(There were 55 warnings)

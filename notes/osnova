@@ -31,7 +31,7 @@
 	+ python balíčky, které k tomu využívám
 	+ oduvodnit vybery tech testu, proc ne t-test a fischers test
 
-4) Datasety 3/1
+4) Datasety 2/1
 - popis tech puvodnich, popis zmen a proteinu, ktere jsem vyradila. Odstraneni duplikatu. Zminit, ze jsou vsechny singlechain
 - filtrovani - MOAD, P2Rank
 - analyza datasetu, pocty ligandu atd., pomer binding/nonbinding,...
@@ -41,7 +41,7 @@
 - typy vlastností (binární, spojité,...)
 - UniProt, PDBe-KB, PDBe
 
-6) Vysledky a diskuze 15/8
+6) Vysledky a diskuze 15/3
 - pridani debugovacich featur
 - co vsechno se pocitalo a jak (zminit metacentrum, na kterych datasetech co, parametry p2ranku,...)
 - tabulka P values pro vsechny datasety s vyuzitim celeho vzorku

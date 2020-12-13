@@ -202,9 +202,13 @@ class AnalysisComputer():
             Plots.plot_binding_nonbinding_ratios(data_binding, data_nonbinding,
                                                  os.path.join(feature_output_dir, f"{feature_name}_ratios"), 1)
             Plots.plot_frequencies(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_frequencies"))
+            Plots.plot_counts(data_binding, data_nonbinding,
+                                   os.path.join(feature_output_dir, f"{feature_name}_counts"))
         elif feature_type == "continuous":
             Plots.plot_histogram(data_binding, data_nonbinding, 40,
                                  os.path.join(feature_output_dir, f"{feature_name}_hist_bins_40"))
+            Plots.plot_histogram(data_binding, data_nonbinding, 60,
+                                 os.path.join(feature_output_dir, f"{feature_name}_hist_bins_60"))
             Plots.plot_histogram(data_binding, data_nonbinding, 100,
                                  os.path.join(feature_output_dir, f"{feature_name}_hist_bins_100"))
 
@@ -212,10 +216,13 @@ class AnalysisComputer():
             Plots.plot_binding_nonbinding_ratios(data_binding, data_nonbinding,
                                                  os.path.join(feature_output_dir, f"{feature_name}_ratios"), 0)
             Plots.plot_frequencies(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_frequencies"))
+            Plots.plot_counts(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_counts"))
         elif feature_type == "binary":
             Plots.plot_binding_nonbinding_ratios(data_binding, data_nonbinding,
                                                  os.path.join(feature_output_dir, f"{feature_name}_ratios"), 0)
             Plots.plot_positives_ratio(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_positivesRatio"))
+            Plots.plot_counts(data_binding, data_nonbinding, os.path.join(feature_output_dir, f"{feature_name}_counts"))
+
 
     def write_summary(self):
         self.p_values.sort(key=lambda x: x[0])  # sort by name
