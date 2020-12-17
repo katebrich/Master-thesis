@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  16 DEC 2020 09:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  17 DEC 2020 13:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -731,7 +731,7 @@ LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line
 (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<../img/pipelineDiagram.pdf, id=222, 782.60612pt x 736.82486pt>
+<../img/pipelineDiagram.pdf, id=224, 782.60612pt x 736.82486pt>
 File: ../img/pipelineDiagram.pdf Graphic file (type pdf)
 <use ../img/pipelineDiagram.pdf>
 Package pdftex.def Info: ../img/pipelineDiagram.pdf  used on input line 13.
@@ -911,22 +911,46 @@ ine 184.
 
 [11] [12]
 
-Package natbib Warning: Citation `mann' on page 13 undefined on input line 247.
+Package natbib Warning: Citation `mann' on page 13 undefined on input line 245.
 
 
-[13]
 
-Package natbib Warning: Citation `bartlett' on page 14 undefined on input line 
-254.
+Package natbib Warning: Citation `bartlett' on page 13 undefined on input line 
+252.
 
 
-Package natbib Warning: Citation `brown' on page 14 undefined on input line 254
+Package natbib Warning: Citation `brown' on page 13 undefined on input line 252
 .
 
+[13]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 258.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 258.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 258.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 258.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 258.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 258.
+
 [14]
+Overfull \hbox (45.42783pt too wide) in paragraph at lines 286--289
+\OT1/lmr/m/n/12 nif-i-cant. The ex-pected fre-quen-cies are com-puted for ev-er
+y cell as $[]$.|
+ []
+
 
 Package natbib Warning: Citation `cochran' on page 15 undefined on input line 2
-92.
+90.
 
 ) [15]
 \openout2 = `results.aux'.
@@ -984,7 +1008,7 @@ Package natbib Warning: Citation `holo4k' on page 16 undefined on input line 25
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 60.
 
-<../img/dynamine_hist.png, id=377, 462.528pt x 346.896pt>
+<../img/dynamine_hist.png, id=379, 462.528pt x 346.896pt>
 File: ../img/dynamine_hist.png Graphic file (type png)
 <use ../img/dynamine_hist.png>
 Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 105.
@@ -999,7 +1023,7 @@ Package natbib Warning: Citation `pvalueproblem' on page 19 undefined on input
 line 112.
 
 [19 <../img/dynamine_hist.png>]
-<../img/pValue_deflation_dynamine.pdf, id=397, 462.52798pt x 346.89601pt>
+<../img/pValue_deflation_dynamine.pdf, id=399, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_dynamine.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_dynamine.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_dynamine.pdf  used on input li
@@ -1009,24 +1033,24 @@ File: ../img/dynamine_hist.png Graphic file (type png)
 <use ../img/dynamine_hist.png>
 Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 123.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/pValue_deflation_phi_angle.pdf, id=398, 462.52798pt x 346.89601pt>
+<../img/pValue_deflation_phi_angle.pdf, id=400, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_phi_angle.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_phi_angle.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_phi_angle.pdf  used on input l
 ine 129.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/phi_angle_hist.png, id=399, 462.528pt x 346.896pt>
+<../img/phi_angle_hist.png, id=401, 462.528pt x 346.896pt>
 File: ../img/phi_angle_hist.png Graphic file (type png)
 <use ../img/phi_angle_hist.png>
 Package pdftex.def Info: ../img/phi_angle_hist.png  used on input line 131.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/pValue_deflation_exposure_CN.pdf, id=400, 462.52798pt x 346.89601pt>
+<../img/pValue_deflation_exposure_CN.pdf, id=402, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_exposure_CN.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_exposure_CN.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_exposure_CN.pdf  used on input
  line 137.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/exposure_CN_hist.png, id=401, 462.528pt x 346.896pt>
+<../img/exposure_CN_hist.png, id=403, 462.528pt x 346.896pt>
 File: ../img/exposure_CN_hist.png Graphic file (type png)
 <use ../img/exposure_CN_hist.png>
 Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 139.
@@ -1063,12 +1087,12 @@ Overfull \hbox (30.01608pt too wide) in paragraph at lines 200--201
 /12 conservation \OT1/lmr/m/n/12 and \OT1/lmtt/m/n/12 pdbekb[]conservation|
  []
 
-<../img/conservation_hist.png, id=439, 462.528pt x 346.896pt>
+<../img/conservation_hist.png, id=440, 462.528pt x 346.896pt>
 File: ../img/conservation_hist.png Graphic file (type png)
 <use ../img/conservation_hist.png>
 Package pdftex.def Info: ../img/conservation_hist.png  used on input line 206.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/pdbekb_conservation_frequencies.png, id=440, 462.528pt x 346.896pt>
+<../img/pdbekb_conservation_frequencies.png, id=441, 462.528pt x 346.896pt>
 File: ../img/pdbekb_conservation_frequencies.png Graphic file (type png)
 <use ../img/pdbekb_conservation_frequencies.png>
 Package pdftex.def Info: ../img/pdbekb_conservation_frequencies.png  used on in
@@ -1087,22 +1111,22 @@ File: ../img/exposure_CN_hist.png Graphic file (type png)
 <use ../img/exposure_CN_hist.png>
 Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 225.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/depth_hist.png, id=452, 462.528pt x 346.896pt>
+<../img/depth_hist.png, id=453, 462.528pt x 346.896pt>
 File: ../img/depth_hist.png Graphic file (type png)
 <use ../img/depth_hist.png>
 Package pdftex.def Info: ../img/depth_hist.png  used on input line 230.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/HSE_up_hist.png, id=453, 462.528pt x 346.896pt>
+<../img/HSE_up_hist.png, id=454, 462.528pt x 346.896pt>
 File: ../img/HSE_up_hist.png Graphic file (type png)
 <use ../img/HSE_up_hist.png>
 Package pdftex.def Info: ../img/HSE_up_hist.png  used on input line 235.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/HSE_down_hist.png, id=454, 462.528pt x 346.896pt>
+<../img/HSE_down_hist.png, id=455, 462.528pt x 346.896pt>
 File: ../img/HSE_down_hist.png Graphic file (type png)
 <use ../img/HSE_down_hist.png>
 Package pdftex.def Info: ../img/HSE_down_hist.png  used on input line 240.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/bfactor_hist.png, id=456, 462.528pt x 346.896pt>
+<../img/bfactor_hist.png, id=457, 462.528pt x 346.896pt>
 File: ../img/bfactor_hist.png Graphic file (type png)
 <use ../img/bfactor_hist.png>
 Package pdftex.def Info: ../img/bfactor_hist.png  used on input line 251.
@@ -1112,12 +1136,12 @@ Package pdftex.def Info: ../img/bfactor_hist.png  used on input line 251.
 Package natbib Warning: Citation `lbscomposition' on page 23 undefined on input
  line 256.
 
-<../img/aa_frequencies.png, id=458, 462.528pt x 346.896pt>
+<../img/aa_frequencies.png, id=459, 462.528pt x 346.896pt>
 File: ../img/aa_frequencies.png Graphic file (type png)
 <use ../img/aa_frequencies.png>
 Package pdftex.def Info: ../img/aa_frequencies.png  used on input line 264.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
-<../img/aa_ratios.png, id=459, 462.528pt x 346.896pt>
+<../img/aa_ratios.png, id=460, 462.528pt x 346.896pt>
 File: ../img/aa_ratios.png Graphic file (type png)
 <use ../img/aa_ratios.png>
 Package pdftex.def Info: ../img/aa_ratios.png  used on input line 269.
@@ -1193,7 +1217,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 568D7D862E536FEED4C653B8866B3FA0;4345.
+(rerunfilecheck)             Checksum: D3907457B737D0D1C6B91AB64A02BD24;4382.
 
 
 LaTeX Warning: There were undefined references.
@@ -1201,13 +1225,13 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
  ) 
 Here is how much of TeX's memory you used:
- 17508 strings out of 483140
- 251601 string characters out of 5965151
- 500577 words of memory out of 5000000
- 32049 multiletter control sequences out of 15000+600000
- 587476 words of font info for 63 fonts, out of 8000000 for 9000
+ 17539 strings out of 483140
+ 252001 string characters out of 5965151
+ 500623 words of memory out of 5000000
+ 32074 multiletter control sequences out of 15000+600000
+ 604439 words of font info for 85 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 48i,13n,46p,1313b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,13n,46p,1330b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/sha
 re/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-
@@ -1219,10 +1243,10 @@ r/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (38 pages, 649865 bytes).
+Output written on thesis.pdf (38 pages, 649678 bytes).
 PDF statistics:
- 610 PDF objects out of 1000 (max. 8388607)
- 497 compressed objects within 5 object streams
+ 611 PDF objects out of 1000 (max. 8388607)
+ 498 compressed objects within 5 object streams
  118 named destinations out of 1000 (max. 500000)
  349 words of extra memory for PDF output out of 10000 (max. 10000000)
 
