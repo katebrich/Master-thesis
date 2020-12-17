@@ -5,6 +5,10 @@ Users can define a feature of their own by implementing a method for its computa
 
 The only needed **input is a dataset file** with proteins.
 
+
+![alt text](Scripts/source/pipelineDiagram.svg)
+
+
 Below, you can learn how to:
  - [get data and run analysis with predefined features](#one)
  - [add a custom feature](#two)
@@ -203,7 +207,7 @@ By specifying a task, we tell the program what is the desired output. The progra
 Thus, if you already have some data already downloaded/computed, you can **run the pipeline with them by putting them into the correct folders**.
 Note that the folders hierarchy and naming, as well as naming of the files (pbdID+chainID.txt/.pdb/.fasta) and correct formatting of the files **must be kept the same** as if it were obtained from the pipeline!
 
-The **dependencies** of the tasks are following:
+The **dependencies** of the tasks are following (as shown in the diagram above)
 - D: no dependencies
 - M: no dependencies
 - L: D,M
