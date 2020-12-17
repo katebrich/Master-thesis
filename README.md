@@ -6,7 +6,7 @@ Users can define a feature of their own by implementing a method for its computa
 The only needed **input is a dataset file** with proteins.
 
 
-![alt text](Scripts/source/pipelineDiagram.svg)
+![alt text](Scripts/source/pipelineDiagram.svg =250x)
 
 
 Below, you can learn how to:
