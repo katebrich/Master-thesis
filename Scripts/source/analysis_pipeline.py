@@ -30,8 +30,8 @@ balance_binding_ratio = False # if True, take the same sample size for binding/n
 draw_plots = True
 alpha = 0.05
 
-#todo smazat
-
+#todo delete, only for debugging
+'''
 P2Rank_path="/home/katebrich/Documents/diplomka/P2Rank"
 dataset_name="mix_filter_p2rank"
 tasks="A"
@@ -42,7 +42,7 @@ config_path = "config_all.json"
 sample_size = 500
 iterations = 1000
 balance_binding_ratio = True
-
+'''
 
 def usage():
     print("Usage: analysis_pipeline.py -d DATASET_FILE_PATH -o OUTPUT_DIR_PATH [OPTIONS]... \n")
