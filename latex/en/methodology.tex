@@ -5,7 +5,7 @@ One of the main aims of the thesis was to develop a pipeline for statistical ana
 
 The pipeline is able to do all steps needed for the task, from downloading the structures from PDB, to computing the statistical significance of individual features. Moreover, there are two scripts that further extend the analysis pipeline and can be used to train and evaluate P2Rank models with new features. The only needed input is a dataset file with listed proteins.
 
-The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or Matplotlib \cite{maplotlib}. BioPython is an open-source collection of Python tools for computational biology and it was very useful for this work. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{ https://github.com/katebrich/Master-thesis/tree/dev/Scripts} TODO for more details about options, requirements, input, output and examples of usage.
+The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or Matplotlib \cite{maplotlib}. BioPython is an open-source collection of Python tools for computational biology and it was very useful for this work. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{ https://github.com/katebrich/Master-thesis/tree/dev/Scripts} TODO for more details about requirements, options, input, output, and examples of usage.
 
 The structure of the pipeline is depicted in Diagram~\ref{fig:diagram}. The details about individual parts are described in this chapter.
 
@@ -15,28 +15,38 @@ The structure of the pipeline is depicted in Diagram~\ref{fig:diagram}. The deta
 \label{fig:diagram}
 \end{figure}
 
-
-TODO verze programu a databazi? Kam to dat?
-TODO options, parameters - tasks, threads, output\_dir, dataset
-TODO default values
+TODO verze pouzitych programu a databazi? Kam to dat?
 
 \section{Dataset file}
-TODO co je REST API
+Dataset file is a mandatory input for the pipeline. It is a plain-text file with each row representing one structure. The columns are separated by whitespace. The first two columns are mandatory and they contain PDB ID and chain ID (pipeline can only work with single-chain structures). The third column is optional and it can define a comma-separated list of ligands which will be used for ligand binding sites computation.
 
 \section{Data download}
 
+For each structure, FASTA and PDB files are downloaded from PDBe, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries.
+
 \section{Residue mappings}
+TODO
 - zminit chybu s mapovanim segmentu, insertion codes, proc nesly SIFTS
 
 \section{Ligand binding sites labelling}
-- options - lbs\_distance\_threshold
-- problemy s HETATM
-- SASA + cutoff
+
+The assignment of labels non-binding/binding (0/1) is done directly according to the PDB file. The residue is labeled as binding if it has at least one non-hydrogen surface atom within distance 4.0 {\AA} of a non-hydrogen atom of any ligand. The distance 4.0 {\AA} can be changed with \texttt{-l} argument. This ligand-based definition of binding sites was used in previous large-scale study exploring the composition of binding sites \cite{lbscomposition}.
+
+Only residues on the surface of the protein were taken into consideration in the analysis. The non-surface residues cannot be binding anyway, and excluding them decreases the imbalance between binding and non-binding residues counts. Furthermore, excluding the inner residues helps to reduce potential influence of  difference in feature value in surface vs. non-surface residues. For example, inner residues tend to be more hydrophobic in general. Thus, binding sites could seem to be more hydrophilic than non-binding sites, but it would not be clear whether it is not simply the effect of being on the surface of the protein.
+
+The solvent-accessible surface was computed using \texttt{Bio.PDB.SASA} module in BioPython \cite{sasa}. It implements Shrake \& Rupley algorithm \cite{shrake} which uses a sphere of particular radius to probe the surface of the protein. It can be imagined as `rolling a ball' along the surface. The smaller the sphere radius, the more surface details it can detect. Fot this work, the default radius of 1.4 {\AA}, which approximates the radius of a water molecule, was used.
+
+The algorithm computes the solvent accessible surface area of each residue. We defined the surface residues as residues that have less than 5\% of their surface accessible to the solvent. This cut-off was proposed by Miller \textit{et al.} \cite{sasaCutoff} and used in other studies\cite{jones,lbscomposition}. 
 
 \section{Features}
 
-....TODO
-- options - features, config\_path
+This section describes all the implemented features and provides information on how to add user-defined features.
+
+Pipeline can run only with a subset of implemented features, by listing them and passing as argument (e.g. \texttt{-f hydropathy,aromaticity}). If argument \texttt{-f} is not stated, all features defined in the config file are computed.
+
+The config file is a file in JSON format that lists names of features, their type (binary, categorical, ordinal or continuous) and path to the class with implementation. Custom config file with user-defined features or with subsets of features can be created and passed as argument \texttt{-c new\_config\_path}.
+
+TODO tabulka s prehledem featur, jejich jmena a typy, jestli jsou predikovane nebo pocitane atd.
 
 \subsection{UniProtKB}
 
@@ -109,61 +119,95 @@ The algorithm places input 3D structure in the box of model water, each residue 
 
 \subsection{PDB}
 
+The following features can be computed or obtained directly from the PDB file.
+
 \subsubsection{B factor}
 
 The B factor, also called the Debye-Waller factor or the temperature factor, describes "the attenuation of X-ray or neutron scattering caused by thermal motion" \cite{bfactor}. It can be used to identify and interpret flexibility of proteins, supposing that high B factors are indicators of higher flexibility, whereas atoms with low B factors generally belong to the well-ordered parts of the structure. B factors can be also view as indicators of the relative vibrational motion of atoms in a protein \cite{bfactor}.
 
 The values can be obtained directly from the PDB files: each ATOM record of a X-ray structure (except for hydrogens) deposited in PDB contains B factor value for the atom. B factor for a residue was computed be averaging B factors of all its atoms. 
 
+\subsubsection{Contact number exposure}
+
+Contact number (CN) is a simple solvent exposure measure that can be computed directly from the 3D structure. The CN value for residue is number of C$\alpha$ atoms within a sphere of chosen radius around the C$\alpha$ of that residue \cite{cn}.
+
+The implementation in BioPython module \texttt{Bio.PDB.HSExposure} was used for computation, with default sphere radius 12 {\AA}.
+
+
 \subsubsection{Half sphere exposure}
 
-\subsubsection{Exposure CN}
+Half sphere exposure (HSE) is a solvent exposure measure introduced by Hamelryck (2005) \cite{hse}. The CN sphere (defined above) around the C$\alpha$ atom is split in two halves by the plane perpendicular to the C$\alpha$-C$\beta$ vector, going through the C$\alpha$. Two different measures are obtained, HSE-up, which is number of C$\alpha$ in `upper' half sphere (containing C$\beta$), and HSE-down, number of C$\alpha$ in the opposite sphere.
+
+Class \texttt{HSExposureCB} from BioPython module \texttt{Bio.PDB.HSExposure} with default sphere radius 12 {\AA} was used. 
+
+TODO obrazek?
+
 
 \subsubsection{Phi and psi angles}
 
+Three dihedral angles of a popypeptide backbone phi ($\phi$), psi ($\psi$) and omega ($\omega$) are depicted on the Figure~\ref{fig:angles}. While the $\omega$ angle is restricted due to the planar character of the peptide bond, the $\phi$ and $\psi$ angles have high rotational freedom around the N-C$\alpha$ ($\phi$ torsion) or C$\alpha$-C ($\psi$ torsion) bonds. The Ramachandran plot provides good visualization of the whole $\phi$\\$\psi$ space \cite{ramachandran}.
+The angles sizes can be computed directly from the PDBe; for the purpose of this work, they were obtained from PDBe via REST API.
+
+TODO obrazek vazby
+
 \subsubsection{Cis peptide}
 
+The majority of protein bonds is found with torsion angle $\omega$ close to 180$^\circ$, in so-called \textit{trans} conformation. The \textit{cis} isomer, having $\omega$ close to 0$^\circ$, is rather rare. The \textit{cis-trans} isomeration is involved in some biological processes, such as protein folding or membrane binding \cite{cispeptide}.
 
+The residues with \textit{trans} bond are obtained from PDBe via REST API.
 
 
 \subsection{FASTA}
 
+There are features that can be derived directly from the FASTA sequence. Every amino acid is assigned a value and the feature values are obtained according to the FASTA file. These features are:
 
+\begin{itemize}
+\item \textbf{Hydropathy} - The values of hydropathy index proposed by J. Kyte and R. F. Doolittle \cite{kyte}. It takes into consideration hydrophilic and hydrophobic properties of the 20 amino acid side chains. It is based on experimental observations derived from the literature. It ranges from -4.5 (Arg) to 4.5 (Ile) and the larger the number is, the more hydrophobic the amino acid.
+\item \textbf{Molecular weight} - Residue mass in Daltons.
+\item \textbf{Polarity} - Classification of amino acids according to the side chain - categories Polar, Nonpolar and Polar uncharged.
+\item \textbf{Charge} - Binary feature indicating whether the side group is charged in physiological pH.
+\item \textbf{Aromaticity} - Binary feature labeling residues that contain aromatic ring.
+\item \textbf{Hydrogen bond atoms} - Number of atoms of the side chain that are either hydrogen donor or hydrogen acceptor.
+\end{itemize}
+
+The biochemical properties of amino acids (all features above except hydropathy) were obtained from TODO citovat biochemie voet
 
 \subsection{Other resources}
 
 \subsubsection{MobiDB}
 
+MobiDB is a database of protein disorder and mobility annotations. It provides annotations and predictions for intrinsically disordered (ID) proteins. MobiDB-lite is a method for highly specific predictions of long (at least 20 residues) disorders. It is a consensus-based prediction, combining results of eight different predictors
+\cite{mobidb}. It has been integrated into the MobiDB and the web server provides programmatic access to retrieve single entries via REST API \cite{mobidbApi}.
+
 \subsubsection{Conservation}
 
+The sequence conservation scores for this feature are computed through Conservation pipeline \cite{conservation} implemented for P2Rank. The pipeline runs on local computer and needs to have SwissProt, UniRef90 and TrEMBL databases downloaded locally.
 
-\subsection{Custom features}
+\subsection{User-defined features}
 
+There are two ways to run the statistical analysis with user-defined features. The first, more time-demanding way is to compute all needed results (i.e. feature values and ligand binding sites labels) outside of the pipeline, and then run only the analysis task (with argument \texttt{-tasks A}). The data supplied to the pipeline need to be in the correct format; more details about the usage and a few  examples are described in the README file in the GitHub repository (\url{ https://github.com/katebrich/Master-thesis/tree/dev/Scripts} TODO).
 
+Another, more straightforward possibility is to implement the new feature directly inside the pipeline. Two steps need to be made:
 
+\begin{itemize}
+\item to add the feature to the config file. The class with feature implementation is loaded dynamically according to the feature name, for the easier definition of new features,
+\item to implement class with method \texttt{get\_values} which computes the feature values and returns them in the required format.
+\end{itemize}
 
 \section{Statistical analysis}
 
-TODO P-value
-TODO power of test
+To find the features which are possibly important for prediction of protein-ligand binding sites, statistical analysis will have the crucial role. This section describes the method that was used to analyse the statistical significance of the features and to distinguish the ones that stand out in the known protein-ligand binding sites.
 
-TODO implementace testu v Pythonu
+In this work, the problem will be seen as a hypothesis testing problem. Two populations will be compared: we take values of a feature for all the residues across all the proteins in the dataset and then compare the binding residues and non-binding residues.
 
-To find properties mapped on the protein primary structure which are possibly important for prediction of protein-ligand binding sites, statistical analysis will have the crucial role. It is a great way to explore the big amounts of accessible data and it can potentially help to discover underlying patterns and draw inferences from the data.
+The \textit{null hypothesis} and the \textit{alternative hypothesis}, denoted by $H_{0}$ and $H_{1}$, respectively, will be tested:
 
-This chapter describes the method that was used to analyse the \textit{statistical significance} of the properties and to distinguish the ones that stand out in the known protein-ligand binding sites.
+\begin{itemize}
+\item \textbf{$H_{0}$} - The feature values in binding sites do not significantly differ from the values in non-binding sites.
+\item \textbf{$H_{1}$} - There is a significant difference of feature values in binding sites and non-binding sites.
+\end{itemize}
 
-
-
-Hypothesis testing is a method of statistical inference. Its goal is to infer properties of a \textit{statistical population}, i.e. a set of similar items or events. In this work, two populations will be compared: we take values of a property for all the amino acids across all the proteins in the dataset and then compare the ones in binding sites and outside of binding sites.
-
-A dataset usually contains a subset sampled from a larger population, rather than the whole population. This subset is called a \textit{statistical sample}. It should represent the population well and be unbiased.
-
-A \textit{hypothesis} makes a statement about an unknown population parameter. In a hypothesis testing problem, an experimenter states two complementary hypotheses: the \textit{null hypothesis} and the \textit{alternative hypothesis}, denoted by $H_{0}$ and $H_{1}$, respectively. The null hypothesis comprises a subset of possible parameters and the alternative hypothesis comprises the supplement, so that all the possible parameters are covered.
-
-In a hypothesis testing problem, an experimenter should come to one of the conclusions: to either accept $H_{0}$, or to reject $H_{0}$ and accept $H_{1}$.
-
-To decide which one of two complementary hypotheses is true, an experimenter employes a suitable \textit{hypothesis test}. A hypothesis test is a rule that specifies for which sample values the $H_{0}$ is accepted as true and for which sample values it is rejected, and therefore $H_{1}$ is accepted as true. A hypothesis test is usually specified in terms of a test statistic (i.e. a function of the sample) \cite{casella}.
+To decide which one of two complementary hypotheses is true, we employ a suitable \textit{hypothesis test}. A hypothesis test is a rule that specifies for which sample values the $H_{0}$ is accepted as true and for which sample values it is rejected, and therefore $H_{1}$ is accepted as true \cite{casella}. Welch's test and Chi-squared test of indepence, both described below in more detail, will be used according to the feature type (binary, categorical or continuous). 
 
 As one may expect, the tests are not error-proof and a mistake can be made in the decision of whether to accept or reject the null hypothesis. There are two types of errors in hypothesis testing, commonly known as \textit{Type I error} and \textit{Type II error}. The test has made a Type I error if it incorrectly rejects a true null hypothesis. If, on the other hand, a null hypothesis is accepted and it is not true, a Type II error has been made. Both situations are depicted in the Table~\ref{tab:hypothesis_testing_errors}. The ideal test would have both error probabilities equal to zero. Nevertheless, in most cases it is not possible to make both error probabilities arbitrarily small for a fixed sample size \cite{casella}.
 
@@ -183,16 +227,16 @@ As one may expect, the tests are not error-proof and a mistake can be made in th
 \caption{Type I and II Error in hypothesis testing.}\label{tab:hypothesis_testing_errors}
 \end{table}
 
-To control statistical significance of the result, a study defines a threshold called \textit{significance level}, a constant denoted by $\alpha$. It represents the probability  of making a Type I error, in other words, the probability that the study rejects the null hypothesis when it is true.
+To control statistical significance of the result, we define a \textit{significance level}, a constant denoted by $\alpha$. It represents the probability  of making a Type I error, in other words, the probability that the study rejects the null hypothesis when it is true. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}. One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the accuracy and completeness of the data and most importantly, the true effect size \cite{sham_purcell}. Our choice will be $\alpha =$ 0.05.
 
-One way to report the result of the test would be simply to tell whether the null hypothesis was accepted or rejected at the given significance level. However, most researchers choose to report a certain kind of test statistic (function of a sample $X$), the so-called \textit{p-value}.
-Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. Hence, we are able to determine the smallest significance level at which the hypothesis would be accepted/rejected. P-value gives an idea of how strongly the data contradict the null hypothesis; furthermore, it allows other researchers to make a decision according to the significance level of their choice \cite{sham_purcell, casella, lehmann}.
+Most researchers choose to report the so-called \textit{P value}. TODO co znamena
 
-It is suggested that the significance level for a study is set prior to any data collection \cite{neynman_pearson}. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}. One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the accuracy and completeness of the data and most importantly, the true effect size \cite{sham_purcell}.
-
-Let's suppose an experimenter has a research hypothesis that he or she hopes to prove, but does not want to risk accepting it without convincing data support. In this case, the test should be set up in such a way that the research hypothesis corresponds to the alternative hypothesis, not the null hypothesis. By specifying a small significance level $\alpha$, the experimenter thus controls the probability of the Type I error. In other words, the probability of accepting the research hypothesis when in is not true would be $\alpha$ at most \cite{casella}.
+Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. Hence, we are able to determine the smallest significance level at which the hypothesis would be accepted/rejected. P value gives an idea of how strongly the data contradict the null hypothesis; furthermore, it allows other researchers to make a decision according to the significance level of their choice \cite{sham_purcell, casella, lehmann}.
 
 
+TODO pipeline
+
+TODO implementace testu v Pythonu
 
 \subsection{Welch's test}
 

@@ -13,6 +13,12 @@ Database file #1: bibliography.bib
 Warning--I didn't find a database entry for "biopython"
 Warning--I didn't find a database entry for "numpy"
 Warning--I didn't find a database entry for "maplotlib"
+Warning--I didn't find a database entry for "pdbe_restapi"
+Warning--I didn't find a database entry for "lbscomposition"
+Warning--I didn't find a database entry for "sasa"
+Warning--I didn't find a database entry for "shrake"
+Warning--I didn't find a database entry for "sasaCutoff"
+Warning--I didn't find a database entry for "jones"
 Warning--I didn't find a database entry for "uniprot"
 Warning--I didn't find a database entry for "proteins_api"
 Warning--I didn't find a database entry for "TODO"
@@ -35,6 +41,14 @@ Warning--I didn't find a database entry for "dynamine"
 Warning--I didn't find a database entry for "efoldmine"
 Warning--I didn't find a database entry for "depth"
 Warning--I didn't find a database entry for "bfactor"
+Warning--I didn't find a database entry for "cn"
+Warning--I didn't find a database entry for "hse"
+Warning--I didn't find a database entry for "ramachandran"
+Warning--I didn't find a database entry for "cispeptide"
+Warning--I didn't find a database entry for "kyte"
+Warning--I didn't find a database entry for "mobidb"
+Warning--I didn't find a database entry for "mobidbApi"
+Warning--I didn't find a database entry for "conservation"
 Warning--I didn't find a database entry for "mann"
 Warning--I didn't find a database entry for "bartlett"
 Warning--I didn't find a database entry for "brown"
@@ -53,7 +67,6 @@ Warning--I didn't find a database entry for "cons"
 Warning--I didn't find a database entry for "casp"
 Warning--I didn't find a database entry for "prankweb"
 Warning--I didn't find a database entry for "pocketpicker"
-Warning--I didn't find a database entry for "lbscomposition"
 Warning--to sort, need author, editor, or key in 
 Warning--empty author and editor in 
 Warning--empty title in 
@@ -63,47 +76,45 @@ Warning--empty year in
 Warning--empty year in 
 Warning--empty year in levene
 Warning--empty year in levene
-Warning--can't use both volume and number fields in neynman_pearson
-Warning--empty publisher in neynman_pearson
-You've used 16 entries,
+You've used 15 entries,
             2773 wiz_defined-function locations,
-            765 strings with 8346 characters,
-and the built_in function-call counts, 6657 in all, are:
-= -- 614
-> -- 260
-< -- 17
-+ -- 92
-- -- 76
-* -- 533
-:= -- 1004
-add.period$ -- 60
-call.type$ -- 16
-change.case$ -- 68
-chr.to.int$ -- 16
-cite$ -- 44
-duplicate$ -- 337
-empty$ -- 617
-format.name$ -- 105
-if$ -- 1400
+            773 strings with 8242 characters,
+and the built_in function-call counts, 6283 in all, are:
+= -- 586
+> -- 239
+< -- 15
++ -- 85
+- -- 70
+* -- 502
+:= -- 947
+add.period$ -- 57
+call.type$ -- 15
+change.case$ -- 64
+chr.to.int$ -- 15
+cite$ -- 40
+duplicate$ -- 317
+empty$ -- 585
+format.name$ -- 96
+if$ -- 1324
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 20
-newline$ -- 99
-num.names$ -- 62
-pop$ -- 156
+missing$ -- 18
+newline$ -- 94
+num.names$ -- 58
+pop$ -- 144
 preamble$ -- 1
-purify$ -- 57
+purify$ -- 53
 quote$ -- 0
-skip$ -- 226
+skip$ -- 210
 stack$ -- 0
-substring$ -- 277
-swap$ -- 34
-text.length$ -- 3
+substring$ -- 275
+swap$ -- 31
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 151
-warning$ -- 11
-while$ -- 67
+type$ -- 145
+warning$ -- 9
+while$ -- 64
 width$ -- 0
-write$ -- 232
-(There were 55 warnings)
+write$ -- 220
+(There were 66 warnings)

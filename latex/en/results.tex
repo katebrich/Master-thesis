@@ -13,7 +13,7 @@ The resulting datasets were named identically with the original datasets:
 
 \begin{itemize}
   \item \textbf{Chen11}
-  - a smaller non-redundant dataset that was originally designed for a comparative study of ligand binding sites predictors \cite{benchmark}. It comprises at most one representative chain for every SCOP family \cite{scop} to ensure the minimal sequence similarity and maximal variability in tertiary structure. The original dataset covers 6 structural classes, 148 protein folds, 184 superfamilies and 251 families \cite{benchmark}; after re-downloading and filtering, the numbers are slightly smaller.
+  - a smaller non-redundant dataset that was originally designed for a comparative study of ligand binding sites predictors \cite{benchmark}. It comprises at most one representative chain for every SCOP family \cite{scop} to ensure the minimal sequence similarity and maximal variability in tertiary structure. The original dataset covers 6 structural classes, 148 protein folds, 184 superfamilies and 251 families \cite{benchmark}; after re-downloading and filtering, the numbers are slightly smaller. Although this dataset is rather small, it covers wide range of non-homologous proteins. Therefore, it serves as good training dataset (P2Rank default model was trained on this dataset as well).
   
   \item \textbf{Coach420}
   - a dataset that was originally taken from a benchmark study \cite{cofactor} and used in other studies \cite{coach, p2rank1}. The non-redundant dataset harbor mix of natural and drug-like ligand molecules.
@@ -32,6 +32,8 @@ TODO single chain
 \subsection{Ligands filtering}
 
 \section{Statistical analysis}
+
+TODO vymenit grafy za ty nove, hezci, lepci!
 
 The statistical analysis of ligand binding sites properties was computed using the analysis pipeline described in TODO section 3 with default parameters. The results were collected for all the datasets, including the versions with filtered ligands. Let's set the significance level, denoted by $\alpha$, to 0.05.
 
@@ -149,6 +151,8 @@ Another noticeable thing about Table~\ref{tab:pvaluesAll} is that the results fo
 For the mentioned reasons, a different approach was implemented. Dataset `mix' was created by merging all four datasets together, removing a few duplicates. Random sampling without replacement was applied on this dataset, in each iteration taking a sample of 500 binding and 500 non-binding sites. 1000 iterations were computed and mean P-values were reported. The results are shown in Table~\ref{tab:pvalues500}. Note that the mean P-value cannot be understood in the original meaning of P-value. Nevertheless, the numbers provide relative comparison of the features.
 
 The sample size of 500 was chosen for two reasons: firstly,  validity of the Central Limit Theorem needs to be assured, as described in section TODO. Lumley \textit{et al.} \cite{lumley} demonstrated that 500 is a sufficiently large sample even for extremely non-normal data. And secondly, the minimum sample size assuring the Central Limit Theorem validity should be chosen, to avoid the P-value problem. Smaller sample size would probably be sufficient for the Central Limit Theorem, as 500 is a very safe estimation. Nevertheless, the sample size could not be much smaller anyhow, since the data for some categorial features would be very sparse. Even with the sample size of 500, some features needed to be excluded from the analysis, as there was not sufficient number of positives in this smaller sample. TODO vyjmenovat je
+
+TODO taky vyhoda, ze nebudou zavislosti mezi rezidui
 
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
@@ -369,8 +373,10 @@ In another experiment, all P2Rank features were switched off and the models were
 \textbf{phi\_angle}           & 8.7   & 16.3      \\
 \textbf{hydropathy}           & 10.7  & 16        \\
 \textbf{mol\_weight}          & 8.4   & 15.7      \\
+\textbf{random\_cont (test)}         & 8.2   & 14.1      \\
 \textbf{efoldmine}            & 7.2   & 13.5      \\
 \textbf{strand}               & 6.3   & 10.9      \\
+\textbf{random\_binary (test)}       & 7     & 10.7      \\
 \textbf{psi\_angle}           & 5.8   & 9.8       \\
 \textbf{bfactor}              & 4.2   & 6.1       \\
 \textbf{helix}                & 3.9   & 6         \\

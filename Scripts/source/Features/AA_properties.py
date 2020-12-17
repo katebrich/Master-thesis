@@ -136,52 +136,6 @@ H_bond_atoms = {
     'Y': 2   #tyrosine
 }
 
-random_prop = {
-    'A': 54,   #alanine
-    'C': 73,   #cysteine
-    'D': 84,  #aspartic acid
-    'E': 72,  #glumatic acid
-    'F': 71,   #phenylalanine
-    'G': 75,  #glycine
-    'H': 41,  #histidine
-    'I': 56,   #isoleucine
-    'K': 46,  #lysine
-    'L': 67,   #leucine
-    'M': 76,   #methionine
-    'N': 92,  #asparagine
-    'P': 86,  #proline
-    'Q': 63,  #glutamine
-    'R': 21,  #arginine
-    'S': 19,  #serine
-    'T': 49,  #threonine
-    'V': 53,   #valine
-    'W': 22,  #tryptophan
-    'Y': 59   #tyrosine
-}
-
-aa_ratio = {
-    'A': 0.0676,   #alanine
-    'C': 0.2606,   #cysteine
-    'D': 0.0673,  #aspartic acid
-    'E': 0.0500,  #glumatic acid
-    'F': 0.1398,   #phenylalanine
-    'G': 0.1295,  #glycine
-    'H': 0.1573,  #histidine
-    'I': 0.0987,   #isoleucine
-    'K': 0.0529,  #lysine
-    'L': 0.0813,   #leucine
-    'M': 0.1140,   #methionine
-    'N': 0.0801,  #asparagine
-    'P': 0.0413,  #proline
-    'Q': 0.0511,  #glutamine
-    'R': 0.1029,  #arginine
-    'S': 0.0951,  #serine
-    'T': 0.0813,  #threonine
-    'V': 0.0873,   #valine
-    'W': 0.1933,  #tryptophan
-    'Y': 0.1386   #tyrosine
-}
-
 def get_AA_scores(scores_dict, fasta):
     result = []
     for i in range(1, len(fasta) + 1):

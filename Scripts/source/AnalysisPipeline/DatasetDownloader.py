@@ -36,7 +36,7 @@ class DatasetDownloader():
         if not os.path.exists(self.output_FASTA):
             os.makedirs(self.output_FASTA)
 
-        dataset = parse_dataset_not_split_chains(self.dataset_file)  # todo co kdyz neni spravny format
+        dataset = parse_dataset_not_split_chains(self.dataset_file)
 
         start = time.time()
         logger.info(f"Downloading structures to {self.output_dir} started...")
@@ -50,7 +50,7 @@ class DatasetDownloader():
         total_errors = [ent for sublist in errors for ent in sublist]
 
         if (len(total_errors) == 0):
-            logger.info(f"Downloading structures finished in {math.ceil(time.time() - start)}s. All structures downloaded successfully.")  #todo cas rovnou sem
+            logger.info(f"Downloading structures finished in {math.ceil(time.time() - start)}s. All structures downloaded successfully.")
         else:
             errors_format = '\n'.join('%s %s' % x for x in total_errors)
             logger.warning(
@@ -61,7 +61,7 @@ class DatasetDownloader():
         response = restAPI_get(url)
         with open(temp_file, 'wb') as file:
             file.write(response)
-        parser = PDBParser(PERMISSIVE=0, QUIET=1)  # todo
+        parser = PDBParser(PERMISSIVE=0, QUIET=1)
         structure = parser.get_structure(pdb_id, temp_file)
         chains_list = chain_ids.split(',')
         for chain_id in chains_list:

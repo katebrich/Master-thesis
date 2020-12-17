@@ -36,12 +36,7 @@
 - filtrovani - MOAD, P2Rank
 - analyza datasetu, pocty ligandu atd., pomer binding/nonbinding,...
 
-5) Features 7/2
-- popisy jednotlivych vlastnosti, odkud je ziskavam, jestli jsou manualne urcene nebo predikovane atd.
-- typy vlastností (binární, spojité,...)
-- UniProt, PDBe-KB, PDBe
-
-6) Vysledky a diskuze 15/3
+6) Vysledky a diskuze 15/1
 - pridani debugovacich featur
 - co vsechno se pocitalo a jak (zminit metacentrum, na kterych datasetech co, parametry p2ranku,...)
 - tabulka P values pro vsechny datasety s vyuzitim celeho vzorku
@@ -51,16 +46,23 @@
 - oduvodneni zvoleneho vzorku 500
 - analyza pro vzorek 500 a dataset mix_filter_p2rank
 - prumerna p value pro mix (vsechny filtry)
+- analyza slozeni aminokyselin v binding sites
 - practical significance
 	- uspesnost baseline modelu, argumenty (pocet stromu atd.), porovnat s default modelem P2Ranku
 	- pridani featur do P2Ranku, vysvetlit, proc to krome konzervovanosti nezlepsilo uspesnost
-	- natrenovani P2Ranku pouze s myma featurama, porovnani uspesnosti, featury serazene podle feature importances z random forests
+	- natrenovani P2Ranku pouze s myma featurama, porovnani uspesnosti
 	- natrenovani P2Ranku vzdy s jednou featurou, porovnani uspesnosti
 	- zamysleni se, proc feature lbs nema uspesnost 100%
-- analyza slozeni aminokyselin v binding sites
+	- featury serazene podle feature importances z random forests
+	- bfactor + neco?
+	- vysvetleni, proc bfactor a dynamine jinak nez se cekalo
+	- evaluacni metrika
 
 7) zaver 1/1
 - jake featury vysly dobre
-- ze konzervovanost hodne dobra, ale v pdbekb chybi data pro nejake struktury
+- ze konzervovanost hodne dobra, ale v pdbekb chybi data pro nejake struktury, srovnat s pipeline konzervovanosti
 - vysledkem je pipelina, ktera toho spoustu umi
 - hypothesis testing se na tohle zas tak moc nehodi, asi spis lepsi rovnou vyzkouset v klasifikatoru
+- o kolik jsem dosahla zlepseni P2Rank modelu
+- jake featury byly nabohacene v binding sites podle testu
+- o P value problemu s large samples

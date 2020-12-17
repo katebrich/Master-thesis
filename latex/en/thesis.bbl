@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -56,12 +56,6 @@ Cyrus~R. Mehta and Nitin~R. Patel.
 \newblock \emph{Journal of the American Statistical Association}, 78\penalty0
   (382):\penalty0 427, jun 1983.
 \newblock \doi{10.2307/2288652}.
-
-\bibitem[Neyman and Pearson(1933)]{neynman_pearson}
-Jerzy Neyman and Egon~S Pearson.
-\newblock \emph{The testing of statistical hypotheses in relation to
-  probabilities a priori}, volume~29.
-\newblock 1933.
 
 \bibitem[Ruxton(2006)]{ruxton}
 Graeme~D. Ruxton.

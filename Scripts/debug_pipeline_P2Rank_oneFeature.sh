@@ -9,33 +9,13 @@ PYTHON="python3"
 #            PARSE ARGUMENTS             #
 ##########################################
 
-OPTIND=1 # Reset in case getopts has been used previously in the shell.
-
 # Initialize variables:
 loops=10
 threads=4
 
-while getopts "t:e:f:l:m:" opt; do
-	case "$opt" in
-	t)
-		dataset_train_file=$OPTARG
-		;;
-	e)
-		dataset_eval_file=$OPTARG
-		;;
-	f)
-		features_list=$OPTARG
-		;;
-	l)
-		loops=$OPTARG
-		;;
-	m)
-		threads=$OPTARG
-		;;
-	esac
-done
-shift $((OPTIND - 1))
-[ "${1:-}" = "--" ] && shift
+dataset_train_file=/home/katebrich/Documents/diplomka/GitHub/data/datasets/chen11.txt
+dataset_eval_file=/home/katebrich/Documents/diplomka/GitHub/data/datasets/coach420.txt
+features_list=random_binary,random_cont
 
 ##########################################
 #            PREPARE DATA                #
@@ -54,15 +34,6 @@ dataset_eval_name="${filename%.*}"
 data_train_dir="${P2RANK_PATH}/datasets/${dataset_train_name}"
 data_eval_dir="${P2RANK_PATH}/datasets/${dataset_eval_name}"
 
-#run pipeline, get data and analysis
-TASKS="A"
-echo "Running analysis_pipeline.py for dataset $dataset_train_name"
-${PYTHON} ${PYTHON_SCRIPTS_PATH}/analysis_pipeline.py -d $dataset_train_file -o $data_train_dir -t $TASKS -m $threads -f $features_list -s 0 -i 1 -b 0    #download data and run analysis with all rows, 1 iteration
-${PYTHON} ${PYTHON_SCRIPTS_PATH}/analysis_pipeline.py -d $dataset_train_file -o $data_train_dir -t $TASKS -m $threads -f $features_list -s 500 -i 10 -b 1 #run analysis again with sample size 500, 10 iterations
-echo "Running analysis_pipeline.py for dataset $dataset_eval_name"
-${PYTHON} ${PYTHON_SCRIPTS_PATH}/analysis_pipeline.py -d $dataset_eval_file -o $data_eval_dir -t $TASKS -m $threads -f $features_list -s 0 -i 1 -b 0    #download data and run analysis with all rows, 1 iteration
-${PYTHON} ${PYTHON_SCRIPTS_PATH}/analysis_pipeline.py -d $dataset_eval_file -o $data_eval_dir -t $TASKS -m $threads -f $features_list -s 500 -i 10 -b 1 #run analysis again with sample size 500, 10 iterations
-
 #create dataset files for P2Rank
 echo "Creating P2Rank dataset file for dataset $dataset_train_name"
 ${PYTHON} ${PYTHON_SCRIPTS_PATH}/create_p2rank_ds.py -p ${data_train_dir}/PDB -o ${P2RANK_PATH}/datasets/${dataset_train_name}.ds -d $dataset_train_file
@@ -75,16 +46,16 @@ IFS=','
 #create input files for P2Rank Custom feature
 for feature in $features_list; do
 	echo "Feature $feature: Creating P2Rank custom feature files for $dataset_train_name"
-	${PYTHON} ${PYTHON_SCRIPTS_PATH}/create_p2rank_custom_feature_files.py -d $dataset_train_file -i $data_train_dir -o $data_train_dir/P2Rank/$feature -t $threads -f $feature
+	${PYTHON} ${PYTHON_SCRIPTS_PATH}/create_p2rank_custom_feature_files.py -d $dataset_train_file -i $data_train_dir -o $data_train_dir/P2Rank/$feature -t $threads -f $feature -c ./python/config_all.json
 	echo "Feature $feature: Creating P2Rank custom feature files for $dataset_eval_name"
-	${PYTHON} ${PYTHON_SCRIPTS_PATH}/create_p2rank_custom_feature_files.py -d $dataset_eval_file -i $data_eval_dir -o $data_eval_dir/P2Rank/$feature -t $threads -f $feature
+	${PYTHON} ${PYTHON_SCRIPTS_PATH}/create_p2rank_custom_feature_files.py -d $dataset_eval_file -i $data_eval_dir -o $data_eval_dir/P2Rank/$feature -t $threads -f $feature -c ./python/config_all.json
 done
 
 #############################################
 #   P2RANK MODEL TRAINING AND EVALUATION    #
 #############################################
 
-EXTRA_FEATURES='(chem,volsite,protrusion,bfactor,csv)'
+EXTRA_FEATURES='(csv)'
 
 DATESET_P2RANK_TRAIN=${P2RANK_PATH}/datasets/${dataset_train_name}.ds
 DATASET_P2RANK_EVAL=${P2RANK_PATH}/datasets/${dataset_eval_name}.ds
@@ -109,7 +80,7 @@ for feature in ${features_list}; do
 		-rf_features 6 -rf_trees 100 -rf_depth 0 \
 		-threads ${threads} -delete_models 0 -loop ${loops} -seed 42 \
 		-classifier FastRandomForest -feature_importances 1 \
-		-features ${EXTRA_FEATURES} \
+		-features ${EXTRA_FEATURES} -atom_table_features '()' \
 		-feat_csv_directories ",${CUSTOM_FEATURE_DIR}," \
 		-feat_csv_columns "($feature)" \
 		-feat_csv_ignore_missing 1

@@ -1,5 +1,5 @@
 # Pipeline for statistical analysis of ligand binding sites properties
-This folder contains scripts for analysis of ligand binding sites properties (called features). The pipeline is able to download PDB and FASTA files from PDBe, label binding residues based on the ligands in the PDB file, compute values of defined features, perform **statistical analysis to find out whether these features are interesting for the recognition of binding sites**, and draw various histograms and plots. Furthermore, the extended pipeline can use obtained PDB files and features to train a new model in [P2Rank](http://siret.ms.mff.cuni.cz/p2rank) predictor of binding sites to see if the new features improve the prediction.
+This folder contains implementation of pipeline for analysis of ligand binding sites annotations (hereinafter called features). The pipeline is able to download PDB and FASTA files from PDBe, label binding residues based on the ligands in the PDB file, compute values of defined features, perform **statistical analysis to find out whether these features are interesting for the recognition of binding sites**, and draw various histograms and plots. Furthermore, the extended pipeline can use obtained PDB files and features to train a new model in [P2Rank](http://siret.ms.mff.cuni.cz/p2rank) predictor of binding sites to see if the new features improve the prediction.
 
 Users can define a feature of their own by implementing a method for its computation.
 
@@ -22,9 +22,11 @@ Below, you can learn how to:
   * some modules from the Python Standard Library (e.g. logging, random, multiprocessing, collections etc.)
 * P2Rank 2.2 or later (only for part 3 of the tutorial)
 
+TODO requirements.txt, virtual environment
+
 <a name="one"></a>
 ## 1. Downloading data and running analysis
-This can be done using python script [`analysis_pipeline.py`](python/analysis_pipeline.py).
+The pipeline can be run with the main script [`analysis_pipeline.py`](./Scripts/source/analysis_pipeline.py) that defines the user API.
 
 ### Input - Dataset file
 We need to specify the **list of structures in the dataset file**. It is a plain-text file where one row equals one structure. The columns are separated by whitespace. The first two columns are mandatory and they contain PDB ID and chain ID (pipeline can only work with single-chain structures). The third column is optional and it can define a list of specific ligands which will be used for ligand binding sites computation.
@@ -44,7 +46,7 @@ Example:
     1loj	B	URI
     1ja1	A	FAD,NAP,FMN
     ```
-Several datasets can be found [here](../datasets)
+Several dataset files can be found [here](./data/datasets)
 
 ### Output
 All output files are located in an **output root folder** which was specified by argument `-o` or `--output_dir`. 
@@ -135,26 +137,36 @@ Options:
 ```
 
 ### Examples
+We will show the usage on a short test dataset [test.txt](./data/datasets/test.txt) of 10 proteins. You can replace it with any [pre-defined dataset
+](../data/datasets/) or with your own file. 
+
+First, go to the folder with your installation (the folder containing subfolders Scripts and data):
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir
+cd your_installation_location
+```
+
+Then run the pipeline:
+
+```
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output
 ```
 This is the **basic usage**. It downloads all the structures, computes binding sites, all features defined in config, and analysis of those features. By default, the analysis is computed for all the data rows. The random sampling can be done by **specifying the sample size and number of iterations**:
 
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir -s 500 -i 10
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output -s 500 -i 10
 ```
 In the example above, in each iteration, 500 rows will be randomly sampled from the whole dataset. If we want to **take the same number of binding and nonbinding rows**, we need to set the balance_binding_ratio to true. In the following example, the analysis will be computed with 500 binding rows AND 500 nonbinding rows.
 
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir -s 500 -i 10 -b true
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output -s 500 -i 10 -b true
 ```
 In all the examples above, the analysis was computed for all the features in the config file. It is possible to **specify a subset of features**:
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir -f hydropathy,aromaticity
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output -f hydropathy,aromaticity
 ```
 We could need to **compute only some parts of the pipeline**, for example ligand bingind sites. This can be done by specifying particular task. The pipeline computes only data needed for this task. The following command downloads data, computes mappings and ligand binding sites, but does not compute any feature values or analysis, because these computations are not needed for the main task ('L' - ligand binding sites):
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir -t L
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output -t L
 ```
 
 ### Notes
@@ -173,22 +185,22 @@ python3 analysis_pipeline.py -d dataset_file -o output_dir -t L
 ## 2. Defining new features
 User can define a custom feature and implement a method for getting the values.
 **Two steps** need to be made:
-- add feature to the **[config file]**(python/config.json)
+- add feature to the **[config file]**(Scripts/source/config.json)
   - **import_path**: path to the implementation. The class is loaded dynamically according to the feature name.
   - **type**: binary, categorical, ordinal or continuous. Hypothesis test is chosen according to the type (Welch's test for continuous and Chi-squared test for the rest). Plots can also differ according to the type.
   - **default**: optional. It is needed when creating feature files for P2Rank (described in section [four](#four)). It specifies the default value for rows where the value is missing.
-- **implement** class with method `get_values(self, data_dir, pdb_id, chain_id)`. It can be located anywhere (the path to the class is provided in the config); however, there is a prepared script [`Custom.py`](python/Features/Custom.py) for this purpose, with an example implementation.
+- **implement** class with method `get_values(self, data_dir, pdb_id, chain_id)`. It can be located anywhere (the path to the class is provided in the config); however, there is a prepared script [`Custom.py`](Scripts/source/Features/Custom.py) for this purpose, with an example implementation.
 
 If you don't want to add the custom feature to the existing ones, you can create a new config file and pass it as argument:
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir -c new_config_path
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output -c **new_config_path**
 ```
 
 <a name="three"></a>
 ## 2. Running analysis on custom data
 By specifying a task, we tell the program what is the desired output. The program **automatically decides what else is needed to compute for this task**. For example, if the task is 'L' (ligand binding sites computation), the program checks the existence of folders 'PDB' and 'mappings' (see the [folder structure](#folders) above). If they don't exist, the tasks 'D' (download) and 'M' (mappings) are automatically processed before binding sites computation.
 
-Thus, if you already have some data already donwloaded/computed, you can **run the pipeline with them by putting them into the correct folders**.
+Thus, if you already have some data already downloaded/computed, you can **run the pipeline with them by putting them into the correct folders**.
 Note that the folders hierarchy and naming, as well as naming of the files (pbdID+chainID.txt/.pdb/.fasta) and correct formatting of the files **must be kept the same** as if it were obtained from the pipeline!
 
 The **dependencies** of the tasks are following:
@@ -204,9 +216,9 @@ We need to create a directory 'features' with subdirectory 'XXX' and put the fil
 We do the same thing for ligand binding sites values - create a directory 'lbs' and put there files for all the structure.
 Then, we run this command:
 ```
-python3 analysis_pipeline.py -d dataset_file -o output_dir -t A
+python3 Scripts/source/analysis_pipeline.py -d data/datasets/test.txt -o output -t A
 ```
-where output_dir is the directory which contains subdirectories 'features' and 'lbs'. The program **should recognize that these folders already exist** and it should compute the analysis only. 
+where 'output' is the directory which contains subdirectories 'features' and 'lbs' with files in correct format. The program **should recognize that these folders already exist** and it should compute the analysis only.
 
 <a name="four"></a>
 ## 3. Training a P2Rank model
@@ -215,13 +227,13 @@ where output_dir is the directory which contains subdirectories 'features' and '
 
 In this folder, you will find **two scripts that further extend the analysis pipeline** and allow you to automatically train P2Rank models with obtained data. The scripts first run the pipeline - download the data, compute ligand binding sites, features and analysis, as in previous sections. In addition, dataset files are converted to the format accepted by P2Rank, the .csv files with custom features are created using previously computed feature values, and **P2Rank model is trained and evaluated on given datasets with custom features**.
 
-It is possible either to train one model with **all given features at once** (`pipeline_P2Rank_allFeatures`) or to train **one model per feature** (`pipeline_P2Rank_oneFeature.sh`). We will show the latter in the example; however, the usage is exactly the same for the both scripts.
+It is possible either to train one model with **all given features at once** ([`pipeline_P2Rank_allFeatures.sh`](Scripts/pipeline_P2Rank_allFeatures.sh)) or to train **one model per feature** ([`pipeline_P2Rank_oneFeature.sh`](Scripts/pipeline_P2Rank_oneFeature.sh). We will show the latter in the example; however, the usage is exactly the same for the both scripts.
 
 **NOTE! Before usage, you need to change the `P2RANK_PATH` variable in the scripts according to your P2Rank installation directory!**
 
 
 ```
-bash pipeline_P2Rank_oneFeature.sh -t ../datasets/chen11.txt -e ../datasets/coach420.txt -f pdbekb_conservation,depth -l 1 -m 4
+bash Scripts/pipeline_P2Rank_oneFeature.sh -t data/datasets/chen11.txt -e data/datasets/coach420.txt -f pdbekb_conservation,depth -l 1 -m 4
 ```
 
 In this example, the whole analysis pipeline is calculated for the both datasets. The P2Rank model is trained and evaluated using `traineval` command (see P2Rank tutorial) twice - for feature pdbekb_conservation and depth separately.
