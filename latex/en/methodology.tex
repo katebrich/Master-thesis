@@ -5,17 +5,17 @@ One of the main aims of the thesis was to develop a pipeline for statistical ana
 
 The pipeline is able to do all steps needed for the task, from downloading the structures from PDB, to computing the statistical significance of individual features. Moreover, there are two scripts that further extend the analysis pipeline and can be used to train and evaluate P2Rank models with new features. The only needed input is a dataset file with listed proteins.
 
-The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or Matplotlib \cite{maplotlib}. BioPython is an open-source collection of Python tools for computational biology and it was very useful for this work. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{ https://github.com/katebrich/Master-thesis/tree/dev/Scripts} TODO for more details about requirements, options, input, output, and examples of usage.
+The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or Matplotlib \cite{maplotlib}. BioPython is an open-source collection of Python tools for computational biology and it was very useful in this work, especially for parsing PDB and FASTA files. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{https://github.com/katebrich/LBS_analysis_pipeline} for more details about options, examples of usage, setup, requirements, input and output.
 
 The structure of the pipeline is depicted in Diagram~\ref{fig:diagram}. The details about individual parts are described in this chapter.
+
+The information about versions of used software and databases can be found in Appendix TODO. 
 
 \begin{figure}[!htbp]\centering
 \includegraphics[width=120mm]{../img/pipelineDiagram.pdf}
 \caption{Diagram of the pipeline structure.}
 \label{fig:diagram}
 \end{figure}
-
-TODO verze pouzitych programu a databazi? Kam to dat?
 
 \section{Dataset file}
 Dataset file is a mandatory input for the pipeline. It is a plain-text file with each row representing one structure. The columns are separated by whitespace. The first two columns are mandatory and they contain PDB ID and chain ID (pipeline can only work with single-chain structures). The third column is optional and it can define a comma-separated list of ligands which will be used for ligand binding sites computation.
@@ -25,8 +25,16 @@ Dataset file is a mandatory input for the pipeline. It is a plain-text file with
 For each structure, FASTA and PDB files are downloaded from PDBe, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries.
 
 \section{Residue mappings}
-TODO
-- zminit chybu s mapovanim segmentu, insertion codes, proc nesly SIFTS
+
+Cross-referencing the protein structure with the primary sequence annotations, UniProt records and data from other resources would be very problematic without residue-level mappings.
+
+The residues in the PDB files are assigned identifiers by the author, in order to match the identification used in the publication. The identifier of the residue is composed of two parts. The first one is a residue number, and the second one, called `insertion code', is usually a character. It is empty for most residues; it is usually used when there are insertions relative to the reference sequence. This numbering is used only in the PDB file and does not have to correspond with the primary sequence residues numbering. The author can assign the numbers how he or she desires; they do not have to start with one or zero, do not have to be in consecutive order and can even be negative. Furthermore, the PDB structure can cover only the part of the full-length sequence; it can even be split in parts, having some residues skipped.
+
+For those reasons, the residue-level mappings are downloaded from PDBe REST API \cite{pdbe_restapi} at the beginning, they are cached in files and can be used whenever some values need to be mapped on the structure described in PDB.
+
+For the cross-referencing between protein structures and protein sequences in UniProtKB \cite{uniprot}, we used UniProt segments mapping implemented in PDBe REST API. Mappings are assigned by the SIFTS \cite{sifts}, resource for the transfer of annotations between protein structure and sequence. The difference from the standard SIFTS  is that it uses the UniProt sequence as reference and thus, the output is a set of segments that reflects discontinuities in the UniProt sequence.
+
+There is a presumable issue with UniProt segments - sometimes the returned segment does not have the same length in UniProt coordinates and PDB coordinates. It was reported and recognized as a bug, but unfortunately has not been corrected before running the experiments in this work; however, it is very rare and it concerns only a few structures; those were removed from the datasets. 
 
 \section{Ligand binding sites labelling}
 
@@ -207,7 +215,7 @@ The \textit{null hypothesis} and the \textit{alternative hypothesis}, denoted by
 \item \textbf{$H_{1}$} - There is a significant difference of feature values in binding sites and non-binding sites.
 \end{itemize}
 
-To decide which one of two complementary hypotheses is true, we employ a suitable \textit{hypothesis test}. A hypothesis test is a rule that specifies for which sample values the $H_{0}$ is accepted as true and for which sample values it is rejected, and therefore $H_{1}$ is accepted as true \cite{casella}. Welch's test and Chi-squared test of indepence, both described below in more detail, will be used according to the feature type (binary, categorical or continuous). 
+To decide which one of two complementary hypotheses is true, we employ a suitable \textit{hypothesis test}. Welch's test and Chi-squared test of indepence, both described below in more detail, will be used according to the feature type (binary, categorical or continuous). 
 
 As one may expect, the tests are not error-proof and a mistake can be made in the decision of whether to accept or reject the null hypothesis. There are two types of errors in hypothesis testing, commonly known as \textit{Type I error} and \textit{Type II error}. The test has made a Type I error if it incorrectly rejects a true null hypothesis. If, on the other hand, a null hypothesis is accepted and it is not true, a Type II error has been made. Both situations are depicted in the Table~\ref{tab:hypothesis_testing_errors}. The ideal test would have both error probabilities equal to zero. Nevertheless, in most cases it is not possible to make both error probabilities arbitrarily small for a fixed sample size \cite{casella}.
 
@@ -229,14 +237,29 @@ As one may expect, the tests are not error-proof and a mistake can be made in th
 
 To control statistical significance of the result, we define a \textit{significance level}, a constant denoted by $\alpha$. It represents the probability  of making a Type I error, in other words, the probability that the study rejects the null hypothesis when it is true. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}. One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the accuracy and completeness of the data and most importantly, the true effect size \cite{sham_purcell}. Our choice will be $\alpha =$ 0.05.
 
-Most researchers choose to report the so-called \textit{P value}. TODO co znamena
+The \textit{P value} is reported as a result of the statistical test. The P value is the probability that, under the assumption the null hypothesis is true, we observe the same or greater difference between groups. Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. P value gives an idea of how strongly the data contradict the null hypothesis; furthermore, it allows other researchers to make a decision according to the significance level of their choice \cite{pvalue, sham_purcell, lehmann}.
 
-Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. Hence, we are able to determine the smallest significance level at which the hypothesis would be accepted/rejected. P value gives an idea of how strongly the data contradict the null hypothesis; furthermore, it allows other researchers to make a decision according to the significance level of their choice \cite{sham_purcell, casella, lehmann}.
+\subsection{Implementation}
 
+The following subsections rationalize the choice of Welch's and chi-squared test. The imlementation of these tests in module \texttt{scipy.stats} from the SciPy Python library \cite{scipy} was used in the pipeline; namely \texttt{ttest\_ind} with \texttt{equal\_var=False} to perform Welch's test, and \texttt{chi2\_contingency} for chi-squared test of independence.
 
-TODO pipeline
+By default, the pipeline computes the analysis for all the residues across all proteins in dataset. Neverthless, random sampling (without repetition) can be performed by specifying the sample size with argument \texttt{-s}. It is also possible to run more iterations of random sampling (argument \texttt{-i}). In this case, mean P values will be reported in summary. Individual P values from all iterations will be reported in separate files for each feature. Another possibility is to balance the number of binding and non-binding sites with argument \texttt{-b}. Same number of binding and non-binding residues will be sampled in that case.
 
-TODO implementace testu v Pythonu
+The significance level is 0.05 by default and can be changed with \texttt{-a} argument.
+
+The output of the whole analysis pipeline are folders with results for each feature, as well as several summary files:
+
+\begin{itemize}
+\item \textbf{p\_values\_means.csv} - Averaged P values obtained from all iterations.
+\item \textbf{p\_values.csv} - List of P values from all iterations for all features. P values for individual features are also included in the results folder for each feature.
+\item \textbf{p\_vals\_perc.csv} - Summary of how many percent of iterations had P value below given significance level $\alpha$ for each feature.
+\item \textbf{means\_difference.csv} - Summary only for continuous features. Lists the differences of means and variances in both populations (all binding vs. all non-binding).
+\item \textbf{binding\_ratios.csv} - binding/non-binding sites ratios for all iterations and all features.
+\item \textbf{errors.txt} - Lists features that ended up with an error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test). Detailed information about the errors can be found in the log file.
+\end{itemize}
+
+The results folder for each feature contain file \texttt{pairs.txt} with paired ligand binding sites values and feature values, detailed information about all iterations, and various histograms and plots (according to the type of feature). 
+
 
 \subsection{Welch's test}
 
@@ -287,12 +310,16 @@ Chi-squared test if independence is able to decide whether the difference betwee
 $\dfrac{row\: total\times column\:total}{grand\:total}$.
 It can be imagined as the average frequencies we would get in the long run with the same marginal totals, assuming the null hypothesis is true (i.e. there is no association between groups). The result of the test tells how likely are we to observe given data under the assumption of the true null hypothesis \cite{bland}.
 
-The biggest difference between the two mentioned tests is that the chi-squared test is based on a aproximation approach; therefore, it needs a `large enough' sample. W. G. Cochran (1954) \cite{cochran} proposed a set of recommendations about the minimum expectations to be used in $\chi^{2}$ tests and about the choice between Fisher's test and $\chi^{2}$ test:
+The biggest difference between the two mentioned tests is that the chi-squared test is based on a aproximation approach; therefore, it needs a `large enough' sample. W. G. Cochran (1952, 1954) proposed a set of recommendations about the minimum expectations to be used in $\chi^{2}$ tests and about the choice between Fisher's test and $\chi^{2}$ test:
 
+\begin{itemize}
+\item \textbf{The 2 x 2 table} - Fisher's exact test should be used whenever the sample size is smaller than 20, or when the sample size is smaller than 40 and if the expected frequency in at least one cell is less than 5. For sample sizes bigger than 40, always use chi-squared test \cite{cochran1952, cochran}.
+\item \textbf{More than 1 degree of freedom} - Chi-squared test can be used when at most 20\% of cells have the expected frequency less than 5 and no cell have the expected frequencies less than 1 \cite{cochran1954}.
+\end{itemize}
 
-These recommendations are presented in several textbooks and articles as a rule of thumb \cite{} and recommended to be used in practice.
+ These recommendations are presented in several textbooks and articles as a rule of thumb \cite{cochranRule} and recommended to be used in practice.
 
-As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some samples can be sparse, Chi-squared test is presumably better choice for both binary and categorical features.
+As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some features can be sparse, chi-squared test is presumably better choice for both binary and categorical features.
 
 
 \section{P2Rank models training and evaluation}

@@ -10,111 +10,84 @@ A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "biopython"
 Warning--I didn't find a database entry for "numpy"
 Warning--I didn't find a database entry for "maplotlib"
-Warning--I didn't find a database entry for "pdbe_restapi"
-Warning--I didn't find a database entry for "lbscomposition"
-Warning--I didn't find a database entry for "sasa"
-Warning--I didn't find a database entry for "shrake"
-Warning--I didn't find a database entry for "sasaCutoff"
-Warning--I didn't find a database entry for "jones"
-Warning--I didn't find a database entry for "uniprot"
-Warning--I didn't find a database entry for "proteins_api"
+Warning--I didn't find a database entry for "sifts"
 Warning--I didn't find a database entry for "TODO"
-Warning--I didn't find a database entry for "mod_res"
-Warning--I didn't find a database entry for "disulfid"
-Warning--I didn't find a database entry for "non_std"
-Warning--I didn't find a database entry for "dssp"
-Warning--I didn't find a database entry for "sec_str"
-Warning--I didn't find a database entry for "natural_variant"
 Warning--I didn't find a database entry for "1000genomes"
 Warning--I didn't find a database entry for "cosmic"
 Warning--I didn't find a database entry for "clinvar"
 Warning--I didn't find a database entry for "exac"
 Warning--I didn't find a database entry for "https://www.uniprot.org/help/compbias"
-Warning--I didn't find a database entry for "pdbekb"
-Warning--I didn't find a database entry for "3dpatch"
-Warning--I didn't find a database entry for "bio2byte"
-Warning--I didn't find a database entry for "bmrb"
-Warning--I didn't find a database entry for "dynamine"
-Warning--I didn't find a database entry for "efoldmine"
-Warning--I didn't find a database entry for "depth"
-Warning--I didn't find a database entry for "bfactor"
 Warning--I didn't find a database entry for "cn"
-Warning--I didn't find a database entry for "hse"
-Warning--I didn't find a database entry for "ramachandran"
-Warning--I didn't find a database entry for "cispeptide"
-Warning--I didn't find a database entry for "kyte"
-Warning--I didn't find a database entry for "mobidb"
-Warning--I didn't find a database entry for "mobidbApi"
-Warning--I didn't find a database entry for "conservation"
+Warning--I didn't find a database entry for "scipy"
 Warning--I didn't find a database entry for "mann"
 Warning--I didn't find a database entry for "bartlett"
 Warning--I didn't find a database entry for "brown"
-Warning--I didn't find a database entry for "cochran"
-Warning--I didn't find a database entry for "p2rank1"
-Warning--I didn't find a database entry for "benchmark"
-Warning--I didn't find a database entry for "scop"
-Warning--I didn't find a database entry for "cofactor"
-Warning--I didn't find a database entry for "coach"
-Warning--I didn't find a database entry for "dt"
-Warning--I didn't find a database entry for "astex"
-Warning--I didn't find a database entry for "ligsite"
-Warning--I didn't find a database entry for "holo4k"
-Warning--I didn't find a database entry for "pvalueproblem"
-Warning--I didn't find a database entry for "cons"
-Warning--I didn't find a database entry for "casp"
-Warning--I didn't find a database entry for "prankweb"
+Warning--I didn't find a database entry for "cochran1954"
+Warning--I didn't find a database entry for "cochranRule"
 Warning--I didn't find a database entry for "pocketpicker"
-Warning--to sort, need author, editor, or key in 
-Warning--empty author and editor in 
-Warning--empty title in 
-Warning--empty chapter and pages in 
-Warning--empty publisher in 
-Warning--empty year in 
-Warning--empty year in 
+Warning--to sort, need author or key in pdbe_restapi
+Warning--to sort, need author or key in sasa
+Warning--to sort, need author or key in mod_res
+Warning--to sort, need author or key in disulfid
+Warning--to sort, need author or key in non_std
+Warning--to sort, need author or key in sec_str
+Warning--to sort, need author or key in natural_variant
+Warning--to sort, need author or key in bio2byte
+Warning--to sort, need author or key in mobidbApi
+Warning--to sort, need author or key in conservation
+Warning--empty year in bio2byte
+Warning--empty year in conservation
+Warning--empty year in disulfid
+Warning--empty year in mobidbApi
+Warning--empty year in mod_res
+Warning--empty year in natural_variant
+Warning--empty year in non_std
+Warning--empty year in pdbe_restapi
+Warning--empty year in sasa
+Warning--empty year in sec_str
 Warning--empty year in levene
 Warning--empty year in levene
-You've used 15 entries,
+You've used 60 entries,
             2773 wiz_defined-function locations,
-            773 strings with 8242 characters,
-and the built_in function-call counts, 6283 in all, are:
-= -- 586
-> -- 239
-< -- 15
-+ -- 85
-- -- 70
-* -- 502
-:= -- 947
-add.period$ -- 57
-call.type$ -- 15
-change.case$ -- 64
-chr.to.int$ -- 15
-cite$ -- 40
-duplicate$ -- 317
-empty$ -- 585
-format.name$ -- 96
-if$ -- 1324
+            1027 strings with 16502 characters,
+and the built_in function-call counts, 28914 in all, are:
+= -- 2731
+> -- 1595
+< -- 29
++ -- 550
+- -- 490
+* -- 2539
+:= -- 4382
+add.period$ -- 257
+call.type$ -- 60
+change.case$ -- 336
+chr.to.int$ -- 60
+cite$ -- 152
+duplicate$ -- 1186
+empty$ -- 2322
+format.name$ -- 568
+if$ -- 6035
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 18
-newline$ -- 94
-num.names$ -- 58
-pop$ -- 144
+missing$ -- 53
+newline$ -- 384
+num.names$ -- 202
+pop$ -- 646
 preamble$ -- 1
-purify$ -- 53
+purify$ -- 283
 quote$ -- 0
-skip$ -- 210
+skip$ -- 871
 stack$ -- 0
-substring$ -- 275
-swap$ -- 31
+substring$ -- 1246
+swap$ -- 110
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 145
-warning$ -- 9
-while$ -- 64
+type$ -- 645
+warning$ -- 22
+while$ -- 237
 width$ -- 0
-write$ -- 220
-(There were 66 warnings)
+write$ -- 918
+(There were 39 warnings)

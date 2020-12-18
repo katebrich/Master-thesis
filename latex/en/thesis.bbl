@@ -1,12 +1,62 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{60}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[()]{}
+\bibitem[bio()]{bio2byte}
+Bio2byte group.
+\newblock URL \url{https://bio2byte.be/info/}.
+\newblock Accessed: 20.11.2020.
 
+\bibitem[con()]{conservation}
+Sequence conservation pipeline.
+\newblock URL \url{https://github.com/cusbg/sequence-conservation}.
+\newblock Accessed: 5.12.2020.
+
+\bibitem[dis()]{disulfid}
+URL \url{https://www.uniprot.org/help/disulfid}.
+\newblock Accessed: 15.11.2020.
+
+\bibitem[mob()]{mobidbApi}
+Mobidb api documentation.
+\newblock URL \url{https://mobidb.bio.unipd.it/help/apidoc}.
+\newblock Accessed: 2.12.2020.
+
+\bibitem[mod()]{mod_res}
+Todo.
+\newblock URL \url{https://www.uniprot.org/help/mod_res}.
+\newblock Accessed: 15.11.2020.
+
+\bibitem[nat()]{natural_variant}
+URL \url{https://www.uniprot.org/help/variant}.
+
+\bibitem[non()]{non_std}
+URL \url{https://www.uniprot.org/help/non_std}.
+\newblock Accessed: 15.11.2020.
+
+\bibitem[pdb()]{pdbe_restapi}
+Pdbe rest api.
+\newblock URL \url{https://www.ebi.ac.uk/pdbe/pdbe-rest-api}.
+\newblock Accessed: 5.11.2020.
+
+\bibitem[sas()]{sasa}
+Biopython api documentation.
+\newblock URL \url{https://biopython.org/docs/dev/api/Bio.PDB.SASA.html}.
+\newblock Accessed: 10.11.2020.
+
+\bibitem[sec()]{sec_str}
+URL \url{https://www.uniprot.org/docs/userman.htm}.
+\newblock Accessed: 15.12.2020.
+
+\bibitem[Andrade(2019)]{pvalue}
+Chittaranjan Andrade.
+\newblock The p value and statistical significance: Misunderstandings,
+  explanations, challenges, and alternatives.
+\newblock \emph{Indian Journal of Psychological Medicine}, 41\penalty0
+  (3):\penalty0 210--215, may 2019.
+\newblock \doi{10.4103/ijpsym.ijpsym_193_19}.
 
 \bibitem[Bland(1987)]{bland}
 Martin Bland.
@@ -18,6 +68,74 @@ Martin Bland.
 George Casella and Roger~L Berger.
 \newblock \emph{Statistical inference}, volume~2.
 \newblock Duxbury Pacific Grove, CA, 2002.
+
+\bibitem[Chen et~al.(2011)Chen, Mizianty, Gao, and Kurgan]{benchmark}
+Ke~Chen, Marcin~J. Mizianty, Jianzhao Gao, and Lukasz Kurgan.
+\newblock A critical comparative assessment of predictions of protein-binding
+  sites for biologically relevant organic compounds.
+\newblock \emph{Structure (London, England : 1993)}, 19:\penalty0 613--621, May
+  2011.
+\newblock ISSN 1878-4186.
+\newblock \doi{10.1016/j.str.2011.02.015}.
+
+\bibitem[Cilia et~al.(2013)Cilia, Pancsa, Tompa, Lenaerts, and
+  Vranken]{dynamine}
+Elisa Cilia, Rita Pancsa, Peter Tompa, Tom Lenaerts, and Wim~F. Vranken.
+\newblock From protein sequence to dynamics and disorder with dynamine.
+\newblock \emph{Nature communications}, 4:\penalty0 2741, 2013.
+\newblock ISSN 2041-1723.
+\newblock \doi{10.1038/ncomms3741}.
+
+\bibitem[Cochran(1952)]{cochran1952}
+William~G. Cochran.
+\newblock The {\textdollar}{\textbackslash}chi{\^{}}2{\textdollar} test of
+  goodness of fit.
+\newblock \emph{The Annals of Mathematical Statistics}, 23\penalty0
+  (3):\penalty0 315--345, sep 1952.
+\newblock \doi{10.1214/aoms/1177729380}.
+
+\bibitem[Cochran(1954)]{cochran}
+William~G. Cochran.
+\newblock The combination of estimates from different experiments.
+\newblock \emph{Biometrics}, 10\penalty0 (1):\penalty0 101, mar 1954.
+\newblock \doi{10.2307/3001666}.
+
+\bibitem[Cock et~al.(2009)Cock, Antao, Chang, Chapman, Cox, Dalke, Friedberg,
+  Hamelryck, Kauff, Wilczynski, and de~Hoon]{biopython}
+Peter J.~A. Cock, Tiago Antao, Jeffrey~T. Chang, Brad~A. Chapman, Cymon~J. Cox,
+  Andrew Dalke, Iddo Friedberg, Thomas Hamelryck, Frank Kauff, Bartek
+  Wilczynski, and Michiel J.~L. de~Hoon.
+\newblock Biopython: freely available python tools for computational molecular
+  biology and bioinformatics.
+\newblock \emph{Bioinformatics (Oxford, England)}, 25:\penalty0 1422--1423,
+  June 2009.
+\newblock ISSN 1367-4811.
+\newblock \doi{10.1093/bioinformatics/btp163}.
+
+\bibitem[consortium(2020)]{pdbekb}
+PDBe-K.~B. consortium.
+\newblock Pdbe-kb: a community-driven resource for structural and functional
+  annotations.
+\newblock \emph{Nucleic acids research}, 48:\penalty0 D344--D353, January 2020.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gkz853}.
+
+\bibitem[Craveur et~al.(2013)Craveur, Joseph, Poulain, de~Brevern, and
+  Rebehmed]{cispeptide}
+Pierrick Craveur, Agnel~Praveen Joseph, Pierre Poulain, Alexandre~G.
+  de~Brevern, and Joseph Rebehmed.
+\newblock Cis-trans isomerization of omega dihedrals in proteins.
+\newblock \emph{Amino acids}, 45:\penalty0 279--289, August 2013.
+\newblock ISSN 1438-2199.
+\newblock \doi{10.1007/s00726-013-1511-3}.
+
+\bibitem[Dai et~al.(2011)Dai, Liu, Gao, Cao, and Zhu]{cons}
+Tianli Dai, Qi~Liu, Jun Gao, Zhiwei Cao, and Ruixin Zhu.
+\newblock A new protein-ligand binding sites prediction method based on the
+  integration of protein sequence conservation information.
+\newblock \emph{BMC bioinformatics}, 12 Suppl 14:\penalty0 S9, December 2011.
+\newblock ISSN 1471-2105.
+\newblock \doi{10.1186/1471-2105-12-S14-S9}.
 
 \bibitem[Derrick and White(2016)]{derrick}
 B.~Derrick and P.~White.
@@ -34,12 +152,104 @@ Joseph P.~Romano Erich L.~Lehmann.
 \newblock URL
   \url{https://www.ebook.de/de/product/3186913/erich_l_lehmann_joseph_p_romano_testing_statistical_hypotheses.html}.
 
+\bibitem[Hamelryck(2005)]{hse}
+Thomas Hamelryck.
+\newblock An amino acid has two sides: a new 2d measure provides a different
+  view of solvent exposure.
+\newblock \emph{Proteins}, 59:\penalty0 38--48, April 2005.
+\newblock ISSN 1097-0134.
+\newblock \doi{10.1002/prot.20379}.
+
+\bibitem[Hartshorn et~al.(2007)Hartshorn, Verdonk, Chessari, Brewerton, Mooij,
+  Mortenson, and Murray]{astex}
+Michael~J. Hartshorn, Marcel~L. Verdonk, Gianni Chessari, Suzanne~C. Brewerton,
+  Wijnand T.~M. Mooij, Paul~N. Mortenson, and Christopher~W. Murray.
+\newblock Diverse, high-quality test set for the validation of protein-ligand
+  docking performance.
+\newblock \emph{Journal of medicinal chemistry}, 50:\penalty0 726--741,
+  February 2007.
+\newblock ISSN 0022-2623.
+\newblock \doi{10.1021/jm061277y}.
+
+\bibitem[Huang and Schroeder(2006)]{ligsite}
+Bingding Huang and Michael Schroeder.
+\newblock Ligsitecsc: predicting ligand binding sites using the connolly
+  surface and degree of conservation.
+\newblock \emph{BMC structural biology}, 6:\penalty0 19, September 2006.
+\newblock ISSN 1472-6807.
+\newblock \doi{10.1186/1472-6807-6-19}.
+
+\bibitem[Jakubec et~al.(2019)Jakubec, Vondrášek, and Finn]{3dpatch}
+David Jakubec, Jirí Vondrášek, and Robert~D. Finn.
+\newblock 3dpatch: fast 3d structure visualization with residue conservation.
+\newblock \emph{Bioinformatics (Oxford, England)}, 35:\penalty0 332--334,
+  January 2019.
+\newblock ISSN 1367-4811.
+\newblock \doi{10.1093/bioinformatics/bty464}.
+
+\bibitem[Jendele et~al.(2019)Jendele, Krivak, Skoda, Novotny, and
+  Hoksza]{prankweb}
+Lukas Jendele, Radoslav Krivak, Petr Skoda, Marian Novotny, and David Hoksza.
+\newblock Prankweb: a web server for ligand binding site prediction and
+  visualization.
+\newblock \emph{Nucleic acids research}, 47:\penalty0 W345--W349, July 2019.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gkz424}.
+
+\bibitem[Jones and Thornton(1997)]{jones}
+S.~Jones and J.~M. Thornton.
+\newblock Analysis of protein-protein interaction sites using surface patches.
+\newblock \emph{Journal of molecular biology}, 272:\penalty0 121--132,
+  September 1997.
+\newblock ISSN 0022-2836.
+\newblock \doi{10.1006/jmbi.1997.1234}.
+
+\bibitem[Kabsch and Sander(1983)]{dssp}
+W.~Kabsch and C.~Sander.
+\newblock Dictionary of protein secondary structure: pattern recognition of
+  hydrogen-bonded and geometrical features.
+\newblock \emph{Biopolymers}, 22:\penalty0 2577--2637, December 1983.
+\newblock ISSN 0006-3525.
+\newblock \doi{10.1002/bip.360221211}.
+
+\bibitem[Khazanov and Carlson(2013)]{lbscomposition}
+Nickolay~A. Khazanov and Heather~A. Carlson.
+\newblock Exploring the composition of protein-ligand binding sites on a large
+  scale.
+\newblock \emph{PLoS computational biology}, 9:\penalty0 e1003321, 2013.
+\newblock ISSN 1553-7358.
+\newblock \doi{10.1371/journal.pcbi.1003321}.
+
+\bibitem[Krivák and Hoksza(2018)]{p2rank1}
+Radoslav Krivák and David Hoksza.
+\newblock P2rank: machine learning based tool for rapid and accurate prediction
+  of ligand binding sites from protein structure.
+\newblock \emph{Journal of cheminformatics}, 10:\penalty0 39, August 2018.
+\newblock ISSN 1758-2946.
+\newblock \doi{10.1186/s13321-018-0285-8}.
+
+\bibitem[Kyte and Doolittle(1982)]{kyte}
+J.~Kyte and R.~F. Doolittle.
+\newblock A simple method for displaying the hydropathic character of a
+  protein.
+\newblock \emph{Journal of molecular biology}, 157:\penalty0 105--132, May
+  1982.
+\newblock ISSN 0022-2836.
+\newblock \doi{10.1016/0022-2836(82)90515-0}.
+
 \bibitem[Levene()]{levene}
 Howard Levene.
 \newblock Robust tests for equality of variances.
 \newblock In Ingram Olkin, editor, \emph{Contributions to Probability and
   Statistics: Essays in Honor of Harold Hotelling}, pages 278--292. Stanford
   University Press.
+
+\bibitem[Lin et~al.(2013)Lin, Lucas, and Shmueli]{pvalueproblem}
+Mingfeng Lin, Henry~C. Lucas, and Galit Shmueli.
+\newblock Too big to fail: Large samples and thep-value problem.
+\newblock \emph{Information Systems Research}, 24\penalty0 (4):\penalty0
+  906--917, dec 2013.
+\newblock \doi{10.1287/isre.2013.0480}.
 
 \bibitem[Lumley et~al.(2002)Lumley, Diehr, Emerson, and Chen]{lumley}
 Thomas Lumley, Paula Diehr, Scott Emerson, and Lu~Chen.
@@ -57,6 +267,69 @@ Cyrus~R. Mehta and Nitin~R. Patel.
   (382):\penalty0 427, jun 1983.
 \newblock \doi{10.2307/2288652}.
 
+\bibitem[Miller et~al.(1987)Miller, Janin, Lesk, and Chothia]{sasaCutoff}
+S.~Miller, J.~Janin, A.~M. Lesk, and C.~Chothia.
+\newblock Interior and surface of monomeric proteins.
+\newblock \emph{Journal of molecular biology}, 196:\penalty0 641--656, August
+  1987.
+\newblock ISSN 0022-2836.
+\newblock \doi{10.1016/0022-2836(87)90038-6}.
+
+\bibitem[Murzin et~al.(1995)Murzin, Brenner, Hubbard, and Chothia]{scop}
+A.~G. Murzin, S.~E. Brenner, T.~Hubbard, and C.~Chothia.
+\newblock Scop: a structural classification of proteins database for the
+  investigation of sequences and structures.
+\newblock \emph{Journal of molecular biology}, 247:\penalty0 536--540, April
+  1995.
+\newblock ISSN 0022-2836.
+\newblock \doi{10.1006/jmbi.1995.0159}.
+
+\bibitem[Necci et~al.(2017)Necci, Piovesan, Dosztányi, and Tosatto]{mobidb}
+Marco Necci, Damiano Piovesan, Zsuzsanna Dosztányi, and Silvio C.~E. Tosatto.
+\newblock Mobidb-lite: fast and highly specific consensus prediction of
+  intrinsic disorder in proteins.
+\newblock \emph{Bioinformatics (Oxford, England)}, 33:\penalty0 1402--1404, May
+  2017.
+\newblock ISSN 1367-4811.
+\newblock \doi{10.1093/bioinformatics/btx015}.
+
+\bibitem[Nightingale et~al.(2017)Nightingale, Antunes, Alpi, Bursteinas,
+  Gonzales, Liu, Luo, Qi, Turner, and Martin]{proteins_api}
+Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
+  Leonardo Gonzales, Wudong Liu, Jie Luo, Guoying Qi, Edd Turner, and Maria
+  Martin.
+\newblock The proteins api: accessing key integrated protein and genome
+  information.
+\newblock \emph{Nucleic acids research}, 45:\penalty0 W539--W544, July 2017.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gkx237}.
+
+\bibitem[Raimondi et~al.(2017)Raimondi, Orlando, Pancsa, Khan, and
+  Vranken]{efoldmine}
+Daniele Raimondi, Gabriele Orlando, Rita Pancsa, Taushif Khan, and Wim~F.
+  Vranken.
+\newblock Exploring the sequence-based prediction of folding initiation sites
+  in proteins.
+\newblock \emph{Scientific reports}, 7:\penalty0 8826, August 2017.
+\newblock ISSN 2045-2322.
+\newblock \doi{10.1038/s41598-017-08366-3}.
+
+\bibitem[RAMACHANDRAN et~al.(1963)RAMACHANDRAN, RAMAKRISHNAN, and
+  SASISEKHARAN]{ramachandran}
+G.~N. RAMACHANDRAN, C.~RAMAKRISHNAN, and V.~SASISEKHARAN.
+\newblock Stereochemistry of polypeptide chain configurations.
+\newblock \emph{Journal of molecular biology}, 7:\penalty0 95--99, July 1963.
+\newblock ISSN 0022-2836.
+\newblock \doi{10.1016/s0022-2836(63)80023-6}.
+
+\bibitem[Roy et~al.(2012)Roy, Yang, and Zhang]{cofactor}
+Ambrish Roy, Jianyi Yang, and Yang Zhang.
+\newblock Cofactor: an accurate comparative algorithm for structure-based
+  protein function annotation.
+\newblock \emph{Nucleic acids research}, 40:\penalty0 W471--W477, July 2012.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gks372}.
+
 \bibitem[Ruxton(2006)]{ruxton}
 Graeme~D. Ruxton.
 \newblock The unequal variance t-test is an underused alternative to
@@ -64,6 +337,16 @@ Graeme~D. Ruxton.
 \newblock \emph{Behavioral Ecology}, 17\penalty0 (4):\penalty0 688--690, may
   2006.
 \newblock \doi{10.1093/beheco/ark016}.
+
+\bibitem[Schmidtke et~al.(2010)Schmidtke, Souaille, Estienne, Baurin, and
+  Kroemer]{holo4k}
+Peter Schmidtke, Catherine Souaille, Frédéric Estienne, Nicolas Baurin, and
+  Romano~T. Kroemer.
+\newblock Large-scale comparison of four binding site detection algorithms.
+\newblock \emph{Journal of chemical information and modeling}, 50:\penalty0
+  2191--2200, December 2010.
+\newblock ISSN 1549-960X.
+\newblock \doi{10.1021/ci1000289}.
 
 \bibitem[Sham and Purcell(2014)]{sham_purcell}
 Pak~C. Sham and Shaun~M. Purcell.
@@ -73,12 +356,82 @@ Pak~C. Sham and Shaun~M. Purcell.
   apr 2014.
 \newblock \doi{10.1038/nrg3706}.
 
+\bibitem[Shrake and Rupley(1973)]{shrake}
+A.~Shrake and J.~A. Rupley.
+\newblock Environment and exposure to solvent of protein atoms. lysozyme and
+  insulin.
+\newblock \emph{Journal of molecular biology}, 79:\penalty0 351--371, September
+  1973.
+\newblock ISSN 0022-2836.
+\newblock \doi{10.1016/0022-2836(73)90011-9}.
+
+\bibitem[Sun et~al.(2019)Sun, Liu, Qu, Feng, and Reetz]{bfactor}
+Zhoutong Sun, Qian Liu, Ge~Qu, Yan Feng, and Manfred~T. Reetz.
+\newblock Utility of b-factors in protein science: Interpreting rigidity,
+  flexibility, and internal motion and engineering thermostability.
+\newblock \emph{Chemical reviews}, 119:\penalty0 1626--1665, February 2019.
+\newblock ISSN 1520-6890.
+\newblock \doi{10.1021/acs.chemrev.8b00290}.
+
+\bibitem[Tan et~al.(2011)Tan, Varadarajan, and Madhusudhan]{depth}
+Kuan~Pern Tan, Raghavan Varadarajan, and M.~S. Madhusudhan.
+\newblock Depth: a web server to compute depth and predict small-molecule
+  binding cavities in proteins.
+\newblock \emph{Nucleic acids research}, 39:\penalty0 W242--W248, July 2011.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gkr356}.
+
+\bibitem[The UniProt Consortium(2017)]{uniprot}
+The UniProt Consortium.
+\newblock Uniprot: the universal protein knowledgebase.
+\newblock \emph{Nucleic acids research}, 45:\penalty0 D158--D169, January 2017.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gkw1099}.
+
+\bibitem[Ulrich et~al.(2008)Ulrich, Akutsu, Doreleijers, Harano, Ioannidis,
+  Lin, Livny, Mading, Maziuk, Miller, Nakatani, Schulte, Tolmie, Kent~Wenger,
+  Yao, and Markley]{bmrb}
+Eldon~L. Ulrich, Hideo Akutsu, Jurgen~F. Doreleijers, Yoko Harano, Yannis~E.
+  Ioannidis, Jundong Lin, Miron Livny, Steve Mading, Dimitri Maziuk, Zachary
+  Miller, Eiichi Nakatani, Christopher~F. Schulte, David~E. Tolmie,
+  R.~Kent~Wenger, Hongyang Yao, and John~L. Markley.
+\newblock Biomagresbank.
+\newblock \emph{Nucleic acids research}, 36:\penalty0 D402--D408, January 2008.
+\newblock ISSN 1362-4962.
+\newblock \doi{10.1093/nar/gkm957}.
+
+\bibitem[Wass and Sternberg(2009)]{casp}
+Mark~N. Wass and Michael J.~E. Sternberg.
+\newblock Prediction of ligand binding sites using homologous structures and
+  conservation at casp8.
+\newblock \emph{Proteins}, 77 Suppl 9:\penalty0 147--151, 2009.
+\newblock ISSN 1097-0134.
+\newblock \doi{10.1002/prot.22513}.
+
 \bibitem[WELCH(1947)]{welch}
 B.~L. WELCH.
 \newblock {THE} {GENERALIZATION} {OF} `{STUDENT}{\textquotesingle}s' {PROBLEM}
   {WHEN} {SEVERAL} {DIFFERENT} {POPULATION} {VARLANCES} {ARE} {INVOLVED}.
 \newblock \emph{Biometrika}, 34\penalty0 (1-2):\penalty0 28--35, 1947.
 \newblock \doi{10.1093/biomet/34.1-2.28}.
+
+\bibitem[Yang et~al.(2013)Yang, Roy, and Zhang]{coach}
+Jianyi Yang, Ambrish Roy, and Yang Zhang.
+\newblock Protein-ligand binding site recognition using complementary
+  binding-specific substructure comparison and sequence profile alignment.
+\newblock \emph{Bioinformatics (Oxford, England)}, 29:\penalty0 2588--2595,
+  October 2013.
+\newblock ISSN 1367-4811.
+\newblock \doi{10.1093/bioinformatics/btt447}.
+
+\bibitem[Zhang et~al.(2011)Zhang, Li, Lin, Schroeder, and Huang]{dt}
+Zengming Zhang, Yu~Li, Biaoyang Lin, Michael Schroeder, and Bingding Huang.
+\newblock Identification of cavities on protein surface using multiple
+  computational approaches for drug binding site prediction.
+\newblock \emph{Bioinformatics (Oxford, England)}, 27:\penalty0 2083--2088,
+  August 2011.
+\newblock ISSN 1367-4811.
+\newblock \doi{10.1093/bioinformatics/btr331}.
 
 \bibitem[Zimmerman(1998)]{zimmerman1998}
 Donald~W. Zimmerman.
