@@ -24,7 +24,7 @@ Below, you can learn how to:
 * Matplotlib
 * P2Rank 2.2 (only for part 3 of the tutorial)
 
-The Python packages can be installed all at once with the [requirement file] requirements.txt(https://note.nkmk.me/en/python-pip-install-requirements/):
+The Python packages can be installed all at once with the [requirement file](https://note.nkmk.me/en/python-pip-install-requirements/) requirements.txt:
 ```
 pip install -r requirements.txt
 ```
