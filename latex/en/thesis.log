@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  18 DEC 2020 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  19 DEC 2020 08:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -719,8 +719,7 @@ Chapter 3.
 Package natbib Warning: Citation `numpy' on page 4 undefined on input line 8.
 
 
-Package natbib Warning: Citation `maplotlib' on page 4 undefined on input line 
-8.
+Package natbib Warning: Citation `scipy' on page 4 undefined on input line 8.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
 8.
@@ -742,95 +741,95 @@ Package natbib Warning: Citation `sifts' on page 5 undefined on input line 35.
 
 [5]
 
-Package natbib Warning: Citation `TODO' on page 6 undefined on input line 69.
+Package natbib Warning: Citation `TODO' on page 6 undefined on input line 63.
 
 [6] [7]
-Overfull \hbox (4.95274pt too wide) in paragraph at lines 95--96
+Overfull \hbox (4.95274pt too wide) in paragraph at lines 89--90
 \OT1/lmr/m/n/12 This fea-ture in-cludes nat-u-rally oc-cur-ing poly-mor-phisms,
  vari-a-tions be-tween strains|
  []
 
 
 Package natbib Warning: Citation `1000genomes' on page 8 undefined on input lin
-e 98.
+e 92.
 
 
-Package natbib Warning: Citation `cosmic' on page 8 undefined on input line 98.
+Package natbib Warning: Citation `cosmic' on page 8 undefined on input line 92.
 
 
 
-Package natbib Warning: Citation `clinvar' on page 8 undefined on input line 98
+Package natbib Warning: Citation `clinvar' on page 8 undefined on input line 92
 .
 
 
-Package natbib Warning: Citation `exac' on page 8 undefined on input line 98.
+Package natbib Warning: Citation `exac' on page 8 undefined on input line 92.
 
 
 Package natbib Warning: Citation `https://www.uniprot.org/help/compbias' on pag
-e 8 undefined on input line 102.
+e 8 undefined on input line 96.
 
 [8] [9]
 
-Package natbib Warning: Citation `cn' on page 10 undefined on input line 146.
+Package natbib Warning: Citation `cn' on page 10 undefined on input line 140.
 
 
-LaTeX Warning: Reference `fig:angles' on page 10 undefined on input line 162.
+LaTeX Warning: Reference `fig:angles' on page 10 undefined on input line 156.
 
 [10]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-79.
+73.
  (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [11] [12]
 
-Package natbib Warning: Citation `scipy' on page 13 undefined on input line 250
+Package natbib Warning: Citation `scipy' on page 13 undefined on input line 244
 .
 
 [13]
 
-Package natbib Warning: Citation `mann' on page 14 undefined on input line 274.
+Package natbib Warning: Citation `mann' on page 14 undefined on input line 268.
 
 
 [14]
 
 Package natbib Warning: Citation `bartlett' on page 15 undefined on input line 
-281.
+275.
 
 
-Package natbib Warning: Citation `brown' on page 15 undefined on input line 281
+Package natbib Warning: Citation `brown' on page 15 undefined on input line 275
 .
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 287.
+(Font)              <14.4> on input line 281.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 287.
+(Font)              <10> on input line 281.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 287.
+(Font)              <7> on input line 281.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 287.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 287.
+(hyperref)                removing `math shift' on input line 281.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 287.
+(hyperref)                removing `superscript' on input line 281.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 281.
 
 [15]
-Overfull \hbox (45.42783pt too wide) in paragraph at lines 315--318
+Overfull \hbox (45.42783pt too wide) in paragraph at lines 309--312
 \OT1/lmr/m/n/12 nif-i-cant. The ex-pected fre-quen-cies are com-puted for ev-er
 y cell as $[]$.|
  []
 
 
 Package natbib Warning: Citation `cochran1954' on page 16 undefined on input li
-ne 323.
+ne 317.
 
 
 Package natbib Warning: Citation `cochranRule' on page 16 undefined on input li
-ne 326.
+ne 320.
 
 [16]) [17]
 \openout2 = `results.aux'.
@@ -1067,7 +1066,7 @@ r/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (43 pages, 671504 bytes).
+Output written on thesis.pdf (43 pages, 672230 bytes).
 PDF statistics:
  763 PDF objects out of 1000 (max. 8388607)
  643 compressed objects within 7 object streams

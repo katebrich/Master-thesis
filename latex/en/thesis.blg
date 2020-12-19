@@ -11,7 +11,7 @@ A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
 Database file #1: bibliography.bib
 Warning--I didn't find a database entry for "numpy"
-Warning--I didn't find a database entry for "maplotlib"
+Warning--I didn't find a database entry for "scipy"
 Warning--I didn't find a database entry for "sifts"
 Warning--I didn't find a database entry for "TODO"
 Warning--I didn't find a database entry for "1000genomes"
@@ -20,7 +20,6 @@ Warning--I didn't find a database entry for "clinvar"
 Warning--I didn't find a database entry for "exac"
 Warning--I didn't find a database entry for "https://www.uniprot.org/help/compbias"
 Warning--I didn't find a database entry for "cn"
-Warning--I didn't find a database entry for "scipy"
 Warning--I didn't find a database entry for "mann"
 Warning--I didn't find a database entry for "bartlett"
 Warning--I didn't find a database entry for "brown"
@@ -51,7 +50,7 @@ Warning--empty year in levene
 Warning--empty year in levene
 You've used 60 entries,
             2773 wiz_defined-function locations,
-            1027 strings with 16502 characters,
+            1026 strings with 16493 characters,
 and the built_in function-call counts, 28914 in all, are:
 = -- 2731
 > -- 1595
@@ -90,4 +89,4 @@ warning$ -- 22
 while$ -- 237
 width$ -- 0
 write$ -- 918
-(There were 39 warnings)
+(There were 38 warnings)

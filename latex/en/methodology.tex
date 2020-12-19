@@ -1,11 +1,11 @@
 
 \chapter{Methodology}
 
-One of the main aims of the thesis was to develop a pipeline for statistical analysis of available protein structure annotations (hereinafter referred to as features), and to prepare this pipeline for adding user-defined custom features.
+One of the main aims of the thesis was to develop a pipeline for statistical analysis of available protein structure annotations (hereinafter referred to as features), and to prepare this pipeline for adding user-defined features.
 
-The pipeline is able to do all steps needed for the task, from downloading the structures from PDB, to computing the statistical significance of individual features. Moreover, there are two scripts that further extend the analysis pipeline and can be used to train and evaluate P2Rank models with new features. The only needed input is a dataset file with listed proteins.
+The pipeline is able to do all steps needed for the task, from downloading the structures from PDB, to computing the statistical significance of individual features. Moreover, there are two scripts that further extend the pipeline and can be used to train and evaluate P2Rank models with new features. The only needed input is a dataset file with listed proteins.
 
-The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or Matplotlib \cite{maplotlib}. BioPython is an open-source collection of Python tools for computational biology and it was very useful in this work, especially for parsing PDB and FASTA files. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{https://github.com/katebrich/LBS_analysis_pipeline} for more details about options, examples of usage, setup, requirements, input and output.
+The pipeline is implemented in Python, making use of several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or SciPy \cite{scipy}. BioPython is an open-source collection of Python tools for computational biology and it was very useful in this work, especially for parsing PDB and FASTA files. The main script \texttt{analysis\_pipeline.py} defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{https://github.com/katebrich/LBS_analysis_pipeline} for more details about options, examples of usage, setup, requirements, input and output.
 
 The structure of the pipeline is depicted in Diagram~\ref{fig:diagram}. The details about individual parts are described in this chapter.
 
@@ -18,11 +18,11 @@ The information about versions of used software and databases can be found in Ap
 \end{figure}
 
 \section{Dataset file}
-Dataset file is a mandatory input for the pipeline. It is a plain-text file with each row representing one structure. The columns are separated by whitespace. The first two columns are mandatory and they contain PDB ID and chain ID (pipeline can only work with single-chain structures). The third column is optional and it can define a comma-separated list of ligands which will be used for ligand binding sites computation.
+Dataset file is a mandatory input for the pipeline. It is a plain-text file with each row representing one structure. The columns are separated by whitespace. The first two columns are mandatory and they contain PDB ID and chain ID (pipeline can only work with single-chain structures). The third column is optional and it can define a comma-separated list of ligands which will be used for the ligand binding sites computation.
 
 \section{Data download}
 
-For each structure, FASTA and PDB files are downloaded from PDBe, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries.
+For each structure, FASTA and PDB files are downloaded from PDBe, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries programatically.
 
 \section{Residue mappings}
 
@@ -193,7 +193,7 @@ The sequence conservation scores for this feature are computed through Conservat
 
 \subsection{User-defined features}
 
-There are two ways to run the statistical analysis with user-defined features. The first, more time-demanding way is to compute all needed results (i.e. feature values and ligand binding sites labels) outside of the pipeline, and then run only the analysis task (with argument \texttt{-tasks A}). The data supplied to the pipeline need to be in the correct format; more details about the usage and a few  examples are described in the README file in the GitHub repository (\url{ https://github.com/katebrich/Master-thesis/tree/dev/Scripts} TODO).
+There are two ways to run the statistical analysis with user-defined features. The first, more time-demanding way is to compute all needed results (i.e. feature values and ligand binding sites labels) outside of the pipeline, and then run only the analysis task (with argument \texttt{-tasks A}). The data supplied to the pipeline need to be in the correct format; more details about the usage and a few  examples are described in the README file in the GitHub repository of the project (\url{https://github.com/katebrich/LBS_analysis_pipeline}).
 
 Another, more straightforward possibility is to implement the new feature directly inside the pipeline. Two steps need to be made:
 
@@ -319,11 +319,13 @@ The biggest difference between the two mentioned tests is that the chi-squared t
 
  These recommendations are presented in several textbooks and articles as a rule of thumb \cite{cochranRule} and recommended to be used in practice.
 
-As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some features can be sparse, chi-squared test is presumably better choice for both binary and categorical features.
+As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some features can be sparse, chi-squared test should be better choice for both binary and categorical features.
 
 
 \section{P2Rank models training and evaluation}
 
+Two scripts further extend the analysis pipeline and can be used to train P2Rank models with obtained data. The scripts first run the whole pipeline - download the data, compute ligand binding sites, features and analysis, as in previous sections. In addition, dataset files are converted to the format accepted by P2Rank, the .csv files with custom features are created using previously computed feature values, and P2Rank model is trained and evaluated on given datasets with custom features.
 
+It is possible either to train one model with all given features at once with script \texttt{pipeline\_P2Rank\_allFeatures.sh}, or to train one model per feature with \texttt{pipeline\_P2Rank\_oneFeature.sh}
 
 
