@@ -9,12 +9,12 @@
 2) Predikce ligand binding sites 3/2
 - co existuje za programy
 - jakou maji uspesnost + jakym zpusobem se uspesnost vyhodnocuje
-- co maji za problemy
+- co maji za problemy - problemy s datasety - ze maji hodne false negatives, malo experimentalnich dat
 - P2RANK - metoda, uspesnost, metriky uspesnosti, custom features a jak se zadavaji
 	- random forests
-- problemy s datasety - ze maji hodne false negatives, malo experimentalnich dat
 
-3) Metody 15/3
+
+3) Metody 15/0
 - pouzite verze programu a databazi
 - pipeline + diagram
 	- stahovani z DB
@@ -31,18 +31,19 @@
 	+ python balíčky, které k tomu využívám
 	+ oduvodnit vybery tech testu, proc ne t-test a fischers test
 
-4) Datasety 2/1
+4) Datasety 2/0
 - popis tech puvodnich, popis zmen a proteinu, ktere jsem vyradila. Odstraneni duplikatu. Zminit, ze jsou vsechny singlechain
 - filtrovani - MOAD, P2Rank
 - analyza datasetu, pocty ligandu atd., pomer binding/nonbinding,...
 
-6) Vysledky a diskuze 15/1
+6) Vysledky a diskuze 15/5
 - pridani debugovacich featur
 - co vsechno se pocitalo a jak (zminit metacentrum, na kterych datasetech co, parametry p2ranku,...)
 - tabulka P values pro vsechny datasety s vyuzitim celeho vzorku
 - histogramy a grafy pro vybrane featury
 - problemy s velkymi vzorky a zmensujici se p value + obrazky, graf p value deflation
 - vytvoreni datasetu mix
+- ze byly kategorialni rozdeleny na vic featur
 - oduvodneni zvoleneho vzorku 500
 - analyza pro vzorek 500 a dataset mix_filter_p2rank
 - prumerna p value pro mix (vsechny filtry)
@@ -57,6 +58,15 @@
 	- bfactor + neco?
 	- vysvetleni, proc bfactor a dynamine jinak nez se cekalo
 	- evaluacni metrika
+- prakticka aplikace
+	- uz mame stahnute PDB a FASTA, vypocitanou konzervovanost
+	- stazeni INTAA conservation
+	- vypocitani konzervovanosti
+	- novy config
+	- implementace featury - parsovani predvypocitanych souboru
+	- vytvoreni slozky s PDB, FASTA a konzervovanostmi
+	- nove datasety, vyrazeni struktur pro ktere nemam nejakou z konzervovanosti
+	- bash scripts/pipeline_P2Rank_oneFeature.sh -t data/datasets/chen11_conservation.txt -e data/datasets/coach420_conservation.txt -c scripts/source/config_conservation.json -l 1 -m 4
 
 7) zaver 1/1
 - jake featury vysly dobre

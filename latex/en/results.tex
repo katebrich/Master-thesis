@@ -6,7 +6,7 @@
 
 The choice of datasets of protein-ligand complexes used for statistical analysis and P2Rank model training and evaluation was strongly inspired by the datasets described in the P2Rank article \cite{p2rank1}. The structures were re-downloaded directly from PDBe, according to their PDB ID (four-character alphanumeric identifier) and chain ID (one-character identifier) used in the original datasets. It was not possible to take the original datasets as they were, since the structures were not up-to-date and the annotations downloaded from the databases (e.g. feature values) could not be mapped properly.
 
-Downloaded datasets were further checked and filtered: Obsolete structures were replaced with their current entries, structures that do not have a corresponding UniProt record were removed, as well as  structures with the incorrect segments mapping due to the bug in PDBe (mentioned in section TODO-ODKAZ).
+Downloaded datasets were further checked and filtered: Obsolete structures were replaced with their current entries, structures that do not have a corresponding UniProt record were removed, as well as  structures with the incorrect segments mapping due to the bug in PDBe (mentioned in section TODO-ODKAZ). The pipeline can only work with single-chain structures, and the structures from Holo4k and a few structures from Joined were multi-chain; thus, only one chain was chosen from each such structure.
 
 
 The resulting datasets were named identically with the original datasets:
@@ -26,10 +26,49 @@ The resulting datasets were named identically with the original datasets:
 \end{itemize}
 
 
-
-TODO single chain
-
 \subsection{Ligands filtering}
+
+The downloaded PDB files contain more ligands per structure, and not all of them are of interest for drug design and other applications. These non-relevant ligands can be ions, peptides, small molecules such as solvents, buffers, detergents and salts that are merely artifacts, and other specific types of ligands.
+
+For each dataset, three variants were created by different filters of the relevant ligands:
+
+\begin{itemize}
+\item \textbf{No filter} - Only water molecules were filtered out.
+\item \textbf{P2Rank filter} - Relevant ligands were obtained according to the rules used by P2Rank software \cite{p2rank1}. These rules are:
+	\begin{itemize}
+	\item the ligand has at least 5 atoms
+	\item at least one atom of the ligand is in distance 4 {\AA} from any protein atom
+	\item the center of the mass of the ligand is not farther than 5.5 {\AA} from the closest protein atom
+	\item the name of ligand PDB group is not any of following: HOH, DOD, WAT, NAG, MAN, UNK, GLC, ABA, MPD, GOL, SO4, PO4
+	\end{itemize}
+\item \textbf{MOAD filter} - Biologically relevant ligands according to the Binding MOAD \cite{moad} database. It contains manually curated crystalography protein-ligand complexes with validated biologically relevant ligands. Only structures obtained by X-ray crystalography with resolution higher than 2.5 {\AA} have entry in Binding MOAD; other structures were removed from the datasets.
+\end{itemize}
+
+The structures without any remaining ligands after applying the P2Rank or MOAD filters were removed.
+
+The summary of datasets properties can be seen in Table~\ref{tab:datasets}. The more strict the filter is, the lower the Binding/Non-binding ratio; nevertheless, the information obtained from the relevant binding sites should be more valuable. As we can see, MOAD filter is more strict and filteres out more ligands than P2Rank filter.
+
+\begin{table}[]
+\footnotesize
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+Dataset                  & Proteins & Ligands & Lig./Pro. & Binding & Non-bind. & B/N ratio \\ \midrule
+chen11                   & 241      & 1039    & 4.3112        & 5670         & 49374            & 0.1148    \\
+chen11\_filter\_p2rank   & 223      & 401     & 1.7982        & 4590         & 47073            & 0.0975    \\
+chen11\_filter\_MOAD     & 178      & 266     & 1.4944        & 3032         & 39006            & 0.0777    \\
+coach420                 & 417      & 841     & 2.0168        & 5988         & 80575            & 0.0743    \\
+coach420\_filter\_p2rank & 369      & 427     & 1.1572        & 5247         & 71498            & 0.0734    \\
+coach420\_filter\_MOAD   & 258      & 291     & 1.1279        & 3688         & 48485            & 0.0761    \\
+joined                   & 527      & 1522    & 2.888         & 8260         & 108337           & 0.0762    \\
+joined\_filter\_p2rank   & 446      & 585     & 1.3117        & 6492         & 97158            & 0.0668    \\
+joined\_filter\_MOAD     & 348      & 417     & 1.1983        & 4614         & 72363            & 0.0638    \\
+holo4k                   & 3973     & 10391   & 2.6154        & 69866        & 790091           & 0.0884    \\
+holo4k\_filter\_p2rank   & 3842     & 5049    & 1.3142        & 62483        & 784885           & 0.0796    \\
+holo4k\_filter\_MOAD     & 3308     & 4023    & 1.2161        & 50834        & 679918           & 0.0748    \\ \bottomrule
+\end{tabular}
+\caption{Summary of dataset properties with and without ligands filtering. Chen11 dataset has the highest average number of ligands per protein, but when the ligands are filtered, the number is comparable to the other datasets. It indicates that Chen11 has the highest ratio of biologically irrelevant ligands.}
+\label{tab:datasets}
+\end{table}
 
 \section{Statistical analysis}
 
@@ -385,7 +424,8 @@ In another experiment, all P2Rank features were switched off and the models were
 \textbf{mobiDB}               & 2.4   & 4.7       \\
 \textbf{turn}                 & 0     & 0         \\ \hline
 \end{tabular}
-\caption{Sorted by sec col}
+\caption{Performance of models trained only on csv feature at a time (without the default P2Rank features). The features are sorted according to the performance in
+Top-(n+2) category.}
 \label{tab:p2rankCSVOne}
 \end{table}
 

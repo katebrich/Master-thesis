@@ -13,6 +13,7 @@ Database file #1: bibliography.bib
 Warning--I didn't find a database entry for "numpy"
 Warning--I didn't find a database entry for "scipy"
 Warning--I didn't find a database entry for "sifts"
+Warning--I didn't find a database entry for "uniprot_web"
 Warning--I didn't find a database entry for "TODO"
 Warning--I didn't find a database entry for "1000genomes"
 Warning--I didn't find a database entry for "cosmic"
@@ -25,6 +26,7 @@ Warning--I didn't find a database entry for "bartlett"
 Warning--I didn't find a database entry for "brown"
 Warning--I didn't find a database entry for "cochran1954"
 Warning--I didn't find a database entry for "cochranRule"
+Warning--I didn't find a database entry for "moad"
 Warning--I didn't find a database entry for "pocketpicker"
 Warning--to sort, need author or key in pdbe_restapi
 Warning--to sort, need author or key in sasa
@@ -50,7 +52,7 @@ Warning--empty year in levene
 Warning--empty year in levene
 You've used 60 entries,
             2773 wiz_defined-function locations,
-            1026 strings with 16493 characters,
+            1028 strings with 16508 characters,
 and the built_in function-call counts, 28914 in all, are:
 = -- 2731
 > -- 1595
@@ -89,4 +91,4 @@ warning$ -- 22
 while$ -- 237
 width$ -- 0
 write$ -- 918
-(There were 38 warnings)
+(There were 40 warnings)

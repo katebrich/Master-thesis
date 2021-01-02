@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  19 DEC 2020 08:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  2 JAN 2021 17:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -534,8 +534,11 @@ Package caption Info: listings package is loaded.
 \c@subfigure=\count286
 \c@subtable=\count287
 )
-Package hyperref Info: Option `unicode' set `true' on input line 119.
-Package hyperref Info: Option `breaklinks' set `true' on input line 120.
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+Package hyperref Info: Option `unicode' set `true' on input line 120.
+Package hyperref Info: Option `breaklinks' set `true' on input line 121.
 
 \@input{macros.aux}
 \openout2 = `macros.aux'.
@@ -553,26 +556,26 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 (./methodology.aux) (./results.aux) (./epilog.aux) (./bibliography.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 130.
-LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-30.
+31.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -601,7 +604,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring OFF on input line 130.
+Package hyperref Info: Link coloring OFF on input line 131.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -614,9 +617,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count297
 )
-LaTeX Info: Redefining \ref on input line 130.
-LaTeX Info: Redefining \pageref on input line 130.
-LaTeX Info: Redefining \nameref on input line 130.
+LaTeX Info: Redefining \ref on input line 131.
+LaTeX Info: Redefining \pageref on input line 131.
+LaTeX Info: Redefining \nameref on input line 131.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write5
@@ -676,7 +679,7 @@ Package pdftex.def Info: ../img/logo2.pdf  used on input line 25.
 
 
  <../img/logo2.pdf>]
-Package hyperref Info: Option `pageanchor' set `true' on input line 69.
+Package hyperref Info: Option `pageanchor' set `true' on input line 68.
  [1
 
 ] [2
@@ -685,20 +688,24 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 69.
 
 ] [4
 
-]) (./thesis.toc)
+]) (./thesis.toc [1
+
+
+
+])
 \tf@toc=\write6
 \openout6 = `thesis.toc'.
 
- [1
-
-
-
-]
+ [2]
 \openout2 = `introduction.aux'.
 
  (./introduction.tex
 Chapter 1.
-) [2
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+7.
+(/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)) [3
 
 
 ]
@@ -706,7 +713,7 @@ Chapter 1.
 
  (./lbs_predictors.tex
 Chapter 2.
-) [3
+) [4
 
 
 
@@ -715,175 +722,223 @@ Chapter 2.
 
  (./methodology.tex
 Chapter 3.
-
-Package natbib Warning: Citation `numpy' on page 4 undefined on input line 8.
-
-
-Package natbib Warning: Citation `scipy' on page 4 undefined on input line 8.
-
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-8.
-(/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-<../img/pipelineDiagram.pdf, id=230, 782.60612pt x 736.82486pt>
+<../img/pipelineDiagram.pdf, id=235, 782.60612pt x 736.82486pt>
 File: ../img/pipelineDiagram.pdf Graphic file (type pdf)
 <use ../img/pipelineDiagram.pdf>
-Package pdftex.def Info: ../img/pipelineDiagram.pdf  used on input line 15.
-(pdftex.def)             Requested size: 341.43306pt x 321.46063pt.
- [4
+Package pdftex.def Info: ../img/pipelineDiagram.pdf  used on input line 13.
+(pdftex.def)             Requested size: 398.33858pt x 375.03366pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Package natbib Warning: Citation `numpy' on page 5 undefined on input line 18.
+
+
+Package natbib Warning: Citation `scipy' on page 5 undefined on input line 18.
+
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
+20.
+(/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [5
 
 
 
- <../img/pipelineDiagram.pdf>]
+] [6 <../img/pipelineDiagram.pdf>]
 
-Package natbib Warning: Citation `sifts' on page 5 undefined on input line 35.
+Package natbib Warning: Citation `sifts' on page 7 undefined on input line 44.
 
-[5]
+[7]
+<../img/sasa.png, id=287, 926.46124pt x 836.12375pt>
+File: ../img/sasa.png Graphic file (type png)
+<use ../img/sasa.png>
+Package pdftex.def Info: ../img/sasa.png  used on input line 59.
+(pdftex.def)             Requested size: 284.52756pt x 256.78438pt.
 
-Package natbib Warning: Citation `TODO' on page 6 undefined on input line 63.
 
-[6] [7]
-Overfull \hbox (4.95274pt too wide) in paragraph at lines 89--90
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 74.
+
+[8] [9]
+
+Package natbib Warning: Citation `uniprot_web' on page 10 undefined on input li
+ne 121.
+
+
+Package natbib Warning: Citation `TODO' on page 10 undefined on input line 121.
+
+
+[10 <../img/sasa.png>] [11]
+Overfull \hbox (4.95274pt too wide) in paragraph at lines 147--148
 \OT1/lmr/m/n/12 This fea-ture in-cludes nat-u-rally oc-cur-ing poly-mor-phisms,
  vari-a-tions be-tween strains|
  []
 
 
-Package natbib Warning: Citation `1000genomes' on page 8 undefined on input lin
-e 92.
+Package natbib Warning: Citation `1000genomes' on page 12 undefined on input li
+ne 150.
 
 
-Package natbib Warning: Citation `cosmic' on page 8 undefined on input line 92.
+Package natbib Warning: Citation `cosmic' on page 12 undefined on input line 15
+0.
 
 
+Package natbib Warning: Citation `clinvar' on page 12 undefined on input line 1
+50.
 
-Package natbib Warning: Citation `clinvar' on page 8 undefined on input line 92
-.
 
+Package natbib Warning: Citation `exac' on page 12 undefined on input line 150.
 
-Package natbib Warning: Citation `exac' on page 8 undefined on input line 92.
 
 
 Package natbib Warning: Citation `https://www.uniprot.org/help/compbias' on pag
-e 8 undefined on input line 96.
+e 12 undefined on input line 154.
 
-[8] [9]
+[12] [13]
 
-Package natbib Warning: Citation `cn' on page 10 undefined on input line 140.
-
-
-LaTeX Warning: Reference `fig:angles' on page 10 undefined on input line 156.
-
-[10]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-73.
- (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [11] [12]
-
-Package natbib Warning: Citation `scipy' on page 13 undefined on input line 244
-.
-
-[13]
-
-Package natbib Warning: Citation `mann' on page 14 undefined on input line 268.
-
+Package natbib Warning: Citation `cn' on page 14 undefined on input line 198.
 
 [14]
+<../img/hse.png, id=380, 71.7882pt x 64.0794pt>
+File: ../img/hse.png Graphic file (type png)
+<use ../img/hse.png>
+Package pdftex.def Info: ../img/hse.png  used on input line 210.
+(pdftex.def)             Requested size: 227.62204pt x 203.19853pt.
+ [15 <../img/hse.png (PNG copy)>]
+<../img/torsion.png, id=396, 204.765pt x 76.1244pt>
+File: ../img/torsion.png Graphic file (type png)
+<use ../img/torsion.png>
+Package pdftex.def Info: ../img/torsion.png  used on input line 222.
+(pdftex.def)             Requested size: 341.43306pt x 126.94142pt.
 
-Package natbib Warning: Citation `bartlett' on page 15 undefined on input line 
-275.
-
-
-Package natbib Warning: Citation `brown' on page 15 undefined on input line 275
-.
-
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 281.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 281.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 281.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 281.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 281.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 281.
-
-[15]
-Overfull \hbox (45.42783pt too wide) in paragraph at lines 309--312
-\OT1/lmr/m/n/12 nif-i-cant. The ex-pected fre-quen-cies are com-puted for ev-er
-y cell as $[]$.|
+Underfull \hbox (badness 5050) in paragraph at lines 223--223
+[]\OT1/lmr/m/n/12 Figure 3.4: |Polypep-tide tor-sion an-gles phi, psi and omega
+. Re-
  []
 
 
-Package natbib Warning: Citation `cochran1954' on page 16 undefined on input li
-ne 317.
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
+\OT1/lmr/m/n/12 trieved 02-01-2020 from []$\OT1/lmtt/m/n/12 https : / / www . r
+esearchgate . net / figure /
+ []
 
 
-Package natbib Warning: Citation `cochranRule' on page 16 undefined on input li
-ne 320.
+Overfull \hbox (149.68532pt too wide) in paragraph at lines 223--223
+\OT1/lmtt/m/n/12 Backbone-[]torsion-[]angles-[]of-[]a-[]prototypical-[]amino-[]
+acid-[]building-[]block-[]embedded-[]in-[]a-[]peptide _|
+ []
 
-[16]) [17]
+[16 <../img/torsion.png>] [17] [18]
+
+Package natbib Warning: Citation `scipy' on page 19 undefined on input line 312
+.
+
+[19]
+
+Package natbib Warning: Citation `mann' on page 20 undefined on input line 336.
+
+
+[20]
+
+Package natbib Warning: Citation `bartlett' on page 21 undefined on input line 
+343.
+
+
+Package natbib Warning: Citation `brown' on page 21 undefined on input line 343
+.
+
+[21]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 349.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 349.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 349.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 349.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 349.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 349.
+
+[22]
+
+Package natbib Warning: Citation `cochran1954' on page 23 undefined on input li
+ne 390.
+
+
+Package natbib Warning: Citation `cochranRule' on page 23 undefined on input li
+ne 393.
+
+) [23] [24]
 \openout2 = `results.aux'.
 
  (./results.tex
 Chapter 4.
-[18
+[25
 
 
 
 ]
 
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 60.
+Package natbib Warning: Citation `moad' on page 26 undefined on input line 44.
 
-<../img/dynamine_hist.png, id=482, 462.528pt x 346.896pt>
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 51.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 53.
+[26] [27]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 99.
+
+<../img/dynamine_hist.png, id=546, 462.528pt x 346.896pt>
 File: ../img/dynamine_hist.png Graphic file (type png)
 <use ../img/dynamine_hist.png>
-Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 105.
+Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 144.
 (pdftex.def)             Requested size: 341.43306pt x 256.08499pt.
-[19] [20]
-<../img/pValue_deflation_dynamine.pdf, id=499, 462.52798pt x 346.89601pt>
+[28] [29]
+<../img/pValue_deflation_dynamine.pdf, id=562, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_dynamine.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_dynamine.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_dynamine.pdf  used on input li
-ne 121.
+ne 160.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
 File: ../img/dynamine_hist.png Graphic file (type png)
 <use ../img/dynamine_hist.png>
-Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 123.
+Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 162.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/pValue_deflation_phi_angle.pdf, id=500, 462.52798pt x 346.89601pt>
+<../img/pValue_deflation_phi_angle.pdf, id=563, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_phi_angle.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_phi_angle.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_phi_angle.pdf  used on input l
-ine 129.
+ine 168.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/phi_angle_hist.png, id=501, 462.528pt x 346.896pt>
+<../img/phi_angle_hist.png, id=564, 462.528pt x 346.896pt>
 File: ../img/phi_angle_hist.png Graphic file (type png)
 <use ../img/phi_angle_hist.png>
-Package pdftex.def Info: ../img/phi_angle_hist.png  used on input line 131.
+Package pdftex.def Info: ../img/phi_angle_hist.png  used on input line 170.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/pValue_deflation_exposure_CN.pdf, id=502, 462.52798pt x 346.89601pt>
+<../img/pValue_deflation_exposure_CN.pdf, id=565, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_exposure_CN.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_exposure_CN.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_exposure_CN.pdf  used on input
- line 137.
+ line 176.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/exposure_CN_hist.png, id=503, 462.528pt x 346.896pt>
+<../img/exposure_CN_hist.png, id=566, 462.528pt x 346.896pt>
 File: ../img/exposure_CN_hist.png Graphic file (type png)
 <use ../img/exposure_CN_hist.png>
-Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 139.
+Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 178.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
- [21 <../img/dynamine_hist.png>] [22 <../img/pValue_deflation_dynamine.pdf> <..
+ [30 <../img/dynamine_hist.png>] [31 <../img/pValue_deflation_dynamine.pdf> <..
 /img/pValue_deflation_phi_angle.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ../img/pValue_deflation_phi_angle.pdf):
@@ -893,86 +948,87 @@ pdfTeX warning: /usr/bin/pdflatex (file ../img/pValue_deflation_phi_angle.pdf):
 pdfTeX warning: /usr/bin/pdflatex (file ../img/pValue_deflation_exposure_CN.pdf
 ): PDF inclusion: multiple pdfs with page group included in a single page
 > <../img/exposure_CN_hist.png>]
-Overfull \hbox (30.01608pt too wide) in paragraph at lines 200--201
+Overfull \hbox (30.01608pt too wide) in paragraph at lines 239--240
 []\OT1/lmr/m/n/12 The re-sults for both con-ser-va-tion fea-tures \OT1/lmtt/m/n
 /12 conservation \OT1/lmr/m/n/12 and \OT1/lmtt/m/n/12 pdbekb[]conservation|
  []
 
-<../img/conservation_hist.png, id=549, 462.528pt x 346.896pt>
+<../img/conservation_hist.png, id=612, 462.528pt x 346.896pt>
 File: ../img/conservation_hist.png Graphic file (type png)
 <use ../img/conservation_hist.png>
-Package pdftex.def Info: ../img/conservation_hist.png  used on input line 206.
+Package pdftex.def Info: ../img/conservation_hist.png  used on input line 245.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/pdbekb_conservation_frequencies.png, id=550, 462.528pt x 346.896pt>
+<../img/pdbekb_conservation_frequencies.png, id=613, 462.528pt x 346.896pt>
 File: ../img/pdbekb_conservation_frequencies.png Graphic file (type png)
 <use ../img/pdbekb_conservation_frequencies.png>
 Package pdftex.def Info: ../img/pdbekb_conservation_frequencies.png  used on in
-put line 211.
+put line 250.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
 
-Package natbib Warning: Citation `pocketpicker' on page 23 undefined on input l
-ine 218.
+Package natbib Warning: Citation `pocketpicker' on page 32 undefined on input l
+ine 257.
 
-[23] [24]
+[32] [33]
 File: ../img/exposure_CN_hist.png Graphic file (type png)
 <use ../img/exposure_CN_hist.png>
-Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 225.
+Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 264.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/depth_hist.png, id=566, 462.528pt x 346.896pt>
+<../img/depth_hist.png, id=630, 462.528pt x 346.896pt>
 File: ../img/depth_hist.png Graphic file (type png)
 <use ../img/depth_hist.png>
-Package pdftex.def Info: ../img/depth_hist.png  used on input line 230.
+Package pdftex.def Info: ../img/depth_hist.png  used on input line 269.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/HSE_up_hist.png, id=567, 462.528pt x 346.896pt>
+<../img/HSE_up_hist.png, id=631, 462.528pt x 346.896pt>
 File: ../img/HSE_up_hist.png Graphic file (type png)
 <use ../img/HSE_up_hist.png>
-Package pdftex.def Info: ../img/HSE_up_hist.png  used on input line 235.
+Package pdftex.def Info: ../img/HSE_up_hist.png  used on input line 274.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/HSE_down_hist.png, id=568, 462.528pt x 346.896pt>
+<../img/HSE_down_hist.png, id=632, 462.528pt x 346.896pt>
 File: ../img/HSE_down_hist.png Graphic file (type png)
 <use ../img/HSE_down_hist.png>
-Package pdftex.def Info: ../img/HSE_down_hist.png  used on input line 240.
+Package pdftex.def Info: ../img/HSE_down_hist.png  used on input line 279.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/bfactor_hist.png, id=570, 462.528pt x 346.896pt>
+<../img/bfactor_hist.png, id=634, 462.528pt x 346.896pt>
 File: ../img/bfactor_hist.png Graphic file (type png)
 <use ../img/bfactor_hist.png>
-Package pdftex.def Info: ../img/bfactor_hist.png  used on input line 251.
+Package pdftex.def Info: ../img/bfactor_hist.png  used on input line 290.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
-<../img/aa_frequencies.png, id=573, 462.528pt x 346.896pt>
+<../img/aa_frequencies.png, id=637, 462.528pt x 346.896pt>
 File: ../img/aa_frequencies.png Graphic file (type png)
 <use ../img/aa_frequencies.png>
-Package pdftex.def Info: ../img/aa_frequencies.png  used on input line 264.
+Package pdftex.def Info: ../img/aa_frequencies.png  used on input line 303.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
-<../img/aa_ratios.png, id=574, 462.528pt x 346.896pt>
+<../img/aa_ratios.png, id=638, 462.528pt x 346.896pt>
 File: ../img/aa_ratios.png Graphic file (type png)
 <use ../img/aa_ratios.png>
-Package pdftex.def Info: ../img/aa_ratios.png  used on input line 269.
+Package pdftex.def Info: ../img/aa_ratios.png  used on input line 308.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
- [25 <../img/conservation_hist.png> <../img/pdbekb_conservation_frequencies.png
->] [26 <../img/depth_hist.png> <../img/HSE_up_hist.png> <../img/HSE_down_hist.p
-ng> <../img/bfactor_hist.png>] [27 <../img/aa_frequencies.png> <../img/aa_ratio
+ [34 <../img/conservation_hist.png> <../img/pdbekb_conservation_frequencies.png
+>] [35 <../img/depth_hist.png> <../img/HSE_up_hist.png> <../img/HSE_down_hist.p
+ng> <../img/bfactor_hist.png>] [36 <../img/aa_frequencies.png> <../img/aa_ratio
 s.png>]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 310.
+               Default added (so using `tbp') on input line 349.
 
-[28]
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 325.
-
+[37]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 359.
+               Default added (so using `tbp') on input line 364.
 
-) [29] [30]
+[38]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 398.
+
+) [39]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [31
+ (./epilog.tex) [40
 
 
 
-] [32
+] [41
 
 
 ]
@@ -996,17 +1052,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--52
 s / userman . htm$[]\OT1/lmr/m/n/12 .  Ac-cessed:
  []
 
+[42
+
+
+]
 LaTeX Font Info:    Trying to load font information for OMS+lmr on input line 9
 1.
-(/usr/share/texmf/tex/latex/lm/omslmr.fd
+ (/usr/share/texmf/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 91.
- [33
 
-
-]
 Underfull \hbox (badness 5388) in paragraph at lines 148--154
 []\OT1/lmr/m/n/12 Joseph P. Ro-mano Erich L. Lehmann.  \OT1/lmr/m/it/12 Test-in
 g Sta-tis-ti-cal Hy-
@@ -1024,35 +1081,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--154
 ch _ l _ lehmann _
  []
 
-[34] [35] [36])) [37]
+[43] [44] [45] [46] [47])) [48]
 Appendix A.
-[38
+[49
 
 
 ]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 190.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
 (./thesis.aux (./title.aux) (./introduction.aux) (./lbs_predictors.aux)
 (./methodology.aux) (./results.aux) (./epilog.aux) (./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8A1C5DEF3824B901F7712439AEEB84EA;4514.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
+(rerunfilecheck)             Checksum: 688729A56D896471492B48E45D60BE74;4512.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 190.
  ) 
 Here is how much of TeX's memory you used:
- 17745 strings out of 483140
- 255035 string characters out of 5965151
- 502026 words of memory out of 5000000
- 32226 multiletter control sequences out of 15000+600000
- 604439 words of font info for 85 fonts, out of 8000000 for 9000
+ 17827 strings out of 483140
+ 256226 string characters out of 5965151
+ 503579 words of memory out of 5000000
+ 32277 multiletter control sequences out of 15000+600000
+ 606115 words of font info for 91 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  48i,13n,46p,1330b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
@@ -1066,10 +1119,10 @@ r/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on thesis.pdf (43 pages, 672230 bytes).
+Output written on thesis.pdf (54 pages, 781211 bytes).
 PDF statistics:
- 763 PDF objects out of 1000 (max. 8388607)
- 643 compressed objects within 7 object streams
- 169 named destinations out of 1000 (max. 500000)
- 357 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 836 PDF objects out of 1000 (max. 8388607)
+ 698 compressed objects within 7 object streams
+ 185 named destinations out of 1000 (max. 500000)
+ 372 words of extra memory for PDF output out of 10000 (max. 10000000)
 
