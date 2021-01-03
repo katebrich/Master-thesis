@@ -10,85 +10,75 @@ A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "numpy"
-Warning--I didn't find a database entry for "scipy"
-Warning--I didn't find a database entry for "sifts"
-Warning--I didn't find a database entry for "uniprot_web"
-Warning--I didn't find a database entry for "TODO"
-Warning--I didn't find a database entry for "1000genomes"
-Warning--I didn't find a database entry for "cosmic"
-Warning--I didn't find a database entry for "clinvar"
-Warning--I didn't find a database entry for "exac"
-Warning--I didn't find a database entry for "https://www.uniprot.org/help/compbias"
-Warning--I didn't find a database entry for "cn"
-Warning--I didn't find a database entry for "mann"
-Warning--I didn't find a database entry for "bartlett"
-Warning--I didn't find a database entry for "brown"
-Warning--I didn't find a database entry for "cochran1954"
-Warning--I didn't find a database entry for "cochranRule"
-Warning--I didn't find a database entry for "moad"
-Warning--I didn't find a database entry for "pocketpicker"
+Warning--to sort, need author or key in pdb_growth
 Warning--to sort, need author or key in pdbe_restapi
 Warning--to sort, need author or key in sasa
+Warning--to sort, need author or key in uniprot_web
 Warning--to sort, need author or key in mod_res
 Warning--to sort, need author or key in disulfid
 Warning--to sort, need author or key in non_std
 Warning--to sort, need author or key in sec_str
 Warning--to sort, need author or key in natural_variant
+Warning--to sort, need author or key in compbias
 Warning--to sort, need author or key in bio2byte
 Warning--to sort, need author or key in mobidbApi
 Warning--to sort, need author or key in conservation
 Warning--empty year in bio2byte
+Warning--empty year in compbias
 Warning--empty year in conservation
 Warning--empty year in disulfid
 Warning--empty year in mobidbApi
 Warning--empty year in mod_res
 Warning--empty year in natural_variant
 Warning--empty year in non_std
+Warning--empty year in pdb_growth
 Warning--empty year in pdbe_restapi
 Warning--empty year in sasa
 Warning--empty year in sec_str
+Warning--empty year in uniprot_web
 Warning--empty year in levene
 Warning--empty year in levene
-You've used 60 entries,
+Warning--empty year in cn
+Warning--empty year in cn
+You've used 85 entries,
             2773 wiz_defined-function locations,
-            1028 strings with 16508 characters,
-and the built_in function-call counts, 28914 in all, are:
-= -- 2731
-> -- 1595
-< -- 29
-+ -- 550
-- -- 490
-* -- 2539
-:= -- 4382
-add.period$ -- 257
-call.type$ -- 60
-change.case$ -- 336
-chr.to.int$ -- 60
-cite$ -- 152
-duplicate$ -- 1186
-empty$ -- 2322
-format.name$ -- 568
-if$ -- 6035
-int.to.chr$ -- 1
+            1167 strings with 22887 characters,
+and the built_in function-call counts, 46923 in all, are:
+= -- 4246
+> -- 3259
+< -- 38
++ -- 1110
+- -- 1024
+* -- 4355
+:= -- 7228
+add.period$ -- 356
+call.type$ -- 85
+change.case$ -- 588
+chr.to.int$ -- 84
+cite$ -- 213
+duplicate$ -- 1710
+empty$ -- 3341
+format.name$ -- 1134
+if$ -- 9649
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 53
-newline$ -- 384
-num.names$ -- 202
-pop$ -- 646
+missing$ -- 75
+newline$ -- 531
+num.names$ -- 290
+pop$ -- 1132
 preamble$ -- 1
-purify$ -- 283
+purify$ -- 511
 quote$ -- 0
-skip$ -- 871
+skip$ -- 1354
 stack$ -- 0
-substring$ -- 1246
-swap$ -- 110
-text.length$ -- 2
+substring$ -- 1849
+swap$ -- 174
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 645
-warning$ -- 22
-while$ -- 237
+type$ -- 920
+warning$ -- 30
+while$ -- 345
 width$ -- 0
-write$ -- 918
-(There were 40 warnings)
+write$ -- 1284
+(There were 30 warnings)

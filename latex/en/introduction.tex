@@ -1,21 +1,30 @@
 
 \chapter{Introduction}
 
-TODO biologicke background, struktura proteinu, interakce proteinu (protein-protein, protein-ligand, DNA, RNA...)
+Exploring the three-dimensional structure of a protein, as well as the quaternary structure of its complexes and interactions with other molecules, can help to understand the function of the protein. Thanks to ongoing efforts of structural biology, the number of experimentally resolved structures is growing rapidly. Within the last 20 years, the number of entries in the Protein Data Bank (PDB) \cite{pdb} increased from 13 000 to 173 000. The number of structures released in 2020 is higher than the total number of PDB entries by the year 2000 \cite{pdb_growth}. This wealth of information motivates the development of various computational tools that can help to identify protein function.
 
-TODO co jsou active sites, jakou maji funkci, proc je jejich predikce dulezita, drug design
+Proteins can interact with other molecules, including nucleic acids, nucleotides, peptides, organic and inorganic compounds, metal ions or other proteins. These interactions have crucial role in many physiological processes and the proteins carry their function through the interactions \cite{benchmark}. Some interactions are unspecific, such as interactions with water and ions, other can be highly specific and have an important functional role. Binding to a protein binding site can be transient or persistent (e.g. metal ions). Binding often results in a change of conformation of the protein, causing essential changes in cellular function. Two important examples are enzyme-substrate complexes and receptor-ligands complexes which are crucial for signal transduction pathways \cite{casp9}.
 
+The identification of protein's functionally important residues and defining binding sites locations is of a great importance. Nevertheless, many interactions have not been characterized experimentally and remain unknown. For this reason, plethora of computational methods for the prediction of binding sites and protein-protein interaction sites have been developed \cite{casp9}. Various approaches have been proposed; they are described in Chapter~\ref{ch:2} in more detail.
 
+In this thesis, we focus on protein interactions with small compounds, generally referred to as \textit{protein-ligand interactions}. For convenience we use terms `ligand binding sites' or simply `binding sites' to refer to the sites (set of interacting residues) on the protein structure where these small ligands bind. The interactions with small organic compounds are of particular interest, as they are essential for numerous cellular mechanisms, such as signalling or regulation of cell cycle \cite{benchmark}.
 
-TODO cile prace
+Protein-ligand binding sites prediction has a very important application in rational drug design. The crucial part of the process that leads to a new drug design is to search for small drug-like molecules that are able to bind on particular proteins related to a disease \cite{drug_design}. Most of the currently used drugs are small organic compounds \cite{benchmark}. The knowledge of binding sites is also important for prediction of off-target binding (molecule binds to a protein other than the primary drug target), possibly causing side-effects of a drug \cite{offtarget}. Prediction of binding sites has other applications in many fields, such as protein-ligand docking \cite{docking}, inverse virtual screening \cite{screening}, or molecular dynamics \cite{dynamics}. And finally, as mentioned before, protein-ligand binding gives valuable insight into understanding protein biological function. 
 
-TODO napsat jak by bylo slozity zjistovat jestli mi nejaka vlastnost zmeni predikci, ze je tam problem s mapovanim, parsovanim atd.
+\section{Thesis goals}
+
+An interesting question is whether binding sites have some properties in common across different proteins and ligand types. There are some studies that explored the composition of binding sites on large scale \cite{lbscomposition, catalytic_res, binding_sites_char}, but those were focused on a few characteristics such as shape similarities or amino acid composition, rather than on the whole picture. Sequence and structural databases contain many valuable annotations that would be interesting to explore. As far as we know, there has not been a study that would take all suitable annotations of protein sequence and structure and perform an analysis to find out the general properties of know ligand binding sites. Knowing these properties could help to increase the success rates of existing binding sites predictors. In the thesis, we address this question and try to find the general properties of binding sites on large scale.
 
 The aims of the thesis are following:
 
 \begin{itemize}
-\item To implement a pipeline for the statistical analysis of residue-level annotations. The pipeline should be designed to be easily extensible by new annotations defined by the user. It should be possible to run the statistical analysis with data supplied by the user, as well as to run the whole process and obtaining the data automatically.
-\item To use the pipeline for the analysis of existing experimental and predicted residue-level annotations of protein structure. According to the results, select the ligand binding sites properties which appear to have different values for binding and non-binding sites.
+\item To implement a pipeline for the statistical analysis of residue-level annotations. The pipeline should be designed to be easily extensible by new annotations defined by the user. It should be possible to run the statistical analysis with data supplied by the user, as well as to run the whole process, obtaining the data automatically.
+\item To use the pipeline to analyse chosen existing experimental and predicted residue-level annotations. Based on the results, to select the ligand binding sites properties which appear to have different values for binding and non-binding sites.
 \item To use existing method P2Rank \cite{p2rank1} for prediction of ligand binding sites to test the practical significance of the results.
-
 \end{itemize}
+
+First, in Chapter~\ref{ch:2} we describe existing approaches to protein-ligand binding sites prediction, introduce the P2Rank method in more detail and describe how the success rates are evaluated.
+
+In Chapter~\ref{ch:3} we present the analysis pipeline and its implementation, explain how the known binding sites (used as ground truth) were obtained, describe the annotations that were selected for experiments and introduce the statistical methods for evaluation of those annotations. 
+
+Finally, in Chapter~\ref{ch:4} we go through the experiments and summarize and discuss the results. The descriptions of used datasets can be found there.

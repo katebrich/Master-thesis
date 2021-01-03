@@ -1,4 +1,4 @@
-\begin{thebibliography}{60}
+\begin{thebibliography}{85}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -9,6 +9,10 @@
 Bio2byte group.
 \newblock URL \url{https://bio2byte.be/info/}.
 \newblock Accessed: 20.11.2020.
+
+\bibitem[com()]{compbias}
+URL \url{https://www.uniprot.org/help/compbias}.
+\newblock Accessed: 15.11.2020.
 
 \bibitem[con()]{conservation}
 Sequence conservation pipeline.
@@ -36,8 +40,14 @@ URL \url{https://www.uniprot.org/help/variant}.
 URL \url{https://www.uniprot.org/help/non_std}.
 \newblock Accessed: 15.11.2020.
 
-\bibitem[pdb()]{pdbe_restapi}
-Pdbe rest api.
+\bibitem[pdb({\natexlab{a}})]{pdb_growth}
+Rcsb pdb: Pdb statistics, {\natexlab{a}}.
+\newblock URL
+  \url{https://www.rcsb.org/stats/growth/growth-released-structures}.
+\newblock Accessed: 3.1.2021.
+
+\bibitem[pdb({\natexlab{b}})]{pdbe_restapi}
+Pdbe rest api, {\natexlab{b}}.
 \newblock URL \url{https://www.ebi.ac.uk/pdbe/pdbe-rest-api}.
 \newblock Accessed: 5.11.2020.
 
@@ -50,6 +60,11 @@ Biopython api documentation.
 URL \url{https://www.uniprot.org/docs/userman.htm}.
 \newblock Accessed: 15.12.2020.
 
+\bibitem[uni()]{uniprot_web}
+Uniprot website.
+\newblock URL \url{https://www.uniprot.org/}.
+\newblock Accessed: 16.12.2020.
+
 \bibitem[Andrade(2019)]{pvalue}
 Chittaranjan Andrade.
 \newblock The p value and statistical significance: Misunderstandings,
@@ -58,11 +73,42 @@ Chittaranjan Andrade.
   (3):\penalty0 210--215, may 2019.
 \newblock \doi{10.4103/ijpsym.ijpsym_193_19}.
 
+\bibitem[Bartlett et~al.(2002)Bartlett, Porter, Borkakoti, and
+  Thornton]{catalytic_res}
+Gail~J. Bartlett, Craig~T. Porter, Neera Borkakoti, and Janet~M. Thornton.
+\newblock Analysis of catalytic residues in enzyme active sites.
+\newblock \emph{Journal of Molecular Biology}, 324\penalty0 (1):\penalty0
+  105--121, nov 2002.
+\newblock \doi{10.1016/s0022-2836(02)01036-7}.
+
+\bibitem[Benson et~al.(2007)Benson, Smith, Khazanov, Dimcheff, Beaver,
+  Dresslar, Nerothin, and Carlson]{moad}
+M.~L. Benson, R.~D. Smith, N.~A. Khazanov, B.~Dimcheff, J.~Beaver, P.~Dresslar,
+  J.~Nerothin, and H.~A. Carlson.
+\newblock Binding {MOAD}, a high-quality protein ligand database.
+\newblock \emph{Nucleic Acids Research}, 36\penalty0 (Database):\penalty0
+  D674--D678, dec 2007.
+\newblock \doi{10.1093/nar/gkm911}.
+
+\bibitem[Berman et~al.(2000)Berman, Westbrook, and Feng]{pdb}
+H.~M. Berman, J.~Westbrook, and Z.~Feng.
+\newblock The protein data bank.
+\newblock \emph{Nucleic Acids Research}, 28\penalty0 (1):\penalty0 235--242,
+  jan 2000.
+\newblock \doi{10.1093/nar/28.1.235}.
+
 \bibitem[Bland(1987)]{bland}
 Martin Bland.
 \newblock \emph{An introduction to medical statistics}.
 \newblock Oxford University Press, Oxford New York, 1987.
 \newblock ISBN 0192615025.
+
+\bibitem[Brown and Forsythe(1974)]{brown}
+Morton~B. Brown and Alan~B. Forsythe.
+\newblock Robust tests for the equality of variances.
+\newblock \emph{Journal of the American Statistical Association}, 69\penalty0
+  (346):\penalty0 364--367, jun 1974.
+\newblock \doi{10.1080/01621459.1974.10482955}.
 
 \bibitem[Casella and Berger(2002)]{casella}
 George Casella and Roger~L Berger.
@@ -94,7 +140,7 @@ William~G. Cochran.
   (3):\penalty0 315--345, sep 1952.
 \newblock \doi{10.1214/aoms/1177729380}.
 
-\bibitem[Cochran(1954)]{cochran}
+\bibitem[Cochran(1954)]{cochran1954}
 William~G. Cochran.
 \newblock The combination of estimates from different experiments.
 \newblock \emph{Biometrics}, 10\penalty0 (1):\penalty0 101, mar 1954.
@@ -120,6 +166,12 @@ PDBe-K.~B. consortium.
 \newblock ISSN 1362-4962.
 \newblock \doi{10.1093/nar/gkz853}.
 
+\bibitem[Consortium(2015)]{1000genomes}
+The 1000 Genomes~Project Consortium.
+\newblock A global reference for human genetic variation.
+\newblock \emph{Nature}, 526\penalty0 (7571):\penalty0 68--74, sep 2015.
+\newblock \doi{10.1038/nature15393}.
+
 \bibitem[Craveur et~al.(2013)Craveur, Joseph, Poulain, de~Brevern, and
   Rebehmed]{cispeptide}
 Pierrick Craveur, Agnel~Praveen Joseph, Pierre Poulain, Alexandre~G.
@@ -137,12 +189,36 @@ Tianli Dai, Qi~Liu, Jun Gao, Zhiwei Cao, and Ruixin Zhu.
 \newblock ISSN 1471-2105.
 \newblock \doi{10.1186/1471-2105-12-S14-S9}.
 
+\bibitem[Dana et~al.(2018)Dana, Gutmanas, Tyagi, Qi, O'Donovan, Martin, and
+  Velankar]{sifts}
+Jose~M Dana, Aleksandras Gutmanas, Nidhi Tyagi, Guoying Qi, Claire O'Donovan,
+  Maria Martin, and Sameer Velankar.
+\newblock {SIFTS}: updated structure integration with function, taxonomy and
+  sequences resource allows 40-fold increase in coverage of structure-based
+  annotations for proteins.
+\newblock \emph{Nucleic Acids Research}, 47\penalty0 (D1):\penalty0 D482--D489,
+  nov 2018.
+\newblock \doi{10.1093/nar/gky1114}.
+
 \bibitem[Derrick and White(2016)]{derrick}
 B.~Derrick and P.~White.
 \newblock Why welch{\textquotesingle}s test is type i error robust.
 \newblock \emph{The Quantitative Methods for Psychology}, 12\penalty0
   (1):\penalty0 30--38, jan 2016.
 \newblock \doi{10.20982/tqmp.12.1.p030}.
+
+\bibitem[Durrant and McCammon(2011)]{dynamics}
+Jacob~D Durrant and J~Andrew McCammon.
+\newblock Molecular dynamics simulations and drug discovery.
+\newblock \emph{{BMC} Biology}, 9\penalty0 (1), oct 2011.
+\newblock \doi{10.1186/1741-7007-9-71}.
+
+\bibitem[Ehrt et~al.(2019)Ehrt, Brinkjost, and Koch]{binding_sites_char}
+Christiane Ehrt, Tobias Brinkjost, and Oliver Koch.
+\newblock Binding site characterization {\textendash} similarity, promiscuity,
+  and druggability.
+\newblock \emph{{MedChemComm}}, 10\penalty0 (7):\penalty0 1145--1159, 2019.
+\newblock \doi{10.1039/c9md00102f}.
 
 \bibitem[Erich L.~Lehmann(2008)]{lehmann}
 Joseph P.~Romano Erich L.~Lehmann.
@@ -159,6 +235,21 @@ Thomas Hamelryck.
 \newblock \emph{Proteins}, 59:\penalty0 38--48, April 2005.
 \newblock ISSN 1097-0134.
 \newblock \doi{10.1002/prot.20379}.
+
+\bibitem[Harris et~al.(2020)Harris, Millman, van~der Walt, Gommers, Virtanen,
+  Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, van Kerkwijk,
+  Brett, Haldane, del R{\'{\i}}o, Wiebe, Peterson, G{\'{e}}rard-Marchant,
+  Sheppard, Reddy, Weckesser, Abbasi, Gohlke, and Oliphant]{numpy}
+Charles~R. Harris, K.~Jarrod Millman, St{\'{e}}fan~J. van~der Walt, Ralf
+  Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, Julian Taylor,
+  Sebastian Berg, Nathaniel~J. Smith, Robert Kern, Matti Picus, Stephan Hoyer,
+  Marten~H. van Kerkwijk, Matthew Brett, Allan Haldane, Jaime~Fern{\'{a}}ndez
+  del R{\'{\i}}o, Mark Wiebe, Pearu Peterson, Pierre G{\'{e}}rard-Marchant,
+  Kevin Sheppard, Tyler Reddy, Warren Weckesser, Hameer Abbasi, Christoph
+  Gohlke, and Travis~E. Oliphant.
+\newblock Array programming with {NumPy}.
+\newblock \emph{Nature}, 585\penalty0 (7825):\penalty0 357--362, sep 2020.
+\newblock \doi{10.1038/s41586-020-2649-2}.
 
 \bibitem[Hartshorn et~al.(2007)Hartshorn, Verdonk, Chessari, Brewerton, Mooij,
   Mortenson, and Murray]{astex}
@@ -212,6 +303,19 @@ W.~Kabsch and C.~Sander.
 \newblock ISSN 0006-3525.
 \newblock \doi{10.1002/bip.360221211}.
 
+\bibitem[Karczewski et~al.(2016)Karczewski, Weisburd, Thomas, Solomonson,
+  Ruderfer, Kavanagh, Hamamsy, Lek, Samocha, Cummings, Birnbaum, Daly, and
+  and]{exac}
+Konrad~J. Karczewski, Ben Weisburd, Brett Thomas, Matthew Solomonson,
+  Douglas~M. Ruderfer, David Kavanagh, Tymor Hamamsy, Monkol Lek, Kaitlin~E.
+  Samocha, Beryl~B. Cummings, Daniel Birnbaum, Mark~J. Daly, and Daniel
+  G.~MacArthur and.
+\newblock The {ExAC} browser: displaying reference data information from over
+  60 000 exomes.
+\newblock \emph{Nucleic Acids Research}, 45\penalty0 (D1):\penalty0 D840--D845,
+  nov 2016.
+\newblock \doi{10.1093/nar/gkw971}.
+
 \bibitem[Khazanov and Carlson(2013)]{lbscomposition}
 Nickolay~A. Khazanov and Heather~A. Carlson.
 \newblock Exploring the composition of protein-ligand binding sites on a large
@@ -228,6 +332,14 @@ Radoslav Krivák and David Hoksza.
 \newblock ISSN 1758-2946.
 \newblock \doi{10.1186/s13321-018-0285-8}.
 
+\bibitem[Kroonenberg and Verbeek(2018)]{cochranRule}
+P.~M. Kroonenberg and Albert Verbeek.
+\newblock The tale of cochran{\textquotesingle}s rule: My contingency table has
+  so many expected values smaller than 5, what am i to do?
+\newblock \emph{The American Statistician}, 72\penalty0 (2):\penalty0 175--183,
+  mar 2018.
+\newblock \doi{10.1080/00031305.2017.1286260}.
+
 \bibitem[Kyte and Doolittle(1982)]{kyte}
 J.~Kyte and R.~F. Doolittle.
 \newblock A simple method for displaying the hydropathic character of a
@@ -236,6 +348,20 @@ J.~Kyte and R.~F. Doolittle.
   1982.
 \newblock ISSN 0022-2836.
 \newblock \doi{10.1016/0022-2836(82)90515-0}.
+
+\bibitem[Landrum et~al.(2017)Landrum, Lee, Benson, Brown, Chao, Chitipiralla,
+  Gu, Hart, Hoffman, Jang, Karapetyan, Katz, Liu, Maddipatla, Malheiro,
+  McDaniel, Ovetsky, Riley, Zhou, Holmes, Kattman, and Maglott]{clinvar}
+Melissa~J Landrum, Jennifer~M Lee, Mark Benson, Garth~R Brown, Chen Chao,
+  Shanmuga Chitipiralla, Baoshan Gu, Jennifer Hart, Douglas Hoffman, Wonhee
+  Jang, Karen Karapetyan, Kenneth Katz, Chunlei Liu, Zenith Maddipatla, Adriana
+  Malheiro, Kurt McDaniel, Michael Ovetsky, George Riley, George Zhou,
+  J~Bradley Holmes, Brandi~L Kattman, and Donna~R Maglott.
+\newblock {ClinVar}: improving access to variant interpretations and supporting
+  evidence.
+\newblock \emph{Nucleic Acids Research}, 46\penalty0 (D1):\penalty0
+  D1062--D1067, nov 2017.
+\newblock \doi{10.1093/nar/gkx1153}.
 
 \bibitem[Levene()]{levene}
 Howard Levene.
@@ -251,6 +377,13 @@ Mingfeng Lin, Henry~C. Lucas, and Galit Shmueli.
   906--917, dec 2013.
 \newblock \doi{10.1287/isre.2013.0480}.
 
+\bibitem[L{\'{o}}pez et~al.(2009)L{\'{o}}pez, Ezkurdia, and Tress]{casp9}
+Gonzalo L{\'{o}}pez, Iakes Ezkurdia, and Michael~L. Tress.
+\newblock Assessment of ligand binding residue predictions in {CASP}8.
+\newblock \emph{Proteins: Structure, Function, and Bioinformatics}, 77\penalty0
+  (S9):\penalty0 138--146, 2009.
+\newblock \doi{10.1002/prot.22557}.
+
 \bibitem[Lumley et~al.(2002)Lumley, Diehr, Emerson, and Chen]{lumley}
 Thomas Lumley, Paula Diehr, Scott Emerson, and Lu~Chen.
 \newblock The importance of the normality assumption in large public health
@@ -258,6 +391,14 @@ Thomas Lumley, Paula Diehr, Scott Emerson, and Lu~Chen.
 \newblock \emph{Annual Review of Public Health}, 23\penalty0 (1):\penalty0
   151--169, may 2002.
 \newblock \doi{10.1146/annurev.publhealth.23.100901.140546}.
+
+\bibitem[Mann and Whitney(1947)]{mann}
+H.~B. Mann and D.~R. Whitney.
+\newblock On a test of whether one of two random variables is stochastically
+  larger than the other.
+\newblock \emph{The Annals of Mathematical Statistics}, 18\penalty0
+  (1):\penalty0 50--60, mar 1947.
+\newblock \doi{10.1214/aoms/1177730491}.
 
 \bibitem[Mehta and Patel(1983)]{Mehta}
 Cyrus~R. Mehta and Nitin~R. Patel.
@@ -304,6 +445,14 @@ Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
 \newblock ISSN 1362-4962.
 \newblock \doi{10.1093/nar/gkx237}.
 
+\bibitem[Paluszewski and Winter()]{cn}
+Martin Paluszewski and Pawel Winter.
+\newblock Protein decoy generation using branch and bound with efficient
+  bounding.
+\newblock In \emph{Lecture Notes in Computer Science}, pages 382--393. Springer
+  Berlin Heidelberg.
+\newblock \doi{10.1007/978-3-540-87361-7_32}.
+
 \bibitem[Raimondi et~al.(2017)Raimondi, Orlando, Pancsa, Khan, and
   Vranken]{efoldmine}
 Daniele Raimondi, Gabriele Orlando, Rita Pancsa, Taushif Khan, and Wim~F.
@@ -321,6 +470,14 @@ G.~N. RAMACHANDRAN, C.~RAMAKRISHNAN, and V.~SASISEKHARAN.
 \newblock \emph{Journal of molecular biology}, 7:\penalty0 95--99, July 1963.
 \newblock ISSN 0022-2836.
 \newblock \doi{10.1016/s0022-2836(63)80023-6}.
+
+\bibitem[Rognan(2011)]{docking}
+Didier Rognan.
+\newblock Docking methods for virtual screening: Principles and recent
+  advances.
+\newblock In \emph{Methods and Principles in Medicinal Chemistry}, pages
+  153--176. Wiley-{VCH} Verlag {GmbH} {\&} Co. {KGaA}, may 2011.
+\newblock \doi{10.1002/9783527633326.ch6}.
 
 \bibitem[Roy et~al.(2012)Roy, Yang, and Zhang]{cofactor}
 Ambrish Roy, Jianyi Yang, and Yang Zhang.
@@ -347,6 +504,16 @@ Peter Schmidtke, Catherine Souaille, Frédéric Estienne, Nicolas Baurin, and
   2191--2200, December 2010.
 \newblock ISSN 1549-960X.
 \newblock \doi{10.1021/ci1000289}.
+
+\bibitem[Schomburg et~al.(2014)Schomburg, Bietz, Briem, Henzler, Urbaczek, and
+  Rarey]{screening}
+Karen~T. Schomburg, Stefan Bietz, Hans Briem, Angela~M. Henzler, Sascha
+  Urbaczek, and Matthias Rarey.
+\newblock Facing the challenges of structure-based target prediction by inverse
+  virtual screening.
+\newblock \emph{Journal of Chemical Information and Modeling}, 54\penalty0
+  (6):\penalty0 1676--1686, may 2014.
+\newblock \doi{10.1021/ci500130e}.
 
 \bibitem[Sham and Purcell(2014)]{sham_purcell}
 Pak~C. Sham and Shaun~M. Purcell.
@@ -381,6 +548,21 @@ Kuan~Pern Tan, Raghavan Varadarajan, and M.~S. Madhusudhan.
 \newblock ISSN 1362-4962.
 \newblock \doi{10.1093/nar/gkr356}.
 
+\bibitem[Tate et~al.(2018)Tate, Bamford, Jubb, Sondka, Beare, Bindal,
+  Boutselakis, Cole, Creatore, Dawson, Fish, Harsha, Hathaway, Jupe, Kok,
+  Noble, Ponting, Ramshaw, Rye, Speedy, Stefancsik, Thompson, Wang, Ward,
+  Campbell, and Forbes]{cosmic}
+John~G Tate, Sally Bamford, Harry~C Jubb, Zbyslaw Sondka, David~M Beare, Nidhi
+  Bindal, Harry Boutselakis, Charlotte~G Cole, Celestino Creatore, Elisabeth
+  Dawson, Peter Fish, Bhavana Harsha, Charlie Hathaway, Steve~C Jupe, Chai~Yin
+  Kok, Kate Noble, Laura Ponting, Christopher~C Ramshaw, Claire~E Rye, Helen~E
+  Speedy, Ray Stefancsik, Sam~L Thompson, Shicai Wang, Sari Ward, Peter~J
+  Campbell, and Simon~A Forbes.
+\newblock {COSMIC}: the catalogue of somatic mutations in cancer.
+\newblock \emph{Nucleic Acids Research}, 47\penalty0 (D1):\penalty0 D941--D947,
+  oct 2018.
+\newblock \doi{10.1093/nar/gky1015}.
+
 \bibitem[The UniProt Consortium(2017)]{uniprot}
 The UniProt Consortium.
 \newblock Uniprot: the universal protein knowledgebase.
@@ -400,6 +582,24 @@ Eldon~L. Ulrich, Hideo Akutsu, Jurgen~F. Doreleijers, Yoko Harano, Yannis~E.
 \newblock ISSN 1362-4962.
 \newblock \doi{10.1093/nar/gkm957}.
 
+\bibitem[Virtanen et~al.(2020)Virtanen, Gommers, Oliphant, Haberland, Reddy,
+  Cournapeau, Burovski, Peterson, Weckesser, Bright, van~der Walt, Brett,
+  Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng,
+  Moore, VanderPlas, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris,
+  Archibald, Ribeiro, Pedregosa, van Mulbregt, and Contributors]{scipy}
+Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, Matt Haberland, Tyler Reddy,
+  David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan
+  Bright, Stéfan~J. van~der Walt, Matthew Brett, Joshua Wilson, K.~Jarrod
+  Millman, Nikolay Mayorov, Andrew R.~J. Nelson, Eric Jones, Robert Kern, Eric
+  Larson, C.~J. Carey, İlhan Polat, Yu~Feng, Eric~W. Moore, Jake VanderPlas,
+  Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E.~A. Quintero,
+  Charles~R. Harris, Anne~M. Archibald, Antônio~H. Ribeiro, Fabian Pedregosa,
+  Paul van Mulbregt, and SciPy~1.0 Contributors.
+\newblock Scipy 1.0: fundamental algorithms for scientific computing in python.
+\newblock \emph{Nature methods}, 17:\penalty0 261--272, March 2020.
+\newblock ISSN 1548-7105.
+\newblock \doi{10.1038/s41592-019-0686-2}.
+
 \bibitem[Wass and Sternberg(2009)]{casp}
 Mark~N. Wass and Michael J.~E. Sternberg.
 \newblock Prediction of ligand binding sites using homologous structures and
@@ -408,12 +608,26 @@ Mark~N. Wass and Michael J.~E. Sternberg.
 \newblock ISSN 1097-0134.
 \newblock \doi{10.1002/prot.22513}.
 
+\bibitem[Weisel et~al.(2007)Weisel, Proschak, and Schneider]{pocketpicker}
+Martin Weisel, Ewgenij Proschak, and Gisbert Schneider.
+\newblock {PocketPicker}: analysis of ligand binding-sites with shape
+  descriptors.
+\newblock \emph{Chemistry Central Journal}, 1\penalty0 (1), mar 2007.
+\newblock \doi{10.1186/1752-153x-1-7}.
+
 \bibitem[WELCH(1947)]{welch}
 B.~L. WELCH.
 \newblock {THE} {GENERALIZATION} {OF} `{STUDENT}{\textquotesingle}s' {PROBLEM}
   {WHEN} {SEVERAL} {DIFFERENT} {POPULATION} {VARLANCES} {ARE} {INVOLVED}.
 \newblock \emph{Biometrika}, 34\penalty0 (1-2):\penalty0 28--35, 1947.
 \newblock \doi{10.1093/biomet/34.1-2.28}.
+
+\bibitem[Xie et~al.(2011)Xie, Xie, and Bourne]{offtarget}
+Lei Xie, Li~Xie, and Philip~E Bourne.
+\newblock Structure-based systems biology for analyzing off-target binding.
+\newblock \emph{Current Opinion in Structural Biology}, 21\penalty0
+  (2):\penalty0 189--199, apr 2011.
+\newblock \doi{10.1016/j.sbi.2011.01.004}.
 
 \bibitem[Yang et~al.(2013)Yang, Roy, and Zhang]{coach}
 Jianyi Yang, Ambrish Roy, and Yang Zhang.
@@ -432,6 +646,13 @@ Zengming Zhang, Yu~Li, Biaoyang Lin, Michael Schroeder, and Bingding Huang.
   August 2011.
 \newblock ISSN 1367-4811.
 \newblock \doi{10.1093/bioinformatics/btr331}.
+
+\bibitem[Zheng et~al.(2012)Zheng, Gan, Wang, and Wang]{drug_design}
+Xiliang Zheng, LinFeng Gan, Erkang Wang, and Jin Wang.
+\newblock Pocket-based drug design: Exploring pocket space.
+\newblock \emph{The {AAPS} Journal}, 15\penalty0 (1):\penalty0 228--241, nov
+  2012.
+\newblock \doi{10.1208/s12248-012-9426-6}.
 
 \bibitem[Zimmerman(1998)]{zimmerman1998}
 Donald~W. Zimmerman.
