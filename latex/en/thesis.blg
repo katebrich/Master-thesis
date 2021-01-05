@@ -10,6 +10,28 @@ A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
 Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "casp_def"
+Warning--I didn't find a database entry for "cameo"
+Warning--I didn't find a database entry for "cafa"
+Warning--I didn't find a database entry for "methods"
+Warning--I didn't find a database entry for "fpocket"
+Warning--I didn't find a database entry for "coachweb"
+Warning--I didn't find a database entry for "qsitefinder"
+Warning--I didn't find a database entry for "ligsitecsc"
+Warning--I didn't find a database entry for "concavity"
+Warning--I didn't find a database entry for "findsite"
+Warning--I didn't find a database entry for "ssite"
+Warning--I didn't find a database entry for "needleman"
+Warning--I didn't find a database entry for "efindsite"
+Warning--I didn't find a database entry for "sfcscore"
+Warning--I didn't find a database entry for "nnscore"
+Warning--I didn't find a database entry for "deepsite"
+Warning--I didn't find a database entry for "deepcseqsite"
+Warning--I didn't find a database entry for "metapocket"
+Warning--I didn't find a database entry for "classification"
+Warning--I didn't find a database entry for "randomforests"
+Warning--I didn't find a database entry for "p2rank2"
+Warning--I didn't find a database entry for "forests_biology"
 Warning--to sort, need author or key in pdb_growth
 Warning--to sort, need author or key in pdbe_restapi
 Warning--to sort, need author or key in sasa
@@ -42,7 +64,7 @@ Warning--empty year in cn
 Warning--empty year in cn
 You've used 85 entries,
             2773 wiz_defined-function locations,
-            1167 strings with 22887 characters,
+            1189 strings with 23081 characters,
 and the built_in function-call counts, 46923 in all, are:
 = -- 4246
 > -- 3259
@@ -81,4 +103,4 @@ warning$ -- 30
 while$ -- 345
 width$ -- 0
 write$ -- 1284
-(There were 30 warnings)
+(There were 52 warnings)
