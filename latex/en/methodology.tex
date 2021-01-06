@@ -1,4 +1,3 @@
-
 \chapter{Methodology} \label{ch:3}
 
 One of the main aims of the thesis was to develop a pipeline for statistical analysis of available protein structure annotations (hereinafter referred to as features), and to prepare this pipeline for adding user-defined features.
@@ -309,7 +308,7 @@ The \textit{P value} is reported as a result of the statistical test. The P valu
 
 \subsection{Implementation}
 
-The following subsections rationalize the choice of Welch's and chi-squared test. The imlementation of these tests in module \texttt{scipy.stats} from the SciPy Python library \cite{scipy} was used in the pipeline; namely \texttt{ttest\_ind} with \texttt{equal\_var=False} to perform Welch's test, and \texttt{chi2\_contingency} for chi-squared test of independence.
+The following sections rationalize the choice of Welch's and chi-squared test. The imlementation of these tests in module \texttt{scipy.stats} from the SciPy Python library \cite{scipy} was used in the pipeline; namely \texttt{ttest\_ind} with \texttt{equal\_var=False} to perform Welch's test, and \texttt{chi2\_contingency} for chi-squared test of independence.
 
 By default, the pipeline computes the analysis for all the residues across all proteins in dataset. Neverthless, random sampling (without repetition) can be performed by specifying the sample size with argument \texttt{-s}. It is also possible to run more iterations of random sampling (argument \texttt{-i}). In this case, mean P values will be reported in summary. Individual P values from all iterations will be reported in separate files for each feature. Another possibility is to balance the number of binding and non-binding sites with argument \texttt{-b}. Same number of binding and non-binding residues will be sampled in that case.
 
@@ -325,6 +324,7 @@ The output of the whole analysis pipeline are folders with results for each feat
 \item \textbf{binding\_ratios.csv} - binding/non-binding sites ratios for all iterations and all features.
 \item \textbf{errors.txt} - Lists features that ended up with an error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test). Detailed information about the errors can be found in the log file.
 \end{itemize}
+TODO dopsat effect sizes
 
 The results folder for each feature contain file \texttt{pairs.txt} with paired ligand binding sites values and feature values, detailed information about all iterations, and various histograms and plots (according to the type of feature). 
 
@@ -394,6 +394,57 @@ The biggest difference between the two mentioned tests is that the chi-squared t
 
 As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some features can be sparse, chi-squared test should be better choice for both binary and categorical features.
 
+\subsection{Effect size}
+In most cases, the main purpose of research is to estimate actual effects that exist in the real world. Effect size can be understood as ``the degree to which the phenomenon is present in the population" \cite{cohen_book}. In other words, it is the sensitivity of the dependent variable to changes in the independent variable. Effect size complements statistical hypothesis testing and can also help with planning of the sample size \cite{cohen}.
+
+It is considered good practice to report the effect size in addition to statistical tests to provide an objective measure of importance of the results. While statistical significance reflects likeliness of our results, the effect size indicates the practical importance of our findings. For very large samples, even the miniscule effects can become statistically significant, due to the increased power of the statistical test, and the P-value alone is not a good objective measure of importance \cite{pvalueproblem}. The critical difference between effect size indices and test statistics is that the effect size is not affected by the size of the sample.
+
+There are many measures of effect size, including odds ratio, relative risk or various correlation coefficients (e.g. Pearson's, Spearman's) \cite{effect_sizes}. For the purpose of this work, we will use two effect size indices proposed by Cohen (1992) \cite{cohen} and commonly known as Cohen's \textit{d} and Cohen's \textit{w}.
+
+\subsubsection{Cohen's \textit{d}}
+
+Cohen's \textit{d} is one of the most used effect size measures for continuous data and can be used for all tests of the difference between means of independent samples (e.g. t-tests). It is defined as the difference of the means divided by the pooled standard deviation of the two groups A and B: \cite{cohen_book}
+
+\begin{equation}
+d = \frac{\overline{X}_A-\overline{X}_B}{s} ,
+\end{equation}
+
+where $\overline{X}_A$ and $\overline{X}_B$ are the means of the two groups and $s$ is the pooled standard deviation for two independent samples defined as:
+
+\begin{equation}
+s = \sqrt{\frac{\sum{\left( X_A-\overline{X}_A \right)^2} + \sum{\left( X_B-\overline{X}_B \right)^2}}{n_A+n_B-2}} .
+\end{equation}
+
+Cohen also suggests following interpretation of magnitudes:
+
+\begin{table}[!h] \centering
+\begin{tabular}{cc}
+\hline
+Cohen's \textit{d} & Effect size \\ \hline
+0.2                & Small       \\
+0.5                & Medium      \\
+0.8                & Large       \\ \hline
+\end{tabular}
+\end{table}
+
+These cutoffs, defined for most effect size measures, provide a good basis for interpreting the effect sizes; however, they tend to be misused and remain controversial practice \cite{effect_sizes}. Even Cohen himself warned about ``many dangers'' emerging from the use of such arbitrary categories. Therefore, these three categories can serve as a guideline for interpretation, but should not be used and trusted blindly.
+
+
+\subsubsection{Cohen's \textit{w}}
+
+Cohen's \textit{w} is an effect size index used for chi-squared tests. It is defined as:
+
+
+
+\begin{table}[!h] \centering
+\begin{tabular}{cc}
+\hline
+Cohen's \textit{w} & Effect size \\ \hline
+0.1                & Small       \\
+0.3                & Medium      \\
+0.5                & Large       \\ \hline
+\end{tabular}
+\end{table}
 
 \section{P2Rank models training and evaluation}
 

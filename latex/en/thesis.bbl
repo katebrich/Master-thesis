@@ -1,4 +1,4 @@
-\begin{thebibliography}{85}
+\begin{thebibliography}{104}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -103,12 +103,44 @@ Martin Bland.
 \newblock Oxford University Press, Oxford New York, 1987.
 \newblock ISBN 0192615025.
 
+\bibitem[Boulesteix et~al.(2012)Boulesteix, Janitza, Kruppa, and
+  König]{forests_biology}
+Anne-Laure Boulesteix, Silke Janitza, Jochen Kruppa, and Inke~R. König.
+\newblock Overview of random forest methodology and practical guidance with
+  emphasis on computational biology and bioinformatics.
+\newblock \emph{Wiley Interdisciplinary Reviews: Data Mining and Knowledge
+  Discovery}, 2\penalty0 (6):\penalty0 493--507, oct 2012.
+\newblock \doi{10.1002/widm.1072}.
+
+\bibitem[Breiman(2001)]{randomforests}
+Leo Breiman.
+\newblock \emph{Machine Learning}, 45\penalty0 (1):\penalty0 5--32, 2001.
+\newblock \doi{10.1023/a:1010933404324}.
+
 \bibitem[Brown and Forsythe(1974)]{brown}
 Morton~B. Brown and Alan~B. Forsythe.
 \newblock Robust tests for the equality of variances.
 \newblock \emph{Journal of the American Statistical Association}, 69\penalty0
   (346):\penalty0 364--367, jun 1974.
 \newblock \doi{10.1080/01621459.1974.10482955}.
+
+\bibitem[Brylinski and Feinstein(2013)]{efindsite}
+Michal Brylinski and Wei~P. Feinstein.
+\newblock {eFindSite}: Improved prediction of ligand binding sites in protein
+  models using meta-threading, machine learning and auxiliary ligands.
+\newblock \emph{Journal of Computer-Aided Molecular Design}, 27\penalty0
+  (6):\penalty0 551--567, jun 2013.
+\newblock \doi{10.1007/s10822-013-9663-5}.
+
+\bibitem[Capra et~al.(2009)Capra, Laskowski, Thornton, Singh, and
+  Funkhouser]{concavity}
+John~A. Capra, Roman~A. Laskowski, Janet~M. Thornton, Mona Singh, and Thomas~A.
+  Funkhouser.
+\newblock Predicting protein ligand binding sites by combining evolutionary
+  sequence conservation and 3d structure.
+\newblock \emph{{PLoS} Computational Biology}, 5\penalty0 (12):\penalty0
+  e1000585, dec 2009.
+\newblock \doi{10.1371/journal.pcbi.1000585}.
 
 \bibitem[Casella and Berger(2002)]{casella}
 George Casella and Roger~L Berger.
@@ -181,6 +213,13 @@ Pierrick Craveur, Agnel~Praveen Joseph, Pierre Poulain, Alexandre~G.
 \newblock ISSN 1438-2199.
 \newblock \doi{10.1007/s00726-013-1511-3}.
 
+\bibitem[Cui et~al.(2019)Cui, Dong, Hong, and Wang]{deepcseqsite}
+Yifeng Cui, Qiwen Dong, Daocheng Hong, and Xikun Wang.
+\newblock Predicting protein-ligand binding residues with deep convolutional
+  neural networks.
+\newblock \emph{{BMC} Bioinformatics}, 20\penalty0 (1), feb 2019.
+\newblock \doi{10.1186/s12859-019-2672-1}.
+
 \bibitem[Dai et~al.(2011)Dai, Liu, Gao, Cao, and Zhu]{cons}
 Tianli Dai, Qi~Liu, Jun Gao, Zhiwei Cao, and Ruixin Zhu.
 \newblock A new protein-ligand binding sites prediction method based on the
@@ -207,11 +246,19 @@ B.~Derrick and P.~White.
   (1):\penalty0 30--38, jan 2016.
 \newblock \doi{10.20982/tqmp.12.1.p030}.
 
-\bibitem[Durrant and McCammon(2011)]{dynamics}
+\bibitem[Durrant and McCammon(2011{\natexlab{a}})]{dynamics}
 Jacob~D Durrant and J~Andrew McCammon.
 \newblock Molecular dynamics simulations and drug discovery.
-\newblock \emph{{BMC} Biology}, 9\penalty0 (1), oct 2011.
+\newblock \emph{{BMC} Biology}, 9\penalty0 (1), oct 2011{\natexlab{a}}.
 \newblock \doi{10.1186/1741-7007-9-71}.
+
+\bibitem[Durrant and McCammon(2011{\natexlab{b}})]{nnscore}
+Jacob~D. Durrant and J.~Andrew McCammon.
+\newblock {NNScore} 2.0: A neural-network receptor{\textendash}ligand scoring
+  function.
+\newblock \emph{Journal of Chemical Information and Modeling}, 51\penalty0
+  (11):\penalty0 2897--2903, nov 2011{\natexlab{b}}.
+\newblock \doi{10.1021/ci2003889}.
 
 \bibitem[Ehrt et~al.(2019)Ehrt, Brinkjost, and Koch]{binding_sites_char}
 Christiane Ehrt, Tobias Brinkjost, and Oliver Koch.
@@ -227,6 +274,22 @@ Joseph P.~Romano Erich L.~Lehmann.
 \newblock ISBN 0387988645.
 \newblock URL
   \url{https://www.ebook.de/de/product/3186913/erich_l_lehmann_joseph_p_romano_testing_statistical_hypotheses.html}.
+
+\bibitem[Guilloux et~al.(2009)Guilloux, Schmidtke, and Tuffery]{fpocket}
+Vincent~Le Guilloux, Peter Schmidtke, and Pierre Tuffery.
+\newblock Fpocket: An open source platform for ligand pocket detection.
+\newblock \emph{{BMC} Bioinformatics}, 10\penalty0 (1):\penalty0 168, 2009.
+\newblock \doi{10.1186/1471-2105-10-168}.
+
+\bibitem[Haas et~al.(2017)Haas, Barbato, Behringer, Studer, Roth, Bertoni,
+  Mostaguir, Gumienny, and Schwede]{cameo}
+Jürgen Haas, Alessandro Barbato, Dario Behringer, Gabriel Studer, Steven Roth,
+  Martino Bertoni, Khaled Mostaguir, Rafal Gumienny, and Torsten Schwede.
+\newblock Continuous automated model {EvaluatiOn} ({CAMEO}) complementing the
+  critical assessment of structure prediction in {CASP}12.
+\newblock \emph{Proteins: Structure, Function, and Bioinformatics},
+  86:\penalty0 387--398, dec 2017.
+\newblock \doi{10.1002/prot.25431}.
 
 \bibitem[Hamelryck(2005)]{hse}
 Thomas Hamelryck.
@@ -262,6 +325,14 @@ Michael~J. Hartshorn, Marcel~L. Verdonk, Gianni Chessari, Suzanne~C. Brewerton,
 \newblock ISSN 0022-2623.
 \newblock \doi{10.1021/jm061277y}.
 
+\bibitem[Huang(2009)]{metapocket}
+Bingding Huang.
+\newblock {MetaPocket}: A meta approach to improve protein ligand binding site
+  prediction.
+\newblock \emph{{OMICS}: A Journal of Integrative Biology}, 13\penalty0
+  (4):\penalty0 325--330, aug 2009.
+\newblock \doi{10.1089/omi.2009.0045}.
+
 \bibitem[Huang and Schroeder(2006)]{ligsite}
 Bingding Huang and Michael Schroeder.
 \newblock Ligsitecsc: predicting ligand binding sites using the connolly
@@ -286,6 +357,16 @@ Lukas Jendele, Radoslav Krivak, Petr Skoda, Marian Novotny, and David Hoksza.
 \newblock \emph{Nucleic acids research}, 47:\penalty0 W345--W349, July 2019.
 \newblock ISSN 1362-4962.
 \newblock \doi{10.1093/nar/gkz424}.
+
+\bibitem[Jim{\'{e}}nez et~al.(2017)Jim{\'{e}}nez, Doerr,
+  Mart{\'{\i}}nez-Rosell, Rose, and Fabritiis]{deepsite}
+J~Jim{\'{e}}nez, S~Doerr, G~Mart{\'{\i}}nez-Rosell, A~S Rose, and G~De
+  Fabritiis.
+\newblock {DeepSite}: protein-binding site predictor using 3d-convolutional
+  neural networks.
+\newblock \emph{Bioinformatics}, 33\penalty0 (19):\penalty0 3036--3042, may
+  2017.
+\newblock \doi{10.1093/bioinformatics/btx350}.
 
 \bibitem[Jones and Thornton(1997)]{jones}
 S.~Jones and J.~M. Thornton.
@@ -324,6 +405,14 @@ Nickolay~A. Khazanov and Heather~A. Carlson.
 \newblock ISSN 1553-7358.
 \newblock \doi{10.1371/journal.pcbi.1003321}.
 
+\bibitem[Kriv{\'{a}}k and Hoksza(2015)]{p2rank2}
+Radoslav Kriv{\'{a}}k and David Hoksza.
+\newblock P2rank: Knowledge-based ligand binding site prediction using
+  aggregated local features.
+\newblock In \emph{Algorithms for Computational Biology}, pages 41--52.
+  Springer International Publishing, 2015.
+\newblock \doi{10.1007/978-3-319-21233-3_4}.
+
 \bibitem[Krivák and Hoksza(2018)]{p2rank1}
 Radoslav Krivák and David Hoksza.
 \newblock P2rank: machine learning based tool for rapid and accurate prediction
@@ -339,6 +428,16 @@ P.~M. Kroonenberg and Albert Verbeek.
 \newblock \emph{The American Statistician}, 72\penalty0 (2):\penalty0 175--183,
   mar 2018.
 \newblock \doi{10.1080/00031305.2017.1286260}.
+
+\bibitem[Kryshtafovych et~al.(2019)Kryshtafovych, Schwede, Topf, Fidelis, and
+  Moult]{casp_def}
+Andriy Kryshtafovych, Torsten Schwede, Maya Topf, Krzysztof Fidelis, and John
+  Moult.
+\newblock Critical assessment of methods of protein structure prediction
+  ({CASP}){\textemdash}round {XIII}.
+\newblock \emph{Proteins: Structure, Function, and Bioinformatics}, 87\penalty0
+  (12):\penalty0 1011--1020, oct 2019.
+\newblock \doi{10.1002/prot.25823}.
 
 \bibitem[Kyte and Doolittle(1982)]{kyte}
 J.~Kyte and R.~F. Doolittle.
@@ -363,12 +462,26 @@ Melissa~J Landrum, Jennifer~M Lee, Mark Benson, Garth~R Brown, Chen Chao,
   D1062--D1067, nov 2017.
 \newblock \doi{10.1093/nar/gkx1153}.
 
+\bibitem[Laurie and Jackson(2005)]{qsitefinder}
+A.~T.~R. Laurie and R.~M. Jackson.
+\newblock Q-{SiteFinder}: an energy-based method for the prediction of
+  protein-ligand binding sites.
+\newblock \emph{Bioinformatics}, 21\penalty0 (9):\penalty0 1908--1916, feb
+  2005.
+\newblock \doi{10.1093/bioinformatics/bti315}.
+
 \bibitem[Levene()]{levene}
 Howard Levene.
 \newblock Robust tests for equality of variances.
 \newblock In Ingram Olkin, editor, \emph{Contributions to Probability and
   Statistics: Essays in Honor of Harold Hotelling}, pages 278--292. Stanford
   University Press.
+
+\bibitem[Lever et~al.(2016)Lever, Krzywinski, and Altman]{classification}
+Jake Lever, Martin Krzywinski, and Naomi Altman.
+\newblock Classification evaluation.
+\newblock \emph{Nature Methods}, 13\penalty0 (8):\penalty0 603--604, jul 2016.
+\newblock \doi{10.1038/nmeth.3945}.
 
 \bibitem[Lin et~al.(2013)Lin, Lucas, and Shmueli]{pvalueproblem}
 Mingfeng Lin, Henry~C. Lucas, and Galit Shmueli.
@@ -434,6 +547,14 @@ Marco Necci, Damiano Piovesan, Zsuzsanna Dosztányi, and Silvio C.~E. Tosatto.
 \newblock ISSN 1367-4811.
 \newblock \doi{10.1093/bioinformatics/btx015}.
 
+\bibitem[Needleman and Wunsch(1970)]{needleman}
+Saul~B. Needleman and Christian~D. Wunsch.
+\newblock A general method applicable to the search for similarities in the
+  amino acid sequence of two proteins.
+\newblock \emph{Journal of Molecular Biology}, 48\penalty0 (3):\penalty0
+  443--453, mar 1970.
+\newblock \doi{10.1016/0022-2836(70)90057-4}.
+
 \bibitem[Nightingale et~al.(2017)Nightingale, Antunes, Alpi, Bursteinas,
   Gonzales, Liu, Luo, Qi, Turner, and Martin]{proteins_api}
 Andrew Nightingale, Ricardo Antunes, Emanuele Alpi, Borisas Bursteinas,
@@ -452,6 +573,47 @@ Martin Paluszewski and Pawel Winter.
 \newblock In \emph{Lecture Notes in Computer Science}, pages 382--393. Springer
   Berlin Heidelberg.
 \newblock \doi{10.1007/978-3-540-87361-7_32}.
+
+\bibitem[Radivojac et~al.(2013)Radivojac, Clark, Oron, Schnoes, Wittkop,
+  Sokolov, Graim, Funk, Verspoor, Ben-Hur, Pandey, Yunes, Talwalkar, Repo,
+  Souza, Piovesan, Casadio, Wang, Cheng, Fang, Gough, Koskinen, Törönen,
+  Nokso-Koivisto, Holm, Cozzetto, Buchan, Bryson, Jones, Limaye, Inamdar,
+  Datta, Manjari, Joshi, Chitale, Kihara, Lisewski, Erdin, Venner, Lichtarge,
+  Rentzsch, Yang, Romero, Bhat, Paccanaro, Hamp, Ka{\ss}ner, Seemayer, Vicedo,
+  Schaefer, Achten, Auer, Boehm, Braun, Hecht, Heron, Hönigschmid, Hopf,
+  Kaufmann, Kiening, Krompass, Landerer, Mahlich, Roos, Björne, Salakoski,
+  Wong, Shatkay, Gatzmann, Sommer, Wass, Sternberg, {\v{S}}kunca, Supek,
+  Bo{\v{s}}njak, Panov, D{\v{z}}eroski, {\v{S}}muc, Kourmpetis, van Dijk, ter
+  Braak, Zhou, Gong, Dong, Tian, Falda, Fontana, Lavezzo, Camillo, Toppo, Lan,
+  Djuric, Guo, Vucetic, Bairoch, Linial, Babbitt, Brenner, Orengo, Rost,
+  Mooney, and Friedberg]{cafa}
+Predrag Radivojac, Wyatt~T Clark, Tal~Ronnen Oron, Alexandra~M Schnoes, Tobias
+  Wittkop, Artem Sokolov, Kiley Graim, Christopher Funk, Karin Verspoor, Asa
+  Ben-Hur, Gaurav Pandey, Jeffrey~M Yunes, Ameet~S Talwalkar, Susanna Repo,
+  Michael~L Souza, Damiano Piovesan, Rita Casadio, Zheng Wang, Jianlin Cheng,
+  Hai Fang, Julian Gough, Patrik Koskinen, Petri Törönen, Jussi
+  Nokso-Koivisto, Liisa Holm, Domenico Cozzetto, Daniel W~A Buchan, Kevin
+  Bryson, David~T Jones, Bhakti Limaye, Harshal Inamdar, Avik Datta, Sunitha~K
+  Manjari, Rajendra Joshi, Meghana Chitale, Daisuke Kihara, Andreas~M Lisewski,
+  Serkan Erdin, Eric Venner, Olivier Lichtarge, Robert Rentzsch, Haixuan Yang,
+  Alfonso~E Romero, Prajwal Bhat, Alberto Paccanaro, Tobias Hamp, Rebecca
+  Ka{\ss}ner, Stefan Seemayer, Esmeralda Vicedo, Christian Schaefer, Dominik
+  Achten, Florian Auer, Ariane Boehm, Tatjana Braun, Maximilian Hecht, Mark
+  Heron, Peter Hönigschmid, Thomas~A Hopf, Stefanie Kaufmann, Michael Kiening,
+  Denis Krompass, Cedric Landerer, Yannick Mahlich, Manfred Roos, Jari Björne,
+  Tapio Salakoski, Andrew Wong, Hagit Shatkay, Fanny Gatzmann, Ingolf Sommer,
+  Mark~N Wass, Michael J~E Sternberg, Nives {\v{S}}kunca, Fran Supek, Matko
+  Bo{\v{s}}njak, Pan{\v{c}}e Panov, Sa{\v{s}}o D{\v{z}}eroski, Tomislav
+  {\v{S}}muc, Yiannis A~I Kourmpetis, Aalt D~J van Dijk, Cajo J~F ter Braak,
+  Yuanpeng Zhou, Qingtian Gong, Xinran Dong, Weidong Tian, Marco Falda, Paolo
+  Fontana, Enrico Lavezzo, Barbara~Di Camillo, Stefano Toppo, Liang Lan,
+  Nemanja Djuric, Yuhong Guo, Slobodan Vucetic, Amos Bairoch, Michal Linial,
+  Patricia~C Babbitt, Steven~E Brenner, Christine Orengo, Burkhard Rost, Sean~D
+  Mooney, and Iddo Friedberg.
+\newblock A large-scale evaluation of computational protein function
+  prediction.
+\newblock \emph{Nature Methods}, 10\penalty0 (3):\penalty0 221--227, jan 2013.
+\newblock \doi{10.1038/nmeth.2340}.
 
 \bibitem[Raimondi et~al.(2017)Raimondi, Orlando, Pancsa, Khan, and
   Vranken]{efoldmine}
@@ -531,6 +693,23 @@ A.~Shrake and J.~A. Rupley.
   1973.
 \newblock ISSN 0022-2836.
 \newblock \doi{10.1016/0022-2836(73)90011-9}.
+
+\bibitem[Skolnick and Brylinski(2009)]{findsite}
+J.~Skolnick and M.~Brylinski.
+\newblock {FINDSITE}: a combined evolution/structure-based approach to protein
+  function prediction.
+\newblock \emph{Briefings in Bioinformatics}, 10\penalty0 (4):\penalty0
+  378--391, mar 2009.
+\newblock \doi{10.1093/bib/bbp017}.
+
+\bibitem[Sotriffer et~al.(2008)Sotriffer, Sanschagrin, Matter, and
+  Klebe]{sfcscore}
+Christoph~A. Sotriffer, Paul Sanschagrin, Hans Matter, and Gerhard Klebe.
+\newblock {SFCscore}: Scoring functions for affinity prediction of
+  protein-ligand complexes.
+\newblock \emph{Proteins: Structure, Function, and Bioinformatics}, 73\penalty0
+  (2):\penalty0 395--419, apr 2008.
+\newblock \doi{10.1002/prot.22058}.
 
 \bibitem[Sun et~al.(2019)Sun, Liu, Qu, Feng, and Reetz]{bfactor}
 Zhoutong Sun, Qian Liu, Ge~Qu, Yan Feng, and Manfred~T. Reetz.
@@ -646,6 +825,14 @@ Zengming Zhang, Yu~Li, Biaoyang Lin, Michael Schroeder, and Bingding Huang.
   August 2011.
 \newblock ISSN 1367-4811.
 \newblock \doi{10.1093/bioinformatics/btr331}.
+
+\bibitem[Zhao et~al.(2020)Zhao, Cao, and Zhang]{methods}
+Jingtian Zhao, Yang Cao, and Le~Zhang.
+\newblock Exploring the computational methods for protein-ligand binding site
+  prediction.
+\newblock \emph{Computational and Structural Biotechnology Journal},
+  18:\penalty0 417--426, 2020.
+\newblock \doi{10.1016/j.csbj.2020.02.008}.
 
 \bibitem[Zheng et~al.(2012)Zheng, Gan, Wang, and Wang]{drug_design}
 Xiliang Zheng, LinFeng Gan, Erkang Wang, and Jin Wang.
