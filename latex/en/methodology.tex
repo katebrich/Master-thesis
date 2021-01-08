@@ -319,17 +319,18 @@ The output of the whole analysis pipeline are folders with results for each feat
 \begin{itemize}
 \item \textbf{p\_values\_means.csv} - Averaged P values obtained from all iterations.
 \item \textbf{p\_values.csv} - List of P values from all iterations for all features. P values for individual features are also included in the results folder for each feature.
+\item \textbf{cohens\_d.csv} - Effect sizes for continuous features (as described below).
+\item \textbf{cohens\_w.csv} - Effect sizes for binary, ordinal and categorical features.
 \item \textbf{p\_vals\_perc.csv} - Summary of how many percent of iterations had P value below given significance level $\alpha$ for each feature.
 \item \textbf{means\_difference.csv} - Summary only for continuous features. Lists the differences of means and variances in both populations (all binding vs. all non-binding).
-\item \textbf{binding\_ratios.csv} - binding/non-binding sites ratios for all iterations and all features.
+\item \textbf{binding\_ratios.csv} - binding/non-binding sites ratios for all rows in the dataset.
 \item \textbf{errors.txt} - Lists features that ended up with an error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test). Detailed information about the errors can be found in the log file.
 \end{itemize}
-TODO dopsat effect sizes
 
 The results folder for each feature contain file \texttt{pairs.txt} with paired ligand binding sites values and feature values, detailed information about all iterations, and various histograms and plots (according to the type of feature). 
 
 
-\subsection{Welch's test}
+\subsection{Welch's test} \label{s:welchs}
 
 Welch's unequal variances t-test, or Welch's test in short, is a two-sample hypothesis test used to decide whether two populations have different central tendencies (means or medians). The decision is made based on the samples from the two populations. It is a more robust alteration of the widely-used Student's t-test \cite{welch}.
 
@@ -394,10 +395,14 @@ The biggest difference between the two mentioned tests is that the chi-squared t
 
 As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some features can be sparse, chi-squared test should be better choice for both binary and categorical features.
 
-\subsection{Effect size}
+\subsection{Effect size} \label{s:effectsize}
 In most cases, the main purpose of research is to estimate actual effects that exist in the real world. Effect size can be understood as ``the degree to which the phenomenon is present in the population" \cite{cohen_book}. In other words, it is the sensitivity of the dependent variable to changes in the independent variable. Effect size complements statistical hypothesis testing and can also help with planning of the sample size \cite{cohen}.
 
-It is considered good practice to report the effect size in addition to statistical tests to provide an objective measure of importance of the results. While statistical significance reflects likeliness of our results, the effect size indicates the practical importance of our findings. For very large samples, even the miniscule effects can become statistically significant, due to the increased power of the statistical test, and the P-value alone is not a good objective measure of importance \cite{pvalueproblem}. The critical difference between effect size indices and test statistics is that the effect size is not affected by the size of the sample.
+It is considered good practice to report the effect size in addition to statistical tests to provide an objective measure of importance of the results. While statistical significance reflects likeliness of our results, the effect size indicates the practical importance of our findings. For very large samples, even the miniscule effects can become statistically significant, due to the increased power of the statistical test; this is called the \textit{P-value problem} \cite{pvalueproblem}. 
+
+The P-value itself does not have an objective meaning and is not an unambiguous measure of evidence. The sample size hugely influences the significance, and relying only on the P-value can lead to acceptance of the hypothesis of no practical significance. Despite that, this appears to be a common practice. Lin et al. \cite{pvalueproblem} reviewed articles in two leading Information System (IS) journals and reported that 50\% of recent papers with sample sizes over 10,000 were relying on low P-values.
+
+The critical difference between effect size indices and test statistics is that the effect size is not affected by the size of the sample.
 
 There are many measures of effect size, including odds ratio, relative risk or various correlation coefficients (e.g. Pearson's, Spearman's) \cite{effect_sizes}. For the purpose of this work, we will use two effect size indices proposed by Cohen (1992) \cite{cohen} and commonly known as Cohen's \textit{d} and Cohen's \textit{w}.
 
@@ -415,7 +420,7 @@ where $\overline{X}_A$ and $\overline{X}_B$ are the means of the two groups and 
 s = \sqrt{\frac{\sum{\left( X_A-\overline{X}_A \right)^2} + \sum{\left( X_B-\overline{X}_B \right)^2}}{n_A+n_B-2}} .
 \end{equation}
 
-Cohen also suggests following interpretation of magnitudes:
+Cohen \cite{cohen_book} also suggests following interpretation of magnitudes:
 
 \begin{table}[!h] \centering
 \begin{tabular}{cc}
@@ -432,9 +437,15 @@ These cutoffs, defined for most effect size measures, provide a good basis for i
 
 \subsubsection{Cohen's \textit{w}}
 
-Cohen's \textit{w} is an effect size index used for chi-squared tests. It is defined as:
+Cohen's \textit{w} is an effect size index used for chi-squared tests. It is defined as
 
+\begin{equation}
+w = \sqrt{\sum\limits_{i=1}^k {\frac{\left( P_{1i}-P_{0i} \right)^2}{P_{0i}}}} ,
+\end{equation}
 
+where $k$ is the number of cells and $P_{0i}$ and $P_{1i}$ are proportions in cell $i$ under the null and alternative hypothesis \cite{cohen_book}.
+
+The interpretation of magnitudes is following:
 
 \begin{table}[!h] \centering
 \begin{tabular}{cc}

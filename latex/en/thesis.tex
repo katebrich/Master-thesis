@@ -66,7 +66,7 @@
 \def\ThesisAuthor{Kateřina Břicháčková}
 
 % Year when the thesis is submitted
-\def\YearSubmitted{2020}
+\def\YearSubmitted{2021}
 
 % Name of the department or institute, where the work was officially assigned
 % (according to the Organizational Structure of MFF UK in English,
@@ -84,33 +84,38 @@
 \def\StudyProgramme{Bioinformatics}
 \def\StudyBranch{Bioinformatics}
 
-% An optional dedication: you can thank whomever you wish (your supervisor,
-% consultant, a person who lent the software, etc.)
 \def\DedicationAJ{%
 
-}
+\vspace{10mm}
 
-\def\DedicationCJ{%
+The thesis is dedicated to Ondra Skácel; I will never forget you (again). Huge thanks to my family, my partner David and Čenda.
+
+I would like to thank to my supervisor, David Hoksza, for his guidance throughout writing this thesis, and for many helpful comments and advice.
+Many thanks to Radoslav Krivák and Petr Škoda for their kindliness and help with P2Rank program.
+
+Computational resources were supplied by the project "e-Infrastruktura CZ" (e-INFRA LM2018140) provided within the program Projects of Large Research, Development and Innovations Infrastructures.
 
 
 }
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\AbstractAJ{%
-abstract
+The number of experimentally resolved protein structures in the Protein Data Bank has been growing fast in the last 20 years, motivating the development of many computational tools for protein-ligand binding sites prediction. Binding sites prediction from protein 3D structures has many important applications; it is a key step in the complex process of rational drug design, it helps to infer the side-effects of drugs, it provides insight into proteins biological functions, and it is helpful in protein-ligand docking, molecular dynamics and many other fields. As far as we know, there has not been a study that would systematically investigate general properties of known ligand binding sites on a large scale. In this thesis, we examine these properties using existing experimental and predicted residue-level annotations of protein sequence and structure. We present an automated pipeline for statistical analysis of the annotations, based on hypothesis testing and effect sizes estimation. It is implemented in Python and it is easily extensible by user-defined annotations. The usage is demonstrated on 33 existing annotations and 4 different datasets. The practical significance of the results is tested on P2Rank prediction method and one use case experiment. We are hopeful that the results as well as the pipeline could eventually help to improve the performance of the existing binding sites predictors.
 }
 
 \def\AbstractCJ{%
-abstract
+
+V posledních 20 letech se počet experimentálních proteinových struktur v databázi Protein Data Bank rychle zvyšuje, což motivuje vývoj mnohých nástrojů pro predikci protein-ligand vazebných míst. Strukturní predikce vazebných míst má mnoho důležitých aplikací; je klíčovým krokem v komplexním procesu návrhu léčiv, pomáhá objevovat vedlejší účinky léčiv, umožňuje chápat biologické funkce proteinů a pomáhá v mnoha jiných oborech, jako je protein-ligand docking nebo molekulová dynamika. Pokud víme, dosud nebyla provedena studie, která by systematicky zkoumala obecné vlastnosti známých vazebných míst na velkých datasetech. V této práci se zaměřujeme na analýzu těchto vlastností, s využitím existujících experimentálních i predikovaných anotací primární a terciální struktury. Představujeme automatizovanou metodu pro statistickou analýzu těchto anotací, která je založená na testování hypotéz a odhadu velikosti účinku. Metoda je implementována v jazyce Python a lze ji jednoduše rozšířit o nové anotace definované uživatelem. Použití je demonstrováno na 33 existujících anotacích a čtyřech různých datasetech. Praktická významnost výsledků je otestována s pomocí metody P2Rank a na jednom konkrétním příkladě. Výsledky i samotná metoda pro statistickou analýzu by mohly posléze přispět ke zlepšení úspěšnosti existujících prediktorů vazebných míst.
+
 }
 
 % 3 to 5 keywords (recommended), each enclosed in curly braces
 \def\KeywordsAJ{%
-{keyword1,} {keyword2}
+{binding sites}, {protein-ligand binding sites}, {binding sites prediction}, {P2Rank}, {residue-level annotations}, {3D-based prediction}, {statistical analysis}
 }
 
 \def\KeywordsCJ{% 
-{keyword1,} {keyword2}
+{vazebná místa}, {protein-ligand vazebná místa}, {predikce vazebných míst}, {P2Rank}, {anotace primární struktury}, {3D-based predikce}, {statistická analýza}
 }
 
 %% The hyperref package for clickable links in PDF and also for storing
