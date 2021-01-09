@@ -6,7 +6,7 @@ The tools can vary in many aspects. Some of them are stand-alone command line to
 
 In this Chapter, we summarize different strategies with specific examples of existing methods, we present P2Rank method in more detail and we explain how the performance of the predictors can be evaluated.
 
-\section{Existing methods}
+\section{Existing methods} \label{s:existingmethods}
 
 The existing methods for the protein-ligand binding sites prediction are based on various strategies and algorithmic approaches. It is possible to classify them into following caterogies; neverthless, keep in mind that many tools use a combination of the following approaches.
 
@@ -29,7 +29,7 @@ Predicting protein-ligand binding sites can be seen as a classification problem.
 The consensus methods combine results of other existing methods and by this approach, they can achieve better results than the individual methods. For instance, MetaPocket 2.0 \cite{metapocket} combines eight different methods, taking top three sites from each of them. The resulting 24 sites, which can be spatially overlapping, are merged together by hierarchical clustering.
 
 
-\section{Evaluation of success rates}
+\section{Evaluation of success rates} \label{s:metrics}
 
 According to the way they represent prediction results, there are two types of predictors: \textit{residue-centric} and \textit{pocket-centric}. The residue-centric methods see the problem of binding sites prediction as binary classification. Each residue on the surface is classified as binding or non-binding. On the other hand, the pocket-centric methods do not classify individual residues; rather, they output a list of putative binding sites, usually represented as pocket centers, or sets of points around the protein surface, representing the shape of the binding site. The output list usually contains more predicted sites than the number of ligands and therefore, there are many false positives. Most methods rank the output list by the probability of being a true binding site, obtained by various ranking algorithms \cite{p2rank1}. Ranking is important to prioritize the results, e.g. for visual inspection.
 

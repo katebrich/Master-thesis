@@ -52,10 +52,11 @@
 \contentsline {section}{\numberline {4.1}Datasets}{34}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Ligands filtering}{35}{subsection.4.1.1}%
 \contentsline {section}{\numberline {4.2}Statistical analysis}{36}{section.4.2}%
-\contentsline {section}{\numberline {4.3}P2Rank models}{46}{section.4.3}%
-\contentsline {chapter}{Conclusion}{52}{chapter*.26}%
-\contentsline {chapter}{List of Abbreviations}{53}{chapter*.27}%
-\contentsline {chapter}{Bibliography}{54}{chapter*.28}%
-\contentsline {chapter}{\numberline {A}Attachments}{65}{appendix.A}%
-\contentsline {section}{\numberline {A.1}attachment1}{65}{section.A.1}%
-\contentsline {section}{\numberline {A.2}attachment2}{65}{section.A.2}%
+\contentsline {section}{\numberline {4.3}P2Rank models}{49}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Use case: the best conservation for P2Rank}{52}{section.4.4}%
+\contentsline {chapter}{Conclusion}{55}{chapter*.28}%
+\contentsline {chapter}{List of Abbreviations}{56}{chapter*.29}%
+\contentsline {chapter}{Bibliography}{57}{chapter*.30}%
+\contentsline {chapter}{\numberline {A}Attachments}{68}{appendix.A}%
+\contentsline {section}{\numberline {A.1}attachment1}{68}{section.A.1}%
+\contentsline {section}{\numberline {A.2}attachment2}{68}{section.A.2}%

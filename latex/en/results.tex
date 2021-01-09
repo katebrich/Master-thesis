@@ -1,8 +1,7 @@
 \chapter{Evaluation and results} \label{ch:4}
 
 
-\section{Datasets}
-
+\section{Datasets} \label{s:datasets}
 
 The choice of datasets of protein-ligand complexes used for statistical analysis and P2Rank model training and evaluation was strongly inspired by the datasets described in the P2Rank article \cite{p2rank1}. All structures were re-downloaded directly from PDBe, according to their PDB ID (four-character alphanumeric identifier) and chain ID (one-character identifier) used in the original datasets. It was not possible to take the original datasets as they were, since the structures were not up-to-date and the annotations downloaded from the databases (e.g. feature values) could not be mapped properly.
 
@@ -70,8 +69,6 @@ holo4k\_filter\_MOAD     & 3308     & 4023    & 1.2161        & 50834        & 6
 \end{table}
 
 \section{Statistical analysis}
-
-TODO vymenit grafy za ty nove, hezci, lepci!
 
 The statistical analysis of ligand binding sites properties was performed using the analysis pipeline described in Chapter~\ref{ch:3} with default parameters. The results were collected for all the datasets, including the versions with filtered ligands.
 
@@ -150,7 +147,7 @@ However, when looking at the histograms and plots, some results are not as expec
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=120mm]{../img/dynamine_hist.png}
-\caption{Histogram for feature \texttt{dynamine} computed on \textit{holo4k} dataset. Density on the y-axis is computed with respect to the number of binding or non-binding sites. Difference in means: 0.0012; difference in variances: 0.0012.}
+\caption{Histogram for feature \texttt{dynamine} computed on \textit{holo4k} dataset. Density on the y-axis is computed with respect to the number of binding or non-binding sites. Difference in means: 0.0012.}
 \label{fig:dynamine}
 \end{figure}
 
@@ -188,7 +185,7 @@ Let's see the P-value problem demonstated on our data. Figure~\ref{fig:pvalueDef
 \label{fig:pvalueDeflation}
 \end{figure}
 
-To complement the hypothesis tests and to provide an objective measure of importance of the results, we report two effect size measures, as described in Section~\ref{s:effectsize}: Cohen's \textit{d} for continuous features and Cohen's \textit{w} for the rest. The results can be found in Table~\ref{tab:cohensd} and Table~\ref{tab:cohensw}. Looking at the effect sizes, it seems that the low P-values reported in Table~\ref{tab:pvaluesAll} are most likely mere artifacts of the large-sample sizes. Only a few features seem to have any practical significance. The individual features will be discussed below.
+To complement the hypothesis tests and to provide an objective measure of importance of the results, we report two effect size measures, as described in Section~\ref{s:effectsize}: Cohen's \textit{d} for continuous features and Cohen's \textit{w} for the rest. The results can be found in Table~\ref{tab:cohensd} and Table~\ref{tab:cohensw}. Looking at the effect sizes, it seems that many low P-values reported in Table~\ref{tab:pvaluesAll} are most likely mere artifacts of the large sample sizes. Only a few features seem to have any practical significance. The individual features will be discussed below.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -246,56 +243,64 @@ To complement the hypothesis tests and to provide an objective measure of import
 
 Another noticeable thing about Table~\ref{tab:pvaluesAll} is that the results for some features vary across datasets. Let's take a look at features \textit{disulfid} and \texttt{turn}, for example. The P-value is very high for datasets \textit{chen11} and \textit{joined}; contrarily, it is low for \textit{coach420} and \textit{holo4k}. In this case it is not true that the P-value would decrease with the increasing sample size. This leads to a question of how the datasets are composed, and whether they are representative samples from the whole population of proteins. Taken into consideration the way how the datasets were assembled, it is likely that some bias was introduced. The question is whether taking the whole PDB database would help to solve this issue. There probably would be the problem with redundancy of data, as close homologs and overlapping PDB entries would be included. Furthermore, the database itself is most likely a biased sample of the real world of proteins, as the tertiary structure is yet to be discovered for many of them. And most importantly, this approach would be computationally very demanding.
 
-To make use of our large datasets, one different approach was implemented. Dataset \textit{mix} was created by merging all four datasets together, removing a few duplicates. Random sampling without replacement was applied on this dataset, in each iteration taking a sample of 500 binding and 500 non-binding sites. 1000 iterations were executed and mean P-values were reported. The results are shown in Table~\ref{tab:pvalues500}. Note that the mean P-value cannot be understood in the original meaning of P-value! Nevertheless, the numbers can provide relative comparison of the features.
+To make use of our large datasets, one different approach was implemented. Dataset \textit{mix} was created by merging all four datasets together, removing a few duplicates. Random sampling without replacement was applied on this dataset, in each iteration taking a sample of 500 binding and 500 non-binding sites without replacement. 1000 iterations were executed and mean effect sizes were reported. The results are shown in Table~\ref{tab:cohensd500} and Table~\ref{tab:cohensw500}.
 
-TODO nedat tam misto mean p values mean effect size?
+This approach has the advantage of removing possible dependencies of nearby residues. For many features, the values of individual residues are not independent of each other. For instance, a helix or a beta sheet always cover several consecutive residues. The features obtained from the structure, such as different measures of burriedness (e.g. \texttt{exposure\_CN}, \texttt{depth}) will have similar value for the spacially near residues. And the features computed from the FASTA sequence, such as \texttt{dynamine} or \texttt{mobiDB} will most likely have some dependencies as well, from the principle of their computation. When taking a small sample of 500 residues, the chance of these dependencies affecting the analysis is minimal.
 
-The sample size of 500 was chosen for two reasons: firstly, validity of the Central Limit Theorem needs to be assured, as described in Section~\ref{s:welchs}. Lumley \textit{et al.} \cite{lumley} demonstrated that 500 is a sufficiently large sample even for extremely non-normal data. And secondly, the minimum sample size assuring the Central Limit Theorem validity should be chosen, to avoid the P-value problem. Smaller sample size would probably be sufficient for the Central Limit Theorem, as 500 is a very safe estimation. Nevertheless, the sample size could not be much smaller anyhow, since the data for some categorial features would be very sparse. Even with the sample size of 500, some features needed to be excluded from the analysis, as there was not sufficient number of positives in this smaller sample. TODO vyjmenovat je
+The sample size of 500 was chosen for two reasons: firstly, validity of the Central Limit Theorem needs to be assured, as described in Section~\ref{s:welchs}. Lumley \textit{et al.} \cite{lumley} demonstrated that 500 is a sufficiently large sample even for extremely non-normal data. And secondly, the minimum sample size assuring the Central Limit Theorem validity should be chosen, to avoid the P-value problem. Smaller sample size would probably be sufficient for the Central Limit Theorem, as 500 is a very safe estimation. Nevertheless, the sample size could not be much smaller anyhow, since the data for some categorial features would be very sparse. Even with the sample size of 500, features \texttt{PTM}, \texttt{mod\_res}, \texttt{natural\_variant}, \texttt{disulfid} and \texttt{cis\_peptide} needed to be excluded from the analysis, as there was not sufficient number of positives in this smaller sample.
 
-TODO taky vyhoda, ze nebudou zavislosti mezi rezidui
-
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{llll}
-\hline
-                              & \textbf{no filter} & \textbf{P2Rank filter} & \textbf{MOAD filter} \\ \hline
-\textbf{lbs (test)}                  & 1.33E-218          & 1.33E-218              & 1.33E-218            \\
-\textbf{pdbekb\_conservation} & 3.55E-27           & 1.35E-30               & 4.43E-36             \\
-\textbf{conservation}         & 1.11E-17           & 1.05E-27               & 7.86E-33             \\
-\textbf{exposure\_CN}         & 4.72E-17           & 1.95E-21               & 1.30E-22             \\
-\textbf{HSE\_up}              & 1.15E-14           & 2.15E-18               & 1.38E-18             \\
-\textbf{depth}                & 8.00E-14           & 9.13E-16               & 2.83E-16             \\
-\textbf{HSE\_down}            & 1.48E-09           & 1.59E-11               & 2.28E-11             \\
-\textbf{bfactor}              & 2.56E-06           & 3.03E-08               & 3.97E-08             \\
-\textbf{aa}                   & 0.006394           & 0.001172               & ---                  \\
-\textbf{mol\_weight}          & ---                & 0.00129                & 0.002037             \\
-\textbf{hydropathy}           & 0.00539            & 0.001376               & 0.001953             \\
-\textbf{aromaticity}          & 0.02027            & 0.01516                & 0.02523              \\
-\textbf{H\_bond\_atoms}       & 0.08081            & 0.02502                & 0.03019              \\
-\textbf{charged}              & 0.2683             & 0.06663                & 0.08965              \\
-\textbf{polarity}             & 0.2755             & 0.07131                & 0.1009               \\
-\textbf{sec\_str}             & 0.133              & 0.0873                 & 0.02696              \\
-\textbf{strand}               & 0.1491             & 0.1112                 & 0.04838              \\
-\textbf{helix}                & 0.1361             & 0.1154                 & 0.02435              \\
-\textbf{mobiDB}               & 0.3971             & 0.3844                 & 0.3653               \\
-\textbf{phi\_angle}           & 0.3973             & 0.399                  & 0.3864               \\
-\textbf{psi\_angle}           & 0.4213             & 0.4317                 & 0.2875               \\
-\textbf{efoldmine}            & 0.4769             & 0.4373                 & 0.4839               \\
-\textbf{dynamine}             & 0.4937             & 0.484                  & 0.4208               \\
-\textbf{random\_cont (test)}         & 0.5029             & 0.5021                 & 0.4887               \\
-\textbf{variation}            & 0.5387             & 0.5283                 & 0.5395               \\
-\textbf{random\_binary (test)}       & 0.5374             & 0.5309                 & 0.5223               \\
-\textbf{turn}                 & 0.5785             & 0.5982                 & 0.598                \\ \hline
+\begin{tabular}{@{}llc@{}}
+\toprule
+                      & \textbf{mean} & \textbf{standard deviation} \\ \midrule
+\textbf{conservation} & 0.8812        & 0.06919           \\
+\textbf{exposure\_CN} & 0.7829        & 0.06753           \\
+\textbf{HSE\_up}      & 0.7511        & 0.06866           \\
+\textbf{depth}        & 0.6927        & 0.06815           \\
+\textbf{HSE\_down}    & 0.5649        & 0.06453           \\
+\textbf{bfactor}      & 0.4744        & 0.06165           \\
+\textbf{phi\_angle}   & 0.07136       & 0.05012           \\
+\textbf{mobiDB}       & 0.07066       & 0.04874           \\
+\textbf{psi\_angle}   & 0.06029       & 0.045             \\
+\textbf{efoldmine}    & 0.05961       & 0.04477           \\
+\textbf{dynamine}     & 0.05236       & 0.04086           \\
+\textbf{random\_cont} & 0.04968       & 0.03807           \\ \bottomrule
 \end{tabular}
-\caption{Mean P-values computed from 1000 iterations of random sampling with sample size 500. Computed on dataset \textit{mix} (4 datasets merged together) with three variations of ligands filtering. Features are sorted according to the P-value in the second column. Some values are missing because the assumptions of the test were not met.\\\hspace{\textwidth}
-*\texttt{variation} is computed only on the subsets of proteins for which the data were available in databases.}
-\label{tab:pvalues500}
+\caption{Mean effect sizes (cohen's \textit{d}) computed from 1000 iterations of random sampling with sample size 500. Computed on dataset \textit{mix} (all 4 datasets merged together) with P2Rank ligands filter. Features are sorted according to the effect size.}
+\label{tab:cohensd500}
 \end{table}
 
-The results for both conservation features \texttt{conservation} and \texttt{pdbekb\_conservation} turned out as expected. Sequence conservation has been used previously in many approaches for protein-ligand binding sites prediction and its importance for the prediction has been repeatedly demonstrated \cite{ligsite, cons, casp, prankweb}. The higher values of conservation for binding residues are clearly visible from the Figure~\ref{fig:conservation}.
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{@{}llc@{}}
+\toprule
+                              & \textbf{mean} & \textbf{standard deviation} \\ \midrule
+\textbf{lbs}                  & 0.998         & 2.22E-16                    \\
+\textbf{pdbekb\_conservation} & 0.4742        & 0.02518                     \\
+\textbf{aa}                   & 0.2443        & 0.02677                     \\
+\textbf{mol\_weight}          & 0.2414        & 0.0259                      \\
+\textbf{hydropathy}           & 0.2336        & 0.02724                     \\
+\textbf{H\_bond\_atoms}       & 0.1411        & 0.02893                     \\
+\textbf{aromaticity}          & 0.1067        & 0.03028                     \\
+\textbf{sec\_str}             & 0.09798       & 0.02917                     \\
+\textbf{polarity}             & 0.09157       & 0.0296                      \\
+\textbf{charged}              & 0.08189       & 0.032                       \\
+\textbf{strand}               & 0.07289       & 0.03048                     \\
+\textbf{helix}                & 0.07052       & 0.02998                     \\
+\textbf{random\_binary}       & 0.02375       & 0.01976                     \\
+\textbf{variation}            & 0.02298       & 0.01929                     \\
+\textbf{turn}                 & 0.02023       & 0.01797                     \\ \bottomrule
+\end{tabular}
+\caption{Mean effect sizes (cohen's \textit{w}) computed from 1000 iterations of random sampling with sample size 500. Computed on dataset \textit{mix} (all 4 datasets merged together) with P2Rank ligands filter. Features are sorted according to the effect size.
+\hspace{\textwidth}
+*\texttt{variation} is computed only on the subsets of proteins for which the data were available in databases.}
+\label{tab:cohensw500}
+\end{table}
+
+Let's discuss the results in more detail.
+
+The results for both conservation features \texttt{conservation} and \texttt{pdbekb\_conservation} turned out as expected. Sequence conservation has been used previously in many approaches for protein-ligand binding sites prediction and its importance for the prediction has been repeatedly demonstrated \cite{ligsite, cons, casp, prankweb}. The higher values of conservation for binding residues are clearly visible from the Figure~\ref{fig:conservation}. The effect sizes are the highest from all the examined features and it seems that the sequence conservation might be even more correlated with binding sites positions than the locations of cavities on the protein surface.
 
 \begin{figure}[!htbp]
 \centering
@@ -309,11 +314,11 @@ The results for both conservation features \texttt{conservation} and \texttt{pdb
   \includegraphics[width=1\linewidth]{../img/pdbekb_conservation_frequencies.png}
   \caption{\texttt{pdbekb\_conservation}}
 \end{subfigure}
-\caption{Higher values of conservation for binding residues demonstrated on two features: (a) continuous feature computed by the conservation pipeline, and (b) ordinal feature downloaded from PDBe-KB database.}
+\caption{Higher values of conservation for binding residues demonstrated on two features: (a) continuous feature computed by the P2Rank conservation pipeline, and (b) ordinal feature downloaded from PDBe-KB database.}
 \label{fig:conservation}
 \end{figure}
 
-Features \texttt{HSE\_up}, \texttt{HSE\_down}, \texttt{exposure\_CN} and \texttt{depth} are closely related to the `buriedness' of the residue. Similarly as conservation, this feature was expected to be important for ligand binding sites recognition. Many binding sites are shaped as cavities, or concave pockets, on the surface of the 3D structure. The geometrical methods, such as LIGSITE \cite{ligsite} or PocketPicker \cite{pocketpicker}, as well as other approached, make use of this property. The histograms for these continuous features are depicted in Figure~\ref{fig:buriedness}
+Features \texttt{HSE\_up}, \texttt{HSE\_down}, \texttt{exposure\_CN} and \texttt{depth} are closely related to the `buriedness' of the residue. Similarly as conservation, this feature was expected to be important for ligand binding sites recognition. Many binding sites are shaped as cavities, or concave pockets, on the surface of the 3D structure. The geometrical methods, such as LIGSITE \cite{ligsite} or PocketPicker \cite{pocketpicker}, as well as other approaches (including P2Rank), make use of this property (as explained in Section~\ref{s:existingmethods}. The histograms for these continuous features are depicted in Figure~\ref{fig:buriedness}. The effect sizes for all four features indicate quite large effect.
 
 
 \begin{figure}[!htbp]
@@ -338,22 +343,20 @@ Features \texttt{HSE\_up}, \texttt{HSE\_down}, \texttt{exposure\_CN} and \texttt
   \includegraphics[width=1\linewidth]{../img/HSE_down_hist.png}
   \caption{\texttt{HSE\_down}}
 \end{subfigure}
-\caption{The features related with buriedness of the residue have higher values in binding sites.}
+\caption{The features related to the residue `buriedness' have higher values in binding sites.}
 \label{fig:buriedness}
 \end{figure}
 
-The analysis reveals that binding sites have on average slightly lower B factor values (see Figure~\ref{fig:bfactor}). This suggests that binding sites are more well-ordered in general, whereas non-binding sites might have higher flexibility.
+The analysis reveals that binding sites have slightly lower B factor values on average (see Figure~\ref{fig:bfactor}), with the medium effect size. This could indicate that binding sites are more well-ordered in general, whereas non-binding sites might have higher flexibility.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.7\linewidth]{../img/bfactor_hist.png}
-\caption{\texttt{bfactor}: Binding sites have lower B factor values on average.}
+\caption{\texttt{bfactor}: Binding sites seem to have lower B factor values, which could indicate bigger rigidity of binding sites.}
 \label{fig:bfactor}
 \end{figure}
 
-Binding and non-binding sites seem to have different residue composition. Let's take a look at Figure~\ref{fig:aa}. Cys, Trp, Phe, Tyr, Gly, His, Met and Ile all have high binding/non-binding ratios, and thus, are more likely to occur in binding sites. On the other hand, Pro, Glu, Gln, Lys and Asp disfavour binding sites. Arg, Val, Ser and Leu are very frequent in binding sites; however, they have the ratios similar to the total binding/non-binding ratio, as they are very frequent on the whole protein surface, not only in binding sites. This result is in accordance with a large-scale study that explored the composition of protein-ligand binding sites \cite{lbscomposition}. 
-This is an interesting result and higher propensities of some amino acids to appear in binding sites could be used for their prediction.
-
+Binding and non-binding sites seem to have different residue composition. Let's take a look at Figure~\ref{fig:aa}. Cys, Trp, Phe, Tyr, Gly, His, Met and Ile all have high binding/non-binding ratios, and thus, are more likely to occur in binding sites. On the other hand, Pro, Glu, Gln, Lys and Asp disfavour binding sites. Arg, Val, Ser and Leu are very frequent in binding sites; however, they have the ratios similar to the total binding/non-binding ratio, as they are very frequent on the whole protein surface, not only in binding sites. This result is in accordance with a large-scale study that explored the composition of protein-ligand binding sites \cite{lbscomposition}. This is an interesting result; nevertheless, the effect size is smaller than for the previously discussed features and it is not clear whether the tendency of some amino acids to appear in the binding sites with higher frequency could be used for the prediction.
 
 \begin{figure}[!htbp]
 \centering
@@ -371,87 +374,162 @@ This is an interesting result and higher propensities of some amino acids to app
 \label{fig:aa}
 \end{figure}
 
-TODO analyza nejakych dalsich featur?
-
-TODO !!!!  It was discovered that high B-factor-characterized regions show a
-higher average flexibility index, more pronounced average
-hydrophilicity, and higher absolute net charge. - (11) Radivojac, P.; Obradovic, Z.; Smith, D. K.; Zhu, G.; Vucetic, S.;
-Brown, C. J.; Lawson, J. D.; Dunker, A. K. Protein flexibility and
-intrinsic disorder
-
-TODO high-B-factor ordered regions
-have a higher average flexibility index, a higher average
-hydrophilicity, a higher average absolute net charge, and a
-higher total charge than do either short or long disordered
-regions. The low-B-factor ordered regions are significantly
-enriched in hydrophobic residues and depleted in the total
-number of charged residues compared to the other three
-classes. 
+The molecular weight and hydropathy seem to have similar effect as the amino acid composition. This result is most probably caused by the fact that the values of the molecular weight and the hydropathy index correlate with the amino acid labels almost completely. To explain it more clearly, \texttt{mol\_weight} is an ordinal feature with 19 categories, where one category means one value of molecular weight for one amino acid (only leucine and isoleucine have the same molecular weight and thus fall into the same category). It means that computing this feature is almost equivalent to computing feature \texttt{aa}, only with different labels for categories and two amino acids merged into one category. The feature \texttt{hydropathy} is similar, only with 17 categories. The rest of amino acid-based features does not have this characteristic, as they are either binary (\texttt{charged}, \texttt{aromaticity}) or with small number of categories (\texttt{polarity}, \texttt{H\_bond\_atoms}).
 
 
+The binding sites composition has either very small or negligible effect on the values of the rest of the features. \texttt{aromaticity} and \texttt{H\_bond\_atoms} features look the most promising of the rest and could be given a try. None of properties such as torsion angles, secondary structures, disorder regions, polarity and charge of a residue, early folding regions or regions with increased backbone dynamics appear to have significantly different value within the binding sites. This means that unfortunately, the analysis has not revealed any novel features that would help to increase the protein-ligand binding sites prediction.
 
+\newpage
 
 \section{P2Rank models}
 
-TODO evaluation metrics
-
-The computed features were used to train new P2Rank models and analyze their practical significance. All models were trained with the same parameters as the default P2Rank model (100 trees, each grown with no depth limit using 6 features). The models were trained on the \textit{chen11} dataset and evaluated on \textit{coach420} dataset. The training was done with parameter \texttt{loop=10} which means that training was done 10 times, every time with different random seed, and the performance of the 10 resulting models was averaged at the end. This is important for the comparison of features importance so that the random behaviour of the random forest classifier does not have such big influence.
+The features examined in the previous sectio were used to train new P2Rank models and to find out their practical significance. All models were trained with the same parameters as the default P2Rank model (100 trees, each grown with no depth limit using 6 features). The models were trained on \textit{chen11} dataset and evaluated on \textit{coach420} dataset. The training was done with parameter \texttt{loop=10} which means that the model was trained 10 times, every time with different random seed, and the performance of the 10 resulting models was averaged at the end. This is important for the comparison of features importances so that the random behaviour of the classifier does not have such big influence.
 
 The features obtained by the analysis pipeline are called `csv features' in the following section, in accordance with the terminology used by P2Rank for user-defined features in csv files.
 
-TODO ze se nektere featury vynechaly a proc: aa, secstr, variation
+A couple of features were left out from the following experiments. The feature \texttt{variation} had missing values for around 3/4 structures, as mentioned in the previous section, and the comparison with the rest of the features would not make much sense. Categorical feature \texttt{aa} was replaced by 20 binary features representing individual amino acids (\texttt{aa\_HIS}, \texttt{aa\_SER} etc.). Similarly, categorical feature \texttt{sec\_str} was left out and represented by features \texttt{helix}, \texttt{strand} and \texttt{turn}.
 
-The performance of the baseline model (all default P2Rank features and no csv feature) was compared with the model trained on all csv features (without test features \texttt{lbs}, \texttt{random\_binary} and \texttt{random\_cont}), and the model trained with all P2Rank features and all csv features. The results are summarized in Table~\ref{tab:p2rankbaseline}. Our baseline model performs a little better in the Top-n category than the default P2Rank model described in the P2Rank article \cite{p2rank1}, which achieves the success rate of 72\%. This can be caused by  slightly different datasets, as described in Section TODO, or simply by the random behaviour of the classifier.
+The performance of the baseline model (trained with all default P2Rank features and no csv feature) was compared with the model trained with all csv features (test features \texttt{lbs}, \texttt{random\_binary} and \texttt{random\_cont} were left out of course), and the model trained with both P2Rank features and csv features. The results are summarized in Table~\ref{tab:p2rankbaseline}. Two metrics are reported: $D_{CA}$ and $D_{CC}$, as described in Section~\ref{s:metrics}, with distance threshold 4{\AA}. We used Top-\textit{n} and Top-(\textit{n}+2) rank cutoffs (\textit{n} is the number of relevant ligands). 
 
-The performance of the model trained on the csv features is inferior to the baseline model, but surprisingly, the difference is very small. The reason probably is that many features used by P2Rank are identical or very similar to the new csv features. P2Rank already used B factor, amino acid properties, buriedness and other properties for training, and csv features evidently does not contribute with much new information. That is visible on the model with both csv and P2Rank features: the performance is superior only by 1.5\%. Moreover, csv features are mutually correlated, as well as P2Rank features. 
 
 \begin{table}[]
 \centering
-\begin{tabular}{lll}
-\hline
-\textbf{}                                 & Top-n & Top-(n+2) \\ \hline
-\textbf{P2Rank features (baseline model)} & 73.6  & 78        \\
-\textbf{csv features}                     & 70.7  & 73.9      \\
-\textbf{P2Rank + csv features}            & 75.1  & 77.5      \\ \hline
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{}                      & \multicolumn{2}{c}{$D_{CA}$ [4{\AA}]}    & \multicolumn{2}{c}{$D_{CC}$ [4{\AA}]}    \\
+\textbf{}                      & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} \\ \midrule
+\textbf{baseline model}        & 73.6           & 78.0                 & 47.2           & 49.6               \\
+\textbf{P2Rank + csv features}          & 75.1           & 77.5               & 47.5           & 50.2               \\
+\textbf{csv features} & 70.3           & 74.8               & 39.5           & 42.9               \\ \bottomrule
 \end{tabular}
-\caption{Comparison of the performance of models with different sets of features.}
+\caption{Comparison of the performance of models with different sets of features: P2Rank default features (baseline model), csv features and both sets together.}
 \label{tab:p2rankbaseline}
 \end{table}
 
-Let's take a look at how the csv features help to improve the performance when adding only one of them at a time. Table~\ref{tab:p2rankCSV} summarizes the results of training one model per feature, with all P2Rank default features plus given csv feature. Models with features \texttt{pdbekb\_conservation} and \texttt{conservation} are clearly superior to the baseline model.  There are other features that perform better than the baseline model by tenths of percent; nevertheless, this difference is too small to proclaim the results significant. Although there are features that are enriched in binding sites, as has been shown previously, they do not help to improve P2Rank performance, probably due to the correlations and recurrence of the same features.
 
-\begin{table}[]
-\centering
-\begin{tabular}{lll}
+Our baseline model performs a little better in the Top-\textit{n} category than the default P2Rank model described in the P2Rank article \cite{p2rank1}, which achieves the success rate of 72\%. This can be caused by slightly different datasets (as described in Section~\ref{s:datasets}, or, to some degree, by the random behaviour of the classifier.
+
+When we add all csv features to the baseline model, the performance is superior by only 1.5 \%. The reason probably is that many P2Rank features are identical or very correlated with the new csv features. P2Rank already uses B factor, amino acid properties, buriedness and other properties for training, and csv features evidently does not contribute with much new information. Moreover, csv features are mutually correlated, as well as P2Rank features. These highly correlated features, as well as having so many irrelevant features, cannot be beneficial for the prediction.
+
+The performance of the model trained only with the csv features is inferior to the baseline model, but surprisingly, the difference is only 3.3 \%.
+
+We can see that the performances measured in the $D_{CC}$ metric are very low. This is unfortunatelly true for various tools. The benchmark study published by Chen \textit{et al.} \cite{benchmark} compared 10 predictors and in the Top-\textit{n} category with cutoff 4{\AA}, the top-performing predictor (FINDSITE \cite{findsite}) had 57\% success rate; the rest of the methods scored at most 28\%. Furthermore, FINDSITE is a template-based method, relying on a availability of known protein-ligand complexes similar to the query protein, and the 57 \% success rate was achieved with the similarity threshold set to 1.
+
+Let's take a look at how the individual csv features help to improve the performance, by adding only one at a time. Table~\ref{tab:p2rankCSV} summarizes the results of training one model per feature, with one csv feature plus all P2Rank default features. Only models with features \texttt{pdbekb\_conservation} and \texttt{conservation} are clearly superior to the baseline model. There are a few features that help to increase the performance of the baseline model, but only by tenths of percent; this difference is too small to proclaim the results significant. The rest of the features do not help to improve P2Rank performance, probably due to the correlations and recurrence of the similar features that were already included in P2Rank.
+
+\begin{table}[] \centering
+\scalebox{0.80}{
+\begin{tabular}{lcccc}
 \hline
-                              & Top-n & Top-(n+2) \\ \hline
-\textbf{lbs (test)}                  & 90.2  & 90.5      \\
-\textbf{pdbekb\_conservation} & 78.9  & 81.6      \\
-\textbf{conservation}         & 76.8  & 79.8      \\
-\textbf{HSE\_down}            & 74.1  & 78.6      \\
-\textbf{helix}                & 73.6  & 78.6      \\
-\textbf{psi\_angle}           & 74.3  & 78.4      \\
-\textbf{depth}                & 73.2  & 78.4      \\
-\textbf{turn}                 & 73.8  & 78.3      \\
-\textbf{HSE\_up}              & 73.6  & 78.2      \\
-\textbf{strand}               & 73.6  & 78.2      \\
-\textbf{mol\_weight}          & 73.5  & 78.2      \\
-\textbf{aromaticity}          & 73.6  & 78.1      \\
-\textbf{dynamine}             & 73.6  & 78.1      \\
-\textbf{charged}              & 73.5  & 78.1      \\
-\textbf{H\_bond\_atoms}       & 73.5  & 78.1      \\
-\textbf{efoldmine}            & 74.1  & 78        \\
-\textbf{phi\_angle}           & 73.8  & 78        \\
-\textbf{mobiDB}               & 73.6  & 78        \\
-\textbf{exposure\_CN}         & 73.5  & 78        \\
-\textbf{hydropathy}           & 73.3  & 77.8      \\
-\textbf{bfactor}              & 73    & 77.5      \\ \hline
+                              & \multicolumn{2}{c}{$D_{CA}$ [4{\AA}]}    & \multicolumn{2}{c}{$D_{CC}$ [4{\AA}]}    \\
+                              & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} \\ \hline
+\textbf{lbs (test)}                  & 90.2           & 90.5               & 78.1           & 78.6               \\
+\textbf{pdbekb\_conservation} & 78.9           & 81.6               & 48.9           & 51                 \\
+\textbf{conservation}         & 76.8           & 79.8               & 47.7           & 50.4               \\
+\textbf{psi\_angle}           & 74.3           & 78.4               & 47.1           & 49.5               \\
+\textbf{aa\_ASN}              & 74.1           & 78.7               & 46.9           & 49.6               \\
+\textbf{HSE\_down}            & 74.1           & 78.6               & 47             & 49.4               \\
+\textbf{efoldmine}            & 74.1           & 78                 & 46.5           & 48.8               \\
+\textbf{aa\_GLU}              & 73.9           & 78.3               & 47.1           & 49.6               \\
+\textbf{aa\_PHE}              & 73.9           & 78.2               & 47.5           & 49.9               \\
+\textbf{aa\_SER}              & 73.8           & 78.5               & 47.3           & 49.9               \\
+\textbf{aa\_ILE}              & 73.8           & 78.4               & 47             & 49.4               \\
+\textbf{aa\_ASP}              & 73.8           & 78.4               & 46.7           & 49.3               \\
+\textbf{turn}                 & 73.8           & 78.3               & 47.2           & 49.4               \\
+\textbf{aa\_GLY}              & 73.8           & 78.2               & 47.3           & 49.9               \\
+\textbf{phi\_angle}           & 73.8           & 78                 & 47.1           & 49.4               \\
+\textbf{aa\_TYR}              & 73.7           & 78.4               & 47             & 49.5               \\
+\textbf{helix}                & 73.6           & 78.6               & 47.1           & 49.5               \\
+\textbf{aa\_VAL}              & 73.6           & 78.4               & 47.4           & 49.8               \\
+\textbf{aa\_LEU}              & 73.6           & 78.4               & 46.9           & 49.4               \\
+\textbf{aa\_ARG}              & 73.6           & 78.2               & 47.1           & 49.6               \\
+\textbf{strand}               & 73.6           & 78.2               & 46.8           & 49.3               \\
+\textbf{HSE\_up}              & 73.6           & 78.2               & 46.2           & 48.6               \\
+\textbf{aromaticity}          & 73.6           & 78.1               & 46.9           & 49                 \\
+\textbf{dynamine}             & 73.6           & 78.1               & 46.9           & 49.3               \\
+\textbf{aa\_MET}              & 73.6           & 78.1               & 46.8           & 49                 \\
+\textbf{random\_binary (test)}       & 73.6           & 78.1               & 46.7           & 49.1               \\
+\textbf{aa\_THR}              & 73.6           & 78                 & 47.1           & 49.4               \\
+\textbf{mobiDB}               & 73.6           & 78                 & 47             & 49.4               \\
+\textbf{mol\_weight}          & 73.5           & 78.2               & 46.9           & 49.5               \\
+\textbf{H\_bond\_atoms}       & 73.5           & 78.1               & 47.2           & 49.8               \\
+\textbf{aa\_CYS}              & 73.5           & 78.1               & 47.1           & 49.7               \\
+\textbf{charged}              & 73.5           & 78.1               & 46.9           & 49.2               \\
+\textbf{aa\_HIS}              & 73.5           & 78                 & 46.8           & 49.3               \\
+\textbf{exposure\_CN}         & 73.5           & 78                 & 46.6           & 48.8               \\
+\textbf{random\_cont (test)}         & 73.5           & 77.9               & 46.5           & 48.8               \\
+\textbf{aa\_LYS}              & 73.4           & 78.3               & 46.6           & 49.4               \\
+\textbf{aa\_PRO}              & 73.3           & 78.3               & 46.7           & 49.3               \\
+\textbf{aa\_GLN}              & 73.3           & 78                 & 47             & 49.5               \\
+\textbf{aa\_ALA}              & 73.3           & 77.9               & 47.2           & 49.6               \\
+\textbf{hydropathy}           & 73.3           & 77.8               & 46.5           & 49.1               \\
+\textbf{depth}                & 73.2           & 78.4               & 46.2           & 48.9               \\
+\textbf{aa\_TRP}              & 73.1           & 77.9               & 46.6           & 48.9               \\
+\textbf{bfactor}              & 73             & 77.5               & 47.4           & 49.8               \\ \hline
 \end{tabular}
-\caption{Performance of models trained with all P2Rank features plus one extra csv feature at a time. The features are sorted according to the performance in Top-(n+2) category.}
+}
+\caption{Performances of models trained with individual csv features used together with all P2Rank features. The features are sorted according to the performances in the first column.}
 \label{tab:p2rankCSV}
 \end{table}
 
-In another experiment, all P2Rank features were switched off and the models were trained with csv features only, one at a time. The performances are of course wery poor, but it gives us the relative comparison of csv features, without the effect of correlation with existing P2Rank features. Table~\ref{tab:p2rankCSVOne}
+No csv features (except for two conservation features) seem to provide new information to the P2Rank classifier. This way, it is not possible to find out whether the statistical analysis produced meaningful results.
+
+Thanks to the features importances obtained by the Random Forests algorithm, we can get a kind of comparison of individual csv features. Feature importances indicate how much a feature is important for the prediction. The importances listed in Table~\ref{tab:importances} were obtained from training the model with all csv features and no P2Rank features (the same model as in Table~\ref{tab:p2rankbaseline}. This comparison can indicate the real importances to some degree, but keep in mind that it is only indicative. The importation measures can be affected by correlations among features \cite{variableimportance} and can be biased when the features have different number of categories or different scales of measurement (continuous, nominal etc.)  \cite{bias_importance}. Unfortunately, this experiment has all of these characteristics.
+
+The feature importances mostly correspond with the results of the statistical analysis. Both conservation features took place on the top, as well as four features related to the `burriedness'. \texttt{bfactor} feature was also among the top scoring features. We observed only smaller effect size for \texttt{aromaticity} feature, but it seems that it can provide new information to the classifier. Feature \texttt{helix} appears to be more important than we would expect based on the statistical analysis; however, it is hard to tell what is the reason for that. It is possible that even if the effect is small, it can still be useful for the classifier. It could be caused by the issues with correlation and number of categories, as described above, or simply by pure luck - a small perturbation of training data or input parameters can cause different features selection.
+
+\begin{table}[] \centering
+\scalebox{0.80}{
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{feature}     & \textbf{importance} \\ \midrule
+pdbekb\_conservation & 0.008592            \\
+HSE\_up              & 0.006906            \\
+conservation         & 0.004021            \\
+depth                & 0.003474            \\
+HSE\_down            & 0.002467            \\
+exposure\_CN         & 0.002011            \\
+aromaticity          & 0.001627            \\
+bfactor              & 0.000891            \\
+helix                & 0.000807            \\
+aa\_HIS              & 0.000783            \\
+hydropathy           & 0.000706            \\
+efoldmine            & 0.000675            \\
+dynamine             & 0.000661            \\
+strand               & 0.000645            \\
+mobiDB               & 0.000578            \\
+charged              & 0.000564            \\
+mol\_weight          & 0.000533            \\
+aa\_PHE              & 0.000516            \\
+phi\_angle           & 0.000457            \\
+aa\_GLY              & 0.000454            \\
+psi\_angle           & 0.000433            \\
+H\_bond\_atoms       & 0.00042             \\
+aa\_CYS              & 0.000389            \\
+aa\_LEU              & 0.000363            \\
+aa\_TYR              & 0.000305            \\
+aa\_GLU              & 0.000221            \\
+aa\_PRO              & 0.000221            \\
+aa\_SER              & 0.000211            \\
+aa\_ILE              & 0.000209            \\
+aa\_ARG              & 0.000209            \\
+aa\_MET              & 0.000196            \\
+aa\_LYS              & 0.000194            \\
+aa\_ASP              & 0.000138            \\
+aa\_VAL              & 0.000137            \\
+aa\_TRP              & 0.000121            \\
+aa\_THR              & 0.000116            \\
+aa\_ALA              & 0.000107            \\
+aa\_ASN              & 0.000102            \\
+aa\_GLN              & 9.1E-05             \\
+turn                 & 9E-05               \\ \bottomrule
+\end{tabular}
+}
+\caption{Importances of csv features returned by the Random Forests algorithm. The model was trained with all csv features and without P2Rank features.}
+\label{tab:importances}
+\end{table}
+
+TODO In another experiment, all P2Rank features were switched off and the models were trained with csv features only, one at a time. The performances are of course wery poor, but it gives us the relative comparison of csv features, without the effect of correlation with existing P2Rank features. Table~\ref{tab:p2rankCSVOne}
 
 
 \begin{table}[]
@@ -493,3 +571,8 @@ TODO nekde popsat, jake muzou byt duvody, proc je ta uspesnost tak mala
 v clanku prank: machine learning tool je napsano, ze podle benchmarku metody nemaji takove uspesnosti...
 \cite{methods} : researchers also think that the series of LBS prediction methods mentioned in the article cannot completely solve the problem of LBS detection since there exist some cryptic sites that are not evident in the unbound protein but form upon ligand binding
 taky ze noisy datasets, incomplete experimental data
+
+
+
+
+\section{Use case: the best conservation for P2Rank}
