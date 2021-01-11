@@ -66,7 +66,7 @@
 	- implementace featury - parsovani predvypocitanych souboru
 	- vytvoreni slozky s PDB, FASTA a konzervovanostmi
 	- nove datasety, vyrazeni struktur pro ktere nemam nejakou z konzervovanosti
-	- bash scripts/pipeline_P2Rank_oneFeature.sh -t data/datasets/chen11_conservation.txt -e data/datasets/coach420_conservation.txt -c scripts/source/config_conservation.json -l 1 -m 4
+	- bash scripts/pipeline_P2Rank_oneFeature.sh -t data/datasets/chen11_conservation.txt -e data/datasets/coach420_conservation.txt -c scripts/source/config_conservation.json -l 10 -m 4 -f conservation,INTAA_conservation,pdbekb_conservation
 
 7) zaver 1/1
 - jake featury vysly dobre

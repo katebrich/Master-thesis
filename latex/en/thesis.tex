@@ -88,7 +88,7 @@
 
 \vspace{10mm}
 
-The thesis is dedicated to Ondra Skácel; I will never forget you (again). Huge thanks to my family, my partner David and Čenda.
+The thesis is dedicated to Ondra Skácel - you are unforgettable. The biggest thanks go to my family, my partner David and dog Čenda.
 
 I would like to thank to my supervisor, David Hoksza, for his guidance throughout writing this thesis, and for many helpful comments and advice.
 Many thanks to Radoslav Krivák and Petr Škoda for their kindliness and help with P2Rank program.
@@ -100,12 +100,12 @@ Computational resources were supplied by the project "e-Infrastruktura CZ" (e-IN
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\AbstractAJ{%
-The number of experimentally resolved protein structures in the Protein Data Bank has been growing fast in the last 20 years, motivating the development of many computational tools for protein-ligand binding sites prediction. Binding sites prediction from protein 3D structures has many important applications; it is a key step in the complex process of rational drug design, it helps to infer the side-effects of drugs, it provides insight into proteins biological functions, and it is helpful in protein-ligand docking, molecular dynamics and many other fields. As far as we know, there has not been a study that would systematically investigate general properties of known ligand binding sites on a large scale. In this thesis, we examine these properties using existing experimental and predicted residue-level annotations of protein sequence and structure. We present an automated pipeline for statistical analysis of the annotations, based on hypothesis testing and effect sizes estimation. It is implemented in Python and it is easily extensible by user-defined annotations. The usage is demonstrated on 33 existing annotations and 4 different datasets. The practical significance of the results is tested on P2Rank prediction method and one use case experiment. We are hopeful that the results as well as the pipeline could eventually help to improve the performance of the existing binding sites predictors.
+The number of experimentally resolved protein structures in the Protein Data Bank has been growing fast in the last 20 years, which motivates the development of many computational tools for protein-ligand binding sites prediction. Binding sites prediction from protein 3D structures has many important applications; it is a key step in the complex process of rational drug design, it helps to infer the side-effects of drugs, it provides insight into proteins biological functions and it is helpful in many other fields, such as protein-ligand docking and molecular dynamics. As far as we know, there has not been a study that would systematically investigate general properties of known ligand binding sites on a large scale. In this thesis, we examine these properties using existing experimental and predicted residue-level annotations of protein sequence and structure. We present an automated pipeline for statistical analysis of these annotations, based on hypothesis testing and effect size estimation. It is implemented in Python and it is easily extensible by user-defined annotations. The usage is demonstrated on 33 existing annotations and 4 different datasets. The practical significance of the results is tested with P2Rank prediction method. We are hopeful that the results as well as the pipeline could be eventually helpful for improving the performance of the existing binding sites predictors.
 }
 
 \def\AbstractCJ{%
 
-V posledních 20 letech se počet experimentálních proteinových struktur v databázi Protein Data Bank rychle zvyšuje, což motivuje vývoj mnohých nástrojů pro predikci protein-ligand vazebných míst. Strukturní predikce vazebných míst má mnoho důležitých aplikací; je klíčovým krokem v komplexním procesu návrhu léčiv, pomáhá objevovat vedlejší účinky léčiv, umožňuje chápat biologické funkce proteinů a pomáhá v mnoha jiných oborech, jako je protein-ligand docking nebo molekulová dynamika. Pokud víme, dosud nebyla provedena studie, která by systematicky zkoumala obecné vlastnosti známých vazebných míst na velkých datasetech. V této práci se zaměřujeme na analýzu těchto vlastností, s využitím existujících experimentálních i predikovaných anotací primární a terciální struktury. Představujeme automatizovanou metodu pro statistickou analýzu těchto anotací, která je založená na testování hypotéz a odhadu velikosti účinku. Metoda je implementována v jazyce Python a lze ji jednoduše rozšířit o nové anotace definované uživatelem. Použití je demonstrováno na 33 existujících anotacích a čtyřech různých datasetech. Praktická významnost výsledků je otestována s pomocí metody P2Rank a na jednom konkrétním příkladě. Výsledky i samotná metoda pro statistickou analýzu by mohly posléze přispět ke zlepšení úspěšnosti existujících prediktorů vazebných míst.
+V posledních 20 letech se počet experimentálních proteinových struktur v databázi Protein Data Bank rychle zvyšuje, což motivuje vývoj nástrojů pro predikci protein-ligand vazebných míst. Strukturní predikce vazebných míst má mnoho důležitých aplikací; je klíčovým krokem v komplexním procesu návrhu léčiv, pomáhá objevovat vedlejší účinky léčiv, umožňuje chápat biologické funkce proteinů a je využívá se i v mnoha jiných oborech, jako je protein-ligand docking nebo molekulová dynamika. Pokud je autorce známo, dosud nebyla provedena studie, která by systematicky zkoumala obecné vlastnosti známých vazebných míst na velkých datasetech. Tato práce se zaměřuje na analýzu těchto vlastností, s využitím existujících experimentálních i predikovaných anotací primární a terciální struktury proteinu. Je zde představena automatizovaná metoda pro statistickou analýzu těchto anotací, která je založena na testování hypotéz a odhadu velikosti účinku. Metoda je implementována v jazyce Python a lze ji jednoduše rozšířit o nové anotace definované uživatelem. Použití je demonstrováno na 33 existujících anotacích a čtyřech různých datasetech. Praktická významnost výsledků je otestována s pomocí metody P2Rank. Výsledky i samotná metoda pro statistickou analýzu by mohly posléze přispět ke zlepšení úspěšnosti existujících nástrojů pro predikci vazebných míst.
 
 }
 
@@ -157,11 +157,11 @@ atd & a tak dale \\
 \include{bibliography}
 
 %%% Figures used in the thesis (consider if this is needed)
-%\listoffigures
+\listoffigures
 
 %%% Tables used in the thesis (consider if this is needed)
 %%% In mathematical theses, it could be better to move the list of tables to the beginning of the thesis.
-%\listoftables
+\listoftables
 
 
 
@@ -179,11 +179,22 @@ atd & a tak dale \\
 \appendix
 \chapter{Attachments}
 
-The attached CD contains two attachments:
 
 \section{attachment1}
 
-blabla
+TODO
+
+The procedure was following:
+\begin{itemize}
+\item We installed INTAA-conservation tool and downloaded Swiss-Prot database, as described in the project repository (\url{https://github.com/davidjakubec/INTAA-conservation}). Conservation scores for all structures in datasets \textit{chen11} and \textit{coach420} were calculated.
+\item Similarly, calculate conservation scores using P2Rank conservation pipeline. The usage is described at \url{https://github.com/cusbg/sequence-conservation}.
+\item New dataset files \texttt{chen11\_conservation.txt} and \texttt{coach420\_conservation. txt} were created.
+\item We created new config file \texttt{config\_conservation.json} with definitions of three conservation features. The file is included in Attachment TODO. 
+\item We implemented new feature \texttt{INTAA\_conservation} in class \texttt{Features.Custom.INTAAConservation} (TODO odkaz na attachments).
+\item Since conservation scores for \texttt{conservation} and \texttt{INTAA\_conservation} were computed locally and the computation was not included directly in the pipeline, these features were implemented so that they read and parse the files obtained by INTAA-conservation tool and supply values for individual residues to the pipeline. For this reason, before running the pipeline we must create the output folder (named as the dataset file) and place the pre-computed files into the subfolders named `conservation' and `INTAA\_conservation'.
+\item The following command was run to download the PDB files, compute the features, perform the statistical analysis and train and evaluate three P2Rank models with each conservation feature: \texttt{bash scripts/pipeline\_P2Rank\_oneFeature.sh -t data/datasets/chen11\_conservation.txt -e data/datasets/coach420\_conservation.txt -c scripts/source/config\_conservation.json -l 10 -m 4 -f conservation,INTAA\_conservation,pdbekb\_conservation}
+\item TODO recompute analysis sample 500
+\end{itemize}
 
 \section{attachment2}
 

@@ -253,9 +253,10 @@ The biochemical properties of amino acids (all features above except hydropathy)
 MobiDB is a database of protein disorder and mobility annotations. It provides annotations and predictions for intrinsically disordered (ID) proteins. MobiDB-lite is a method for highly specific predictions of long (at least 20 residues) disorders. It is a consensus-based prediction, combining results of eight different predictors
 \cite{mobidb}. It has been integrated into the MobiDB and the web server provides programmatic access to retrieve single entries via REST API \cite{mobidbApi}.
 
-\subsubsection{P2Rank}
+\subsubsection{P2Rank} \label{s:conservation}
 
-The sequence conservation scores for the feature \texttt{conservation} are computed through Conservation pipeline \cite{conservation} implemented for P2Rank. The pipeline runs on local computer and needs to have SwissProt, UniRef90 and TrEMBL databases downloaded locally.
+The sequence conservation scores for the feature \texttt{conservation} are computed through Conservation pipeline \cite{conservation} implemented for P2Rank. The conservation scores are computed from multiple sequence alignment (MSA) using the Jensen-Shannon divergence model \cite{jensen}. The pipeline searches for sequences similar to the query sequence in several databases. The details of the implementation were described by Jendele \textit{et al.} \cite{prankweb}.
+The pipeline runs on local computer and needs to have SwissProt, UniRef90 and TrEMBL databases downloaded locally.
 
 \subsection{User-defined features}
 

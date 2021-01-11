@@ -42,9 +42,9 @@
 \contentsline {subsection}{\numberline {3.5.6}User-defined features}{24}{subsection.3.5.6}%
 \contentsline {section}{\numberline {3.6}Statistical analysis}{25}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Implementation}{26}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Welch's test}{27}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.2}Welch's test}{28}{subsection.3.6.2}%
 \contentsline {subsection}{\numberline {3.6.3}Chi-squared ($\chi ^{2}$) test of independence}{29}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Effect size}{30}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.4}Effect size}{31}{subsection.3.6.4}%
 \contentsline {subsubsection}{\numberline {3.6.4.1}Cohen's \textit {d}}{31}{subsubsection.3.6.4.1}%
 \contentsline {subsubsection}{\numberline {3.6.4.2}Cohen's \textit {w}}{32}{subsubsection.3.6.4.2}%
 \contentsline {section}{\numberline {3.7}P2Rank models training and evaluation}{32}{section.3.7}%
@@ -52,11 +52,15 @@
 \contentsline {section}{\numberline {4.1}Datasets}{34}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Ligands filtering}{35}{subsection.4.1.1}%
 \contentsline {section}{\numberline {4.2}Statistical analysis}{36}{section.4.2}%
-\contentsline {section}{\numberline {4.3}P2Rank models}{49}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Use case: the best conservation for P2Rank}{52}{section.4.4}%
-\contentsline {chapter}{Conclusion}{55}{chapter*.28}%
-\contentsline {chapter}{List of Abbreviations}{56}{chapter*.29}%
-\contentsline {chapter}{Bibliography}{57}{chapter*.30}%
-\contentsline {chapter}{\numberline {A}Attachments}{68}{appendix.A}%
-\contentsline {section}{\numberline {A.1}attachment1}{68}{section.A.1}%
-\contentsline {section}{\numberline {A.2}attachment2}{68}{section.A.2}%
+\contentsline {section}{\numberline {4.3}Statistical analysis - random sampling}{43}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Discussion}{44}{section.4.4}%
+\contentsline {section}{\numberline {4.5}P2Rank models}{50}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Experiment: comparison of conservation features}{55}{section.4.6}%
+\contentsline {chapter}{Conclusion}{59}{chapter*.30}%
+\contentsline {chapter}{List of Abbreviations}{60}{chapter*.31}%
+\contentsline {chapter}{Bibliography}{61}{chapter*.32}%
+\contentsline {chapter}{List of Figures}{72}{chapter*.33}%
+\contentsline {chapter}{List of Tables}{73}{chapter*.34}%
+\contentsline {chapter}{\numberline {A}Attachments}{74}{appendix.A}%
+\contentsline {section}{\numberline {A.1}attachment1}{74}{section.A.1}%
+\contentsline {section}{\numberline {A.2}attachment2}{75}{section.A.2}%
