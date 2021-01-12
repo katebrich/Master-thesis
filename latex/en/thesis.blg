@@ -10,11 +10,7 @@ A level-1 auxiliary file: epilog.aux
 A level-1 auxiliary file: bibliography.aux
 The style file: plainnat.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "jensen"
-Warning--I didn't find a database entry for "variableimportance"
-Warning--I didn't find a database entry for "bias_importance"
-Warning--I didn't find a database entry for "intaa_github"
-Warning--I didn't find a database entry for "swissprot"
+Warning--I didn't find a database entry for "pdbe"
 Warning--to sort, need author or key in pdb_growth
 Warning--to sort, need author or key in pdbe_restapi
 Warning--to sort, need author or key in sasa
@@ -28,10 +24,12 @@ Warning--to sort, need author or key in compbias
 Warning--to sort, need author or key in bio2byte
 Warning--to sort, need author or key in mobidbApi
 Warning--to sort, need author or key in conservation
+Warning--to sort, need author or key in intaa_github
 Warning--empty year in bio2byte
 Warning--empty year in compbias
 Warning--empty year in conservation
 Warning--empty year in disulfid
+Warning--empty year in intaa_github
 Warning--empty year in mobidbApi
 Warning--empty year in mod_res
 Warning--empty year in natural_variant
@@ -45,45 +43,45 @@ Warning--empty year in levene
 Warning--empty year in levene
 Warning--empty year in cn
 Warning--empty year in cn
-You've used 107 entries,
+You've used 114 entries,
             2773 wiz_defined-function locations,
-            1286 strings with 25000 characters,
-and the built_in function-call counts, 52911 in all, are:
-= -- 4891
-> -- 3114
-< -- 54
-+ -- 1070
-- -- 960
-* -- 4624
-:= -- 8052
-add.period$ -- 411
-call.type$ -- 107
-change.case$ -- 631
-chr.to.int$ -- 104
-cite$ -- 257
-duplicate$ -- 2165
-empty$ -- 4190
-format.name$ -- 1104
-if$ -- 11014
+            1323 strings with 26194 characters,
+and the built_in function-call counts, 55885 in all, are:
+= -- 5183
+> -- 3245
+< -- 58
++ -- 1116
+- -- 999
+* -- 4861
+:= -- 8505
+add.period$ -- 444
+call.type$ -- 114
+change.case$ -- 669
+chr.to.int$ -- 111
+cite$ -- 274
+duplicate$ -- 2301
+empty$ -- 4450
+format.name$ -- 1153
+if$ -- 11644
 int.to.chr$ -- 4
 int.to.str$ -- 1
-missing$ -- 99
-newline$ -- 629
-num.names$ -- 376
-pop$ -- 1214
+missing$ -- 106
+newline$ -- 676
+num.names$ -- 400
+pop$ -- 1286
 preamble$ -- 1
-purify$ -- 534
+purify$ -- 561
 quote$ -- 0
-skip$ -- 1668
+skip$ -- 1752
 stack$ -- 0
-substring$ -- 2310
-swap$ -- 151
+substring$ -- 2425
+swap$ -- 158
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1152
-warning$ -- 30
-while$ -- 444
+type$ -- 1224
+warning$ -- 32
+while$ -- 470
 width$ -- 0
-write$ -- 1545
-(There were 35 warnings)
+write$ -- 1657
+(There were 33 warnings)

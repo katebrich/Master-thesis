@@ -20,7 +20,7 @@ The pipeline comprises a set of Python scripts which are connected together by t
 
 The features can be defined in `config file'. It is a file in JSON format that lists names of features, their type (binary, categorical, ordinal or continuous) and a path to the class with implementation. Custom config file with user-defined features or with subsets of features can be created and passed as argument \texttt{-c new\_config\_path}.
 
-TODO vic popsat usage? Nebo usage a setup v attachments? Příklady?
+TODO usage a setup v attachments
 
 The information about versions of used software and databases can be found in Appendix TODO. 
 
@@ -30,11 +30,11 @@ Dataset file is a mandatory input for the pipeline. It is a plain-text file with
 
 \section{FASTA and PDB download}
 
-For each structure, FASTA and PDB files are downloaded from PDBe, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries programatically.
+For each structure, FASTA and PDB files are downloaded from PDBe \cite{pdbe}, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries programatically.
 
 \section{Residue mappings}
 
-The residue-level mappings are needed for cross-referencing the protein tertiary structure with the sequence annotations and UniProt records. The main reason is that the PDB entry may cover only a segment of the full-length protein and the segment does not have to be continuous.
+The residue-level mappings are needed for cross-referencing the protein tertiary structure with the sequence annotations and UniProt \cite{uniprot} records. The main reason is that the PDB entry may cover only a segment of the full-length protein and the segment does not have to be continuous.
 
 Furthermore, the numbering of residues in the PDB file can differ from the primary sequence numbering. The residues in the PDB file are assigned identifiers by the author, in order to match the identification used in the publication. The identifier of the residue is composed of two parts. The first one is a residue number, and the second one, called `insertion code', is usually a character and it is left empty for most residues. Typically, it is used to label insertions relative to the reference sequence. The author can assign the numbers how he or she desires; they do not have to start with one or zero, do not have to be in consecutive order and can even be negative.
 
@@ -56,7 +56,7 @@ The solvent-accessible surface was computed using \texttt{Bio.PDB.SASA} module i
 
 \begin{figure}[!htbp]\centering
 \includegraphics[width=100mm]{../img/sasa.png}
-\caption{Illustration of the solvent accessible surface. It was created by rolling the probe (in blue) along the molecule surface and tracing the center of the probe. Retrieved 02-01-2020 from \url{https://commons.wikimedia.org/wiki/File:Surfacetype_Solvent-Accessible.png}}
+\caption[Illustration of the solvent accessible surface]{Illustration of the solvent accessible surface. It was created by rolling the probe (in blue) along the molecule surface and tracing the center of the probe. Retrieved 02-01-2020 from \url{https://commons.wikimedia.org/wiki/File:Surfacetype_Solvent-Accessible.png}}
 \label{fig:sasa}
 \end{figure}
 
@@ -115,7 +115,7 @@ conservation         & continuous  & P2Rank \\ \bottomrule
 
 \subsection{UniProtKB}
 
-The UniProt Knowledgebase (UniProtKB) is a large database of well-annotated protein sequence data. It tries to achieve the minimal redundancy of proteomes and it provides detailed, accurate and consistent annotations of the sequences \cite{uniprot}.
+The UniProt Knowledgebase (UniProtKB) \cite{uniprot} is a large database of well-annotated protein sequence data. It tries to achieve the minimal redundancy of proteomes and it provides detailed, accurate and consistent annotations of the sequences.
 
 Sequence annotations (called `features') are available for every UniProtKB entry. They describe interesting sites and regions on the protein sequence and every feature has an associated description with available evidence, source and related publications. The features are arranged in a well-organized manner on the UniProt website \cite{uniprot_web}, in so called `Features viewer' with many overlapping tracks for different features. Nonetheless, for the purpose of this work, the best way to obtain the features was via the Proteins REST API \cite{proteins_api}. It provides the interface to  access the sequence annotation data as well as mapped variation data programmatically. The API is available at (\url{http://www.ebi.ac.uk/proteins/api/doc}).
 
@@ -155,20 +155,20 @@ The regions of compositional bias are parts of the polypeptide chain where some 
 
 
 \subsection{PDBe-KB}
-PDBe-KB (Protein Data Bank in Europe - Knowledge Base) is managed by the PDBe team at the European Bioinformatics Institute. It is a collaborative resource that aims to bring together the annotations from various sources and to show the macromolecular structures in broader biological context. 
+PDBe-KB (Protein Data Bank in Europe - Knowledge Base) \cite{pdbekb} is managed by the PDBe team at the European Bioinformatics Institute. It is a collaborative resource that aims to bring together the annotations from various sources and to show the macromolecular structures in broader biological context. 
 
 One drawback of PDB is that every page represents only one entry that is based on a single experiment. There may be several PDB entries for the full-length protein, each covering only a segment of it. Nevertheless, the entries for the same protein are not interconnected. PDBe-KB has developed the \textit{aggregated views of proteins}, displaying an overview of all the data related to the full-length protein defined by the UniProtKB accession.
 
 The structures from the PDB are extensively used by scientific software and other resources. There exist many valuable annotations, such as ligand binding sites, post-translational modification sites, molecular channels or effects of mutations, that are created outside of the PDB. The problem is that the data is fragmented and therefore it would require immense effort of a researcher to collect and make use of all available data for a structure of interest.
 
-The aggregated views of proteins integrates the annotations from \textit{PDBe-KB partners}, collaborating scientific software developers. It facilitates the retrieval of these annotations with a uniform data access mechanism (via FTP or REST API). The project is called `FunPDBe'. A common data exchange scheme was defined to facilitate the transfer of data. \cite{pdbekb}
+The aggregated views of proteins integrates the annotations from \textit{PDBe-KB partners}, collaborating scientific software developers. It facilitates the retrieval of these annotations with a uniform data access mechanism (via FTP or REST API). The project is called `FunPDBe'. A common data exchange scheme was defined to facilitate the transfer of data \cite{pdbekb}.
 
 The use of PDBe-KB was difficult because of the lack of documentation and a few bugs that were encountered during this work (some of them corrected by now after pointing them out). However, it is understandable since it was launched only two years ago and the constant improvements are done since then.
 
 \subsubsection{Conservation}
-PDBe-KB provides pre-calculated residue-level conservation scores, obtained by a pipeline using HMMER and Skylign web servers that was described by Jakubec et al. \cite{3dpatch}.
+PDBe-KB provides pre-calculated residue-level conservation scores, obtained by a pipeline described by Jakubec et al. \cite{3dpatch}.
 
-The values of the score are integers ranging from 0 to 9, with 9 being the most conserved. Since scores higher than 4 were very sparse and the feature would not meet the assumptions of the Chi-squared test, the scores 4 and higher were merged into one category (4). This does not deteriorate the prediction nor the hypothesis test, as vast majority (over 95\%) of non-binding residues were scored 1 and lower.
+The values of the score are integers ranging from 0 to 9, with 9 being the most conserved. Since scores higher than 4 were very sparse and the feature would not meet the assumptions of the Chi-squared test (as described below), the scores 4 and higher were merged into one category (4). This does not deteriorate the prediction nor the hypothesis test, as vast majority (over 95\%) of non-binding residues were scored 1 and lower.
 
 \subsubsection{DynaMine}
 DynaMine \cite{dynamine} was developed by the Bio2Byte group \cite{bio2byte} and it is one of the PDBe-KB partner resources. It provides the annotations of the backbone dynamics predicted only from the FASTA sequence. DynaMine predicts backbone flexibility at the residue-level, using a linear regression model trained on a large dataset of curated NMR chemical shifts extracted from the Biological Magnetic Resonance Data Bank \cite{bmrb}. The predictor estimates the value of the `order parameter' (S\textsuperscript{2}) which is related to the rotational freedom of the N-H bond vector of the backbone. The values range from 0 (highly dynamic) to 1 (complete order).
@@ -207,7 +207,7 @@ Class \texttt{HSExposureCB} from BioPython module \texttt{Bio.PDB.HSExposure} wi
 
 \begin{figure}[!h]\centering
 \includegraphics[width=80mm]{../img/hse.png}
-\caption{Half sphere exposure. Retrieved 02-01-2020 from \url{https://en.wikipedia.org/wiki/File:HSECa.png}}
+\caption[Half sphere exposure]{Half sphere exposure. Retrieved 02-01-2020 from \url{https://en.wikipedia.org/wiki/File:HSECa.png}}
 \label{fig:hse}
 \end{figure}
 
@@ -219,7 +219,7 @@ The angles sizes can be computed directly from the PDBe; for the purpose of this
 
 \begin{figure}[!h]\centering
 \includegraphics[width=120mm]{../img/torsion.png}
-\caption{Polypeptide torsion angles phi, psi and omega. Retrieved 02-01-2020 from \url{https://www.researchgate.net/figure/Backbone-torsion-angles-of-a-prototypical-amino-acid-building-block-embedded-in-a-peptide_fig2_284713304}}
+\caption[Polypeptide torsion angles phi, psi and omega]{Polypeptide torsion angles phi, psi and omega. Retrieved 02-01-2020 from \url{https://www.researchgate.net/figure/Backbone-torsion-angles-of-a-prototypical-amino-acid-building-block-embedded-in-a-peptide_fig2_284713304}}
 \label{fig:torsion}
 \end{figure}
 
@@ -244,7 +244,7 @@ There are features that can be derived directly from the FASTA sequence. Every a
 \item \textbf{Hydrogen bond atoms} - Number of atoms of the side chain that are either hydrogen donor or hydrogen acceptor.
 \end{itemize}
 
-The biochemical properties of amino acids (all features above except hydropathy) were obtained from TODO citovat biochemie voet
+The biochemical properties of amino acids (all features above except hydropathy) were obtained from Biochemistry (Voet, 2010 \cite{voet}).
 
 \subsection{Other resources}
 
@@ -369,7 +369,7 @@ A \textit{contigency table} is a table displayed in a form of a matrix where cel
  Total & 5845 & 49199 & 55044 \\
  \hline
 \end{tabular}
-\caption{A $2\times 2$ contingency table for binary feature \texttt{aromaticity} computed on dataset Chen11.}\label{tab:contingency_table_example}
+\caption[A $2\times 2$ contingency table for binary feature \texttt{aromaticity}]{A $2\times 2$ contingency table for binary feature \texttt{aromaticity} computed on dataset Chen11.}\label{tab:contingency_table_example}
 \end{table}
 
 The null hypothesis assumes independence of the groups; in our case, the assumption is that there is no difference in the proportions of the analysed feature between binding sites and non-binding sites.
@@ -474,5 +474,7 @@ Two scripts further extend the analysis pipeline and can be used to train P2Rank
 \end{itemize}
 
 It is possible either to train one model with all given features at once with script \texttt{pipeline\_P2Rank\_allFeatures.sh}, or to train one model per feature with \texttt{pipeline\_P2Rank\_oneFeature.sh}
+
+TODO odkaz na attachments
 
 

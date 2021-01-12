@@ -3,17 +3,17 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Summary of analysed features.\relax }}{16}{table.caption.5}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Type I and II Error in hypothesis testing.\relax }}{26}{table.caption.8}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces A $2\times 2$ contingency table for binary feature \texttt {aromaticity} computed on dataset Chen11.\relax }}{29}{table.caption.9}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces A $2\times 2$ contingency table for binary feature \texttt {aromaticity}}}{29}{table.caption.9}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Summary of dataset properties with and without ligands filtering}}{36}{table.caption.12}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces P-values returned by hypothesis tests for individual features}}{38}{table.caption.13}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Values of Cohen's \textit {d}}}{41}{table.caption.16}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Values of Cohen's \textit {w}}}{42}{table.caption.17}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Mean effect sizes (cohen's \textit {d})}}{44}{table.caption.18}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Mean effect sizes (cohen's \textit {w})}}{45}{table.caption.19}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Comparison of the performance of models with different sets of features: P2Rank default features (baseline model), csv features and both sets together.\relax }}{50}{table.caption.24}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Performances of models trained with individual csv features used together with all P2Rank features. The features are sorted according to the performances in the first column.\relax }}{52}{table.caption.25}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Importances of csv features returned by the Random Forests algorithm. The model was trained with all csv features and without P2Rank features.\relax }}{54}{table.caption.26}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Results of the statistical analysis of three conservation features. The features were compares on two datasets (\textit {chen11} and \textit {coach420}) and the analysis was performed twice: with all the data rows, and 1000 iterations of random sampling with sample size 500, taking the same number of binding and non-binding sites. Keep in mind that the mean P-values cannot be interpreted in the original meaning of P-value and are stated here only to get the idea. \hspace {\textwidth } * The effect sizes for continuous features (\texttt {conservation} and \texttt {INTAA\_conservation}) are measured as Cohen's \textit {d} value, whereas Cohen's \textit {w} is stated for \texttt {pdbekb\_conservation}. Keep in mind that the two measures are scaled differently and the values cannot be compared directly with each other. \relax }}{56}{table.caption.27}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces Performance of P2Rank models with different conservation features}}{58}{table.caption.29}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Summary of dataset properties with and without ligands filtering}}{35}{table.caption.12}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces P-values returned by hypothesis tests for individual features}}{37}{table.caption.13}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Values of Cohen's \textit {d}}}{40}{table.caption.16}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Values of Cohen's \textit {w}}}{40}{table.caption.17}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Mean effect sizes (cohen's \textit {d})}}{42}{table.caption.18}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Mean effect sizes (cohen's \textit {w})}}{42}{table.caption.19}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Comparison of the performance of models with different sets of features}}{47}{table.caption.24}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Performances of models trained with individual csv features}}{49}{table.caption.25}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Importances of csv features returned by the Random Forests algorithm}}{51}{table.caption.26}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Results of the statistical analysis of three conservation features.}}{53}{table.caption.27}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Performance of P2Rank models with different conservation features}}{55}{table.caption.29}%
 \addvspace {10\p@ }

@@ -1,17 +1,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Visualization of SAS points for structure 1FBL. Each point is colored by its predited ligandability score (red points are the most ligandable, green points the least). Predicted binding sites are marked by coloured protein surface. Adapted from: \textit {P2Rank: machine learning based tool for rapid and accurate prediction of ligand binding sites from protein structure} \cite {p2rank1}\relax }}{11}{figure.caption.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces P2Rank: Visualization of SAS points for structure 1FBL}}{11}{figure.caption.2}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram of the pipeline structure.\relax }}{13}{figure.caption.3}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Illustration of the solvent accessible surface. It was created by rolling the probe (in blue) along the molecule surface and tracing the center of the probe. Retrieved 02-01-2020 from \url {https://commons.wikimedia.org/wiki/File:Surfacetype_Solvent-Accessible.png}\relax }}{17}{figure.caption.4}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Half sphere exposure. Retrieved 02-01-2020 from \url {https://en.wikipedia.org/wiki/File:HSECa.png}\relax }}{22}{figure.caption.6}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Polypeptide torsion angles phi, psi and omega. Retrieved 02-01-2020 from \url {https://www.researchgate.net/figure/Backbone-torsion-angles-of-a-prototypical-amino-acid-building-block-embedded-in-a-peptide_fig2_284713304}\relax }}{23}{figure.caption.7}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Illustration of the solvent accessible surface}}{17}{figure.caption.4}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Half sphere exposure}}{22}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Polypeptide torsion angles phi, psi and omega}}{23}{figure.caption.7}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Histogram for feature \texttt {dynamine}}}{39}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces P-value deflation}}{40}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Conservation features}}{45}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces The features related to the residue `buriedness' have higher values in binding sites.\relax }}{46}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces \texttt {bfactor}: Binding sites seem to have lower B factor values, which could indicate bigger rigidity of binding sites.\relax }}{47}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Feature \texttt {aa}.\relax }}{48}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Visual comparison of three conservation features, obtained from dataset \textit {coach420}. Binding/non-binding ratios are plotted on the right. The continuous data were divided into equally sized bins and for each bin, the ratio was computed as the number of binding residues having the conservation score in the corresponding bin, divided by the number of non-binding residues with the conservation score in that bin. For the ordinal feature \texttt {pdbekb\_conservation}, these are simply the ratios of binding/non-binding residues for each category. \relax }}{57}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Histogram for feature \texttt {dynamine}}}{38}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces P-value deflation}}{39}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Conservation features}}{43}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces The features related to the `buriedness'}}{44}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Feature \texttt {bfactor}}}{44}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Feature \texttt {aa}}}{46}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Visual comparison of three conservation features}}{54}{figure.caption.28}%
 \addvspace {10\p@ }

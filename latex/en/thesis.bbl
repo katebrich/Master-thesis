@@ -1,4 +1,4 @@
-\begin{thebibliography}{107}
+\begin{thebibliography}{114}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -6,62 +6,73 @@
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
 \bibitem[bio()]{bio2byte}
-Bio2byte group.
+{Bio2Byte group}.
 \newblock URL \url{https://bio2byte.be/info/}.
 \newblock Accessed: 20.11.2020.
 
 \bibitem[com()]{compbias}
-URL \url{https://www.uniprot.org/help/compbias}.
+{UniProt documentation: Compositional bias}.
+\newblock URL \url{https://www.uniprot.org/help/compbias}.
 \newblock Accessed: 15.11.2020.
 
 \bibitem[con()]{conservation}
-Sequence conservation pipeline.
+{Sequence conservation pipeline}.
 \newblock URL \url{https://github.com/cusbg/sequence-conservation}.
 \newblock Accessed: 5.12.2020.
 
 \bibitem[dis()]{disulfid}
-URL \url{https://www.uniprot.org/help/disulfid}.
+{UniProt documentation: Disulfide bond}.
+\newblock URL \url{https://www.uniprot.org/help/disulfid}.
 \newblock Accessed: 15.11.2020.
 
+\bibitem[int()]{intaa_github}
+{INTAA-conservation GitHub repository}.
+\newblock URL \url{https://github.com/davidjakubec/INTAA-conservation}.
+\newblock Accessed: 19.12.2020.
+
 \bibitem[mob()]{mobidbApi}
-Mobidb api documentation.
+{MobiDB API Documentation}.
 \newblock URL \url{https://mobidb.bio.unipd.it/help/apidoc}.
 \newblock Accessed: 2.12.2020.
 
 \bibitem[mod()]{mod_res}
-Todo.
+{UniProt documentation: Modified residue}.
 \newblock URL \url{https://www.uniprot.org/help/mod_res}.
 \newblock Accessed: 15.11.2020.
 
 \bibitem[nat()]{natural_variant}
-URL \url{https://www.uniprot.org/help/variant}.
+{UniProt documentation: Natural variant}.
+\newblock URL \url{https://www.uniprot.org/help/variant}.
+\newblock Accessed: 15.11.2020.
 
 \bibitem[non()]{non_std}
-URL \url{https://www.uniprot.org/help/non_std}.
+{UniProt documentation: Non-standard residue}.
+\newblock URL \url{https://www.uniprot.org/help/non_std}.
 \newblock Accessed: 15.11.2020.
 
 \bibitem[pdb({\natexlab{a}})]{pdb_growth}
-Rcsb pdb: Pdb statistics, {\natexlab{a}}.
+{RCSB PDB: PDB statistics}, {\natexlab{a}}.
 \newblock URL
   \url{https://www.rcsb.org/stats/growth/growth-released-structures}.
 \newblock Accessed: 3.1.2021.
 
 \bibitem[pdb({\natexlab{b}})]{pdbe_restapi}
-Pdbe rest api, {\natexlab{b}}.
+{PDBe REST API}, {\natexlab{b}}.
 \newblock URL \url{https://www.ebi.ac.uk/pdbe/pdbe-rest-api}.
 \newblock Accessed: 5.11.2020.
 
 \bibitem[sas()]{sasa}
-Biopython api documentation.
+{BioPython API documentation}.
 \newblock URL \url{https://biopython.org/docs/dev/api/Bio.PDB.SASA.html}.
 \newblock Accessed: 10.11.2020.
 
 \bibitem[sec()]{sec_str}
-URL \url{https://www.uniprot.org/docs/userman.htm}.
+{UniProt documentation: Secondary structure}.
+\newblock URL \url{https://www.uniprot.org/docs/userman.htm}.
 \newblock Accessed: 15.12.2020.
 
 \bibitem[uni()]{uniprot_web}
-Uniprot website.
+{UniProt website}.
 \newblock URL \url{https://www.uniprot.org/}.
 \newblock Accessed: 16.12.2020.
 
@@ -72,6 +83,14 @@ Chittaranjan Andrade.
 \newblock \emph{Indian Journal of Psychological Medicine}, 41\penalty0
   (3):\penalty0 210--215, 2019.
 \newblock \doi{10.4103/ijpsym.ijpsym_193_19}.
+
+\bibitem[Bairoch(2000)]{swissprot}
+A.~Bairoch.
+\newblock The {SWISS}-{PROT} protein sequence database and its supplement
+  {TrEMBL} in 2000.
+\newblock \emph{Nucleic Acids Research}, 28\penalty0 (1):\penalty0 45--48,
+  2000.
+\newblock \doi{10.1093/nar/28.1.45}.
 
 \bibitem[Bartlett et~al.(2002)Bartlett, Porter, Borkakoti, and
   Thornton]{catalytic_res}
@@ -131,6 +150,13 @@ Michal Brylinski and Wei~P. Feinstein.
 \newblock \emph{Journal of Computer-Aided Molecular Design}, 27\penalty0
   (6):\penalty0 551--567, 2013.
 \newblock \doi{10.1007/s10822-013-9663-5}.
+
+\bibitem[Capra and Singh(2007)]{jensen}
+John~A. Capra and Mona Singh.
+\newblock Predicting functionally important residues from sequence
+  conservation.
+\newblock \emph{Bioinformatics}, 23\penalty0 (15):\penalty0 1875--1882, 2007.
+\newblock \doi{10.1093/bioinformatics/btm270}.
 
 \bibitem[Capra et~al.(2009)Capra, Laskowski, Thornton, Singh, and
   Funkhouser]{concavity}
@@ -251,6 +277,12 @@ B.~Derrick and P.~White.
   (1):\penalty0 30--38, 2016.
 \newblock \doi{10.20982/tqmp.12.1.p030}.
 
+\bibitem[Donald~Voet(2010)]{voet}
+Judith G.~Voet Donald~Voet.
+\newblock \emph{Biochemistry}.
+\newblock WILEY, 2010.
+\newblock ISBN 0470570954.
+
 \bibitem[Durrant and McCammon(2011{\natexlab{a}})]{dynamics}
 Jacob~D. Durrant and J.~Andrew McCammon.
 \newblock Molecular dynamics simulations and drug discovery.
@@ -311,6 +343,14 @@ Virtanen et~al.
   python.
 \newblock \emph{Nature methods}, 17:\penalty0 261--272, 2020{\natexlab{b}}.
 \newblock \doi{10.1038/s41592-019-0686-2}.
+
+\bibitem[Gregorutti et~al.(2016)Gregorutti, Michel, and
+  Saint-Pierre]{variableimportance}
+Baptiste Gregorutti, Bertrand Michel, and Philippe Saint-Pierre.
+\newblock Correlation and variable importance in random forests.
+\newblock \emph{Statistics and Computing}, 27\penalty0 (3):\penalty0 659--678,
+  2016.
+\newblock \doi{10.1007/s11222-016-9646-1}.
 
 \bibitem[Guilloux et~al.(2009)Guilloux, Schmidtke, and Tuffery]{fpocket}
 Vincent~Le Guilloux, Peter Schmidtke, and Pierre Tuffery.
@@ -518,6 +558,14 @@ H.~B. Mann and D.~R. Whitney.
   (1):\penalty0 50--60, 1947.
 \newblock \doi{10.1214/aoms/1177730491}.
 
+\bibitem[McGinnis and Madden(2004)]{blast}
+S.~McGinnis and T.~L. Madden.
+\newblock {BLAST}: at the core of a powerful and diverse set of sequence
+  analysis tools.
+\newblock \emph{Nucleic Acids Research}, 32\penalty0 (Web Server):\penalty0
+  W20--W25, 2004.
+\newblock \doi{10.1093/nar/gkh435}.
+
 \bibitem[Mehta and Patel(1983)]{Mehta}
 Cyrus~R. Mehta and Nitin~R. Patel.
 \newblock A network algorithm for performing fisher{\textquotesingle}s exact
@@ -661,6 +709,14 @@ Christoph~A. Sotriffer, Paul Sanschagrin, Hans Matter, and Gerhard Klebe.
 \newblock \emph{Proteins: Structure, Function, and Bioinformatics}, 73\penalty0
   (2):\penalty0 395--419, 2008.
 \newblock \doi{10.1002/prot.22058}.
+
+\bibitem[Strobl et~al.(2007)Strobl, Boulesteix, Zeileis, and
+  Hothorn]{bias_importance}
+Carolin Strobl, Anne-Laure Boulesteix, Achim Zeileis, and Torsten Hothorn.
+\newblock Bias in random forest variable importance measures: Illustrations,
+  sources and a solution.
+\newblock \emph{{BMC} Bioinformatics}, 8\penalty0 (1), 2007.
+\newblock \doi{10.1186/1471-2105-8-25}.
 
 \bibitem[Sun et~al.(2019)Sun, Liu, Qu, Feng, and Reetz]{bfactor}
 Zhoutong Sun, Qian Liu, Ge~Qu, Yan Feng, and Manfred~T. Reetz.
