@@ -4,7 +4,7 @@
 
 The choice of datasets of protein-ligand complexes used for statistical analysis and P2Rank model training and evaluation was strongly inspired by the datasets described in the P2Rank article \cite{p2rank1}. All structures were re-downloaded directly from PDBe, according to their PDB ID (four-character alphanumeric identifier) and chain ID (one-character identifier) used in the original datasets. It was not possible to take the original datasets as they were, since the structures were not up-to-date and the annotations downloaded from the databases (e.g. feature values) could not be mapped properly.
 
-Furthermore, the re-downloaded datasets were filtered: Obsolete structures were replaced with their current entries, structures that did not have a corresponding UniProt record were removed, as well as  structures with the incorrect segments mapping due to the bug in PDBe (mentioned in section TODO-ODKAZ). The pipeline can only work with single-chain structures, and the structures from \textit{holo4k} (see below) and a few structures from \textit{joined} were multi-chain; thus, only one chain was chosen from each such structure.
+Furthermore, the re-downloaded datasets were filtered: Obsolete structures were replaced with their current entries, structures that did not have a corresponding UniProt record were removed, as well as  structures with the incorrect segments mapping due to the bug in PDBe (mentioned in Section~\ref{s:mappings}). The pipeline can only work with single-chain structures, and the structures from \textit{holo4k} (see below) and a few structures from \textit{joined} were multi-chain; thus, only one chain was chosen from each such structure.
 
 The resulting datasets were named identically with the original datasets:
 
@@ -70,7 +70,7 @@ holo4k\_filter\_MOAD     & 3308     & 4023    & 1.2161        & 50834        & 6
 \newpage
 \section{Statistical analysis}
 
-The statistical analysis of ligand binding sites properties was performed using the analysis pipeline described in Chapter~\ref{ch:3} with default parameters. The results were collected for all the datasets, including the versions with filtered ligands.
+The statistical analysis of ligand binding sites properties was performed using the analysis pipeline described in Chapter~\ref{ch:3} with default parameters, as described in Attachment~\ref{a:experiments1}. The results were collected for all the datasets, including the versions with filtered ligands.
 
 The results for the datasets with different ligands filters does not seem to differ widely and does not reveal any additional informations. For that reason and for better clarity of the text, following features analysis and plots will be shown only for the datasets with P2Rank ligands filter. The results obtained from the analysis pipeline for all the datasets with and without filters are included in Attachments. TODO odkaz
 
@@ -236,7 +236,7 @@ Another noticeable thing about Table~\ref{tab:pvaluesAll} is that the results fo
 
 \section{Statistical analysis - random sampling}
 
-To make use of our large datasets, one different approach was implemented. Dataset \textit{mix} was created by merging all four datasets together, removing a few duplicates. Random sampling without replacement was applied on this dataset, in each iteration taking a sample of 500 binding and 500 non-binding sites without replacement. 1000 iterations were executed and mean effect sizes were reported. The resulting effect sizes are shown in Table~\ref{tab:cohensd500} and Table~\ref{tab:cohensw500}.
+To make use of our large datasets, one different approach was implemented. Dataset \textit{mix} was created by merging all four datasets together, removing a few duplicates. The dataset contains a total number of 5047 structures. Random sampling without replacement was applied on this dataset, in each iteration taking a sample of 500 binding and 500 non-binding sites without replacement. 1000 iterations were executed and mean effect sizes were reported. The prodecure is described in Attachment~\ref{a:experiments2}. The resulting effect sizes are shown in Table~\ref{tab:cohensd500} and Table~\ref{tab:cohensw500}.
 
 This approach has the advantage of removing possible dependencies of nearby residues. For many features, the values of individual residues are not independent of each other. For instance, a helix or a beta sheet always covers several consecutive residues. The features obtained from the structure, such as different measures of burriedness (e.g. \texttt{exposure\_CN}, \texttt{depth}) can have similar values for spacially near residues. And the features computed from the FASTA sequence, such as \texttt{dynamine} or \texttt{mobiDB}, most likely have some dependencies as well, from the principle of their computation. When taking a small sample of 500 residues, the chance of these dependencies affecting the analysis is minimal.
 
@@ -377,7 +377,7 @@ The rest of the features does not seem to be very important for binding sites di
 
 \section{P2Rank models}
 
-The features examined in the previous sectio were used to train new P2Rank models and to find out their practical significance. All models were trained with the same parameters as the default P2Rank model (100 trees, each grown with no depth limit using 6 features). The models were trained on \textit{chen11} dataset and evaluated on \textit{coach420} dataset. The training was done with parameter \texttt{loop=10} which means that the model was trained 10 times, every time with different random seed, and the performances of the 10 resulting models were averaged at the end. This is important for reducing the influence of the random behaviour of the classifier.
+The features examined in the previous sections were used to train new P2Rank models and to find out their practical significance. All models were trained with the same parameters as the default P2Rank model (100 trees, each grown with no depth limit using 6 features). The models were trained on \textit{chen11} dataset and evaluated on \textit{coach420} dataset. The training was done with parameter \texttt{loop=10} which means that the model was trained 10 times, every time with different random seed, and the performances of the 10 resulting models were averaged at the end. This is important for reducing the influence of the random behaviour of the classifier. The procedure is described in Attachment~\ref{a:experiments3}.
 
 The features obtained by the analysis pipeline are called `csv features' in the following section, in accordance with the terminology used by P2Rank for user-defined features in csv files.
 
@@ -467,6 +467,8 @@ Let's take a look at how the individual csv features help to improve the perform
 
 No csv features (except for two conservation features) seem to provide new information to the P2Rank classifier. This way, it is not possible to find out whether the statistical analysis produced meaningful results.
 
+An interesting thing is that even if we supply the true binding residues to the classifier (test feature \texttt{lbs}), we can achieve only 90.2\% success rate in the first category. Therefore, 90.2\% is the highest success rate we are able to reach with this approach of adding extra features in csv files. The probable reason for not being able to achieve 100\% is that the process is more complex than simply classifying individual residues as binding/non-binding. As described in Section~\ref{s:p2rank}, the values for individual residues are mapped on SAS points and weighted by the distance. The clustering of SAS points to form resulting binding sites might have some influence as well.
+
 We can get a kind of comparison of individual csv features thanks to the feature importances obtained by the Random Forests algorithm. Feature importances (also called `variable importances') indicate how much is every feature important for the prediction. The importances listed in Table~\ref{tab:importances} were obtained from training the model with all csv features and no P2Rank features (the same model as in Table~\ref{tab:p2rankbaseline}. This comparison can outline the real importances to some degree, but keep in mind that it is only indicative. The importance measures can be affected by correlations of the features \cite{variableimportance} and can be biased when the features have different number of categories or different scales of measurement (continuous, nominal etc.)  \cite{bias_importance}. Unfortunately, this experiment has all of these characteristics.
 
 The feature importances roughly correspond with the results of the statistical analysis. Both conservation features take place on the top, as well as four features related to the `burriedness'. \texttt{bfactor} feature is also among the top scoring features. We observed only smaller effect size for \texttt{aromaticity} feature, but it seems that it can provide new information to the classifier. Feature \texttt{helix} appears to be more important than we would expect based on the statistical analysis; however, it is hard to tell what is the reason for that. It is possible that even if the effect is small, it can still be useful for the classifier. It could be caused by the issues with correlation and number of categories, as described above, or simply by pure luck - a small perturbation of training data or input parameters can cause different features selection.
@@ -522,26 +524,66 @@ turn                 & 9E-05               \\ \bottomrule
 \label{tab:importances}
 \end{table}
 
+\newpage
+In another experiment, we used the information obtained from the statistical analysis and we filtered the csv features according to the effect sizes. We created three subsets:
+\begin{itemize}
+\item large (effect size) - \texttt{pdbekb\_conservation, conservation, depth, \\ HSE\_up, HSE\_down, exposure\_CN}
+\item medium - \texttt{pdbekb\_conservation, conservation, depth, HSE\_up, \\ HSE\_down, exposure\_CN, bfactor}
+\item small - \texttt{pdbekb\_conservation,conservation,depth,HSE\_up,HSE\_down, \\ exposure\_CN,bfactor,mol\_weight,hydropathy,aromaticity, \\ H\_bond\_atoms
+}
+\end{itemize}
 
-%TODO In another experiment, all P2Rank features were switched off and the models were trained with csv features only, one at a time. The performances are of course wery poor, but it gives us the relative comparison of csv features, without the effect of correlation with existing P2Rank features. Table~\ref{tab:p2rankCSVOne}
+The results are summarized in Table~\ref{tab:models}. As we can see, filtering the features helped to increase the performance in most cases, compared to the models with all 40 csv features (highlighted in gray color). It seems that although Random Forests are robust and can deal with correlated or irrelevant features very well compared to other classifiers, these features can still affect the prediction and it can be useful to filter them out. The models trained with \textit{medium/large} effect features performed worse than the model trained with all csv features. The possible explanation is that some information contained in the features with small effect was missing. Nevertheless, most probable explanation is that wrong hyperparameters of the Random Forests algorithm were used. We trained each tree with 6 features, the same number as was used for the default P2Rank model.  However, in the \textit{medium/large} subsets, there are only 7 or 6 features, respectively. It means that almost all (or all) features were used for every tree. The optimization of the hyperparameters would be certainly needed in this case.
 
+\begin{table}[] \centering
+\scalebox{0.8}{
+\begin{tabular}{lllll}
+\hline
+\textbf{}                                     & \multicolumn{2}{l}{$D_{CA}$ {[}4{\AA}{]}}   & \multicolumn{2}{l}{$D_{CC}$ {[}4{\AA}{]}}   \\
+\textbf{}                                     & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} \\ \hline
+\textbf{small}                                & 71.6           & 78.2               & 40.2           & 44.7               \\
+\textbf{medium}                               & 67.4           & 75.1               & 35.9           & 40.7               \\
+\textbf{large}                                & 66.5           & 75.7               & 35.4           & 40.2               \\
+\rowcolor[HTML]{B7B4B4} 
+\textbf{all csv}                              & 70.3           & 74.8               & 39.5           & 42.9               \\ \hline
+\textbf{small + all P2Rank}                   & 77.4           & 80.4               & 48.4           & 51                 \\
+\textbf{medium + all P2Rank}                  & 77.3           & 80.4               & 48.1           & 50.4               \\
+\textbf{large + all P2Rank}                   & 77.9           & 80.9               & 48.3           & 50.6               \\
+\rowcolor[HTML]{B7B4B4} 
+\textbf{all csv + all P2Rank}                 & 75.1           & 77.5               & 47.5           & 50.2               \\ \hline
+\end{tabular}
+}
+\caption[Performances of the models with subsets of features according to the effect size]{Performances of the models with subsets of features according to the effect size, compared with the models trained with all csv features (highlighted in gray); these models were mentioned before and are stated here for better orientation in the text.}
+\label{tab:models}
+\end{table}
 
+Let's try to filter out P2Rank features as well. This time, we trained a model with only a subset of P2Rank features plus \texttt{pdbekb\_conservation} csv feature, and compared it with the previously mentioned model trained with all P2Rank features plus \texttt{pdbekb\_conservation}. The subset of P2Rank features was chosen based on the knowledge obtained from the features analysis; we took only those P2Rank features related to buriedness, hydrophobicity, aromaticity and B factor. The results are stated in Table~\ref{tab:subset}. 
 
+\begin{table}[] \centering
+\scalebox{0.8}{
+\begin{tabular}{lllll}
+\hline
+\textbf{}                                     & \multicolumn{2}{l}{$D_{CA}$ {[}4{\AA}{]}}   & \multicolumn{2}{l}{$D_{CC}$ {[}4{\AA}{]}}   \\
+\textbf{}                                     & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} \\ \hline
+\textbf{P2Rank subset + pdbekb\_conservation} & 77.3           & 80.9               & 47.3           & 50.8               \\
+\rowcolor[HTML]{B7B4B4} 
+\textbf{P2Rank + pdbekb\_conservation}        & 78.9           & 81.6               & 48.9           & 51                 \\ \hline
+\end{tabular}
+}
+\caption[Comparison of the models with all P2Rank features and a subset of P2Rank features]{Comparison of the models with all P2Rank features and a subset of P2Rank features, plus \texttt{pdbekb\_conservation} csv feature. The model highlighted in gray was mentioned before and is stated here again for comparison.\newline
+The subset of P2Rank features is following: 
+\texttt{protrusion, bfactor, hydrophatyIndex, aromatic, hBondDonor, hBondAcceptor, hBondDonorAcceptor, hydrophobic, hydrophilic}.
+}
+\label{tab:subset}
+\end{table}
 
-TODO dalsi modely 
+Instead of 35 original P2Rank features, only 9 was used, and yet, the performance decreased, but only by 1.6 \% (in the first category). It might mean that most features used by P2Rank have very little impact and do not contribute much to the prediction. Moreover, the model with the subset of features has not been optimized in any way and it is possible that we would achieve even higher success rates with optimizing the hyperparameters, mainly the number of the features used by each tree (as mentioned above). This is beyond the scope of this thesis and it could be subject to future work. Having less features could speed up the training significantly, and therefore, there would be more space for the optimization as well.
 
-TODO zminit, ze tam muze mit efekt to, jak P2Rank mapuje hodnoty na sas points + proc lbs vychazi tak malo
+To sum up, we have demonstrated that the pipeline can indicate which features might be important for the prediction, but the whole process is complex and there are many factors influencing the results. None of the features except for two conservation features helped to improve the performance of the P2Rank default model, since they did not bring any new information and were already included in P2Rank in some form or were not relevant. Nevertheless, we have shown that the statistical analysis can help to select subsets of features relevant for the prediction. Many features used by P2Rank method seem to have very little impact on the prediction and there might be some space for optimization.
 
-TODO nejak to shrnout, jestli teda pipelina pomohla a jak, ze muze slouzit pro hrubou predstavu, ale tech faktoru, co to ovlivnuji, je hodne, jak v te analyye, tak pri trenovani stromu. Ze konzervovanost pomohla, ale nic moc jineho nepomohlo, protoze vsechny ty dobre featury uz tam v nejake forme byly predtim.
-
-%TODO nekde popsat, jake muzou byt duvody, proc je ta uspesnost tak mala
-%(viz p2rank clanek) Improving...
-%v clanku prank: machine learning tool je napsano, ze podle benchmarku metody nemaji takove uspesnosti...
-%\cite{methods} : researchers also think that the series of LBS prediction methods mentioned in the article cannot completely solve the problem of LBS detection since there exist some cryptic sites that are not evident in the unbound protein but form upon ligand binding
-%taky ze noisy datasets, incomplete experimental data
 
 \newpage
-\section{Experiment: comparison of conservation features}
+\section{Practical example: comparison of \newline conservation features}
 
 In this section, we show the usage of the analysis pipeline on a practical example.
 
@@ -559,7 +601,7 @@ Thus, we compare two continuous features \texttt{INTAA\_conservation} and \textt
 
 The comparison of the conservation features was made on two datasets: \textit{chen11} and \textit{coach420}. Some structures were excluded from the original datasets because it was not possible to obtain the alignments, most likely because there was not sufficient number of matches in the sequence database and thus it was not possible to create the multiple sequence alignment. For \textit{chen11}, 16 structures were excluded because of the missing data for \texttt{conservation} and 3 structures because of \texttt{INTAA\_conservation} feature. Values for \texttt{pdbekb\_conservation} downloaded from PDBe-KB database were available for all the structures in \textit{chen11} and were missing only for two structures in \textit{coach420}. 
 
-The whole procedure of getting the results and training the models is described in Attachment TODO odkaz.
+The whole procedure of getting the results and training the models is described in Attachment~\ref{a:experiments4}.
 
 First, let's look at the results of the hypothesis testing, summarized in Table~\ref{tab:conservation1}. The effect sizes as well as P-values seem to be very significant, inicating that all three features should be important for the prediction of binding sites. \texttt{conservation} seems to be the better one of the two continuous features. The effect size of the \texttt{pdbekb\_conservation} cannot be compared with the two other features directly, since it is measured on a different scale. However, based on the interpretation tables described in Section~\ref{s:effectsize}, all three features have similar `medium to large' effect sizes.
 
@@ -635,9 +677,9 @@ To test the correctness of the results, we trained three P2Rank models, each wit
 \label{tab:P2Rankconservation}
 \end{table}
 
-This shows that the pipeline can be helpful for distinguishing useful features from unuseful and can suggest a set of promising features to try out; nevertheless, the results are only indicative and should not be interpreted blindly. In this case, the statistical analysis was not powerful enough to predict the small differences in the performances, but was able to indicate the importance of sequence conservation for the prediction.
+This shows that the pipeline can be helpful for distinguishing useful features from useless and can suggest a set of promising features to try out; nevertheless, the results are only indicative and should not be interpreted blindly. In this case, the statistical analysis was not powerful enough to predict the small differences in the performances, but was able to indicate the importance of sequence conservation for the prediction.
 
-To sum up, P2Rank conservation can probably be replaced with INTAA-conservation tool with possibly improved or similar performance. The advantage would be bigger speed and the need of only one sequential database (currently used tool needs three different databases downloaded locally). Another possibility is to use the pre-computed conservation scores in PDBe-KB database and clear away the necessity to install the databases locally.
+To sum up, P2Rank conservation can probably be replaced with INTAA-conservation tool with possibly improved or similar performance. This result should be verified on more test datasets. The advantage would be bigger speed and the need of only one sequential database (currently used tool needs three different databases downloaded locally). Another possibility is to use the pre-computed conservation scores in PDBe-KB database and clear away the necessity to install the databases locally.
 
 
 

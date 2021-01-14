@@ -4,9 +4,9 @@ One of the main aims of the thesis was to develop a pipeline for statistical ana
 
 The process starts with downloading FASTA and PDB files for input proteins from databases. Residue-level mappings are downloaded as well, to allow cross-referencing the protein tertiary structure with the sequence annotations. After that, values for all features are computed or downloaded and assigned to each residue. Residues are labeled as binding or non-binding according to the ligands defined in the PDB file. As the next step, we perform statistical analysis of the features, using computed ligand binding sites labels and feature values. After examining the results, we can decide which features could be potentially interesting for the ligand binding sites prediction. Finally, we can train new P2Rank models with these new features and see if the performance has improved.
 
-
 The analysis pipeline covers most steps of the process, from downloading the files from databases, to computing the statistical analysis of individual features. The only needed input is a dataset file with listed protein identifiers. Moreover, there are two scripts that further extend the pipeline and can be used to train and evaluate P2Rank models with new features. The structure of the pipeline is depicted in Diagram~\ref{fig:diagram}. The details about individual parts are described in this Chapter.
 
+The pipeline is able to run the whole process at once, or it can start and end in any point, which can be done by specifying a set of `tasks' to perform (e.g. we want to compute ligand binding sites, but do not compute features and run analysis). This way, it is possible to use the pipeline on data obtained from a different source. Moreover, the user can easily extend the pipeline with new features and use them separately, or combine them with the pre-defined features.
 
 \begin{figure}[!h]\centering
 \includegraphics[width=140mm]{../img/pipelineDiagram.pdf}
@@ -16,13 +16,14 @@ The analysis pipeline covers most steps of the process, from downloading the fil
 
 The pipeline is implemented in Python, utilizing several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or SciPy \cite{scipy}. BioPython is an open-source collection of Python tools for computational biology and it was very useful in this work, especially for parsing PDB and FASTA files.
 
-The pipeline comprises a set of Python scripts which are connected together by the main script \texttt{analysis\_pipeline.py}. The main script should be used to run the pipeline. It defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. See \url{https://github.com/katebrich/LBS_analysis_pipeline} for more details about options, examples of usage, setup, requirements, input and output.
+The pipeline comprises a set of Python scripts which are connected together by the main script \texttt{analysis\_pipeline.py}. The main script should be used to run the pipeline. It defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. 
+
+
+The setup and options are described in Attachment~\ref{a:pipeline}. See \url{https://github.com/katebrich/LBS_analysis_pipeline} for detailed description of the functionality, examples of usage, input and output formats etc.
 
 The features can be defined in `config file'. It is a file in JSON format that lists names of features, their type (binary, categorical, ordinal or continuous) and a path to the class with implementation. Custom config file with user-defined features or with subsets of features can be created and passed as argument \texttt{-c new\_config\_path}.
 
-TODO usage a setup v attachments
-
-The information about versions of used software and databases can be found in Appendix TODO. 
+The information about versions of used software and databases can be found in Attachment~\ref{a:software}.
 
 
 \section{Dataset file}
@@ -32,7 +33,7 @@ Dataset file is a mandatory input for the pipeline. It is a plain-text file with
 
 For each structure, FASTA and PDB files are downloaded from PDBe \cite{pdbe}, via Entry-based REST API \cite{pdbe_restapi}, which is one of the possibilities to access large amouts of data about individual PDB entries programatically.
 
-\section{Residue mappings}
+\section{Residue mappings} \label{s:mappings}
 
 The residue-level mappings are needed for cross-referencing the protein tertiary structure with the sequence annotations and UniProt \cite{uniprot} records. The main reason is that the PDB entry may cover only a segment of the full-length protein and the segment does not have to be continuous.
 
@@ -473,8 +474,6 @@ Two scripts further extend the analysis pipeline and can be used to train P2Rank
 \item train and evaluate new P2Rank model on given datasets with custom features
 \end{itemize}
 
-It is possible either to train one model with all given features at once with script \texttt{pipeline\_P2Rank\_allFeatures.sh}, or to train one model per feature with \texttt{pipeline\_P2Rank\_oneFeature.sh}
-
-TODO odkaz na attachments
+It is possible either to train one model with all given features at once with script \texttt{pipeline\_P2Rank\_allFeatures.sh}, or to train one model per feature with \texttt{pipeline\_P2Rank\_oneFeature.sh}.
 
 

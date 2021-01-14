@@ -1,7 +1,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Summary of analysed features.\relax }}{16}{table.caption.5}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Summary of analysed features.\relax }}{17}{table.caption.5}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Type I and II Error in hypothesis testing.\relax }}{26}{table.caption.8}%
 \contentsline {table}{\numberline {3.3}{\ignorespaces A $2\times 2$ contingency table for binary feature \texttt {aromaticity}}}{29}{table.caption.9}%
 \addvspace {10\p@ }
@@ -10,10 +10,12 @@
 \contentsline {table}{\numberline {4.3}{\ignorespaces Values of Cohen's \textit {d}}}{40}{table.caption.16}%
 \contentsline {table}{\numberline {4.4}{\ignorespaces Values of Cohen's \textit {w}}}{40}{table.caption.17}%
 \contentsline {table}{\numberline {4.5}{\ignorespaces Mean effect sizes (cohen's \textit {d})}}{42}{table.caption.18}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Mean effect sizes (cohen's \textit {w})}}{42}{table.caption.19}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Comparison of the performance of models with different sets of features}}{47}{table.caption.24}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Performances of models trained with individual csv features}}{49}{table.caption.25}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Importances of csv features returned by the Random Forests algorithm}}{51}{table.caption.26}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Results of the statistical analysis of three conservation features.}}{53}{table.caption.27}%
-\contentsline {table}{\numberline {4.11}{\ignorespaces Performance of P2Rank models with different conservation features}}{55}{table.caption.29}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Mean effect sizes (cohen's \textit {w})}}{43}{table.caption.19}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Comparison of the performance of models with different sets of features}}{48}{table.caption.24}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Performances of models trained with individual csv features}}{50}{table.caption.25}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Importances of csv features returned by the Random Forests algorithm}}{52}{table.caption.26}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Performances of the models with subsets of features according to the effect size}}{53}{table.caption.27}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Comparison of the models with all P2Rank features and a subset of P2Rank features}}{54}{table.caption.28}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Results of the statistical analysis of three conservation features.}}{56}{table.caption.29}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces Performance of P2Rank models with different conservation features}}{58}{table.caption.31}%
 \addvspace {10\p@ }

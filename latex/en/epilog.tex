@@ -1,5 +1,16 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
+In this thesis, we have proposed a pipeline for the statistical analysis of residue-level annotations, described its functionality, usage and the methodology of the whole process.
 
-Conclusion.
+This pipeline was used to carry out statistical analysis of 33 existing annotations of protein sequence and structure, and the results were calculated for 4 datasets with a total number of 5047 different protein-ligand complexes. We have discussed the results returned by the pipeline which were in accordance with existing literature. We have confirmed that sequence conservation and residue burriedness correlate with the locations of the binding sites. We have validated the fact that the amino acid composition of binding sites is different from the rest of the protein surface. We have revealed that binding residues tend to have slightly lower B factor values. Unfortunately, no novel binding sites properties that could help to improve the binding sites prediction were discovered.
+
+In addition, we have demonstrated on our data that P-value itself is not a good measure of practical significance since it strongly depends on the sample size, and we rationalized the need for reporting the effect sizes.
+
+We have tested the practical significance of the results using P2Rank prediction method, by combining the features obtained by the pipeline with default P2Rank features. Except for the sequence conservation, none of the new features improved the prediction because of the possible correlations between the features. Neverthless, we have demonstrated that the feature importances correlate with the effect sizes obtained from the statistical analysis. We have also shown that the statistical analysis can help to select subsets of features relevant for the prediction. 
+
+In a practical experiment, we have shown that the sequence conservation tool used by P2Rank might probably be replaced with a much faster tool, achieving similar or even better performance. This statement should be tested on more datasets.
+
+The pipeline might be used by researchers as a convenient way to explore properties of the binding sites and to reveal the promising features for the existing or new protein-ligand binding sites predictors.
+
+As a follow-up to this thesis, it might be useful to optimize P2Rank method by analyzing the impact of its features and selecting only a subset of those features which seem relevant for the prediction. This could help to achieve higher speed of the training and hopefully increase the success rate of the method. 

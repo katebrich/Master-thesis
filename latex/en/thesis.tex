@@ -58,6 +58,7 @@
 \usepackage{setspace}
 
 
+
 %%% Basic information on the thesis
 
 % Thesis title in English (exactly as in the formal assignment)
@@ -203,43 +204,161 @@ SAS & Solvent Accessible Surface \\
 
 \singlespacing
 
-
-\section{Analysis pipeline}
-
-\subsection{Setup}
-
-\subsection{Options and arguments}
-
-\subsection{Usage}
-
-
-\section{Dataset files}
-
-
-
-\section{Procedures}
-
-\subsection{Statistical analysis}
-
-\subsection{Statistical analysis - random sampling}
-
-\subsection{Experiment: comparison of conservation features}
-
-TODO
-
-The procedure was following:
+The attached CD contains several attachments:
 \begin{itemize}
-\item We installed INTAA-conservation tool and downloaded Swiss-Prot database, as described in the project repository (\url{https://github.com/davidjakubec/INTAA-conservation}). Conservation scores for all structures in datasets \textit{chen11} and \textit{coach420} were calculated.
-\item Similarly, calculate conservation scores using P2Rank conservation pipeline. The usage is described at \url{https://github.com/cusbg/sequence-conservation}.
-\item New dataset files \texttt{chen11\_conservation.txt} and \texttt{coach420\_conservation. txt} were created.
-\item We created new config file \texttt{config\_conservation.json} with definitions of three conservation features. The file is included in Attachment TODO. 
-\item We implemented new feature \texttt{INTAA\_conservation} in class \texttt{Features.Custom.INTAAConservation} (TODO odkaz na attachments).
-\item Since conservation scores for \texttt{conservation} and \texttt{INTAA\_conservation} were computed locally and the computation was not included directly in the pipeline, these features were implemented so that they read and parse the files obtained by INTAA-conservation tool and supply values for individual residues to the pipeline. For this reason, before running the pipeline we must create the output folder (named as the dataset file) and place the pre-computed files into the subfolders named `conservation' and `INTAA\_conservation'.
-\item The following command was run to download the PDB files, compute the features, perform the statistical analysis and train and evaluate three P2Rank models with each conservation feature: \texttt{bash scripts/pipeline\_P2Rank\_oneFeature.sh -t data/datasets/chen11\_conservation.txt -e data/datasets/coach420\_conservation.txt -c scripts/source/config\_conservation.json -l 10 -m 4 -f conservation,INTAA\_conservation,pdbekb\_conservation}
-\item TODO recompute analysis sample 500
+\item LBS\_analysis\_pipeline.zip - source code of the analysis pipeline and used dataset files
+\item TODO
+
 \end{itemize}
 
-\section{Used software and databases}
+
+\section{Analysis pipeline} \label{a:pipeline}
+This section describes the setup and usage of the analysis pipeline. For more detailed instructions, examples and explanations of the functionality, see project GitHub repository \url{https://github.com/katebrich/LBS_analysis_pipeline}.
+
+The pipeline was developed and tested on Linux operating system.
+
+\subsection{Setup}
+The pipeline requires no installation, only several Python packages installed. For the setup, follow these steps:
+\begin{enumerate}
+\item Unpack the attached source code:
+
+\texttt{unzip LBS\_analysis\_pipeline.zip}
+
+\item Go into the new folder:
+
+\texttt{cd LBS\_analysis\_pipeline}
+
+\item Required packages can be installed using requirement file:
+
+\texttt{pip install -r requirements.txt}
+
+Alternatively, a virtual environment can be created with \texttt{conda}:
+
+\texttt{conda env create -f environment.yml}
+
+\item Now, it is possible to run the pipeline:
+
+\texttt{python3 scripts/source/analysis\_pipeline.py \textbackslash \newline -d data/datasets/test.txt -o output/test}
+
+\item Note! Before usage of the scripts for the P2Rank model training \newline (\texttt{pipeline\_P2Rank\_oneFeature.sh} and \texttt{pipeline\_P2Rank\_allFeatures.sh}), it is required to change the \texttt{P2RANK\_PATH} variable in the scripts according to the P2Rank installation directory.
+
+\end{enumerate}
+
+\subsection{Options and arguments}
+\begin{Verbatim}[fontsize=\small]
+Usage:
+  analysis_pipeline.py 
+  	-d DATASET_FILE_PATH
+  	-o OUTPUT_DIR_PATH [OPTIONS]... 
+
+Options:
+  -d, --dataset                
+  	Mandatory; file with listed structures to process.
+  -o, --output_dir             
+  	Mandatory; root folder. Created if not exists.
+  -t, --tasks                  
+  	Default: 'A'. Comma-separated list of tasks to process. 
+  	If data are missing in root folder for some task, they are 
+  	computed even if their task is not in the list.
+  	Possible values: 'D' - download; 'L' - compute ligand binding 
+  	sites; 'F' - compute features; 'A' - compute analysis
+  -m, --threads                
+  	Default: 4. Number of threads.
+  -f, --features               
+  	Comma-separated list of features. If not provided, all
+  	features from config are processed.
+  -c, --config_path            
+  	Default: file config.json located in the same directory 
+  	as this script.
+  -l, --lbs_distance_threshold 
+  	Default: 4. Binding residues are defined as residues with 
+  	at least one non-hydrogen atom in distance at most 
+  	lbs_binding_threshold from any ligand.
+  -s, --sample_size            
+  	Default: 0. Size of random sample for hypothesis tests. 
+  	If 0, all rows are taken. Arguments -i and -b are not
+  	considered, as this only makes sense for 1 iteration
+  	and no balancing.
+  -i, --iterations             
+  	Default: 1. Number of iterations of hypothesis tests. 
+  	Summary files contain averaged results from all the iterations.
+  -b, --balance_binding_ratio  
+  	Default: False. If false, sample of given size is taken from
+  	the whole dataset and binding/nonbinding ratio is not balanced. 
+  	If true, the same number of binding rows and nonbinding rows
+  	(equal to given sample size) is taken. 
+  -p, --draw_plots             
+  	Default: True.
+  -a, --alpha                  
+  	Default: 0.05. Statistical significance level. 
+\end{Verbatim}
+
+
+\subsection{Dataset files}
+After unpacking the source code (LBS\_analysis\_pipeline.tar.gz), the dataset files for all used datasets can be found in folder `data/datasets'.
+
+
+\section{Experiments} \label{a:experiments}
+
+This section describes the procedures used for obtaining the results discussed in this thesis.
+
+\subsection{Statistical analysis} \label{a:experiments1}
+The analysis pipeline was run with default parameters:
+
+\begin{Verbatim}[fontsize=\small]
+python3 scripts/source/analysis\_pipeline.py \
+	-d data/datasets/DATASET_NAME.txt -o output/DATASET_NAME
+\end{Verbatim}
+
+where `DATASET\_NAME' was substituted with the name of the dataset file, e.g. `chen11' or `coach420\_filter\_MOAD'.
+
+Note than since conservation scores for \texttt{conservation} feature are computed locally and the computation takes very long time, it was not included directly in the pipeline. The scores were obtained outside of the pipeline by the sequnce conservation pipeline (usage is described at \url{https://github.com/cusbg/sequence-conservation}). The pipeline was then used only for parsing the files and running the analysis.
+
+\subsection{Statistical analysis - random sampling} \label{a:experiments2}
+The pipeline analysis was run with following settings to run 1000 iterations of random sampling, each time taking 500 binding and 500 non-binding residues:
+
+\begin{Verbatim}[fontsize=\small]
+python3 scripts/source/analysis\_pipeline.py \
+	-d data/datasets/DATASET_NAME.txt -o output/DATASET_NAME \
+	-s 500 -i 1000 -b true
+\end{Verbatim}
+
+\subsection{P2Rank models} \label{a:experiments3}
+
+The P2Rank models training was done using scripts \newline \texttt{pipeline\_P2Rank\_allFeatures.sh} (trains one model with all given features together) and \texttt{pipeline\_P2Rank\_oneFeature.sh} (takes one feature per one model). The usage is the same for both scripts:
+
+\begin{Verbatim}[fontsize=\small]
+bash scripts/pipeline_P2Rank_oneFeature.sh \
+	-t data/datasets/chen11.txt \
+	-e data/datasets/coach420.txt \
+	-l 10 -m 4 \
+	-f pdbekb_conservation,depth,...(*all desired features here*)
+\end{Verbatim}
+
+\subsection{Practical example: comparison of conservation features} \label{a:experiments4}
+
+The procedure was following:
+\begin{enumerate}
+\item We installed INTAA-conservation tool and downloaded Swiss-Prot \newline database, as described in the project repository (\url{https://github.com/davidjakubec/INTAA-conservation}). Conservation scores for all structures in datasets \textit{chen11} and \textit{coach420} were calculated.
+\item Similarly, we calculated conservation scores using P2Rank conservation pipeline. The usage is described at \newline \url{https://github.com/cusbg/sequence-conservation}.
+\item New dataset files \texttt{chen11\_conservation.txt} and \newline \texttt{coach420\_conservation.txt} were created by removing the structures with missing data for any of the three features.
+\item We created new config file \texttt{config\_conservation.json} with definitions of three conservation features (included in the source code folder).
+\item We implemented new feature \texttt{INTAA\_conservation} in class \newline \texttt{Features.Custom.INTAAConservation} (included in the source code).
+\item Since conservation scores for \texttt{conservation} and \texttt{INTAA\_conservation} were computed locally and the computation was not included directly in the pipeline, inside the pipeline, these features were implemented so that they read and parse the files obtained by the conservation tools and supply values for individual residues to the pipeline. For this reason, before running the pipeline we must create the output folder (named as the dataset file) and place the pre-computed files into the subfolders named `conservation' and `INTAA\_conservation'.
+\item The following command was run to download the PDB files, compute the features, perform the statistical analysis with and without the random sampling, prepare csv files with features for P2Rank, prepare dataset files for P2Rank and train and evaluate three P2Rank models with each conservation feature:
+
+\begin{Verbatim}[fontsize=\small] 
+bash scripts/pipeline_P2Rank_oneFeature.sh \ 
+-t data/datasets/chen11_conservation.txt \
+-e data/datasets/coach420_conservation.txt \
+-c scripts/source/config_conservation.json \
+-l 10 -m 4 \
+-f conservation,INTAA_conservation,pdbekb_conservation
+\end{Verbatim}
+
+\end{enumerate}
+
+\section{Used software and databases} \label{a:software}
 
 Following software and dababases were used for the development of the analysis pipeline and running the experiments:
 
@@ -262,8 +381,6 @@ Following software and dababases were used for the development of the analysis p
 \item UniProtKB/TrEMBL (used by Sequence conservation calculator) \newline - release 2020\_05
 
 \end{itemize}
-
-
 
 
 \openright
