@@ -10,7 +10,7 @@ The resulting datasets were named identically with the original datasets:
 
 \begin{itemize}
   \item \textbf{chen11}
-  - a smaller non-redundant dataset that was originally designed for a comparative study of ligand binding sites predictors \cite{benchmark}. It comprises at most one representative chain for every SCOP family \cite{scop} to ensure the minimal sequence similarity and maximal variability in tertiary structure. The original dataset covers 6 structural classes, 148 protein folds, 184 superfamilies and 251 families \cite{benchmark}; after re-downloading and filtering, the numbers are slightly smaller. Although this dataset is rather small, it covers wide range of non-homologous proteins. Therefore, it serves as a good training dataset (P2Rank default model was trained on this dataset as well).
+  - a smaller non-redundant dataset that was designed for a comparative study of ligand binding sites predictors \cite{benchmark}. It comprises at most one representative chain for every SCOP family \cite{scop} to ensure the minimal sequence similarity and maximal variability in tertiary structure. The original dataset covers 6 structural classes, 148 protein folds, 184 superfamilies and 251 families \cite{benchmark}; after re-downloading and filtering, the numbers are slightly smaller. Although this dataset is rather small, it covers wide range of non-homologous proteins. Therefore, it serves as a good training dataset (P2Rank default model was trained on this dataset as well).
   
   \item \textbf{coach420}
   - a dataset that was originally taken from a benchmark study \cite{cofactor} and used in other studies \cite{coach, p2rank1}. The non-redundant dataset harbors a mix of natural and drug-like ligand molecules.
@@ -72,7 +72,7 @@ holo4k\_filter\_MOAD     & 3308     & 4023    & 1.2161        & 50834        & 6
 
 The statistical analysis of ligand binding sites properties was performed using the analysis pipeline described in Chapter~\ref{ch:3} with default parameters, as described in Attachment~\ref{a:experiments1}. The results were collected for all the datasets, including the versions with filtered ligands.
 
-The results for the datasets with different ligands filters does not seem to differ widely and does not reveal any additional informations. For that reason and for better clarity of the text, following features analysis and plots will be shown only for the datasets with P2Rank ligands filter. The results obtained from the analysis pipeline for all the datasets with and without filters are included in Attachments. TODO odkaz
+The results for the datasets with different ligands filters does not seem to differ widely and does not reveal any additional informations. For that reason and for better clarity of the text, following features analysis and plots will be shown only for the datasets with P2Rank ligands filter. The results obtained from the analysis pipeline for all the datasets with and without filters are included in Attachments.
 
 The P-values computed by the hypothesis tests are shown in Table~\ref{tab:pvaluesAll} and discussed below.
 
@@ -153,22 +153,22 @@ Let's see the P-value problem demonstrated on our data. Figure~\ref{fig:pvalueDe
 \centering
 \begin{subfigure}[b]{\textwidth}
   \centering
-  \includegraphics[width=0.475\linewidth]{../img/pValue_deflation_dynamine.pdf}%
-  \includegraphics[width=0.475\linewidth]{../img/dynamine_hist.png}
+  \includegraphics[width=0.5\linewidth]{../img/pValue_deflation_dynamine.pdf}%
+  \includegraphics[width=0.5\linewidth]{../img/dynamine_hist.png}
   \caption{\texttt{dynamine}}
 \end{subfigure}
 \vskip\baselineskip
 \begin{subfigure}[b]{\textwidth}
   \centering
-  \includegraphics[width=0.475\linewidth]{../img/pValue_deflation_phi_angle.pdf}%
-  \includegraphics[width=0.475\linewidth]{../img/phi_angle_hist.png}
+  \includegraphics[width=0.5\linewidth]{../img/pValue_deflation_phi_angle.pdf}%
+  \includegraphics[width=0.5\linewidth]{../img/phi_angle_hist.png}
   \caption{\texttt{phi\_angle}}
 \end{subfigure}
 \vskip\baselineskip
 \begin{subfigure}[b]{\textwidth}
   \centering
-  \includegraphics[width=0.475\linewidth]{../img/pValue_deflation_exposure_CN.pdf}%
-  \includegraphics[width=0.475\linewidth]{../img/exposure_CN_hist.png}
+  \includegraphics[width=0.5\linewidth]{../img/pValue_deflation_exposure_CN.pdf}%
+  \includegraphics[width=0.5\linewidth]{../img/exposure_CN_hist.png}
   \caption{\texttt{exposure\_CN}}
 \end{subfigure}
 \caption[P-value deflation]{Different speed of P-value deflation demonstrated on three features. The P-value decreases with increasing sample size. The results were obtained from 100 iterations of random sampling with given sample size, taking the same number of binding and non-binding residues. Mean P-values and standard deviations are displayed (the error bars are cut so they are not negative). Computed on dataset \textit{holo4k} with P2Rank ligands filter. The red line represents significance level $\alpha=0.05$. }
@@ -260,11 +260,13 @@ The sample size of 500 was chosen for two reasons: firstly, validity of the Cent
 \textbf{dynamine}     & 0.05236       & 0.04086           \\
 \textbf{random\_cont (test)} & 0.04968       & 0.03807           \\ \bottomrule
 \end{tabular}
-\caption[Mean effect sizes (cohen's \textit{d})]{Mean effect sizes (cohen's \textit{d}) computed from 1000 iterations of random sampling with sample size 500. Computed on dataset \textit{mix} (all 4 datasets merged together) with P2Rank ligands filter. Features are sorted according to the effect size.}
+\caption[Mean effect sizes (cohen's \textit{d})]{Mean effect sizes (cohen's \textit{d}) computed from 1000 iterations of random sampling with sample size 500. Computed on dataset \textit{mix} (all 4 datasets merged together) with P2Rank ligands filter. Features are sorted according to the effect size.
+\hspace{\textwidth}
+*\texttt{conservation} is computed only on a small subset. Data are missing for all structures in \textit{holo4k} dataset, as mentioned before.}
 \label{tab:cohensd500}
 \end{table}
 
-\begin{table}[!h]
+\begin{table}[]
 \centering
 \begin{tabular}{@{}llc@{}}
 \toprule
@@ -386,7 +388,7 @@ A couple of features were left out from the following experiments. The feature \
 The performance of the baseline model (trained with all default P2Rank features and no csv feature) was compared with the model trained with all csv features (test features \texttt{lbs}, \texttt{random\_binary} and \texttt{random\_cont} were left out of course), and the model trained with both P2Rank features and csv features. The results are summarized in Table~\ref{tab:p2rankbaseline}. Two metrics are reported: $D_{CA}$ and $D_{CC}$, as described in Section~\ref{s:metrics}, with distance threshold 4{\AA}. We used Top-\textit{n} and Top-(\textit{n}+2) rank cutoffs (\textit{n} is the number of relevant ligands). 
 
 
-\begin{table}[!h]
+\begin{table}[]
 \centering
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -411,7 +413,7 @@ We can see that the performances measured in the $D_{CC}$ metric are very low. T
 Let's take a look at how the individual csv features help to improve the performance, by adding only one at a time. Table~\ref{tab:p2rankCSV} summarizes the results of training one model per feature, with one csv feature plus all P2Rank default features. Only models with features \texttt{pdbekb\_conservation} and \texttt{conservation} are clearly superior to the baseline model. There are a few features that help to increase the performance of the baseline model, but only by tenths of percent; this difference is too small to proclaim the results significant. The rest of the features do not help to improve P2Rank performance, probably due to the correlations and recurrence of the similar features that were already included in P2Rank.
 
 \begin{table}[] \centering
-\scalebox{0.80}{
+\scalebox{1.0}{
 \begin{tabular}{lcccc}
 \hline
                               & \multicolumn{2}{c}{$D_{CA}$ [4{\AA}]}    & \multicolumn{2}{c}{$D_{CC}$ [4{\AA}]}    \\
@@ -474,7 +476,7 @@ We can get a kind of comparison of individual csv features thanks to the feature
 The feature importances roughly correspond with the results of the statistical analysis. Both conservation features take place on the top, as well as four features related to the `burriedness'. \texttt{bfactor} feature is also among the top scoring features. We observed only smaller effect size for \texttt{aromaticity} feature, but it seems that it can provide new information to the classifier. Feature \texttt{helix} appears to be more important than we would expect based on the statistical analysis; however, it is hard to tell what is the reason for that. It is possible that even if the effect is small, it can still be useful for the classifier. It could be caused by the issues with correlation and number of categories, as described above, or simply by pure luck - a small perturbation of training data or input parameters can cause different features selection.
 
 \begin{table}[] \centering
-\scalebox{0.80}{
+\scalebox{1.0}{
 \begin{tabular}{@{}lc@{}}
 \toprule
 \textbf{feature}     & \textbf{importance} \\ \midrule
@@ -536,7 +538,7 @@ In another experiment, we used the information obtained from the statistical ana
 The results are summarized in Table~\ref{tab:models}. As we can see, filtering the features helped to increase the performance in most cases, compared to the models with all 40 csv features (highlighted in gray color). It seems that although Random Forests are robust and can deal with correlated or irrelevant features very well compared to other classifiers, these features can still affect the prediction and it can be useful to filter them out. The models trained with \textit{medium/large} effect features performed worse than the model trained with all csv features. The possible explanation is that some information contained in the features with small effect was missing. Nevertheless, most probable explanation is that wrong hyperparameters of the Random Forests algorithm were used. We trained each tree with 6 features, the same number as was used for the default P2Rank model.  However, in the \textit{medium/large} subsets, there are only 7 or 6 features, respectively. It means that almost all (or all) features were used for every tree. The optimization of the hyperparameters would be certainly needed in this case.
 
 \begin{table}[] \centering
-\scalebox{0.8}{
+\scalebox{1}{
 \begin{tabular}{lllll}
 \hline
 \textbf{}                                     & \multicolumn{2}{l}{$D_{CA}$ {[}4{\AA}{]}}   & \multicolumn{2}{l}{$D_{CC}$ {[}4{\AA}{]}}   \\
@@ -560,14 +562,21 @@ The results are summarized in Table~\ref{tab:models}. As we can see, filtering t
 Let's try to filter out P2Rank features as well. This time, we trained a model with only a subset of P2Rank features plus \texttt{pdbekb\_conservation} csv feature, and compared it with the previously mentioned model trained with all P2Rank features plus \texttt{pdbekb\_conservation}. The subset of P2Rank features was chosen based on the knowledge obtained from the features analysis; we took only those P2Rank features related to buriedness, hydrophobicity, aromaticity and B factor. The results are stated in Table~\ref{tab:subset}. 
 
 \begin{table}[] \centering
-\scalebox{0.8}{
-\begin{tabular}{lllll}
+\scalebox{1}{
+\begin{tabular}{cllll}
 \hline
 \textbf{}                                     & \multicolumn{2}{l}{$D_{CA}$ {[}4{\AA}{]}}   & \multicolumn{2}{l}{$D_{CC}$ {[}4{\AA}{]}}   \\
 \textbf{}                                     & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} & \textbf{Top-\textit{n}} & \textbf{Top-(\textit{n}+2)} \\ \hline
-\textbf{P2Rank subset + pdbekb\_conservation} & 77.3           & 80.9               & 47.3           & 50.8               \\
+\textbf{P2Rank subset} &         &              &          &              \\
+\textbf{+} & 77.3           & 80.9               & 47.3           & 50.8               \\
+\textbf{pdbekb\_conservation} &         &            &          &             \\
 \rowcolor[HTML]{B7B4B4} 
-\textbf{P2Rank + pdbekb\_conservation}        & 78.9           & 81.6               & 48.9           & 51                 \\ \hline
+\textbf{P2Rank}        & & & &                \\
+\rowcolor[HTML]{B7B4B4} 
+\textbf{+}        & 78.9           & 81.6               & 48.9           & 51                 \\
+\rowcolor[HTML]{B7B4B4} 
+\textbf{pdbekb\_conservation}        &       &             &        &             \\
+ \hline
 \end{tabular}
 }
 \caption[Comparison of the models with all P2Rank features and a subset of P2Rank features]{Comparison of the models with all P2Rank features and a subset of P2Rank features, plus \texttt{pdbekb\_conservation} csv feature. The model highlighted in gray was mentioned before and is stated here again for comparison.\newline
@@ -597,7 +606,7 @@ The impact of P2Rank conservation was compared with another conservation tool, c
 
 Although the conservation feature downloaded from PDBe-KB database was analysed previously, we include it into this comparison as well.
 
-Thus, we compare two continuous features \texttt{INTAA\_conservation} and \texttt{conservation} (P2Rank conservation), and one ordinal feature \texttt{pdbekb\_conservation}. The last two are the same  features as described in the previous sections.
+Thus, we compare two continuous features \texttt{INTAA\_conservation} and \texttt{conser\-vation} (P2Rank conservation), and one ordinal feature \texttt{pdbekb\_conservation}. The last two are the same  features as described in the previous sections.
 
 The comparison of the conservation features was made on two datasets: \textit{chen11} and \textit{coach420}. Some structures were excluded from the original datasets because it was not possible to obtain the alignments, most likely because there was not sufficient number of matches in the sequence database and thus it was not possible to create the multiple sequence alignment. For \textit{chen11}, 16 structures were excluded because of the missing data for \texttt{conservation} and 3 structures because of \texttt{INTAA\_conservation} feature. Values for \texttt{pdbekb\_conservation} downloaded from PDBe-KB database were available for all the structures in \textit{chen11} and were missing only for two structures in \textit{coach420}. 
 

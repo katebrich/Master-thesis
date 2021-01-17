@@ -91,7 +91,7 @@
 
 \vspace{10mm}
 
-The thesis is dedicated to Ondra Skácel - you are unforgettable. The biggest thanks go to my family, my partner David and dog Čenda.
+In the first place, I want to thank to my parents, sister and grandparents, who always believe in me. The biggest thanks go to my partner David for his constant support and love. And I cannot forget Ondra Skácel to whom I dedicate this thesis.
 
 I would like to thank to my supervisor, David Hoksza, for his guidance throughout writing this thesis, and for many helpful comments and advice.
 Many thanks to Radoslav Krivák and Petr Škoda for their kindliness and help with P2Rank program.
@@ -103,12 +103,12 @@ Computational resources were supplied by the project "e-Infrastruktura CZ" (e-IN
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\AbstractAJ{%
-The number of experimentally resolved protein structures in the Protein Data Bank has been growing fast in the last 20 years, which motivates the development of many computational tools for protein-ligand binding sites prediction. Binding sites prediction from protein 3D structures has many important applications; it is a key step in the complex process of rational drug design, it helps to infer the side-effects of drugs, it provides insight into proteins biological functions and it is helpful in many other fields, such as protein-ligand docking and molecular dynamics. As far as we know, there has not been a study that would systematically investigate general properties of known ligand binding sites on a large scale. In this thesis, we examine these properties using existing experimental and predicted residue-level annotations of protein sequence and structure. We present an automated pipeline for statistical analysis of these annotations, based on hypothesis testing and effect size estimation. It is implemented in Python and it is easily extensible by user-defined annotations. The usage is demonstrated on 33 existing annotations and 4 different datasets. The practical significance of the results is tested with P2Rank prediction method. We are hopeful that the results as well as the pipeline could be eventually helpful for improving the performance of the existing binding sites predictors.
+The number of experimentally resolved protein structures in the Protein Data Bank has been growing fast in the last 20 years, which motivates the development of many computational tools for protein-ligand binding sites prediction. Binding sites prediction from protein 3D structure has many important applications; it is an essential step in the complex process of rational drug design, it helps to infer the side-effects of drugs, it provides insight into proteins biological functions and it is helpful in many other fields, such as protein-ligand docking and molecular dynamics. As far as we know, there has not been a study that would systematically investigate general properties of known ligand binding sites on a large scale. In this thesis, we examine these properties using existing experimental and predicted residue-level annotations of protein sequence and structure. We present an automated pipeline for statistical analysis of these annotations, based on hypothesis testing and effect size estimation. It is implemented in Python and it is easily extensible by user-defined annotations. The usage is demonstrated on 33 existing annotations and 4 different datasets. The practical significance of the results is tested with P2Rank prediction method. We hope that the results as well as the pipeline could be eventually helpful for improving the performance of the existing binding sites predictors.
 }
 
 \def\AbstractCJ{%
 
-V posledních 20 letech se počet experimentálních proteinových struktur v databázi Protein Data Bank rychle zvyšuje, což motivuje vývoj nástrojů pro predikci protein-ligand vazebných míst. Strukturní predikce vazebných míst má mnoho důležitých aplikací; je klíčovým krokem v komplexním procesu návrhu léčiv, pomáhá objevovat vedlejší účinky léčiv, umožňuje chápat biologické funkce proteinů a je využívá se i v mnoha jiných oborech, jako je protein-ligand docking nebo molekulová dynamika. Pokud je autorce známo, dosud nebyla provedena studie, která by systematicky zkoumala obecné vlastnosti známých vazebných míst na velkých datasetech. Tato práce se zaměřuje na analýzu těchto vlastností, s využitím existujících experimentálních i predikovaných anotací primární a terciální struktury proteinu. Je zde představena automatizovaná metoda pro statistickou analýzu těchto anotací, která je založena na testování hypotéz a odhadu velikosti účinku. Metoda je implementována v jazyce Python a lze ji jednoduše rozšířit o nové anotace definované uživatelem. Použití je demonstrováno na 33 existujících anotacích a čtyřech různých datasetech. Praktická významnost výsledků je otestována s pomocí metody P2Rank. Výsledky i samotná metoda pro statistickou analýzu by mohly posléze přispět ke zlepšení úspěšnosti existujících nástrojů pro predikci vazebných míst.
+V posledních 20 letech se počet experimentálních proteinových struktur v databá\-zi Protein Data Bank rychle zvyšuje, což motivuje vývoj nástrojů pro predikci protein-ligand vazebných míst. Strukturní predikce vazebných míst má mnoho důležitých aplikací; je klíčovým krokem v komplexním procesu návrhu léčiv, pomáhá objevovat vedlejší účinky léčiv, umožňuje chápat biologické funkce proteinů a je využívá se i v mnoha jiných oborech, jako je protein-ligand docking nebo molekulová dynamika. Pokud je autorce známo, dosud nebyla provedena studie, která by systematicky zkoumala obecné vlastnosti známých vazebných míst na velkých datasetech. Tato práce se zaměřuje na analýzu těchto vlastností, s využitím existujících experimentálních i predikovaných anotací primární a terciální struktury proteinu. Je zde představena metoda pro statistickou analýzu těchto anotací, která je založena na testování hypotéz a odhadu velikosti účinku. Metoda je implementována v jazyce Python a lze ji jednoduše rozšířit o nové anotace definované uživatelem. Použití je demonstrováno na 33 existujících anotacích a čtyřech různých datasetech. Praktická významnost výsledků je otestována s pomocí metody P2Rank. Výsledky i samot\-ná metoda pro statistickou analýzu by mohly posléze přispět ke zlepšení úspěšnos\-ti existujících nástrojů pro predikci vazebných míst.
 
 }
 
@@ -204,12 +204,15 @@ SAS & Solvent Accessible Surface \\
 
 \singlespacing
 
-The attached CD contains several attachments:
+The attachements are following:
 \begin{itemize}
-\item LBS\_analysis\_pipeline.zip - source code of the analysis pipeline and used dataset files
-\item TODO
-
+\item LBS\_analysis\_pipeline.zip - Source code of the analysis pipeline. Includes config files and input dataset files.
+\item P2Rank\_models.zip - Text summary files returned by the P2Rank method. Individual runs and models are not included due to the space limitations, but can be reconstructed from the enclosed data. All parameters are listed in \texttt{params.txt} file.
+\item Analysis\_results.zip - Text outputs of the statistical analysis returned by the pipeline. Plots are not included due to the space limitations, but can be reconstructed by running the analysis pipeline with enclosed data.
+\item data (only on DVD) - Data computed by the analysis pipeline for all datasets with all filters.
 \end{itemize}
+
+Note that by running the analysis pipeline with enclosed input dataset files, the results might not be exactly the same, since the databases and other resources are often updated. Nevertheless, the results should be very similar. To reproduce the same results as in this thesis, the analysis must be computed from the enclosed data.
 
 
 \section{Analysis pipeline} \label{a:pipeline}
@@ -236,7 +239,7 @@ Alternatively, a virtual environment can be created with \texttt{conda}:
 
 \texttt{conda env create -f environment.yml}
 
-\item Now, it is possible to run the pipeline:
+\item Now, it is possible to run the pipeline in the new environment:
 
 \texttt{python3 scripts/source/analysis\_pipeline.py \textbackslash \newline -d data/datasets/test.txt -o output/test}
 
@@ -255,7 +258,7 @@ Options:
   -d, --dataset                
   	Mandatory; file with listed structures to process.
   -o, --output_dir             
-  	Mandatory; root folder. Created if not exists.
+  	Mandatory; root folder. Created if does not exist.
   -t, --tasks                  
   	Default: 'A'. Comma-separated list of tasks to process. 
   	If data are missing in root folder for some task, they are 

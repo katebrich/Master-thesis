@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  14 JAN 2021 18:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.5.20)  17 JAN 2021 19:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,19 +686,7 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 68.
 
 ] [3
 
-]
-Overfull \hbox (0.50674pt too wide) in paragraph at lines 131--131
-[]\OT1/lmr/m/n/12 V posledn^^S^^Pch 20 letech se po^^Tcet ex-per-i-ment^^Saln^^
-S^^Pch pro-teinov^^Sych struk-tur v datab^^Sazi|
- []
-
-
-Overfull \hbox (3.85696pt too wide) in paragraph at lines 131--131
-\OT1/lmr/m/n/12 v^^Syznamnost v^^Sysledk^^Wu je otestov^^Sana s po-moc^^S^^P me
-tody P2Rank. V^^Sysledky i samotn^^Sa|
- []
-
-[4
+] [4
 
 ]) (./thesis.toc [1
 
@@ -713,12 +701,6 @@ tody P2Rank. V^^Sysledky i samotn^^Sa|
 
  (./introduction.tex
 Chapter 1.
-
-Overfull \hbox (1.26097pt too wide) in paragraph at lines 6--7
-[]\OT1/lmr/m/n/12 Proteins can in-ter-act with other molecules, in-clud-ing nu-
-cleic acids, nu-cleotides,|
- []
-
 [3
 
 
@@ -736,13 +718,7 @@ Chapter 2.
 
 
 
-]
-Overfull \hbox (0.20522pt too wide) in paragraph at lines 26--27
-\OT1/lmr/m/n/12 Many al-go-rithm have been em-ployed, for in-stance Su-port Vec
--tor Ma-chines (eFind-|
- []
-
-[7] [8] [9]
+] [7] [8] [9]
 <../img/p2rank.pdf, id=452, 1968.35374pt x 983.675pt>
 File: ../img/p2rank.pdf Graphic file (type pdf)
 <use ../img/p2rank.pdf>
@@ -757,19 +733,13 @@ LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line
 80.
  (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Overfull \hbox (16.45439pt too wide) in paragraph at lines 80--81
-\OT1/lmr/m/n/12 ([]$\OT1/lmtt/m/n/12 https : / / github . com / rdk / p2rank$[]
-\OT1/lmr/m/n/12 ) or in the tu-to-rial avail-able at []$\OT1/lmtt/m/n/12 https 
-: / / github .|
- []
-
-) [11 <../img/p2rank.pdf>]
+)) [11 <../img/p2rank.pdf>]
 \openout2 = `methodology.aux'.
 
- (./methodology.tex
+
+(./methodology.tex
 Chapter 3.
-<../img/pipelineDiagram.pdf, id=489, 782.60612pt x 736.82486pt>
+<../img/pipelineDiagram.pdf, id=487, 782.60612pt x 736.82486pt>
 File: ../img/pipelineDiagram.pdf Graphic file (type pdf)
 <use ../img/pipelineDiagram.pdf>
 Package pdftex.def Info: ../img/pipelineDiagram.pdf  used on input line 12.
@@ -781,76 +751,72 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-] [13 <../img/pipelineDiagram.pdf>]
-
-Package natbib Warning: Citation `pdbe' on page 14 undefined on input line 34.
-
-[14]
-<../img/sasa.png, id=550, 926.46124pt x 836.12375pt>
+] [13 <../img/pipelineDiagram.pdf>] [14]
+<../img/sasa.png, id=549, 926.46124pt x 836.12375pt>
 File: ../img/sasa.png Graphic file (type png)
 <use ../img/sasa.png>
-Package pdftex.def Info: ../img/sasa.png  used on input line 59.
+Package pdftex.def Info: ../img/sasa.png  used on input line 61.
 (pdftex.def)             Requested size: 284.52756pt x 256.78438pt.
  [15]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 74.
+               Default added (so using `tbp') on input line 76.
 
 [16 <../img/sasa.png>] [17] [18]
-Overfull \hbox (4.95274pt too wide) in paragraph at lines 147--148
+Overfull \hbox (4.95274pt too wide) in paragraph at lines 151--152
 \OT1/lmr/m/n/12 This fea-ture in-cludes nat-u-rally oc-cur-ing poly-mor-phisms,
  vari-a-tions be-tween strains|
  []
 
 [19] [20] [21]
-<../img/hse.png, id=653, 71.7882pt x 64.0794pt>
+<../img/hse.png, id=651, 71.7882pt x 64.0794pt>
 File: ../img/hse.png Graphic file (type png)
 <use ../img/hse.png>
-Package pdftex.def Info: ../img/hse.png  used on input line 210.
+Package pdftex.def Info: ../img/hse.png  used on input line 214.
 (pdftex.def)             Requested size: 227.62204pt x 203.19853pt.
  [22 <../img/hse.png (PNG copy)>]
-<../img/torsion.png, id=670, 204.765pt x 76.1244pt>
+<../img/torsion.png, id=666, 204.765pt x 76.1244pt>
 File: ../img/torsion.png Graphic file (type png)
 <use ../img/torsion.png>
-Package pdftex.def Info: ../img/torsion.png  used on input line 222.
+Package pdftex.def Info: ../img/torsion.png  used on input line 226.
 (pdftex.def)             Requested size: 341.43306pt x 126.94142pt.
 
-Underfull \hbox (badness 5050) in paragraph at lines 223--223
+Underfull \hbox (badness 5050) in paragraph at lines 228--228
 []\OT1/lmr/m/n/12 Figure 3.4: |Polypep-tide tor-sion an-gles phi, psi and omega
 . Re-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--223
-\OT1/lmr/m/n/12 trieved 02-01-2020 from []$\OT1/lmtt/m/n/12 https : / / www . r
-esearchgate . net / figure /
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
+\OT1/lmr/m/n/12 trieved 2.1.2020 from []$\OT1/lmtt/m/n/12 https : / / www . res
+earchgate . net / figure /
  []
 
 
-Overfull \hbox (149.68532pt too wide) in paragraph at lines 223--223
+Overfull \hbox (5.66025pt too wide) in paragraph at lines 228--228
 \OT1/lmtt/m/n/12 Backbone-[]torsion-[]angles-[]of-[]a-[]prototypical-[]amino-[]
-acid-[]building-[]block-[]embedded-[]in-[]a-[]peptide _|
+acid-[]building-[]block$[]|
  []
 
 [23 <../img/torsion.png>] [24] [25] [26] [27] [28]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 352.
+(Font)              <14.4> on input line 357.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 352.
+(Font)              <10> on input line 357.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 352.
+(Font)              <7> on input line 357.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 352.
+(hyperref)                removing `math shift' on input line 357.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 352.
+(hyperref)                removing `superscript' on input line 357.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 352.
+(hyperref)                removing `math shift' on input line 357.
 
 [29] [30] [31]) [32]
 \openout2 = `results.aux'.
@@ -877,7 +843,7 @@ LaTeX Warning: No positions in optional float specifier.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 141.
 
-<../img/dynamine_hist.png, id=865, 462.528pt x 346.896pt>
+<../img/dynamine_hist.png, id=864, 462.528pt x 346.896pt>
 File: ../img/dynamine_hist.png Graphic file (type png)
 <use ../img/dynamine_hist.png>
 Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 143.
@@ -887,38 +853,38 @@ Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 143.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 152.
 
-<../img/pValue_deflation_dynamine.pdf, id=880, 462.52798pt x 346.89601pt>
+<../img/pValue_deflation_dynamine.pdf, id=879, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_dynamine.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_dynamine.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_dynamine.pdf  used on input li
 ne 156.
-(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+(pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
 File: ../img/dynamine_hist.png Graphic file (type png)
 <use ../img/dynamine_hist.png>
 Package pdftex.def Info: ../img/dynamine_hist.png  used on input line 157.
-(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/pValue_deflation_phi_angle.pdf, id=881, 462.52798pt x 346.89601pt>
+(pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
+<../img/pValue_deflation_phi_angle.pdf, id=880, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_phi_angle.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_phi_angle.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_phi_angle.pdf  used on input l
 ine 163.
-(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/phi_angle_hist.png, id=882, 462.528pt x 346.896pt>
+(pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
+<../img/phi_angle_hist.png, id=881, 462.528pt x 346.896pt>
 File: ../img/phi_angle_hist.png Graphic file (type png)
 <use ../img/phi_angle_hist.png>
 Package pdftex.def Info: ../img/phi_angle_hist.png  used on input line 164.
-(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/pValue_deflation_exposure_CN.pdf, id=883, 462.52798pt x 346.89601pt>
+(pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
+<../img/pValue_deflation_exposure_CN.pdf, id=882, 462.52798pt x 346.89601pt>
 File: ../img/pValue_deflation_exposure_CN.pdf Graphic file (type pdf)
 <use ../img/pValue_deflation_exposure_CN.pdf>
 Package pdftex.def Info: ../img/pValue_deflation_exposure_CN.pdf  used on input
  line 170.
-(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/exposure_CN_hist.png, id=884, 462.528pt x 346.896pt>
+(pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
+<../img/exposure_CN_hist.png, id=883, 462.528pt x 346.896pt>
 File: ../img/exposure_CN_hist.png Graphic file (type png)
 <use ../img/exposure_CN_hist.png>
 Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 171.
-(pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
+(pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 182.
@@ -942,223 +908,249 @@ LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 245.
 
 
-Underfull \hbox (badness 5637) in paragraph at lines 290--290
-[]\OT1/lmr/m/n/12 Table 4.6: |Mean ef-fect sizes (co-hen's \OT1/lmr/m/it/12 w\O
+Underfull \hbox (badness 5970) in paragraph at lines 265--265
+[]\OT1/lmr/m/n/12 Table 4.5: |Mean ef-fect sizes (co-hen's \OT1/lmr/m/it/12 d\O
 T1/lmr/m/n/12 ) com-puted from 1000 it-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 290--290
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
 \OT1/lmr/m/n/12 er-a-tions of ran-dom sam-pling with sam-ple size 500. Com-pute
 d
  []
 
 
-Underfull \hbox (badness 5578) in paragraph at lines 290--290
+Underfull \hbox (badness 5578) in paragraph at lines 265--265
 \OT1/lmr/m/n/12 on dataset \OT1/lmr/m/it/12 mix \OT1/lmr/m/n/12 (all 4 datasets
  merged to-gether) with P2Rank lig-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 290--290
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
 \OT1/lmr/m/n/12 ands fil-ter. Fea-tures are sorted ac-cord-ing to the ef-fect s
 ize.
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 290--290
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 269.
+
+
+Underfull \hbox (badness 5637) in paragraph at lines 292--292
+[]\OT1/lmr/m/n/12 Table 4.6: |Mean ef-fect sizes (co-hen's \OT1/lmr/m/it/12 w\O
+T1/lmr/m/n/12 ) com-puted from 1000 it-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--292
+\OT1/lmr/m/n/12 er-a-tions of ran-dom sam-pling with sam-ple size 500. Com-pute
+d
+ []
+
+
+Underfull \hbox (badness 5578) in paragraph at lines 292--292
+\OT1/lmr/m/n/12 on dataset \OT1/lmr/m/it/12 mix \OT1/lmr/m/n/12 (all 4 datasets
+ merged to-gether) with P2Rank lig-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--292
+\OT1/lmr/m/n/12 ands fil-ter. Fea-tures are sorted ac-cord-ing to the ef-fect s
+ize.
+ []
+
+
+Underfull \hbox (badness 1389) in paragraph at lines 292--292
 \OT1/lmr/m/n/12 *\OT1/lmtt/m/n/12 variation \OT1/lmr/m/n/12 is com-puted only o
 n the sub-sets of pro-teins for which the
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 [42]
-Overfull \hbox (30.01608pt too wide) in paragraph at lines 298--299
+Overfull \hbox (30.01608pt too wide) in paragraph at lines 300--301
 []\OT1/lmr/m/n/12 The re-sults for both con-ser-va-tion fea-tures \OT1/lmtt/m/n
 /12 conservation \OT1/lmr/m/n/12 and \OT1/lmtt/m/n/12 pdbekb[]conservation|
  []
 
-<../img/conservation_hist.png, id=1155, 462.528pt x 346.896pt>
+<../img/conservation_hist.png, id=1154, 462.528pt x 346.896pt>
 File: ../img/conservation_hist.png Graphic file (type png)
 <use ../img/conservation_hist.png>
-Package pdftex.def Info: ../img/conservation_hist.png  used on input line 304.
+Package pdftex.def Info: ../img/conservation_hist.png  used on input line 306.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/pdbekb_conservation_frequencies.png, id=1156, 462.528pt x 346.896pt>
+<../img/pdbekb_conservation_frequencies.png, id=1155, 462.528pt x 346.896pt>
 File: ../img/pdbekb_conservation_frequencies.png Graphic file (type png)
 <use ../img/pdbekb_conservation_frequencies.png>
 Package pdftex.def Info: ../img/pdbekb_conservation_frequencies.png  used on in
-put line 309.
+put line 311.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 319.
+               Default added (so using `tbp') on input line 321.
 
 File: ../img/exposure_CN_hist.png Graphic file (type png)
 <use ../img/exposure_CN_hist.png>
-Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 323.
+Package pdftex.def Info: ../img/exposure_CN_hist.png  used on input line 325.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/depth_hist.png, id=1161, 462.528pt x 346.896pt>
+<../img/depth_hist.png, id=1160, 462.528pt x 346.896pt>
 File: ../img/depth_hist.png Graphic file (type png)
 <use ../img/depth_hist.png>
-Package pdftex.def Info: ../img/depth_hist.png  used on input line 328.
+Package pdftex.def Info: ../img/depth_hist.png  used on input line 330.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/HSE_up_hist.png, id=1162, 462.528pt x 346.896pt>
+<../img/HSE_up_hist.png, id=1161, 462.528pt x 346.896pt>
 File: ../img/HSE_up_hist.png Graphic file (type png)
 <use ../img/HSE_up_hist.png>
-Package pdftex.def Info: ../img/HSE_up_hist.png  used on input line 333.
+Package pdftex.def Info: ../img/HSE_up_hist.png  used on input line 335.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
-<../img/HSE_down_hist.png, id=1163, 462.528pt x 346.896pt>
+<../img/HSE_down_hist.png, id=1162, 462.528pt x 346.896pt>
 File: ../img/HSE_down_hist.png Graphic file (type png)
 <use ../img/HSE_down_hist.png>
-Package pdftex.def Info: ../img/HSE_down_hist.png  used on input line 338.
+Package pdftex.def Info: ../img/HSE_down_hist.png  used on input line 340.
 (pdftex.def)             Requested size: 206.28247pt x 154.71494pt.
 [43]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 347.
+               Default added (so using `tbp') on input line 349.
 
-<../img/bfactor_hist.png, id=1173, 462.528pt x 346.896pt>
+<../img/bfactor_hist.png, id=1172, 462.528pt x 346.896pt>
 File: ../img/bfactor_hist.png Graphic file (type png)
 <use ../img/bfactor_hist.png>
-Package pdftex.def Info: ../img/bfactor_hist.png  used on input line 349.
+Package pdftex.def Info: ../img/bfactor_hist.png  used on input line 351.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 356.
+               Default added (so using `tbp') on input line 358.
 
-<../img/aa_frequencies.png, id=1176, 462.528pt x 346.896pt>
+<../img/aa_frequencies.png, id=1175, 462.528pt x 346.896pt>
 File: ../img/aa_frequencies.png Graphic file (type png)
 <use ../img/aa_frequencies.png>
-Package pdftex.def Info: ../img/aa_frequencies.png  used on input line 360.
+Package pdftex.def Info: ../img/aa_frequencies.png  used on input line 362.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
-<../img/aa_ratios.png, id=1177, 462.528pt x 346.896pt>
+<../img/aa_ratios.png, id=1176, 462.528pt x 346.896pt>
 File: ../img/aa_ratios.png Graphic file (type png)
 <use ../img/aa_ratios.png>
-Package pdftex.def Info: ../img/aa_ratios.png  used on input line 365.
+Package pdftex.def Info: ../img/aa_ratios.png  used on input line 367.
 (pdftex.def)             Requested size: 288.7942pt x 216.60303pt.
 [44 <../img/conservation_hist.png> <../img/pdbekb_conservation_frequencies.png>
 ] [45 <../img/depth_hist.png> <../img/HSE_up_hist.png> <../img/HSE_down_hist.pn
 g> <../img/bfactor_hist.png>] [46 <../img/aa_frequencies.png> <../img/aa_ratios
-.png>] [47] [48]
+.png>] [47]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 413.
+               Default added (so using `tbp') on input line 391.
+
+[48]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 415.
+
+
+LaTeX Warning: Float too large for page by 4.80585pt on input line 468.
 
 [49] [50]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 476.
+               Default added (so using `tbp') on input line 478.
 
 [51] [52]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 538.
+               Default added (so using `tbp') on input line 540.
 
-[53]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 562.
+               Default added (so using `tbp') on input line 564.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--576
+Underfull \hbox (badness 10000) in paragraph at lines 585--585
 \OT1/lmr/m/n/12 The sub-set of P2Rank fea-tures is fol-low-ing: \OT1/lmtt/m/n/1
 2 protrusion,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--576
+Underfull \hbox (badness 10000) in paragraph at lines 585--585
 \OT1/lmtt/m/n/12 bfactor, hydrophatyIndex, aromatic, hBondDonor, hBondAcceptor,
 
  []
 
-[54]
+[53] [54] [55]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\newline' on input line 586.
+(hyperref)                removing `\newline' on input line 595.
 
 
-Overfull \hbox (27.62773pt too wide) in paragraph at lines 600--601
-[]\OT1/lmr/m/n/12 Thus, we com-pare two con-tin-u-ous fea-tures \OT1/lmtt/m/n/1
-2 INTAA[]conservation \OT1/lmr/m/n/12 and \OT1/lmtt/m/n/12 conservation|
- []
-
-
-Overfull \hbox (1.18336pt too wide) in paragraph at lines 602--603
+Overfull \hbox (1.18336pt too wide) in paragraph at lines 611--612
 []\OT1/lmr/m/n/12 The com-par-i-son of the con-ser-va-tion fea-tures was made o
 n two datasets: \OT1/lmr/m/it/12 chen11|
  []
 
-[55]
+[56]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 610.
+               Default added (so using `tbp') on input line 619.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 637--637
 \OT1/lmr/m/n/12 * The ef-fect sizes for con-tin-u-ous fea-tures (\OT1/lmtt/m/n/
 12 conservation \OT1/lmr/m/n/12 and
  []
 
-<../img/conservation/conservation_hist.png, id=1271, 462.528pt x 346.896pt>
+<../img/conservation/conservation_hist.png, id=1275, 462.528pt x 346.896pt>
 File: ../img/conservation/conservation_hist.png Graphic file (type png)
 <use ../img/conservation/conservation_hist.png>
 Package pdftex.def Info: ../img/conservation/conservation_hist.png  used on inp
-ut line 636.
+ut line 645.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/conservation/conservation_ratios.png, id=1272, 462.528pt x 346.896pt>
+<../img/conservation/conservation_ratios.png, id=1276, 462.528pt x 346.896pt>
 File: ../img/conservation/conservation_ratios.png Graphic file (type png)
 <use ../img/conservation/conservation_ratios.png>
 Package pdftex.def Info: ../img/conservation/conservation_ratios.png  used on i
-nput line 637.
+nput line 646.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/conservation/INTAA_conservation_hist.png, id=1273, 462.528pt x 346.896p
+<../img/conservation/INTAA_conservation_hist.png, id=1277, 462.528pt x 346.896p
 t>
 File: ../img/conservation/INTAA_conservation_hist.png Graphic file (type png)
 <use ../img/conservation/INTAA_conservation_hist.png>
 Package pdftex.def Info: ../img/conservation/INTAA_conservation_hist.png  used 
-on input line 643.
+on input line 652.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/conservation/INTAA_conservation_ratios.png, id=1274, 462.528pt x 346.89
+<../img/conservation/INTAA_conservation_ratios.png, id=1278, 462.528pt x 346.89
 6pt>
 File: ../img/conservation/INTAA_conservation_ratios.png Graphic file (type png)
 
 <use ../img/conservation/INTAA_conservation_ratios.png>
 Package pdftex.def Info: ../img/conservation/INTAA_conservation_ratios.png  use
-d on input line 644.
+d on input line 653.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/conservation/pdbekb_conservation_frequencies.png, id=1275, 462.528pt x 
+<../img/conservation/pdbekb_conservation_frequencies.png, id=1279, 462.528pt x 
 346.896pt>
 File: ../img/conservation/pdbekb_conservation_frequencies.png Graphic file (typ
 e png)
 <use ../img/conservation/pdbekb_conservation_frequencies.png>
 Package pdftex.def Info: ../img/conservation/pdbekb_conservation_frequencies.pn
-g  used on input line 650.
+g  used on input line 659.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-<../img/conservation/pdbekb_conservation_ratios.png, id=1276, 462.528pt x 346.8
+<../img/conservation/pdbekb_conservation_ratios.png, id=1280, 462.528pt x 346.8
 96pt>
 File: ../img/conservation/pdbekb_conservation_ratios.png Graphic file (type png
 )
 <use ../img/conservation/pdbekb_conservation_ratios.png>
 Package pdftex.def Info: ../img/conservation/pdbekb_conservation_ratios.png  us
-ed on input line 651.
+ed on input line 660.
 (pdftex.def)             Requested size: 195.97087pt x 146.98157pt.
-[56] [57 <../img/conservation/conservation_hist.png> <../img/conservation/conse
+[57] [58 <../img/conservation/conservation_hist.png> <../img/conservation/conse
 rvation_ratios.png> <../img/conservation/INTAA_conservation_hist.png> <../img/c
 onservation/INTAA_conservation_ratios.png> <../img/conservation/pdbekb_conserva
 tion_frequencies.png> <../img/conservation/pdbekb_conservation_ratios.png>])
-[58]
+[59]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [59
+ (./epilog.tex) [60
 
 
 
-] [60
+] [61
 
 
 ]
@@ -1188,72 +1180,70 @@ Underfull \hbox (badness 1436) in paragraph at lines 70--73
 1/lmtt/m/n/12 https : / / www .
  []
 
-[61
+[62
 
 
-] [62] [63] [64] [65] [66] [67] [68] [69]
+] [63] [64] [65] [66] [67] [68] [69] [70]
 Underfull \hbox (badness 1776) in paragraph at lines 715--720
 []\OT1/lmr/m/n/12 Carolin Strobl, Anne-Laure Boulesteix, Achim Zeileis, and Tor
 sten
  []
 
-[70] [71])) [72] (./thesis.lof)
+[71] [72])) [73] (./thesis.lof)
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [73
+ [74
 
 
 ] (./thesis.lot)
 \tf@lot=\write8
 \openout8 = `thesis.lot'.
 
- [74
+ [75
 
 ]
 Appendix A.
 LaTeX Font Info:    Trying to load font information for OMS+lmtt on input line 
-241.
-LaTeX Font Info:    No file OMSlmtt.fd. on input line 241.
+244.
+LaTeX Font Info:    No file OMSlmtt.fd. on input line 244.
 
 LaTeX Font Warning: Font shape `OMS/lmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 241.
+(Font)              for symbol `textbackslash' on input line 244.
 
+[76
 
-Overfull \hbox (10.77472pt too wide) in paragraph at lines 243--244
+]
+Overfull \hbox (10.77472pt too wide) in paragraph at lines 246--247
 \OT1/lmr/m/n/12 (\OT1/lmtt/m/n/12 pipeline[]P2Rank[]oneFeature.sh \OT1/lmr/m/n/
 12 and \OT1/lmtt/m/n/12 pipeline[]P2Rank[]allFeatures.sh\OT1/lmr/m/n/12 ),|
  []
 
-[75
-
-] [76] [77] [78] [79]
-
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 387.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 387.
-(./thesis.aux (./title.aux) (./introduction.aux) (./lbs_predictors.aux)
-(./methodology.aux) (./results.aux) (./epilog.aux) (./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 387.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 387.
+[77] [78] [79] [80]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 390.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 390.
+ (./thesis.aux (./title.aux) (./introduction.aux)
+(./lbs_predictors.aux) (./methodology.aux) (./results.aux) (./epilog.aux)
+(./bibliography.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 390.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 390.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: BB9A33163B83773A1D99BDCDAF809D3C;8265.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 387.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 390.
  ) 
 Here is how much of TeX's memory you used:
- 18223 strings out of 483140
- 263008 string characters out of 5965151
- 522502 words of memory out of 5000000
- 32523 multiletter control sequences out of 15000+600000
+ 18228 strings out of 483140
+ 263060 string characters out of 5965151
+ 522942 words of memory out of 5000000
+ 32526 multiletter control sequences out of 15000+600000
  610598 words of font info for 93 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 48i,13n,49p,1492b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,13n,49p,1482b,2341s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/sha
 re/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/
@@ -1268,10 +1258,10 @@ exmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr
 i12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fo
 nts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pf
 b></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (84 pages, 6649160 bytes).
+Output written on thesis.pdf (85 pages, 6648465 bytes).
 PDF statistics:
- 1614 PDF objects out of 1728 (max. 8388607)
- 1349 compressed objects within 14 object streams
- 323 named destinations out of 1000 (max. 500000)
+ 1620 PDF objects out of 1728 (max. 8388607)
+ 1353 compressed objects within 14 object streams
+ 325 named destinations out of 1000 (max. 500000)
  575 words of extra memory for PDF output out of 10000 (max. 10000000)
 

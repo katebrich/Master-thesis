@@ -20,20 +20,20 @@
 \contentsline {subsubsection}{\numberline {3.5.1.1}PTM}{18}{subsubsection.3.5.1.1}%
 \contentsline {subsubsection}{\numberline {3.5.1.2}Disulfide bonds}{18}{subsubsection.3.5.1.2}%
 \contentsline {subsubsection}{\numberline {3.5.1.3}Non-standard residues}{18}{subsubsection.3.5.1.3}%
-\contentsline {subsubsection}{\numberline {3.5.1.4}Secondary structure}{18}{subsubsection.3.5.1.4}%
+\contentsline {subsubsection}{\numberline {3.5.1.4}Secondary structure}{19}{subsubsection.3.5.1.4}%
 \contentsline {subsubsection}{\numberline {3.5.1.5}Natural variant}{19}{subsubsection.3.5.1.5}%
 \contentsline {subsubsection}{\numberline {3.5.1.6}Variation}{19}{subsubsection.3.5.1.6}%
 \contentsline {subsubsection}{\numberline {3.5.1.7}Compositional bias}{19}{subsubsection.3.5.1.7}%
 \contentsline {subsection}{\numberline {3.5.2}PDBe-KB}{19}{subsection.3.5.2}%
 \contentsline {subsubsection}{\numberline {3.5.2.1}Conservation}{20}{subsubsection.3.5.2.1}%
 \contentsline {subsubsection}{\numberline {3.5.2.2}DynaMine}{20}{subsubsection.3.5.2.2}%
-\contentsline {subsubsection}{\numberline {3.5.2.3}EFoldMine}{20}{subsubsection.3.5.2.3}%
+\contentsline {subsubsection}{\numberline {3.5.2.3}EFoldMine}{21}{subsubsection.3.5.2.3}%
 \contentsline {subsubsection}{\numberline {3.5.2.4}Depth}{21}{subsubsection.3.5.2.4}%
 \contentsline {subsection}{\numberline {3.5.3}PDB}{21}{subsection.3.5.3}%
 \contentsline {subsubsection}{\numberline {3.5.3.1}B factor}{21}{subsubsection.3.5.3.1}%
 \contentsline {subsubsection}{\numberline {3.5.3.2}Contact number exposure}{22}{subsubsection.3.5.3.2}%
 \contentsline {subsubsection}{\numberline {3.5.3.3}Half sphere exposure}{22}{subsubsection.3.5.3.3}%
-\contentsline {subsubsection}{\numberline {3.5.3.4}Phi and psi angles}{22}{subsubsection.3.5.3.4}%
+\contentsline {subsubsection}{\numberline {3.5.3.4}Phi and psi angles}{23}{subsubsection.3.5.3.4}%
 \contentsline {subsubsection}{\numberline {3.5.3.5}Cis peptide}{23}{subsubsection.3.5.3.5}%
 \contentsline {subsection}{\numberline {3.5.4}FASTA}{23}{subsection.3.5.4}%
 \contentsline {subsection}{\numberline {3.5.5}Other resources}{24}{subsection.3.5.5}%
@@ -55,20 +55,20 @@
 \contentsline {section}{\numberline {4.3}Statistical analysis - random sampling}{41}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Discussion}{43}{section.4.4}%
 \contentsline {section}{\numberline {4.5}P2Rank models}{48}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Practical example: comparison of \newline conservation features}{55}{section.4.6}%
-\contentsline {chapter}{Conclusion}{59}{chapter*.32}%
-\contentsline {chapter}{List of Abbreviations}{60}{chapter*.33}%
-\contentsline {chapter}{Bibliography}{61}{chapter*.34}%
-\contentsline {chapter}{List of Figures}{73}{chapter*.35}%
-\contentsline {chapter}{List of Tables}{74}{chapter*.36}%
-\contentsline {chapter}{\numberline {A}Attachments}{75}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Analysis pipeline}{75}{section.A.1}%
-\contentsline {subsection}{\numberline {A.1.1}Setup}{75}{subsection.A.1.1}%
-\contentsline {subsection}{\numberline {A.1.2}Options and arguments}{76}{subsection.A.1.2}%
-\contentsline {subsection}{\numberline {A.1.3}Dataset files}{76}{subsection.A.1.3}%
-\contentsline {section}{\numberline {A.2}Experiments}{77}{section.A.2}%
-\contentsline {subsection}{\numberline {A.2.1}Statistical analysis}{77}{subsection.A.2.1}%
-\contentsline {subsection}{\numberline {A.2.2}Statistical analysis - random sampling}{77}{subsection.A.2.2}%
-\contentsline {subsection}{\numberline {A.2.3}P2Rank models}{77}{subsection.A.2.3}%
-\contentsline {subsection}{\numberline {A.2.4}Practical example: comparison of conservation features}{77}{subsection.A.2.4}%
-\contentsline {section}{\numberline {A.3}Used software and databases}{78}{section.A.3}%
+\contentsline {section}{\numberline {4.6}Practical example: comparison of \newline conservation features}{56}{section.4.6}%
+\contentsline {chapter}{Conclusion}{60}{chapter*.32}%
+\contentsline {chapter}{List of Abbreviations}{61}{chapter*.33}%
+\contentsline {chapter}{Bibliography}{62}{chapter*.34}%
+\contentsline {chapter}{List of Figures}{74}{chapter*.35}%
+\contentsline {chapter}{List of Tables}{75}{chapter*.36}%
+\contentsline {chapter}{\numberline {A}Attachments}{76}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Analysis pipeline}{76}{section.A.1}%
+\contentsline {subsection}{\numberline {A.1.1}Setup}{76}{subsection.A.1.1}%
+\contentsline {subsection}{\numberline {A.1.2}Options and arguments}{77}{subsection.A.1.2}%
+\contentsline {subsection}{\numberline {A.1.3}Dataset files}{78}{subsection.A.1.3}%
+\contentsline {section}{\numberline {A.2}Experiments}{78}{section.A.2}%
+\contentsline {subsection}{\numberline {A.2.1}Statistical analysis}{78}{subsection.A.2.1}%
+\contentsline {subsection}{\numberline {A.2.2}Statistical analysis - random sampling}{78}{subsection.A.2.2}%
+\contentsline {subsection}{\numberline {A.2.3}P2Rank models}{78}{subsection.A.2.3}%
+\contentsline {subsection}{\numberline {A.2.4}Practical example: comparison of conservation features}{79}{subsection.A.2.4}%
+\contentsline {section}{\numberline {A.3}Used software and databases}{80}{section.A.3}%

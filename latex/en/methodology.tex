@@ -14,12 +14,14 @@ The pipeline is able to run the whole process at once, or it can start and end i
 \label{fig:diagram}
 \end{figure}
 
-The pipeline is implemented in Python, utilizing several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or SciPy \cite{scipy}. BioPython is an open-source collection of Python tools for computational biology and it was very useful in this work, especially for parsing PDB and FASTA files.
+The pipeline is implemented in Python, utilizing several Python packages, such as BioPython \cite{biopython}, NumPy \cite{numpy} or SciPy \cite{scipy}. BioPython is an open-source project providing variety of Python libraries for computational biology and bioinformatics, and it was very useful in this work, especially for parsing PDB and FASTA files.
 
 The pipeline comprises a set of Python scripts which are connected together by the main script \texttt{analysis\_pipeline.py}. The main script should be used to run the pipeline. It defines the user API, parses and checks arguments, takes care of logging and runs individual parts of the pipeline. 
 
 
-The setup and options are described in Attachment~\ref{a:pipeline}. See \url{https://github.com/katebrich/LBS_analysis_pipeline} for detailed description of the functionality, examples of usage, input and output formats etc.
+The setup and options are described in Attachment~\ref{a:pipeline}.
+
+See \url{https://github.com/katebrich/LBS_analysis_pipeline} for detailed description of the functionality, examples of usage, input and output formats etc.
 
 The features can be defined in `config file'. It is a file in JSON format that lists names of features, their type (binary, categorical, ordinal or continuous) and a path to the class with implementation. Custom config file with user-defined features or with subsets of features can be created and passed as argument \texttt{-c new\_config\_path}.
 
@@ -35,9 +37,9 @@ For each structure, FASTA and PDB files are downloaded from PDBe \cite{pdbe}, vi
 
 \section{Residue mappings} \label{s:mappings}
 
-The residue-level mappings are needed for cross-referencing the protein tertiary structure with the sequence annotations and UniProt \cite{uniprot} records. The main reason is that the PDB entry may cover only a segment of the full-length protein and the segment does not have to be continuous.
+The residue-level mappings are needed for cross-referencing the protein tertiary structure with the sequence annotations and UniProt \cite{uniprot} records. The main reason is that the PDB entry may not cover the full-length protein, but only a segment that does not even have to be continuous.
 
-Furthermore, the numbering of residues in the PDB file can differ from the primary sequence numbering. The residues in the PDB file are assigned identifiers by the author, in order to match the identification used in the publication. The identifier of the residue is composed of two parts. The first one is a residue number, and the second one, called `insertion code', is usually a character and it is left empty for most residues. Typically, it is used to label insertions relative to the reference sequence. The author can assign the numbers how he or she desires; they do not have to start with one or zero, do not have to be in consecutive order and can even be negative.
+Furthermore, the numbering of residues in PDB files can differ from the primary sequence numbering. The residues in the PDB file are assigned identifiers by the author, in order to match the identification used in the publication. The identifier of the residue is composed of two parts. The first one is a residue number, and the second one, called `insertion code', is usually a character and it is left empty for most residues. Typically, it is used to label insertions relative to the reference sequence. The author can assign the numbers how he or she desires; they do not have to start with one or zero, do not have to be in consecutive order and can even be negative.
 
 For those reasons, the residue-level mappings are downloaded from PDBe REST API \cite{pdbe_restapi} early in the pipeline process, they are cached in files and can be used whenever sequence annotations need to be mapped on the structure described in the PDB file.
 
@@ -47,17 +49,17 @@ There is a presumable issue with UniProt segments - sometimes the returned segme
 
 \section{Ligand binding sites}
 
-Each residue is assigned a label \textit{non-binding/binding} (0/1) according to positions of ligands in the PDB file. A residue is labeled as \textit{binding} if it has at least one non-hydrogen surface atom within distance 4.0 {\AA} of a non-hydrogen atom of any ligand. The distance 4.0 {\AA} can be changed in the pipeline with \texttt{-l} argument. This ligand-based definition of binding sites was used in previous large-scale study exploring the composition of binding sites \cite{lbscomposition}.
+Each residue is assigned a label \textit{non-binding/binding} (0/1) according to positions of ligands in the PDB file. A residue is labeled as \textit{binding} if it has at least one non-hydrogen surface atom in distance 4.0 {\AA} from a non-hydrogen atom of any ligand. The distance 4.0 {\AA} can be changed in the pipeline with \texttt{-l} argument. This ligand-based definition of binding sites was used in previous large-scale study exploring the composition of binding sites \cite{lbscomposition}.
 
-Only residues on the surface of the protein were taken into consideration in the analysis. The non-surface residues cannot be binding anyway, and excluding them decreases the imbalance between binding and non-binding residues counts. Furthermore, excluding the inner residues helps to reduce potential influence of difference of feature values in surface vs. non-surface residues. For example, inner residues tend to be more hydrophobic in general. Thus, binding sites could seem to be more hydrophilic than non-binding sites, but it would not be clear whether it is not simply the effect of being on the surface of the protein.
+Only surface residues were taken into consideration in the analysis. The non-surface residues cannot be binding anyway, and excluding them decreases the imbalance between binding and non-binding residues counts. Furthermore, excluding the inner residues helps to reduce potential influence of difference of feature values in surface vs. non-surface residues. For example, inner residues tend to be more hydrophobic in general. Thus, binding sites could seem to be more hydrophilic than non-binding sites, but it would not be clear whether it is not simply the effect of being on the surface of the protein.
 
-To decide which residues are located on the surface, solvent-accessible surface area of each residue was computed. We defined the surface residues as residues that have less than 5\% of their surface accessible to the solvent. This cut-off was proposed by Miller \textit{et al.} \cite{sasaCutoff} and used in other studies\cite{jones,lbscomposition}. 
+To decide which residues are located on the surface, solvent-accessible surface area is computed for each residue. We defined the surface residues as residues that have at most 5\% of the surface accessible to the solvent. This cut-off was proposed by Miller \textit{et al.} \cite{sasaCutoff} and used in other studies\cite{jones,lbscomposition}. 
 
-The solvent-accessible surface was computed using \texttt{Bio.PDB.SASA} module in BioPython \cite{sasa}. It implements Shrake \& Rupley algorithm \cite{shrake} which uses a sphere of particular radius to probe the surface of the protein. It can be imagined as `rolling a ball' along the surface (see Figure~\ref{fig:sasa}). The smaller the sphere radius, the more surface details it can detect. For this work, we used the default radius of 1.4 {\AA}, which approximates the radius of a water molecule.
+The solvent-accessible surface was computed using \texttt{Bio.PDB.SASA} module in BioPython \cite{sasa}. It implements Shrake \& Rupley algorithm \cite{shrake}, which can be imagined as `rolling a ball' along the surface (see Figure~\ref{fig:sasa}). It uses a sphere of chosen radius which is rolled over the protein, tracking the position of the sphere center. The smaller the sphere radius, the more surface details it can detect. For this work, we used the default radius of 1.4 {\AA}, resembling the radius of a water molecule.
 
 \begin{figure}[!htbp]\centering
 \includegraphics[width=100mm]{../img/sasa.png}
-\caption[Illustration of the solvent accessible surface]{Illustration of the solvent accessible surface. It was created by rolling the probe (in blue) along the molecule surface and tracing the center of the probe. Retrieved 02-01-2020 from \url{https://commons.wikimedia.org/wiki/File:Surfacetype_Solvent-Accessible.png}}
+\caption[Illustration of the solvent accessible surface]{Illustration of the solvent accessible surface. It was created by rolling the probe (in blue) along the molecule surface and tracing the center of the probe. Retrieved 2.1.2020 from \url{https://commons.wikimedia.org/wiki/File:Surfacetype_Solvent-Accessible.png}}
 \label{fig:sasa}
 \end{figure}
 
@@ -118,7 +120,9 @@ conservation         & continuous  & P2Rank \\ \bottomrule
 
 The UniProt Knowledgebase (UniProtKB) \cite{uniprot} is a large database of well-annotated protein sequence data. It tries to achieve the minimal redundancy of proteomes and it provides detailed, accurate and consistent annotations of the sequences.
 
-Sequence annotations (called `features') are available for every UniProtKB entry. They describe interesting sites and regions on the protein sequence and every feature has an associated description with available evidence, source and related publications. The features are arranged in a well-organized manner on the UniProt website \cite{uniprot_web}, in so called `Features viewer' with many overlapping tracks for different features. Nonetheless, for the purpose of this work, the best way to obtain the features was via the Proteins REST API \cite{proteins_api}. It provides the interface to  access the sequence annotation data as well as mapped variation data programmatically. The API is available at (\url{http://www.ebi.ac.uk/proteins/api/doc}).
+Sequence annotations (called `features') are available for every UniProtKB entry. They describe interesting sites and regions on the protein sequence and every feature has an associated description with available evidence, source and related publications. The features are arranged in a well-organized manner on the UniProt website \cite{uniprot_web}, in so called `Features viewer' with many overlapping tracks for different features. Nonetheless, for the purpose of this work, the best way to obtain the features was via the Proteins REST API \cite{proteins_api}. It provides the interface to  access the sequence annotation data as well as mapped variation data programmatically.
+
+The API is available at \url{http://www.ebi.ac.uk/proteins/api/doc}.
 
 Features are classified into eight categories which are further subdivided into types. For example, the category `STRUCTURAL' comprises the types `HELIX', `TURN' and `STRAND'.
 
@@ -128,7 +132,7 @@ The types and categories that were chosen as potentially relevant for ligand bin
 \subsubsection{PTM}
 Post-translational modifications are covalent chemical modifications of polypeptide chains after translation, usually modifying the functional group of the standard amino acids, or introducing a new group. They extend the set of the 20 standard amino acids and they can be important for the function of many proteins,as they can alter the interactions with other proteins, localization, activity, signal transduction, cell-cell interactions and other properties. Their enrichment in binding sites is very interesting to examine.
 
-Three UniProtKB feature types were analysed: lipidation, glycosylation and type `MOD\_RES' which comprises phosphorylation, methylation, acetylation, amidation, formation of pyrrolidone carboxylic acid, isomerization, hydroxylation, sulfation, flavin-binding, cysteine oxidation and nitrosylation. Only experimentally determined modification sites are annotated, and they are further propagated to related orthologs when specific criteria are met \cite{mod_res}.
+Three UniProtKB feature types were analysed: lipidation, glycosylation and type `MOD\_RES' which comprises ``phosphorylation, methylation, acetylation, amidation, formation of pyrrolidone carboxylic acid, isomerization, hydroxylation, sulfation, flavin-binding, cysteine oxidation and nitrosylation'' \cite{mod_res}. Only experimentally determined modification sites are annotated, and they are further propagated to related orthologs when specific criteria are met.
 
 Since lipidaton and glycosylation data were very sparse (e.g. there were only 15 lipidation sites in the whole holo4k dataset composed of 3973 proteins), the fourth feature called `PTM' including all three types was added to the analysis.
 
@@ -158,7 +162,7 @@ The regions of compositional bias are parts of the polypeptide chain where some 
 \subsection{PDBe-KB}
 PDBe-KB (Protein Data Bank in Europe - Knowledge Base) \cite{pdbekb} is managed by the PDBe team at the European Bioinformatics Institute. It is a collaborative resource that aims to bring together the annotations from various sources and to show the macromolecular structures in broader biological context. 
 
-One drawback of PDB is that every page represents only one entry that is based on a single experiment. There may be several PDB entries for the full-length protein, each covering only a segment of it. Nevertheless, the entries for the same protein are not interconnected. PDBe-KB has developed the \textit{aggregated views of proteins}, displaying an overview of all the data related to the full-length protein defined by the UniProtKB accession.
+One drawback of PDB is that every page represents only one entry that is based on a single experiment. There may be several PDB entries for the full-length protein, each covering only a segment of it. Nevertheless, the entries for the same protein are not interconnected. Therefore, PDBe-KB has developed the \textit{aggregated views of proteins}, collecting all the data associated with the full-length protein and displaying them altogether.
 
 The structures from the PDB are extensively used by scientific software and other resources. There exist many valuable annotations, such as ligand binding sites, post-translational modification sites, molecular channels or effects of mutations, that are created outside of the PDB. The problem is that the data is fragmented and therefore it would require immense effort of a researcher to collect and make use of all available data for a structure of interest.
 
@@ -172,7 +176,7 @@ PDBe-KB provides pre-calculated residue-level conservation scores, obtained by a
 The values of the score are integers ranging from 0 to 9, with 9 being the most conserved. Since scores higher than 4 were very sparse and the feature would not meet the assumptions of the Chi-squared test (as described below), the scores 4 and higher were merged into one category (4). This does not deteriorate the prediction nor the hypothesis test, as vast majority (over 95\%) of non-binding residues were scored 1 and lower.
 
 \subsubsection{DynaMine}
-DynaMine \cite{dynamine} was developed by the Bio2Byte group \cite{bio2byte} and it is one of the PDBe-KB partner resources. It provides the annotations of the backbone dynamics predicted only from the FASTA sequence. DynaMine predicts backbone flexibility at the residue-level, using a linear regression model trained on a large dataset of curated NMR chemical shifts extracted from the Biological Magnetic Resonance Data Bank \cite{bmrb}. The predictor estimates the value of the `order parameter' (S\textsuperscript{2}) which is related to the rotational freedom of the N-H bond vector of the backbone. The values range from 0 (highly dynamic) to 1 (complete order).
+DynaMine \cite{dynamine} was developed by the Bio2Byte group \cite{bio2byte} and it is one of the PDBe-KB partner resources. It provides the annotations of the backbone dynamics predicted only from the FASTA sequence. A linear regression model trained on a large dataset of curated NMR chemical shifts extracted from the Biological Magnetic Resonance Data Bank \cite{bmrb} is used to predict backbone flexibility for individual residues. The predictor estimates the value of the `order parameter' (S\textsuperscript{2}) which is related to the rotational freedom of the N-H bond vector of the backbone. The values range from 0 (highly dynamic) to 1 (complete order).
 
 \subsubsection{EFoldMine}
 EFoldMine \cite{efoldmine} tool comes from the same group as DynaMine. It is a predictor of the early folding regions of proteins. It makes predictions at the residue-level derived only from the FASTA sequence. Internally it uses dynamics predictions and secondary structure propensities as features and the linear regression model is trained on data from NMR pulsed labelling experiments. Unfortunatelly, the early stages of protein folding are not understood very well so far and experimental data is very difficult to obtain. The predictor was trained on the dataset of only 30 proteins and its performance is quite poor.
@@ -180,7 +184,7 @@ EFoldMine \cite{efoldmine} tool comes from the same group as DynaMine. It is a p
 \subsubsection{Depth}
 Depth \cite{depth} is a webserver that can measure residue burial within the protein. It is able to find small cavities in proteins and could be used as a ligand-binding sites predictor as such. The residue depth values are computed from the input PDB file.
 
-The algorithm places input 3D structure in the box of model water, each residue with at least two hydration shells around itself. The water molecules in cavities are removed: the algorithm removes the water molecule if there are less than a given number of water molecules in its spherical volume of given size. The minimum number of neighbouring molecules and the spherical volume can be defined by the user. The removal is iterated until there are no more cavity waters. Residue depth is then computed as the distance to the closest water molecule.
+The algorithm places input 3D structure in the box of model water, each residue with at least two hydration shells around itself. The water molecules in cavities are removed: the algorithm removes the water molecule if there are less than a given number of water molecules in its spherical volume of given size. The minimum number of neighbouring molecules and the spherical volume can be defined by the user. The removal is iterated until there are no more cavity waters. The depth for a residue is then computed as its distance to the closest water molecule.
 
 
 \subsection{PDB}
@@ -189,26 +193,26 @@ The following features can be computed or obtained directly from the PDB file.
 
 \subsubsection{B factor}
 
-The B factor, also called the Debye-Waller factor or the temperature factor, describes "the attenuation of X-ray or neutron scattering caused by thermal motion" \cite{bfactor}. It can be used to identify and interpret flexibility of proteins, supposing that high B factors are indicators of higher flexibility, whereas atoms with low B factors generally belong to the well-ordered parts of the structure. B factors can be also view as indicators of the relative vibrational motion of atoms in a protein \cite{bfactor}.
+The B factor, also called the Debye-Waller factor or the temperature factor, describes "the attenuation of X-ray or neutron scattering caused by thermal motion" \cite{bfactor}. It is supposed that high B factors are indicators of higher flexibility, whereas atoms with low B factors generally belong to the well-ordered parts of the structure. B factors can also indicate the relative vibrational motion of protein atoms \cite{bfactor}.
 
 The values can be obtained directly from the PDB files: each ATOM record of a X-ray structure (except for hydrogens) deposited in PDB contains B factor value for the atom. B factor for a residue was computed be averaging B factors of all its atoms. 
 
 \subsubsection{Contact number exposure}
 
-Contact number (CN) is a simple solvent exposure measure that can be computed directly from the 3D structure. The CN value for residue is number of C$\alpha$ atoms within a sphere of chosen radius around the C$\alpha$ of that residue \cite{cn}.
+Contact number (CN) is a measure of solvent exposure that can be computed directly from the 3D structure. The CN value for residue is computed as count of C$\alpha$ atoms within a sphere of chosen radius around the C$\alpha$ of that residue \cite{cn}.
 
 The implementation in BioPython module \texttt{Bio.PDB.HSExposure} was used for computation, with default sphere radius 12 {\AA}.
 
 
 \subsubsection{Half sphere exposure}
 
-Half sphere exposure (HSE) is a solvent exposure measure introduced by Hamelryck (2005) \cite{hse}. The CN sphere (defined above) around the C$\alpha$ atom is split in two halves by the plane perpendicular to the C$\alpha$-C$\beta$ vector, going through the C$\alpha$, as illustrated in Figure~\ref{fig:hse}. Two different measures are obtained, HSE-up, which is number of C$\alpha$ in `upper' half sphere (containing C$\beta$), and HSE-down, number of C$\alpha$ in the opposite sphere.
+Another measure of solvent exposure was introduced in 2005 hy Hamelryck \cite{hse}. Half sphere exposure (HSE) is a modification of CN (defined above): the CN sphere around the C$\alpha$ atom is split in two hemispheres by plane perpendicular to the C$\alpha$-C$\beta$ vector, going through the C$\alpha$, as illustrated in Figure~\ref{fig:hse}. Two different measures are obtained: HSE-up, which is the number of C$\alpha$ atoms in the hemisphere containing C$\beta$, and HSE-down, number of C$\alpha$ in the second hemisphere.
 
 Class \texttt{HSExposureCB} from BioPython module \texttt{Bio.PDB.HSExposure} with default sphere radius 12 {\AA} was used. 
 
 \begin{figure}[!h]\centering
 \includegraphics[width=80mm]{../img/hse.png}
-\caption[Half sphere exposure]{Half sphere exposure. Retrieved 02-01-2020 from \url{https://en.wikipedia.org/wiki/File:HSECa.png}}
+\caption[Half sphere exposure]{Half sphere exposure. Retrieved 2.1.2020 from \url{https://en.wikipedia.org/wiki/File:HSECa.png}}
 \label{fig:hse}
 \end{figure}
 
@@ -220,13 +224,14 @@ The angles sizes can be computed directly from the PDBe; for the purpose of this
 
 \begin{figure}[!h]\centering
 \includegraphics[width=120mm]{../img/torsion.png}
-\caption[Polypeptide torsion angles phi, psi and omega]{Polypeptide torsion angles phi, psi and omega. Retrieved 02-01-2020 from \url{https://www.researchgate.net/figure/Backbone-torsion-angles-of-a-prototypical-amino-acid-building-block-embedded-in-a-peptide_fig2_284713304}}
+\caption[Polypeptide torsion angles phi, psi and omega]{Polypeptide torsion angles phi, psi and omega. Retrieved 2.1.2020 from \url{https://www.researchgate.net/figure/Backbone-torsion-angles-of-a-prototypical-amino-acid-building-block}
+\url{-embedded-in-a-peptide_fig2_284713304}}
 \label{fig:torsion}
 \end{figure}
 
 \subsubsection{Cis peptide}
 
-The majority of protein bonds is found with torsion angle $\omega$ close to 180$^\circ$, in so-called \textit{trans} conformation. The \textit{cis} isomer, having $\omega$ close to 0$^\circ$, is rather rare. The \textit{cis-trans} isomeration is involved in some biological processes, such as protein folding or membrane binding \cite{cispeptide}.
+The majority of protein bonds is found with torsion angle $\omega$ close to 180$^\circ$, in so-called \textit{trans} conformation. The \textit{cis} isomer, having $\omega$ close to 0$^\circ$, is rather rare. The \textit{cis-trans} isomeration is has role in protein folding, membrane binding and other biological processes \cite{cispeptide}.
 
 The residues with \textit{trans} bond are obtained from PDBe via REST API.
 
@@ -237,7 +242,7 @@ There are features that can be derived directly from the FASTA sequence. Every a
 
 \begin{itemize}
 \item \textbf{Amino acid} - Categorical feature which is simply the amino acid letter.
-\item \textbf{Hydropathy} - The values of hydropathy index proposed by J. Kyte and R. F. Doolittle \cite{kyte}. It takes into consideration hydrophilic and hydrophobic properties of the 20 amino acid side chains. It is based on experimental observations derived from the literature. It ranges from -4.5 (Arg) to 4.5 (Ile) and the larger the number is, the more hydrophobic the amino acid.
+\item \textbf{Hydropathy} - The values of hydropathy index proposed by J. Kyte and R. F. Doolittle \cite{kyte}. It is based on experimental observations derived from the literature. It ranges from -4.5 (Arg) to 4.5 (Ile) and the larger the number is, the more hydrophobic the amino acid.
 \item \textbf{Molecular weight} - Residue mass in Daltons.
 \item \textbf{Polarity} - Classification of amino acids according to the side chain - categories Polar, Nonpolar and Polar uncharged.
 \item \textbf{Charge} - Binary feature indicating whether the side group is charged in physiological pH.
@@ -251,7 +256,7 @@ The biochemical properties of amino acids (all features above except hydropathy)
 
 \subsubsection{MobiDB}
 
-MobiDB is a database of protein disorder and mobility annotations. It provides annotations and predictions for intrinsically disordered (ID) proteins. MobiDB-lite is a method for highly specific predictions of long (at least 20 residues) disorders. It is a consensus-based prediction, combining results of eight different predictors
+MobiDB is a database of protein disorder. It provides annotations and predictions for intrinsically disordered (ID) proteins. MobiDB-lite is a method for highly specific predictions of long (at least 20 residues) disorders. It is a consensus-based prediction, combining results of eight different predictors
 \cite{mobidb}. It has been integrated into the MobiDB and the web server provides programmatic access to retrieve single entries via REST API \cite{mobidbApi}.
 
 \subsubsection{P2Rank} \label{s:conservation}
@@ -285,7 +290,7 @@ The \textit{null hypothesis} and the \textit{alternative hypothesis}, denoted by
 
 To decide which one of two complementary hypotheses is true, we employ a suitable \textit{hypothesis test}. Welch's test and Chi-squared test of indepence, both described below in more detail, will be used according to the feature type (binary, categorical or continuous). 
 
-As one may expect, the tests are not error-proof and a mistake can be made in the decision of whether to accept or reject the null hypothesis. There are two types of errors in hypothesis testing, commonly known as \textit{Type I error} and \textit{Type II error}. The test has made a Type I error if it incorrectly rejects a true null hypothesis. If, on the other hand, a null hypothesis is accepted and it is not true, a Type II error has been made. Both situations are depicted in the Table~\ref{tab:hypothesis_testing_errors}. The ideal test would have both error probabilities equal to zero. Nevertheless, in most cases it is not possible to make both error probabilities arbitrarily small for a fixed sample size \cite{casella}.
+As one may expect, the tests are not error-proof and a mistake can be made in the decision of whether to accept or reject the null hypothesis. Two types of errors can occur in hypothesis testing. The test has made a \textit{Type I error} if it rejects a null hypothesis which is true in reality. If, on the other hand, a null hypothesis is accepted and it is not true, the test has made a \textit{Type II error}. Both situations are depicted in the Table~\ref{tab:hypothesis_testing_errors}. The ideal test would have both error probabilities equal to zero. Nevertheless, in most cases it is not possible to make both error probabilities arbitrarily small for a fixed sample size \cite{casella}.
 
 \begin{table}[!htbp]
 \centering
@@ -304,26 +309,26 @@ As one may expect, the tests are not error-proof and a mistake can be made in th
 \label{tab:hypothesis_testing_errors}
 \end{table}
 
-To control statistical significance of the result, we define a \textit{significance level}, a constant denoted by $\alpha$. It represents the probability  of making a Type I error, in other words, the probability that the study rejects the null hypothesis when it is true. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}. One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the accuracy and completeness of the data and most importantly, the true effect size \cite{sham_purcell}. Our choice will be $\alpha =$ 0.05.
+To control statistical significance of the result, we define a \textit{significance level}, a constant denoted by $\alpha$. The typical choices in practice are $\alpha =$ 0.01, 0.05 or 0.10 \cite{casella}. One should be aware that by fixing the significance level of the test, the experimenter is controlling only the Type I error probabilities. The probability of the Type II error is subject to factors such as the completeness of the data and most importantly, the true effect size \cite{sham_purcell}. Our choice will be $\alpha =$ 0.05.
 
-The \textit{P value} is reported as a result of the statistical test. The P value is the probability that, under the assumption the null hypothesis is true, we observe the same or greater difference between groups. Smaller values of $p(X)$ give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when $p(X) \leq \alpha$. P value gives an idea of how strongly the data contradict the null hypothesis; furthermore, it allows other researchers to make a decision according to the significance level of their choice \cite{pvalue, sham_purcell, lehmann}.
+The \textit{P-value} is reported as a result of the statistical test. The P-value is the probability that, under the assumption the null hypothesis is true, we observe the same or greater difference between groups. Smaller P-values give stronger evidence for rejecting the null hypothesis. The null hypothesis is rejected when P-value is at most $\alpha$. P-value allows other researchers to make a decision according to the significance level of their choice \cite{pvalue, sham_purcell, lehmann}.
 
 \subsection{Implementation}
 
 The following sections rationalize the choice of Welch's and chi-squared test. The imlementation of these tests in module \texttt{scipy.stats} from the SciPy Python library \cite{scipy} was used in the pipeline; namely \texttt{ttest\_ind} with \texttt{equal\_var=False} to perform Welch's test, and \texttt{chi2\_contingency} for chi-squared test of independence.
 
-By default, the pipeline computes the analysis for all the residues across all proteins in dataset. Neverthless, random sampling (without repetition) can be performed by specifying the sample size with argument \texttt{-s}. It is also possible to run more iterations of random sampling (argument \texttt{-i}). In this case, mean P values will be reported in summary. Individual P values from all iterations will be reported in separate files for each feature. Another possibility is to balance the number of binding and non-binding sites with argument \texttt{-b}. Same number of binding and non-binding residues will be sampled in that case.
+By default, the pipeline computes the analysis for all the residues across all proteins in dataset. Neverthless, random sampling (without repetition) can be performed by specifying the sample size with argument \texttt{-s}. It is also possible to run more iterations of random sampling (argument \texttt{-i}). In this case, mean P-values will be reported in summary. Individual P-values from all iterations will be reported in separate files for each feature. Another possibility is to balance the number of binding and non-binding sites with argument \texttt{-b}. Same number of binding and non-binding residues will be sampled in that case.
 
 The significance level is 0.05 by default and can be changed with \texttt{-a} argument.
 
 The output of the whole analysis pipeline are folders with results for each feature, as well as several summary files:
 
 \begin{itemize}
-\item \textbf{p\_values\_means.csv} - Averaged P values obtained from all iterations.
-\item \textbf{p\_values.csv} - List of P values from all iterations for all features. P values for individual features are also included in the results folder for each feature.
+\item \textbf{p\_values\_means.csv} - Averaged P-values obtained from all iterations.
+\item \textbf{p\_values.csv} - List of P-values from all iterations for all features. P-values for individual features are also included in the results folder for each feature.
 \item \textbf{cohens\_d.csv} - Effect sizes for continuous features (as described below).
 \item \textbf{cohens\_w.csv} - Effect sizes for binary, ordinal and categorical features.
-\item \textbf{p\_vals\_perc.csv} - Summary of how many percent of iterations had P value below given significance level $\alpha$ for each feature.
+\item \textbf{p\_vals\_perc.csv} - Summary of how many percent of iterations had P-value below given significance level $\alpha$ for each feature.
 \item \textbf{means\_difference.csv} - Summary only for continuous features. Lists the differences of means and variances in both populations (all binding vs. all non-binding).
 \item \textbf{binding\_ratios.csv} - binding/non-binding sites ratios for all rows in the dataset.
 \item \textbf{errors.txt} - Lists features that ended up with an error. This is often caused by lack of data (e.g. the sample size is bigger than number of rows or the data for a categorical feature are too sparse to meet the assumptions of Chi-squared test). Detailed information about the errors can be found in the log file.
@@ -339,19 +344,19 @@ Welch's unequal variances t-test, or Welch's test in short, is a two-sample hypo
 Both Student's and Welch's t-test assume that the two examined populations follow a normal distribution \cite{welch}. Nevertheless, when testing for the equality of means of `large enough samples', the normality assumption can be violated thanks to the large sample theory and the Central Limit Theorem \cite{lehmann}. It has been shown in previous studies that for large samples, the statistical significance level is protected not only for normally distributed data, but also for many non-normal distributions; moreover, in case of Welch's test, this is true even for unequal variances \cite{zimmerman_zumbo_1993, zumbo_coulombe_1997, lumley}. According to  Lehmann and Romano \cite{lehmann}, the Type II error is also relatively insensitive to non-normality. Many articles and textbooks mention that when the sample sizes are small, nonparametric tests (i.e. tests that do not assume a specific distribution) such as the Mann-Whitney test \cite{mann} should be considered as an alternative to t-tests.
 However, t-tests become superior when sample sizes increase \cite{zimmerman1998, lumley}. The simulations made by Lumley \textit{et al.} \cite{lumley} show that `sufficiently large sample size' means under 100 in most cases. Even for extremely non-normal data, the sufficient size is at most 500. This suggests that the choice of Welch's test is legitimate for this work.
 
-The problem of the Student's t-test is that it performs badly when the variances of the two compared populations are unequal. Both Type I and Type II errors are negatively affected by violation of the equal variances assumption. The unequal variances can be less problematic if sample sizes are similar, but in practice, that is not always the case \cite{ruxton}.
+The problem of the Student's t-test is that it performs badly when the variances of the two compared populations are unequal. Both Type I and Type II errors are negatively affected by violation of the equal variances assumption. If sample sizes are similar, the unequal variances can become less problematical, but in practice, that is not always the case \cite{ruxton}.
 
-Unlike Student's t-test, Welch's test does not assume equal variances of the populations. It performs well when the samples have unequal variances; furthermore, it can be used even when the samples have unequal sizes \cite{derrick}.
+Unlike Student's t-test, Welch's test does not have the assumption of equal variances of the populations. It performs well when the samples have unequal variances; furthermore, it can be used even when the samples have unequal sizes \cite{derrick}.
 
 Some researchers tend to pre-test for variance equality by a preliminary test of variances (such as Levene's \cite{levene} or Brown-Forsythe test \cite{brown}) and then choose whether to use Student's or Welch's t-test. However, although this approach persists in some textbooks and software packages, it is not recommended by statisticians. As a preliminary test itself is subject to Type I and II errors, this two-stage procedure would not protect the significance level and could lead to incorrect decisions. One should be aware of the fact that even if the test suggested that the samples variances are nearly equal, it would not mean that the whole population variances could not differ to a larger extent \cite{zimmerman}. Some researchers may try to make the significance level of a preliminary test more strict, so that they could be more confident about the choice of the subsequent test; however, as the significance level decreases, the performance of the compound test paradoxically gets worse. According to Zimmerman \cite{zimmerman}, ``a higher Type I error rate of the preliminary test actually improves the performance of the compound test'' \cite{zimmerman}. This suggests that using the preliminary test is not correct in principle.
 
-Welch's test should be used whenever the researcher is not sure that the variances are truly equal. Ruxton \cite{ruxton} even suggests the routine use of Welch's test. When the sample sizes and variances are equal, both tests perform similarly. When dealing with unequal variances and unequal sample sizes, Welch's test is more robust than Student's t-test and the Type I error rate does not deviate far from the nominal value \cite{derrick}. Hence, Welch's test can be applied without any significant disadvantages to Student's t-test.
+Welch's test should be used whenever the researcher is not sure that the variances are truly equal. Both tests perform similarly when the sample sizes and variances are equal. Nevertheless, when the variances and sample sizes are unequal, Welch's test performs better than Student's t-test, as it is more robust \cite{derrick}. Ruxton \cite{ruxton} even suggests the routine use of Welch's test, as there are no significant disadvantages. 
 
-For all the reasons stated above, Welch's test seems to be the best choice for the purpose of this study. It has the best combination of performance and ease of use, the calculation is straightforward and it is available in commonly used statistics packages. This test will be used for continuous features.
+For all the reasons stated above, Welch's test appears to be the best choice for the purpose of this study. It is robust and easy of use, the calculation is straightforward and it is available in commonly used statistics packages. This test will be used for continuous features.
 
 \subsection{Chi-squared ($\chi^{2}$) test of independence}
 
-A different kind of tests will be needed for the analysis of categorical and binary features. In this section, the $\chi^{2}$ test will be compared to another well-known test for the analysis of data in contingency tables, the Fisher's exact test.
+A different kind of tests will be needed for the analysis of categorical and binary features. In this section, the $\chi^{2}$ test will be compared to another well-known test for the analysis of contingency tables, the Fisher's exact test.
 
 A \textit{contigency table} is a table displayed in a form of a matrix where cells represent a frequency distribution of samples in the categories. An example of a contingency table can be seen in Table~\ref{tab:contingency_table_example}. The sums of frequencies in rows and columns are called \textit{marginal totals}.
 
@@ -375,16 +380,16 @@ A \textit{contigency table} is a table displayed in a form of a matrix where cel
 
 The null hypothesis assumes independence of the groups; in our case, the assumption is that there is no difference in the proportions of the analysed feature between binding sites and non-binding sites.
 
-Fisher's exact test belongs to a class of so-called \textit{exact tests}; it means that the P value is calculated accurately, not approximately, as is the case of many tests including Welch's test and $\chi^{2}$ test. Fisher's test is mostly used for $2\times 2$ contigency tables, although the principle of the computation can be extended to a general $m\times n$ table \cite{Mehta}. The principle of the test lies in computing the probability of obtaining a table that is more or equally extreme in the departure from the null hypothesis than the analysed table and has identical marginal totals \cite{bland}.
+Fisher's test is one of the so-called \textit{exact tests}; it means that the P-value is calculated accurately, not approximately, as is the case of many tests including Welch's test and $\chi^{2}$ test. Fisher's test is mostly used for $2\times 2$ contigency tables, although it can be generalized for $m\times n$ tables \cite{Mehta}. The principle of the test lies in computing the probability of obtaining a table that is more or equally extreme in the departure from the null hypothesis than the analysed table and has identical marginal totals \cite{bland}.
 
-Chi-squared test if independence is able to decide whether the difference between the observed frequencies and the `expected frequencies' is statistically significant. The expected frequencies are computed for every cell using this formula:
+Chi-squared test if independence is able to decide if the observed frequencies are significantly different from the `expected frequencies'. The expected frequencies are computed for every cell using this formula:
 
 \vspace{2mm}
 \begin{center}
 $\dfrac{row\: total\times column\:total}{grand\:total}$
 \end{center}
 
-It can be imagined as the average frequencies we would get in the long run with the same marginal totals, assuming the null hypothesis is true (i.e. there is no association between groups). The result of the test tells how likely are we to observe given data under the assumption of the true null hypothesis \cite{bland}.
+It can be imagined as the average frequencies we would get in the long run with the same marginal totals, assuming the null hypothesis is true (i.e. the groups are not associated). The result of the test tells how likely are we to observe given data under the assumption of the true null hypothesis \cite{bland}.
 
 The biggest difference between the two mentioned tests is that the chi-squared test is based on a aproximation approach; therefore, it needs a `large enough' sample. W. G. Cochran (1952, 1954) proposed a set of recommendations about the minimum expectations to be used in $\chi^{2}$ tests and about the choice between Fisher's test and $\chi^{2}$ test:
 
@@ -393,16 +398,16 @@ The biggest difference between the two mentioned tests is that the chi-squared t
 \item \textbf{More than 1 degree of freedom} - Chi-squared test can be used when at most 20\% of cells have the expected frequency less than 5 and no cell have the expected frequencies less than 1 \cite{cochran1954}.
 \end{itemize}
 
- These recommendations are presented in several textbooks and articles as a rule of thumb \cite{cochranRule} and recommended to be used in practice.
+These recommendations are presented in several textbooks and articles as a rule of thumb \cite{cochranRule} and recommended to be used in practice.
 
 As the sample sizes in this work are very large, the number of binding and non-binding sites is unbalanced, and the data for some features can be sparse, chi-squared test should be better choice for both binary and categorical features.
 
 \subsection{Effect size} \label{s:effectsize}
-In most cases, the main purpose of research is to estimate actual effects that exist in the real world. Effect size can be understood as ``the degree to which the phenomenon is present in the population" \cite{cohen_book}. In other words, it is the sensitivity of the dependent variable to changes in the independent variable. Effect size complements statistical hypothesis testing and can also help with planning of the sample size \cite{cohen}.
+In most cases, the main purpose of research is to estimate actual effects that exist in the real world. Effect size can be understood as ``the degree to which the phenomenon is present in the population" \cite{cohen_book}. Effect size complements statistical hypothesis testing and can also help with planning of the sample size \cite{cohen}.
 
 It is considered good practice to report the effect size in addition to statistical tests to provide an objective measure of importance of the results. While statistical significance reflects likeliness of our results, the effect size indicates the practical importance of our findings. For very large samples, even the miniscule effects can become statistically significant, due to the increased power of the statistical test; this is called the \textit{P-value problem} \cite{pvalueproblem}. 
 
-The P-value itself does not have an objective meaning and is not an unambiguous measure of evidence. The sample size hugely influences the significance, and relying only on the P-value can lead to acceptance of the hypothesis of no practical significance. Despite that, this appears to be a common practice. Lin et al. \cite{pvalueproblem} reviewed articles in two leading Information System (IS) journals and reported that 50\% of recent papers with sample sizes over 10,000 were relying on low P-values.
+The P-value itself does not have an objective meaning and is not an unambiguous measure of evidence. The sample size hugely influences the significance, and relying only on the P-value can lead to acceptance of the hypothesis of no practical significance. Despite that, this appears to be a common practice. Lin et al. \cite{pvalueproblem} reviewed articles in two leading Information System (IS) journals and reported that 50\% of recent papers working with sample sizes bigger than 10,000 were relying on low P-values.
 
 The critical difference between effect size indices and test statistics is that the effect size is not affected by the size of the sample.
 

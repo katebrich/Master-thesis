@@ -1649,6 +1649,18 @@
   year      = {2010},
 }
 
+@Article{blast,
+  author    = {S. McGinnis and T. L. Madden},
+  title     = {{BLAST}: at the core of a powerful and diverse set of sequence analysis tools},
+  doi       = {10.1093/nar/gkh435},
+  number    = {Web Server},
+  pages     = {W20--W25},
+  volume    = {32},
+  journal   = {Nucleic Acids Research},
+  publisher = {Oxford University Press ({OUP})},
+  year      = {2004},
+}
+
 @Comment{jabref-meta: databaseType:biblatex;}
 
 @Comment{jabref-meta: grouping:

@@ -1,4 +1,4 @@
-\begin{thebibliography}{114}
+\begin{thebibliography}{115}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -748,6 +748,22 @@ Eldon~L. Ulrich, Hideo Akutsu, Jurgen~F. Doreleijers, Yoko Harano, Yannis~E.
 \newblock {BioMagResBank}.
 \newblock \emph{Nucleic acids research}, 36:\penalty0 D402--D408, 2008.
 \newblock \doi{10.1093/nar/gkm957}.
+
+\bibitem[Velankar et~al.(2010)Velankar, Alhroub, Alili, Best, Boutselakis,
+  Caboche, Conroy, Dana, van Ginkel, Golovin, Gore, Gutmanas, Haslam,
+  Hirshberg, John, Lagerstedt, Mir, Newman, Oldfield, Penkett, Pineda-Castillo,
+  Rinaldi, Sahni, Sawka, Sen, Slowley, da~Silva, Suarez-Uruena, Swaminathan,
+  Symmons, Vranken, Wainwright, and Kleywegt]{pdbe}
+S.~Velankar, Y.~Alhroub, A.~Alili, C.~Best, H.~C. Boutselakis, S.~Caboche,
+  M.~J. Conroy, J.~M. Dana, G.~van Ginkel, A.~Golovin, S.~P. Gore, A.~Gutmanas,
+  P.~Haslam, M.~Hirshberg, M.~John, I.~Lagerstedt, S.~Mir, L.~E. Newman, T.~J.
+  Oldfield, C.~J. Penkett, J.~Pineda-Castillo, L.~Rinaldi, G.~Sahni, G.~Sawka,
+  S.~Sen, R.~Slowley, A.~W.~Sousa da~Silva, A.~Suarez-Uruena, G.~J.
+  Swaminathan, M.~F. Symmons, W.~F. Vranken, M.~Wainwright, and G.~J. Kleywegt.
+\newblock {PDBe}: Protein data bank in europe.
+\newblock \emph{Nucleic Acids Research}, 39\penalty0 (Database):\penalty0
+  D402--D410, 2010.
+\newblock \doi{10.1093/nar/gkq985}.
 
 \bibitem[Wass and Sternberg(2009)]{casp}
 Mark~N. Wass and Michael J.~E. Sternberg.
